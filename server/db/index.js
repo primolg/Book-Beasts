@@ -23,13 +23,9 @@ Book.hasMany(Page);
 Tag.belongsToMany(Book, { through: 'bookTags' });
 Book.belongsToMany(Tag, { through: 'bookTags' });
 
-const seed = async () => {
+const syncAndSeed = async () => {
     await db.sync({ force: true });
-    
     // will seed data here
 };
 
-module.exports = {
-    db,
-    seed,
-};
+module.exports = syncAndSeed;

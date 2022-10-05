@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const dbName = "mspiggy";
+const dbName = "book-beast";
 const config = {
     logging: false,
 };

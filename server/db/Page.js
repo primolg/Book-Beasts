@@ -12,6 +12,10 @@ const Page = db.define("page", {
     type: {
         type: Sequelize.STRING,
     },
+    // might be better to use a through table
+    pageNumber: {
+        type: Sequelize.INTEGER,
+    },
 });
 
 module.exports = Page;
