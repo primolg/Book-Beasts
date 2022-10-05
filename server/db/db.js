@@ -1,12 +1,10 @@
 const Sequelize = require('sequelize');
-
-const dbName = "book-beast";
 const config = {
     logging: false,
 };
 
 const db = new Sequelize(
-    process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`,
+    process.env.DATABASE_URL || `postgres://localhost:5432/book-beast`,
     config
 );
 
