@@ -3,7 +3,7 @@ const { Sequelize } = db;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const Child = db.define("child" , {
+const Student = db.define("student" , {
     email: {
         type: Sequelize.STRING,
         unique: true,
@@ -57,4 +57,4 @@ const Child = db.define("child" , {
 
 // authentication
 
-module.exports = Child;
+module.exports = Student;
