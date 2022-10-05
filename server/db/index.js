@@ -1,4 +1,3 @@
-const data = require("./seed");
 const db = require("./db");
 // models
 const User = require("./User");
@@ -25,11 +24,18 @@ Book.belongsToMany(Tag, { through: 'bookTags' });
 const syncAndSeed = async () => {
     try {
         await db.sync({ force: true });
-
+        console.log("Connected to database, tables built");
     } catch (error) {
-        console.error("Seeding database failed:", error)
+        console.error("Seeding database failed:", error);
     }
-    
 };
 
-module.exports = syncAndSeed;
+module.exports = {
+    syncAndSeed,
+    db,
+    User,
+    Child,
+    Book,
+    Page,
+    Tag,
+};
