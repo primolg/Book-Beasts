@@ -16,10 +16,6 @@ const Book = db.define("book", {
     genre: {
         type: Sequelize.STRING,
     },
-    pages: { // Array of pageIds
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-        defaultValue: [],
-    },
 });
 
 module.exports = Book;
