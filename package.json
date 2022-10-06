@@ -6,7 +6,8 @@
     "start": "node server",
     "dev": "webpack -w & nodemon server -w",
     "build": "webpack",
-    "test": "mocha tests --recursive -w"
+    "test": "mocha tests --recursive -w",
+    "seed": ""
   },
   "keywords": [],
   "author": "",

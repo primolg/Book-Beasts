@@ -1,14 +1,6 @@
 const data = require("./data.json");
 
-const customAdmin = {
-    username: "a",
-    password: "a",
-    email: "abc@gmail.com",
-    firstName: "Ms",
-    lastName: "Piggy",
-    username: "mspiggy",
-    isAdmin: true,
-}
+// PROCEDURAL GENERATION UTILS //
 
 function fixCase(str) {
     return str
@@ -56,6 +48,18 @@ function createSeed(str) {
     return [seed1, seed2];
 }
 
+// USER GENERATION //
+
+const customAdmin = {
+    username: "mspiggy",
+    password: "password",
+    email: "abc@gmail.com",
+    firstName: "Ms",
+    lastName: "Piggy",
+    username: "mspiggy",
+    isAdmin: true,
+}
+
 function generatePerson(seed, type) {
     let idx1 = Math.floor(seed[0] * 100 / seed[1]);
     let idx2 = Math.floor(seed[1] * 100 / seed[0]);
@@ -96,39 +100,117 @@ function generatePerson(seed, type) {
     }
 }
 
-// 'str' as any alphanumeric string which will be converted to a number to seed
-// this will allow us to use the same data every time, and generate more iterations later
+// removes users with duplicate emails
+function deleteDuplicates(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i].email === arr[j].email)
+            arr.splice(j, 1);
+        }
+    }
+    return arr;
+}
+
 function generateDummyUsers(str="abcdefg", scale=1) {
     let seed = createSeed(str);
-    
-    let admins = [];
+
     let users = [];
     let students = [];
     
-    const numberOfAdmins = 3 * scale;
+    const numberOfAdmins = 2 * scale;
     for (let i = 0; i < numberOfAdmins; i++) {
         const newAdmin = generatePerson(seed, "admin");
-        admins.push(newAdmin, true);
+        users.push(newAdmin);
         seed = iterateSeed(seed);
     }
-    admins[0] = customAdmin;
-    const numberOfUsers = 30 * scale;
+    users[0] = customAdmin;
+    const numberOfUsers = 10 * scale;
     for (let i = 0; i < numberOfUsers; i++) {
         const newUser = generatePerson(seed, "teacher")
         users.push(newUser);
         seed = iterateSeed(seed);
     }
-    const numberofStudents = 100 * scale;
+    const numberofStudents = 50 * scale;
     for (let i = 0; i < numberofStudents; i++) {
         const newStudent = generatePerson(seed, "student");
         students.push(newStudent);
         seed = iterateSeed(seed);
     }
-
-    return [admins, users, students];
+    users = deleteDuplicates(users);
+    students = deleteDuplicates(students);
+    return [users, students];
 }
 
-let test = generateDummyUsers();
-console.log(test);
+// BOOKS AND PAGES GENERATION //
 
-// module.exports = generateDummyData;
+// i'm sure it's fine if _this_ one is (pseudo) random
+function generatePageContent(descriptions) {
+    let content = descriptions[Math.floor(Math.random() * descriptions.length)];
+    if (Math.random() > 0.8) content += "!";
+    else content += ".";
+    return content;
+}
+
+function createPages(bookId, seed, pageCount=10) {
+    let startingId = (bookId + 1) * 10;
+    const descriptions = data.lorem.split(". ");
+    
+    let pages = [];
+    for (let i = 0; i < pageCount; i++) {
+        const page = {
+            id: startingId + i + 1,
+            content: generatePageContent(descriptions),
+            type: "text",
+            previousPage: i===0? null : startingId + i,
+            nextPage: i===pageCount-1? null : startingId + i + 2,
+            bookId,
+        };
+        page.childId = Math.floor(seed[0] * 100);
+        while (page.childId > 40) page.childId -= 20;
+        
+        pages.push(page);
+        seed = iterateSeed(seed);
+    };
+    return pages;
+}
+
+function createLibrary(seed) {
+    const avgTitleLength = (
+        data.titles.reduce((accum, title) => accum+title.length, 0)
+        / data.titles.length
+    );
+    
+    let pages = [];
+    let books = [];
+    for (let i = 0; i < data.titles.length; i++) {
+        const book = {
+            id: i + 1,
+            title: data.titles[i],
+            isPublished: data.titles[i] > avgTitleLength,
+        };
+        if (book.title.length > 15) {
+            let idx = Math.floor(seed[0] * seed[1] * 10);
+            if (idx > data.genres.length) idx = 4;
+            book.genre = data.genres[idx];
+            seed = iterateSeed(seed);
+        };
+        book.childId = i * 2 || 1;
+        books.push(book);
+
+        const newPages = createPages(book.id, seed);
+        pages.push(...newPages);
+    }
+    return [books, pages];
+}
+
+function generateDummyContent(str="abcdefg") {
+    let seed = createSeed(str);
+    //can implement scale later
+    const [books, pages] = createLibrary(seed);
+    return [books, pages]
+}
+
+module.exports = {
+    content: generateDummyContent,
+    users: generateDummyUsers,
+}
