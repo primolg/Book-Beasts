@@ -30,17 +30,10 @@ const Student = db.define("student" , {
     },
     firstName: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            len: [4, 32],
-        }
     },
     lastName: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            len: [4, 32],
-        }
     },
     age: {
         type: Sequelize.INTEGER,
