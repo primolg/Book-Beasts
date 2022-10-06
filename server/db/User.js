@@ -49,14 +49,11 @@ const User = db.define("user", {
     }
 });
 
-// hash password before entering user into db
-User.beforeCreate(async (user) => {
-    try {
-        user.password = await bcrypt.hash(user.password, 10);
-    } catch (error) {
-        console.error(error)   ;
-    }
-})
+const hashPassword = async function(user) {
+    user.password = await bcrypt.hash(user.password, 10);
+}
+User.beforeCreate(hashPassword);
+User.beforeUpdate(hashPassword);
 
 // authentication
 User.authenticate = async ({ key, password }) => {
@@ -77,7 +74,7 @@ User.authenticate = async ({ key, password }) => {
             console.log("User successfully authenticated");
             return user;
         } else {
-            console.log("Password invalid");
+            throw new Error("Password invalid");
             return;
         }
     } catch (error) {
@@ -93,7 +90,7 @@ User.prototype.generateToken = function() {
     }
 }
 
-User.findByToken() = async (token) => {
+User.findByToken = async (token) => {
     try {
         const { id } = jwt.verify(token, process.env.JWT_KEY);
         const user = await User.findByPk(id);
