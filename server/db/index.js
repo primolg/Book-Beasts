@@ -2,19 +2,19 @@ const db = require("./db");
 const generateDummyData = require("./seed");
 // models
 const User = require("./User");
-const Child = require("./Child");
+const Student = require("./Student");
 const Book = require("./Book");
 const Page = require("./Page");
 const Tag = require("./Tag");
 
-User.hasMany(Child);
-Child.belongsTo(User);
+User.hasMany(Student);
+Student.belongsTo(User);
 
-Child.hasMany(Book);
-Book.belongsTo(Child);
+Student.hasMany(Book);
+Book.belongsTo(Student);
 
-Child.hasMany(Page);
-Page.belongsTo(Child)
+Student.hasMany(Page);
+Page.belongsTo(Student);
 
 Page.belongsTo(Book);
 Book.hasMany(Page);
@@ -31,7 +31,7 @@ const syncAndSeed = async () => {
         const { users, students, books, pages } = generateDummyData();
 
         await Promise.all(users.map(user => User.create(user)));
-        await Promise.all(students.map(student => Child.create(student)));
+        await Promise.all(students.map(student => Student.create(student)));
         await Promise.all(books.map(book => Book.create(book)));
         await Promise.all(pages.map(page => Page.create(page)));
 
@@ -45,7 +45,7 @@ module.exports = {
     syncAndSeed,
     db,
     User,
-    Child,
+    Student,
     Book,
     Page,
     Tag,
