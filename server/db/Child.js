@@ -25,21 +25,21 @@ const Child = db.define("child" , {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [4, 32],
+            len: [8, 32],
         }
     },
     firstName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [4, 32],
+            len: [2, 32],
         }
     },
     lastName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [4, 32],
+            len: [3, 32],
         }
     },
     age: {
