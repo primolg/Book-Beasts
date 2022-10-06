@@ -68,15 +68,19 @@ User.authenticate = async ({ key, password }) => {
                 where: { username: key }
             });
         }
-        if (!user) return "nouser";
+        // if the user cannot be found, return an object with null token
+        if (!user) return { token: null };
 
+        // if the user is found but password incorrect, return username with null token
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) return ("invalid");
+        if (!isPasswordValid) return { username: user.username, token: null };
 
+        // if all credentials are valid, return user object with token attached
         if (isPasswordValid) {
-            console.log("User successfully authenticated");
             const token = user.generateToken();
-            return token;
+            user.dataValues.token = token;
+            delete user.dataValues.password;
+            return user;
         } else {
             throw new Error("Password invalid");
         }

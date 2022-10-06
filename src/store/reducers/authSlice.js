@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const axios = require("axios");
 
 // === current approach to user information: === //
-// token is stored in localStorage
-// basic user data is in store (email, name, etc (not pw))
+// TOKEN is stored in localStorage
+// USER data is in store (email, name, etc (not pw))
 
 const authSlice = createSlice({
     name: "authSlice",
@@ -23,20 +23,18 @@ const authSlice = createSlice({
 export default authSlice.reducer;
 export const { setLoggedInUser, logout } = authSlice.actions;
 
-// verifies credentials, stores token in localStorage
+// verifies credentials, stores token in localStorage, logs in
 export const login = (credentials) => async (dispatch) => {
-    const { data: token } = await axios.post("/api/auth/login", credentials);
-    switch (token) {
-        case "nouser":
-            alert("Could not find user with that email/username!");
-            return;
-        case "invalid":
-            alert("Invalid credentials!");
-            return;
-        default:
-            await dispatch(verifyToken(token));
-            window.localStorage.setItem("token", token);
-            alert("Successfully logged in!");
+    const { data: user } = await axios.post("/api/auth/login", credentials);
+    console.log(user);
+    if (!user.username) {
+        alert("Could not find user with that email/username!");
+    } else if (!user.token) {
+        alert("Invalid login!");
+    } else {
+        dispatch(setLoggedInUser(user));
+        window.localStorage.setItem("token", user.token);
+        alert("Successfully logged in!");
     }
 }
 
@@ -56,7 +54,5 @@ export const verifyToken = (token) => async (dispatch) => {
     const { data: user } = await axios.get("/api/auth", {
         headers: { authorization: token }
     });
-    console.log("User from token:");
-    console.log(user);
     dispatch(setLoggedInUser(user));
 }

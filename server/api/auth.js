@@ -20,8 +20,8 @@ router.get("/", async (req, res) => {
 // note: token is empty string if user does not exist
 router.post("/login", async (req, res) => {
     try {
-        const token = await User.authenticate(req.body);
-        res.send(token);
+        const user = await User.authenticate(req.body);
+        res.send(user);
     } catch (error) {
         console.error(error);
     }
