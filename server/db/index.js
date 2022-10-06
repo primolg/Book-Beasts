@@ -31,7 +31,7 @@ const syncAndSeed = async () => {
         const { users, students, books, pages } = generateDummyData();
 
         await Promise.all(users.map(user => User.create(user)));
-        await Promise.all(students.map(student => Child.create(student)));
+        await Promise.all(students.map(student => Student.create(student)));
         await Promise.all(books.map(book => Book.create(book)));
         await Promise.all(pages.map(page => Page.create(page)));
 
@@ -45,7 +45,7 @@ module.exports = {
     syncAndSeed,
     db,
     User,
-    Child,
+    Student,
     Book,
     Page,
     Tag,
