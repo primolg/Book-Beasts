@@ -1,10 +1,13 @@
 const router = require('express').Router();
 const { User } = require('../db');
 
+// verifies token
 router.get("/", async (req, res) => {
     try {
         const user = await User.findByToken(req.headers.authorization);
         if (user) {
+            console.log("Successfully verified token");
+            delete user.password;
             res.send(user);
         } else {
             throw new Error("Unable to verify token");
@@ -14,6 +17,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+// verifies user credentials, returns token
 router.post("/login", async (req, res) => {
     try {
         const token = await User.authenticate(req.body);
@@ -23,6 +27,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// adds user to database, returns token
 router.post("/signup", async (req, res) => {
     try {
         const newUser = await User.create(req.body);
