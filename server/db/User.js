@@ -2,6 +2,7 @@ const db = require("./db");
 const { Sequelize } = db;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require('dotenv').config();
 
 const User = db.define("user", {
     email: {
@@ -48,6 +49,62 @@ const User = db.define("user", {
     }
 });
 
+// hash password before entering user into db
+User.beforeCreate(async (user) => {
+    try {
+        user.password = await bcrypt.hash(user.password, 10);
+    } catch (error) {
+        console.error(error)   ;
+    }
+})
+
 // authentication
+User.authenticate = async ({ key, password }) => {
+    try {
+        let user;
+        if (key.includes("@")) {
+            user = await User.findOne({
+                where: { email: key }
+            });
+        } else {
+            user = await User.findOne({
+                where: { username: key }
+            });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user/*.dataValues*/.password);
+        if (isPasswordValid) {
+            console.log("User successfully authenticated");
+            return user;
+        } else {
+            console.log("Password invalid");
+            return;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+User.prototype.generateToken = function() {
+    try {
+        return jwt.sign({ id: this.id }, process.env.JWT_KEY);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+User.findByToken() = async (token) => {
+    try {
+        const { id } = jwt.verify(token, process.env.JWT_KEY);
+        const user = await User.findByPk(id);
+        if (user) {
+            return user;
+        } else {
+            throw new Error("Invalid token");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 module.exports = User;
