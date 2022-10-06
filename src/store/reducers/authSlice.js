@@ -21,17 +21,23 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const { setLoggedInUser, logout } = authSlice.actions;
 
 // verifies credentials, stores token in localStorage
 export const login = (credentials) => async (dispatch) => {
     const { data: token } = await axios.post("/api/auth/login", credentials);
-    console.log("Login data:")
-    console.dir(token);
-
-    await dispatch(verifyToken(token));
-    localStorage.setItem("token", token);
-    console.log("Set token as:", token);
+    switch (token) {
+        case "nouser":
+            alert("Could not find user with that email/username!");
+            return;
+        case "invalid":
+            alert("Invalid credentials!");
+            return;
+        default:
+            await dispatch(verifyToken(token));
+            window.localStorage.setItem("token", token);
+            alert("Successfully logged in!");
+    }
 }
 
 // signup creates acct, generates token, and logs in
@@ -50,6 +56,7 @@ export const verifyToken = (token) => async (dispatch) => {
     const { data: user } = await axios.get("/api/auth", {
         headers: { authorization: token }
     });
+    console.log("User from token:");
+    console.log(user);
     dispatch(setLoggedInUser(user));
-    console.log("Token verified - user logged in");
 }

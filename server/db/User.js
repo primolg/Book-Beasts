@@ -68,14 +68,17 @@ User.authenticate = async ({ key, password }) => {
                 where: { username: key }
             });
         }
+        if (!user) return "nouser";
 
-        const isPasswordValid = await bcrypt.compare(password, user/*.dataValues*/.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) return ("invalid");
+
         if (isPasswordValid) {
             console.log("User successfully authenticated");
-            return user;
+            const token = user.generateToken();
+            return token;
         } else {
             throw new Error("Password invalid");
-            return;
         }
     } catch (error) {
         console.error(error);
@@ -84,7 +87,7 @@ User.authenticate = async ({ key, password }) => {
 
 User.prototype.generateToken = function() {
     try {
-        return jwt.sign({ id: this.id }, process.env.JWT_KEY);
+        return jwt.sign({ id: this.id }, process.env.JWT);
     } catch (error) {
         console.error(error);
     }
@@ -92,7 +95,7 @@ User.prototype.generateToken = function() {
 
 User.findByToken = async (token) => {
     try {
-        const { id } = jwt.verify(token, process.env.JWT_KEY);
+        const { id } = jwt.verify(token, process.env.JWT);
         const user = await User.findByPk(id);
         if (user) {
             return user;

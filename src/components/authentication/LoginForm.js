@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import { login } from "../../store/reducers/authSlice";
+// import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const initialForm = { key: "", password: "" };
     const [form, setForm] = React.useState(initialForm);
@@ -21,8 +24,7 @@ export default function LoginForm() {
     
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        const loginAttempt = dispatch(/* fn */);
-        console.dir(form);
+        dispatch(login(form));
     }
     
     return(
