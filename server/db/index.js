@@ -17,8 +17,8 @@ Book.belongsTo(Student);
 Student.hasMany(Page);
 Page.belongsTo(Student);
 
-Page.belongsToMany(Book, { through: PageItem });
-Book.belongsToMany(Page, { through: PageItem });
+Page.belongsTo(Book);
+Book.hasMany(Page);
 
 Tag.belongsToMany(Book, { through: 'bookTags' });
 Book.belongsToMany(Tag, { through: 'bookTags' });
