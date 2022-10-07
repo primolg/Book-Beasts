@@ -34,12 +34,12 @@ const instructorSlice = createSlice({
     //   state.studentList.push(action.payload.studentList);
     //   return state;
     // },
-    // _deleteStudent: (state, action) => {
-    //   state.instructorData.students = state.instructorData.students.filter((student) =>
-    //       student.id !== action.payload.student.id
-    // );
-    //   return state;
-    // },
+    _deleteStudent: (state, action) => {
+      state.studentList = state.studentList.filter((student) =>
+          student.id !== action.payload.id
+    );
+      return state;
+    },
     setErrorMsg: (state, action) => {
       state.errorMsg = action.payload;
       return state;
@@ -55,7 +55,7 @@ export const {
   getStudents,
   getStudent,
   // _addStudent,
-  // _deleteStudent,
+  _deleteStudent,
 } = instructorSlice.actions;
 
 export const fetchInstructors = () => async(dispatch) => {
@@ -101,7 +101,8 @@ export const updateStudentData = (updatedStudentInfo, userId, studentId) => asyn
 //   dispatch(getInstructor(updatedInstructorData));
 // };
 
-// export const deleteStudent = (studentId) => async(dispatch) => {
-//   const { data: deletedStudentData } = await axios.delete(`/api/instructors/students/${studentId}`);
-//   dispatch(_deleteStudent(deletedStudentData));
-//   };
+export const deleteStudent = (student, navigate) => async(dispatch) => {
+  const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
+  dispatch(_deleteStudent(deletedStudentData));
+  navigate('/instructorPortal/:id/students');
+  };
