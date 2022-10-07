@@ -42,9 +42,8 @@ export const login = (credentials) => async (dispatch) => {
 // signup creates acct, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
-    if (!user.token) {
-        console.log(user);
-        alert("Unable to create account");
+    if (user.error) {
+        alert(user.errorMessage);
         return false;
     } else {
         dispatch(setLoggedInUser(user));

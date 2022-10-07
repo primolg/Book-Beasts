@@ -1,14 +1,19 @@
 const router = require('express').Router();
 const { User, Student } = require('../db');
 
-// verifies token, returns associated user
+// verifies token, returns associated user (might need refactor later)
 router.get("/", async (req, res) => {
     try {
-        const user = await User.findByToken(req.headers.authorization);
+        let user = await User.findByToken(req.headers.authorization);
         if (user) {
-            res.send(filterUserData(user));
+            res.send(user);
         } else {
-            throw new Error("Unable to verify token");
+            user = await Student.findByToken(req.headers.authorization);
+            if (user) {
+                res.send(user);
+            } else {
+                throw new Error("Unable to verify token");
+            }
         }
     } catch (error) {
         console.error(error);
@@ -26,7 +31,7 @@ router.post("/login", async (req, res) => {
         } else {
             throw new Error("Unable to verify account type");
         }
-        res.send(filterUserData(user));
+        res.send(user);
     } catch (error) {
         console.error(error);
     }
@@ -38,12 +43,28 @@ router.post("/signup", async (req, res) => {
         const newUser = await User.create(req.body);
         if (newUser?.id) {
             const token = await newUser.generateToken();
-            res.send(filterUserData(newUser, token));
+            newUser.dataValues.token = token;
+            delete newUser.dataValues.password;
+            res.send(newUser);
         } else {
             throw new Error("Unable to register new user");
         }
     } catch (error) {
-        console.error(error);
+        if (error.name.includes("UniqueConstraint")) {
+            const field = error.errors[0].path;
+            res.send({
+                error: true,
+                errorMessage: `That ${field} is already in use`,
+            });
+        } else if (error.name.includes("ValidationError")) {
+            let field = error.errors[0].path;
+            if (field === "firstName") field = "first name";
+            else if (field === "lastName") field = "last name";
+            res.send({
+                error: true,
+                errorMessage: `Invalid ${field}`,
+            });
+        }
     }
 });
 
