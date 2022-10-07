@@ -40,12 +40,6 @@ const instructorSlice = createSlice({
     );
       return state;
     },
-    _removeStudent: (state, action ) => {
-      state.instructorData.students = state.instructorData.students.filter((student) =>
-      student.id !== action.payload.id
-      );
-      return state;
-    },
     setErrorMsg: (state, action) => {
       state.errorMsg = action.payload;
       return state;
@@ -61,7 +55,6 @@ export const {
   getStudents,
   getStudent,
   _deleteInstructor,
-  _removeStudent,
   // _addStudent,
   _deleteStudent,
 } = instructorSlice.actions;
@@ -100,11 +93,6 @@ export const deleteInstructor = (instructorData, navigate) => async(dispatch) =>
   dispatch(_deleteInstructor(deletedInstructor));
   navigate('/');
 };
-
-export const removeStudent = (updatedStudent, userId, studentId) => async(dispatch) => {
-  const { data: updatedStudentData } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudent, userId, studentId);
-  dispatch(_removeStudent(updatedStudentData));
-}
 
 // export const addStudent = (newStudent) => async(dispatch) => {
 //   try{
