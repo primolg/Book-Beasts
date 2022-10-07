@@ -2,9 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
-// import { Link } from 'react-router-dom';
 
-export default function LoginForm() {
+export default function LoginForm({ type, setAccountType }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -25,10 +24,12 @@ export default function LoginForm() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         dispatch(login(form));
+        // navigate("/");
     }
     
     return(
-        <div className="formContainer login">
+        <div className="formContainer">
+            <h2>{(type === "user" ? "Instructor" : "Student") + " Login"}</h2>
             <form>
                 <p>Enter username or email:</p>
                 <input type="text" onChange={handleFormChange} placeholder="Username or email" />
@@ -36,7 +37,10 @@ export default function LoginForm() {
                 <p>Password:</p>
                 <input type="password" onChange={handleFormChange} />
 
-                <button type="submit" onClick={handleFormSubmit}>Login</button>
+                <div className="btnContainer">
+                    <button onClick={() => setAccountType(null)}>Go back</button>
+                    <button type="submit" onClick={handleFormSubmit}>Login</button>
+                </div>
             </form>
         </div>
     )
