@@ -1,5 +1,6 @@
 const db = require("./db");
 const { Sequelize } = db;
+const { Op } = require("sequelize");
 
 const Page = db.define("page", {
     content: {
@@ -7,6 +8,9 @@ const Page = db.define("page", {
     },
     image: {
         type: Sequelize.STRING,
+        validate: {
+            isUrl: true,
+        }
     },
     type: {
         type: Sequelize.STRING,
@@ -30,28 +34,46 @@ const Page = db.define("page", {
     // },
 });
 
-// 'pageId' parameter refers to the page being inserted
-// will need to add 'insertBefore' or modify this function later on
-// Page.prototype.insertAfter = async function (pageId) {
-//     try {
-//         // update 'previous page' on nextPage
-//         await Page.update(
-//             { previousPage: pageId },
-//             { where: { id: this.nextPage }}
-//         );
-//         // update both page refs on the inserted page
-//         await Page.update(
-//             { 
-//                 previousPage: this.id,
-//                 nextPage: this.nextPage,
-//             },
-//             { where: { id: pageId }}
-//         );
-//         // update 'next page' on this page
-//         await this.update({ nextPage: pageId });
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+// steps to insert into linked list:
+// 1: link prev/next on the node we are inserting
+// 2: save the node AFTER where we are inserting
+// 3: update 'nextNode' on previous and 'previousNode' on next
+// 4: update previous/next on our node
+
+// call this on the page that you want to insert
+// 'pageId' is the page you want to insert it after
+Page.prototype.insertAfter = async function (pageId) {
+    try {
+        // 1 - update previous/next on the node we are moving
+        await Page.update(
+            { previousPage: this.previousPage },
+            { where: { id: this.nextPage }}
+        );
+        await Page.update(
+            { nextPage: this.nextPage },
+            { where: { id: this.previousPage }}
+        )
+
+        // 2 - update the node after insertion point
+        const previousPage = await Page.findByPk(pageId);
+        const nextPage = await Page.findByPk(previousPage.nextPage);
+        await nextPage.set({ previousPage: this.id });
+        await nextPage.save();
+
+        // 3 - update the node before insertion point
+        await previousPage.set({ nextPage: this.id });
+        await previousPage.save();
+
+        // 4 - update prev/next on current node
+        await this.set({
+            previousPage: previousPage.id,
+            nextPage: nextPage.id
+        })
+        await this.save();
+    } catch (error) {
+        console.error("Error");
+        // console.error(error);
+    }
+}
 
 module.exports = Page;

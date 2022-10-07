@@ -6,6 +6,12 @@ const Book = db.define("book", {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    coverArt: {
+        type: Sequelize.STRING,
+        validate: {
+            isUrl: true,
+        }
+    },
     isPublished: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

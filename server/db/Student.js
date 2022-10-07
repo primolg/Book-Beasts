@@ -25,7 +25,7 @@ const Student = db.define("student" , {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [4, 32],
+            len: [8, 32],
         }
     },
     firstName: {
