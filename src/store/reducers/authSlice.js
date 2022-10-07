@@ -7,15 +7,14 @@ const axios = require("axios");
 
 const authSlice = createSlice({
     name: "authSlice",
-    initialState: { user: {} },
+    initialState: {},
     reducers: {
         setLoggedInUser: (state, action) => {
-            state.user = action.payload;
-            return state;
+            return action.payload;
         },
         logout: (state, action) => {
-            state.user = {};
-            return state;
+            localStorage.removeItem("token");
+            return {};
         },
     }
 })
@@ -26,7 +25,6 @@ export const { setLoggedInUser, logout } = authSlice.actions;
 // verifies credentials, stores token in localStorage, logs in
 export const login = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/login", credentials);
-    console.log(user);
     if (!user.username) {
         alert("Could not find user with that email/username!");
     } else if (!user.token) {
@@ -35,6 +33,7 @@ export const login = (credentials) => async (dispatch) => {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
         alert("Successfully logged in!");
+        return(true);
     }
 }
 

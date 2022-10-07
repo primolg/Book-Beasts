@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
 
+// "type" can be user/student
 export default function LoginForm({ type, setAccountType }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const initialForm = { key: "", password: "" };
+    const initialForm = { key: "", password: "", type };
     const [form, setForm] = React.useState(initialForm);
     
     const handleFormChange = (e) => {
@@ -22,9 +23,11 @@ export default function LoginForm({ type, setAccountType }) {
     }
     
     const handleFormSubmit = (e) => {
+        // need to fix for students
         e.preventDefault();
-        dispatch(login(form));
-        // navigate("/");
+        dispatch(login(form)).then(res => {
+            if (res) navigate("/");
+        })
     }
     
     return(
@@ -37,10 +40,10 @@ export default function LoginForm({ type, setAccountType }) {
                 <p>Password:</p>
                 <input type="password" onChange={handleFormChange} />
 
-                <div className="btnContainer">
-                    <button onClick={() => setAccountType(null)}>Go back</button>
-                    <button type="submit" onClick={handleFormSubmit}>Login</button>
-                </div>
+                <button type="submit" onClick={handleFormSubmit}>Login</button>
+                <p onClick={() => setAccountType(null)} className="return">
+                    {`Wait - I'm not ${type === "user" ? "an instructor!" : "a student!"}`}
+                </p>
             </form>
         </div>
     )

@@ -13,11 +13,11 @@ export default function UserStatus() {
             <Link to="/">
                 <p>Home</p>
             </Link>
-            
+
             {user?.id ?
             <>
                 <p>{`Hello, ${user.firstName}`}</p>
-                <LogoutButton /> 
+                <LogoutButton text={true}/> 
             </>
             :
             <>

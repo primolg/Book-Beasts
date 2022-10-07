@@ -12,8 +12,10 @@ export default function LoginPage() {
             {
                 user?.id ?
                 <>
-                    <p>You are already logged in! Please logout to login to a different account.</p>
-                    <LogoutButton />
+                    <div className="content loggedIn">
+                        <p>You are already logged in! Please logout to login to a different account.</p>
+                        <LogoutButton />
+                    </div>
                 </>
                 :
                 accountType ?
