@@ -33,6 +33,7 @@ const StudentTable = () => {
                                 <th>Username</th>
                                 <th>Color</th>
                                 <th>Book List</th>
+                                <th>Email</th>
                                 <th>Edit Student</th>
                                 <th>Delete Student</th>
                             </tr>

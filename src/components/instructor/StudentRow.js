@@ -4,13 +4,14 @@ import  DeleteStudent  from "./DeleteStudent";
 import  EditStudent  from "./EditStudent";
 
 
+
 const StudentRow = ({ student }) => {
     const { pathname } = useLocation();
 
     console.log('STUDENT ROW', student);
     
     return(
-        <div className='studentRow'>
+        <>
             {student && (
                 <tr>
                     <td>{student.firstName}</td>
@@ -28,7 +29,7 @@ const StudentRow = ({ student }) => {
                     </td>
                 </tr>
             )}
-        </div>
+        </>
     )
 };
 

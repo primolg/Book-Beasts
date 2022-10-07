@@ -26,6 +26,10 @@ const instructorSlice = createSlice({
     getStudents: (state, action) => {
       state.studentList = action.payload;
     },
+    getStudent: (state, action) => {
+      state.currentStudent = action.payload;
+      return state;
+    },
     // _addStudent: (state, action) => {
     //   state.studentList.push(action.payload.studentList);
     //   return state;
@@ -49,6 +53,7 @@ export const {
   getInstructorList,
   getInstructor,
   getStudents,
+  getStudent,
   // _addStudent,
   // _deleteStudent,
 } = instructorSlice.actions;
@@ -68,6 +73,19 @@ export const fetchStudents = (userId) => async(dispatch) => {
   console.log('FETCH STUDENTS THUNK', userId);
   dispatch(getStudents(studentList));
 };
+
+export const fetchStudentData = (studentId) => async(dispatch) => {
+  console.log('FETCH STUDENT DATA THUNK ', studentId);
+  const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
+  
+  dispatch(getStudent(studentData));
+};
+
+export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
+  console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
+  const { data: updatedStudent } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudentInfo, userId, studentId);
+  dispatch(getStudent(updatedStudent));
+}
 
 // export const addStudent = (newStudent) => async(dispatch) => {
 //   try{
