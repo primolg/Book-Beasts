@@ -6,12 +6,12 @@ const Home = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state);
 
-  console.log(books);
-
+  
   useEffect(() => {
     dispatch(fetchBooks())
   },[])
-
+  
+  console.log(books.book);
   return (
     <div className='content-container'>
       <div className='FILLER-NAV-BAR'>NAV BAR</div>

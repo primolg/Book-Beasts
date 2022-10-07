@@ -75,7 +75,6 @@ export const {
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
 	try {
 		const { data } = await axios.get('/api/books');
-		await data.sort((a, b) => a.id - b.id);
 		return data;
 	} catch (e) {
 		console.log(e);

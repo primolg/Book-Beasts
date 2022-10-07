@@ -5,7 +5,8 @@ const { Student, Book, User } = require('../db');
 router.get('/', async(req, res, next) => {
     try {
         const bookList = await Book.findAll();
-        res.send(bookList);
+        console.log(bookList)
+        res.send(bookList)
     } catch (e) {
         next(e);
     }
@@ -55,3 +56,5 @@ router.delete('/:id', async(req, res, next) => {
 
     }
 })
+
+module.exports = router;
