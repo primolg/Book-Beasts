@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
-
+import Popup from 'reactjs-popup';
 
 const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
@@ -58,20 +58,30 @@ const EditStudent = ( {student} ) => {
 
     return (
         <>
-       <form id='form' onSubmit={handleSubmit}>
-        <h3>Edit Student</h3>
-        <label htmlFor="firstName">First Name:</label>
-        <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-        <label htmlFor="lastName">Last Name:</label>
-        <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-        <label htmlFor="email">Email:</label>
-        <input name="email" value={form.email} onChange={handleChange('email')}/>
-        <label htmlFor="username">Username:</label>
-        <input name='username' value={form.username} onChange={handleChange('username')}/>
-        <label htmlFor="password">Password:</label>
-        <input name="password" value={form.password} onChange={handleChange('password')}/>
-        <button type="submit">Submit Changes</button>
-       </form>
+        <Popup trigger={<button>Edit</button>} position="top left">
+            {close => (
+                <div>
+               <form id='form' onSubmit={handleSubmit}>
+               <h3>Edit Student</h3>
+               <label htmlFor="firstName">First Name:</label>
+               <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
+               <label htmlFor="lastName">Last Name:</label>
+               <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
+               <label htmlFor="email">Email:</label>
+               <input name="email" value={form.email} onChange={handleChange('email')}/>
+               <label htmlFor="username">Username:</label>
+               <input name='username' value={form.username} onChange={handleChange('username')}/>
+               <label htmlFor="password">Password:</label>
+               <input name="password" value={form.password} onChange={handleChange('password')}/>
+               <button type="submit">Submit Changes</button>
+              </form> 
+              <a className="close" onClick={close}>
+                &times;
+              </a>
+              </div>
+            )}
+        </Popup>
+      
         </>
     )
 };
