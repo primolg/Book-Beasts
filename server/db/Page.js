@@ -16,22 +16,22 @@ const Page = db.define("page", {
         type: Sequelize.STRING,
     },
     // page order kept with doubly linked list
-    previousPage: Sequelize.INTEGER,
-    nextPage: Sequelize.INTEGER,
-    // 'isFirstPage' might make the linked list easier to handle in queries
-    isFirstPage: {
-        type: Sequelize.VIRTUAL,
-        get() {
-            return this.previousPage ? false : true;
-        },
-    },
-    // 'isLastPage' may not be necessary - we can remove it later if we end up not needing it
-    isLastPage: {
-        type: Sequelize.VIRTUAL,
-        get() {
-            return this.nextPage ? false : true;
-        },
-    },
+    // previousPage: Sequelize.INTEGER,
+    // nextPage: Sequelize.INTEGER,
+    // // 'isFirstPage' might make the linked list easier to handle in queries
+    // isFirstPage: {
+    //     type: Sequelize.VIRTUAL,
+    //     get() {
+    //         return this.previousPage ? false : true;
+    //     },
+    // },
+    // // 'isLastPage' may not be necessary - we can remove it later if we end up not needing it
+    // isLastPage: {
+    //     type: Sequelize.VIRTUAL,
+    //     get() {
+    //         return this.nextPage ? false : true;
+    //     },
+    // },
 });
 
 // steps to insert into linked list:
