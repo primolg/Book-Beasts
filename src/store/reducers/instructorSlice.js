@@ -17,12 +17,12 @@ const instructorSlice = createSlice({
     //   state.instructorList.push(action.payload);
     //   return state;
     // },
-    // _deleteInstructor: (state, action)=> {
-    //   state.instructorList = state.instructorList.filter((instructor) =>
-    //   instructor.id != action.payload.id
-    //   );
-    //   return state;
-    // },
+    _deleteInstructor: (state, action)=> {
+      state.instructorList = state.instructorList.filter((instructor) =>
+      instructor.id != action.payload.id
+      );
+      return state;
+    },
     getStudents: (state, action) => {
       state.studentList = action.payload;
     },
@@ -40,6 +40,12 @@ const instructorSlice = createSlice({
     );
       return state;
     },
+    _removeStudent: (state, action ) => {
+      state.instructorData.students = state.instructorData.students.filter((student) =>
+      student.id !== action.payload.id
+      );
+      return state;
+    },
     setErrorMsg: (state, action) => {
       state.errorMsg = action.payload;
       return state;
@@ -54,6 +60,8 @@ export const {
   getInstructor,
   getStudents,
   getStudent,
+  _deleteInstructor,
+  _removeStudent,
   // _addStudent,
   _deleteStudent,
 } = instructorSlice.actions;
@@ -85,6 +93,17 @@ export const updateStudentData = (updatedStudentInfo, userId, studentId) => asyn
   console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
   const { data: updatedStudent } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudentInfo, userId, studentId);
   dispatch(getStudent(updatedStudent));
+};
+
+export const deleteInstructor = (instructorData, navigate) => async(dispatch) => {
+  const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
+  dispatch(_deleteInstructor(deletedInstructor));
+  navigate('/');
+};
+
+export const removeStudent = (updatedStudent, userId, studentId) => async(dispatch) => {
+  const { data: updatedStudentData } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudent, userId, studentId);
+  dispatch(_removeStudent(updatedStudentData));
 }
 
 // export const addStudent = (newStudent) => async(dispatch) => {
@@ -101,8 +120,9 @@ export const updateStudentData = (updatedStudentInfo, userId, studentId) => asyn
 //   dispatch(getInstructor(updatedInstructorData));
 // };
 
-export const deleteStudent = (student, navigate) => async(dispatch) => {
+export const deleteStudent = (student) => async(dispatch) => {
+  console.log('DELETE STUDENT', student)
   const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
   dispatch(_deleteStudent(deletedStudentData));
-  navigate('/instructorPortal/:id/students');
+  
   };
