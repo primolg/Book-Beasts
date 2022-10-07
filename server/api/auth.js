@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../db');
+const { User, Student } = require('../db');
 
 // verifies token
 router.get("/", async (req, res) => {
@@ -20,7 +20,14 @@ router.get("/", async (req, res) => {
 // note: token is empty string if user does not exist
 router.post("/login", async (req, res) => {
     try {
-        const user = await User.authenticate(req.body);
+        let user;
+        if (req.body.type === "user") {
+            user = await User.authenticate(req.body);
+        } else if (req.body.type === "student"){
+            user = await Student.authenticate(req.body);
+        } else {
+            throw new Error("Could not verify account type");
+        }
         res.send(user);
     } catch (error) {
         console.error(error);
