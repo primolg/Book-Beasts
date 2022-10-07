@@ -27,31 +27,44 @@ export const login = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/login", credentials);
     if (!user.username) {
         alert("Could not find user with that email/username!");
+        return false;
     } else if (!user.token) {
         alert("Invalid login!");
+        return false;
     } else {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
         alert("Successfully logged in!");
-        return(true);
+        return true;
     }
 }
 
 // signup creates acct, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
-    const { data: token } = await axios.post("/api/auth/signup", credentials);
-    console.log("Signup data:");
-    console.dir(token);
-
-    await dispatch(verifyToken(token));
-    localStorage.setItem("token", token);
-    console.log("Set token as:", token);
+    const { data: user } = await axios.post("/api/auth/signup", credentials);
+    if (!user.token) {
+        console.log(user);
+        alert("Unable to create account");
+        return false;
+    } else {
+        dispatch(setLoggedInUser(user));
+        window.localStorage.setItem("token", user.token);
+        alert("Account successfully created!");
+        return true;
+    }
 }
 
-// verifies that stored token is valid
+// verifies that stored token is valid, stores user data in store
+// if valid token returns 'true', else returns 'false'
 export const verifyToken = (token) => async (dispatch) => {
     const { data: user } = await axios.get("/api/auth", {
         headers: { authorization: token }
     });
-    dispatch(setLoggedInUser(user));
+    if (user?.email) {
+        dispatch(setLoggedInUser(user));
+        return true;
+    } else {
+        alert("Invalid token");
+        return false;
+    }
 }

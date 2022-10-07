@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/reducers/authSlice";
-// import { Link } from 'react-router-dom';
 
 export default function LogoutButton({ text }) {
     const dispatch = useDispatch();

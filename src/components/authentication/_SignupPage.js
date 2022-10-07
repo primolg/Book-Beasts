@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { SignupForm, SelectAccountType, LogoutButton } from "./";
 
 export default function SignupPage() {
-    const user = useSelector(state => state.user);
+    const token = localStorage.getItem("token");
     const [accountType, setAccountType] = useState(null);
 
     return(
         <div id="authContainer">
             {
-                user?.id ?
-                <>
+                token?.length ?
+                <div className="content loggedIn">
                     <p>You are already logged in! Please logout to signup for a new account.</p>
                     <LogoutButton />
-                </>
+                </div>
                 :
                 accountType ?
-                <LoginForm type={accountType} setAccountType={setAccountType} />
-                : <SelectAccountType setAccountType={setAccountType}/>
+                <SignupForm type={accountType} setAccountType={setAccountType} />
+                : <SelectAccountType formType="Signup" setAccountType={setAccountType}/>
             }
         </div>
     )

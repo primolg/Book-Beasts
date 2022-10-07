@@ -1,13 +1,12 @@
 const router = require('express').Router();
 const { User, Student } = require('../db');
 
-// verifies token
+// verifies token, returns associated user
 router.get("/", async (req, res) => {
     try {
         const user = await User.findByToken(req.headers.authorization);
         if (user) {
-            delete user.dataValues.password;
-            res.send(user);
+            res.send(filterUserData(user));
         } else {
             throw new Error("Unable to verify token");
         }
@@ -16,8 +15,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// verifies user credentials, returns token
-// note: token is empty string if user does not exist
+// verifies user credentials, returns user with token attached
 router.post("/login", async (req, res) => {
     try {
         let user;
@@ -26,20 +24,24 @@ router.post("/login", async (req, res) => {
         } else if (req.body.type === "student"){
             user = await Student.authenticate(req.body);
         } else {
-            throw new Error("Could not verify account type");
+            throw new Error("Unable to verify account type");
         }
-        res.send(user);
+        res.send(filterUserData(user));
     } catch (error) {
         console.error(error);
     }
 });
 
-// adds user to database, returns token
+// adds user to database, returns newly created user
 router.post("/signup", async (req, res) => {
     try {
         const newUser = await User.create(req.body);
-        const token = await newUser.generateToken();
-        res.send(token);
+        if (newUser?.id) {
+            const token = await newUser.generateToken();
+            res.send(filterUserData(newUser, token));
+        } else {
+            throw new Error("Unable to register new user");
+        }
     } catch (error) {
         console.error(error);
     }

@@ -33,6 +33,9 @@ export default function LoginForm({ type, setAccountType }) {
     return(
         <div className="formContainer">
             <h2>{(type === "user" ? "Instructor" : "Student") + " Login"}</h2>
+            <p onClick={() => setAccountType(type==="user"?"student":"user")} className="return">
+                {`Wait - I'm ${type === "user" ? "a student!" : "an instructor!"}`}
+            </p>
             <form>
                 <p>Enter username or email:</p>
                 <input type="text" onChange={handleFormChange} placeholder="Username or email" />
@@ -41,9 +44,6 @@ export default function LoginForm({ type, setAccountType }) {
                 <input type="password" onChange={handleFormChange} />
 
                 <button type="submit" onClick={handleFormSubmit}>Login</button>
-                <p onClick={() => setAccountType(null)} className="return">
-                    {`Wait - I'm not ${type === "user" ? "an instructor!" : "a student!"}`}
-                </p>
             </form>
         </div>
     )
