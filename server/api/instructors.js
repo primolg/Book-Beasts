@@ -7,6 +7,7 @@ const { Student, Book, User } = require('../db');
 router.get('/', async(req, res, next) => {
     try{
         const instructorList = await User.findAll();
+        console.log('INSTRUCTOR LIST API', instructorList);
         res.send(instructorList);
     }catch(error){
         next(error);
@@ -70,8 +71,9 @@ router.delete('/:id', async(req, res, next) => {
 
 //GET student and books
 
-router.get('/students', async(req, res, next) => {
+router.get('/:id/students', async(req, res, next) => {
     try{
+        console.log('API INST ID', req.params.userId)
     const allStudents = await Student.findAll({
         where: {
             userId: req.params.userId
