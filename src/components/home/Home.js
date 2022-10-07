@@ -1,8 +1,17 @@
-import React from 'react';
-import './home.css'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchBooks } from '../../store/reducers/bookSlice';
 
 const Home = () => {
-  
+  const dispatch = useDispatch();
+  const books = useSelector((state) => state);
+
+  console.log(books);
+
+  useEffect(() => {
+    dispatch(fetchBooks())
+  },[])
+
   return (
     <div className='content-container'>
       <div className='FILLER-NAV-BAR'>NAV BAR</div>

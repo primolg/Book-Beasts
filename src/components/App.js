@@ -1,9 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, Provider } from "react-redux";
 import { Routes, Route } from "react-router-dom";
+import Home from "./Home/Home";
+import store from "../store";
+
 
 function App() {
-    return (<div>Hello world</div>)
+    return (
+    <Provider store={store}>
+        <Home/>
+    </Provider>
+    )
 }
 
 export default App;

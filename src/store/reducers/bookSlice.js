@@ -1,25 +1,5 @@
-import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const axios = require('axios');
-
-export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-	try {
-		const { data } = await axios.get('/api/books');
-		await data.sort((a, b) => a.id - b.id);
-		return data;
-	} catch (e) {
-		console.log(e);
-	}
-});
-
-export const fetchBookData = createAsyncThunk('/books/fetchBookData', async (id) => {
-    try {
-        const { data } = await axios.get(`/api/books/${id}`);
-        return data;
-    } catch (e) {
-        console.log(e);
-    }
-})
 
 const bookSlice = createSlice({
     name: 'bookList',
@@ -43,7 +23,7 @@ const bookSlice = createSlice({
             state.bookList.push(action.payload);
             return state;
         },
-        removeBook: (state, action) => {
+        deleteBook: (state, action) => {
             state.bookList = state.bookList.filter(
 				(book) => book.id != action.payload.id
 			);
@@ -84,4 +64,30 @@ const bookSlice = createSlice({
 
 export default bookSlice.reducer;
 
-export const { getBookList, setErrorMsg, } = bookSlice.actions;
+export const {
+    getBookList,
+    setErrorMsg,
+    getBook,
+    addBook,
+    deleteBook,
+} = bookSlice.actions;
+
+export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
+	try {
+		const { data } = await axios.get('/api/books');
+		await data.sort((a, b) => a.id - b.id);
+		return data;
+	} catch (e) {
+		console.log(e);
+	}
+});
+
+export const fetchBookData = createAsyncThunk('/books/fetchBookData', async (id) => {
+    try {
+        const { data } = await axios.get(`/api/books/${id}`);
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
+})
+
