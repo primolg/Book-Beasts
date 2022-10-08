@@ -9,18 +9,33 @@ const instructorSlice = createSlice({
       state.instructorList = action.payload;
       return state;
     },
-    addInstructor: (state, action) => {
-      state.instructorList.push(action.payload);
+    getInstructor: (state, action) => {
+      state.instructorData = action.payload;
       return state;
     },
+    // addInstructor: (state, action) => {
+    //   state.instructorList.push(action.payload);
+    //   return state;
+    // },
     _deleteInstructor: (state, action)=> {
       state.instructorList = state.instructorList.filter((instructor) =>
       instructor.id != action.payload.id
       );
       return state;
     },
+    getStudents: (state, action) => {
+      state.studentList = action.payload;
+    },
+    getStudent: (state, action) => {
+      state.currentStudent = action.payload;
+      return state;
+    },
+    // _addStudent: (state, action) => {
+    //   state.studentList.push(action.payload.studentList);
+    //   return state;
+    // },
     _deleteStudent: (state, action) => {
-      state.instructorData.students = state.instructorData.students.filter((student) =>
+      state.studentList = state.studentList.filter((student) =>
           student.id !== action.payload.id
     );
       return state;
@@ -36,6 +51,11 @@ export default instructorSlice.reducer;
 
 export const {
   getInstructorList,
+  getInstructor,
+  getStudents,
+  getStudent,
+  _deleteInstructor,
+  // _addStudent,
   _deleteStudent,
 } = instructorSlice.actions;
 
@@ -49,12 +69,48 @@ export const fetchInstructorData = (instructorId) => async(dispatch) => {
   dispatch(getInstructor(instructorData));
 };
 
-export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
-  const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
-  dispatch(getInstructor(updatedInstructorData));
+export const fetchStudents = (userId) => async(dispatch) => {
+  const { data: studentList } = await axios.get(`/api/instructors/:id/students`, userId);
+  console.log('FETCH STUDENTS THUNK', userId);
+  dispatch(getStudents(studentList));
 };
 
-export const deleteStudent = (deletedStudent) => async(dispatch) => {
-  const { data: deletedStudentData } = await axios.put (`/api/students/${deletedStudent.id}`, deletedStudentData);
+export const fetchStudentData = (studentId) => async(dispatch) => {
+  console.log('FETCH STUDENT DATA THUNK ', studentId);
+  const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
+  
+  dispatch(getStudent(studentData));
+};
+
+export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
+  console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
+  const { data: updatedStudent } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudentInfo, userId, studentId);
+  dispatch(getStudent(updatedStudent));
+};
+
+export const deleteInstructor = (instructorData, navigate) => async(dispatch) => {
+  const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
+  dispatch(_deleteInstructor(deletedInstructor));
+  navigate('/');
+};
+
+// export const addStudent = (newStudent) => async(dispatch) => {
+//   try{
+//     const{ data: newStudentData } = await axios.post(`/api/instructors/students`, newStudent);
+//     dispatch(_addStudent(newStudentData));
+//   }catch(error){
+//     console.log('ADD STUDENT THUNK ERROR ', error);
+//   }
+// }
+
+// export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
+//   const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
+//   dispatch(getInstructor(updatedInstructorData));
+// };
+
+export const deleteStudent = (student) => async(dispatch) => {
+  console.log('DELETE STUDENT', student)
+  const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
   dispatch(_deleteStudent(deletedStudentData));
+  
   };

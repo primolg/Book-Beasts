@@ -1,5 +1,5 @@
 {
-  "name": "capstone",
+  "name": "book-beast",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.1",
+    "reactjs-popup": "^2.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "sequelize": "^6.24.0",
