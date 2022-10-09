@@ -1,7 +1,11 @@
 const db = require("./db");
 const { Sequelize } = db;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const {
+    hashPassword,
+    authenticate,
+    generateToken,
+    findByToken,
+} = require("./utils");
 
 const User = db.define("user", {
     email: {
@@ -42,6 +46,10 @@ const User = db.define("user", {
     }
 });
 
-// authentication
+User.beforeCreate(hashPassword);
+User.beforeUpdate(hashPassword);
+User.authenticate = authenticate(User);
+User.findByToken = findByToken(User);
+User.prototype.generateToken = generateToken;
 
 module.exports = User;
