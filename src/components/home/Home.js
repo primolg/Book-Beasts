@@ -12,6 +12,8 @@ const Home = () => {
   },[])
   
   console.log(books.book);
+
+  
   return (
     <div className='content-container'>
       <div className='FILLER-NAV-BAR'>NAV BAR</div>
@@ -19,6 +21,13 @@ const Home = () => {
         <h1>Book Beasts</h1>
         <p>What kind of beast will you be today...?</p>
       </div>
+      <div className="outer-div">
+            <div className="shelf-div">
+                {books.book.books.map(book => 
+                    <div className="book">{book.title}</div>
+                )}
+            </div>
+        </div>
 
     </div>
 )}
