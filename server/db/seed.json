@@ -350,6 +350,15 @@
       "firstName": "Liam",
       "lastName": "Dudley",
       "isAdmin": false
+    },
+    {
+      "id": 40,
+      "email": "abc@gmail.com",
+      "username": "mspiggy",
+      "password": "password",
+      "firstName": "Ms",
+      "lastName": "Piggy",
+      "isAdmin": true
     }
   ],
   "students": [

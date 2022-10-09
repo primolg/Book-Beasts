@@ -40,6 +40,10 @@ router.post("/login", async (req, res) => {
 // adds user to database, returns newly created user
 router.post("/signup", async (req, res) => {
     try {
+        // have to manually assign an id due to pk autoIncrement not working as intended
+        // temporary fix - should try to figure this out when time allows
+        req.body.id = (await User.count() + 1);
+
         const newUser = await User.create(req.body);
         if (newUser?.id) {
             const token = await newUser.generateToken();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
@@ -8,8 +8,12 @@ export default function LoginForm({ type, setAccountType }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const initialForm = { key: "", password: "", type };
+    const initialForm = { key: "", password: "" };
     const [form, setForm] = React.useState(initialForm);
+
+    useEffect(() => {
+        setForm({...form, type});
+    }, [type]);
     
     const handleFormChange = (e) => {
         switch (e.target.type) {
@@ -23,7 +27,6 @@ export default function LoginForm({ type, setAccountType }) {
     }
     
     const handleFormSubmit = (e) => {
-        // need to fix for students
         e.preventDefault();
         dispatch(login(form)).then(res => {
             if (res) navigate("/");

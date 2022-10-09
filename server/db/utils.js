@@ -40,9 +40,10 @@ const authenticate = (model) => async({ key, password }) => {
     }
 }
 
+// adding 'username' ensures students/instructors can't log into eachothers' accounts
 function generateToken() {
     try {
-        return jwt.sign({ id: this.id }, process.env.JWT);
+        return jwt.sign({ id: this.id, username: this.username }, process.env.JWT);
     } catch (error) {
         console.error(error);
     }
