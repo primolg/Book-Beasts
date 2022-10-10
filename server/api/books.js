@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Student, Book, User } = require('../db');
+const { Student, Book, Page } = require('../db');
 
 //GET Books
 router.get('/', async(req, res, next) => {
@@ -20,7 +20,8 @@ router.get('/:id', async(req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.id, {
             include: {
-                model: Student
+                model: Student,
+                model: Page,
             }
         });
         res.send(book);

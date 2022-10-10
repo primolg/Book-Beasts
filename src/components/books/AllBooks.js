@@ -60,7 +60,6 @@ const AllBooks = () => {
           <div className='featured-book-slider'>
         <div className="outer-div">Books:
               <div className="shelf-div">
-                  {console.log(books)}
                   {books.map(book => 
                   <div>
                       <Link to={`/books/${book.id}`}>
