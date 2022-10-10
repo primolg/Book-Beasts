@@ -12,7 +12,23 @@ const SingleBook = () => {
     },[]);
 
     const book = useSelector((state) => state.book.singleBook)
-    console.log(book)
+    
+    const sortPages = (book) => {
+
+        let orderedPages = [];
+        let currentPage = book.pages.filter((page) => page.isFirstPage);
+        orderedPages.push(currentPage);
+        
+        while(orderedPages.length < book.pages.length){
+            let nextPage = book.pages.filter((page) => page.id == currentPage[0].nextPage);
+            orderedPages.push(nextPage);
+        }
+        console.log(orderedPages);
+    }
+
+    if(book){
+        sortPages(book);
+    }
 }
 
 export default SingleBook;
