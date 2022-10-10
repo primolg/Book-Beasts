@@ -39,7 +39,11 @@ const Home = () => {
               </div>
           </div>
         </div>
-      
+      <div>
+        <Link to='/books/'>
+          <button>All Books</button>
+        </Link>
+      </div>
     </div>
 )}
 
