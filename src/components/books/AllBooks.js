@@ -27,7 +27,7 @@ const AllBooks = () => {
           case 'biography':
             return bookArray.filter(book => book.genre.includes('biography'));
           case 'none':
-            return bookArray;
+            return bookArray.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
         }
       }
 
