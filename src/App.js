@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import InstructorPortal from "./components/instructor/InstructorPortal";
 import InstructorStudents from "./components/instructor/InstructorStudents";
