@@ -33,6 +33,9 @@ export default function UserStatus() {
             <>
                 <p>{`Hello, ${user.firstName}`}</p>
                 <LogoutButton text={true}/> 
+                <Link to={`/instructorPortal/${user.id}`}>
+                    <p className="loginLink">Instructor Portal</p>
+                    </Link>
             </>
             :
             <>

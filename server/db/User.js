@@ -28,9 +28,9 @@ const User = db.define("user", {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-            len: [8, 32],
-        }
+        // validate: {
+        //     len: [8, 32],
+        // }
     },
     firstName: {
         type: Sequelize.STRING,

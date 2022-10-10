@@ -15,7 +15,7 @@ const InstructorPortal = () => {
         dispatch(fetchInstructorData(params.id));
     }, []);
 
-    console.log('INSTRUCTOR DATA?', instructorData);
+    
 
     return(
         <div className='instructorPortal'>
