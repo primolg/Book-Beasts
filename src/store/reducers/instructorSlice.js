@@ -84,7 +84,7 @@ export const fetchStudentData = (studentId) => async(dispatch) => {
 
 export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
   console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
-  const { data: updatedStudent } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudentInfo, userId, studentId);
+  const { data: updatedStudent } = await axios.put(`/api/instructors/${userId}/students/${studentId}`, updatedStudentInfo, userId, studentId);
   dispatch(getStudent(updatedStudent));
 };
 
