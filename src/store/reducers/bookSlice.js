@@ -89,4 +89,3 @@ export const fetchBookData = createAsyncThunk('/books/fetchBookData', async (id)
         console.log(e);
     }
 })
-

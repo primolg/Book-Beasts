@@ -17,25 +17,29 @@ const instructorSlice = createSlice({
     //   state.instructorList.push(action.payload);
     //   return state;
     // },
-    // _deleteInstructor: (state, action)=> {
-    //   state.instructorList = state.instructorList.filter((instructor) =>
-    //   instructor.id != action.payload.id
-    //   );
-    //   return state;
-    // },
+    _deleteInstructor: (state, action)=> {
+      state.instructorList = state.instructorList.filter((instructor) =>
+      instructor.id != action.payload.id
+      );
+      return state;
+    },
     getStudents: (state, action) => {
       state.studentList = action.payload;
+    },
+    getStudent: (state, action) => {
+      state.currentStudent = action.payload;
+      return state;
     },
     // _addStudent: (state, action) => {
     //   state.studentList.push(action.payload.studentList);
     //   return state;
     // },
-    // _deleteStudent: (state, action) => {
-    //   state.instructorData.students = state.instructorData.students.filter((student) =>
-    //       student.id !== action.payload.student.id
-    // );
-    //   return state;
-    // },
+    _deleteStudent: (state, action) => {
+      state.studentList = state.studentList.filter((student) =>
+          student.id !== action.payload.id
+    );
+      return state;
+    },
     setErrorMsg: (state, action) => {
       state.errorMsg = action.payload;
       return state;
@@ -49,8 +53,10 @@ export const {
   getInstructorList,
   getInstructor,
   getStudents,
+  getStudent,
+  _deleteInstructor,
   // _addStudent,
-  // _deleteStudent,
+  _deleteStudent,
 } = instructorSlice.actions;
 
 export const fetchInstructors = () => async(dispatch) => {
@@ -69,6 +75,25 @@ export const fetchStudents = (userId) => async(dispatch) => {
   dispatch(getStudents(studentList));
 };
 
+export const fetchStudentData = (studentId) => async(dispatch) => {
+  console.log('FETCH STUDENT DATA THUNK ', studentId);
+  const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
+  
+  dispatch(getStudent(studentData));
+};
+
+export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
+  console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
+  const { data: updatedStudent } = await axios.put(`/api/instructors/:id/students/${studentId}`, updatedStudentInfo, userId, studentId);
+  dispatch(getStudent(updatedStudent));
+};
+
+export const deleteInstructor = (instructorData, navigate) => async(dispatch) => {
+  const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
+  dispatch(_deleteInstructor(deletedInstructor));
+  navigate('/');
+};
+
 // export const addStudent = (newStudent) => async(dispatch) => {
 //   try{
 //     const{ data: newStudentData } = await axios.post(`/api/instructors/students`, newStudent);
@@ -83,7 +108,9 @@ export const fetchStudents = (userId) => async(dispatch) => {
 //   dispatch(getInstructor(updatedInstructorData));
 // };
 
-// export const deleteStudent = (studentId) => async(dispatch) => {
-//   const { data: deletedStudentData } = await axios.delete(`/api/instructors/students/${studentId}`);
-//   dispatch(_deleteStudent(deletedStudentData));
-//   };
+export const deleteStudent = (student) => async(dispatch) => {
+  console.log('DELETE STUDENT', student)
+  const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
+  dispatch(_deleteStudent(deletedStudentData));
+  
+  };

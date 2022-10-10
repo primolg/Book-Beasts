@@ -1,15 +1,22 @@
 import React from "react";
-import { useDispatch, Provider } from "react-redux";
 import { Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { LoginPage, SignupPage, UserStatus } from "./authentication";
 import Home from "./Home/Home";
-import store from "../store";
-
 
 function App() {
+
     return (
-    <Provider store={store}>
-        <Home/>
-    </Provider>
+        <>
+        <Provider store={store}>
+            <UserStatus/>
+            <Routes>
+                <Route index element={<Home/>} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/signup" element={<SignupPage />} />
+            </Routes>
+        </Provider>
+        </>
     )
 }
 

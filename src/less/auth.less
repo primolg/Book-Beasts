@@ -1,0 +1,113 @@
+// === UTILITIES === //
+
+// colors
+@light: rgba(215,215,215,1);
+@mediumLight: rgba(200,200,200,1);
+@medium: rgba(165,165,165,1);
+@dark: rgba(120,120,120,1);
+
+// sizes
+@formWidth: 17em;
+
+// functions
+.removeLinkStyling() {
+    a {
+        color: black;
+        :hover {
+            color: @dark;
+        }
+    }
+}
+.subtleShadow(@scale, @opacity) {
+    box-shadow: 1px 1px @scale*6px rgba(0,0,0,(@opacity / 8));
+}
+.mainContent() {
+    width: @formWidth;
+    margin: 1em auto;
+    padding: 0.7em 1em;
+}
+.textLink(@size, @bool) {
+    font-size: @size*1em;
+    font-style: if(@bool, italic, normal);
+    text-align: center;
+    text-decoration: underline;
+}
+
+// === STYLING === //
+
+#authContainer {
+    .removeLinkStyling();
+    .content {
+        background-color: @light;
+        .mainContent();
+        .subtleShadow(1, 0.8);
+        &.loggedIn {
+            text-align: center;
+            button {
+                margin: auto;
+            }
+        }
+
+        * {
+            margin: 0.5em;
+        }
+        h2, h3 {
+            text-align: center;
+        }
+        .selectBtns {
+            width: fit-content;
+            margin: 0 auto;
+            button {
+                padding: 0.4em 0.7em 0.3em;
+            }
+        }
+    }
+}
+
+.userStatus {
+    background-color: @light;
+    .subtleShadow(1.5, 0.4);
+    .removeLinkStyling();
+
+    display: flex;
+    justify-content: space-between;
+    p {
+        padding: 0.5em;
+    }
+    div {
+        display: flex;
+    }
+    .link {
+        .textLink(1, false);
+    }
+}
+
+.formContainer {
+    background-color: @light;
+    .mainContent();
+    .subtleShadow(1, 0.8);
+
+    >h2, >p {
+        // Form header
+        text-align: center;
+        margin-bottom: 0.2em;
+    }
+    >p {
+        margin: 0.8em auto;
+    }
+    .return {
+        margin: 0.7em 0 0.5em;
+        .textLink(0.9, true);
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        * {
+            margin: 0.35em 0 0.16em;
+        }
+        button {
+            margin: 1em auto 0;
+            padding: 0.2em 0.7em;
+        }
+    }
+}

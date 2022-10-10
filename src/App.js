@@ -1,21 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, Provider } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import InstructorPortal from "./components/instructor/InstructorPortal";
-import Home from "./components/Home/Home";
+import InstructorStudents from "./components/instructor/InstructorStudents";
+import { LoginPage, SignupPage, UserStatus } from "./components/authentication";
 
 function App() {
     return (
-    <div>
-        <Home/>
-    <Routes>
-        <Route path="/instructorPortal/:id" element={<InstructorPortal />}/>
-    </Routes>
-
-    </div>
-    
-    
-
+    <>
+        <UserStatus />
+        <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/instructorPortal/:id" element={<InstructorPortal />}/>
+            <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
+        </Routes>
+    </>
     )
 }
 
