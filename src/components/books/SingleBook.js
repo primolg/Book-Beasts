@@ -13,7 +13,7 @@ const SingleBook = () => {
 
     const book = useSelector((state) => state.book.singleBook)
     
-    const sortPages = (book) => {
+const sortPages = (book) => {
 
         let orderedPages = [];
         let currentPage = book.pages.filter((page) => page.isFirstPage);
@@ -22,7 +22,11 @@ const SingleBook = () => {
         while(orderedPages.length < book.pages.length){
             let nextPage = book.pages.filter((page) => page.id == currentPage[0].nextPage);
             orderedPages.push(nextPage);
+            currentPage = nextPage;
         }
+
+        //all pages are put into an array, in the linked list order
+        //this is done to make rendering easier.
         console.log(orderedPages);
     }
 
