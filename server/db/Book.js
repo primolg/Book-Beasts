@@ -8,9 +8,10 @@ const Book = db.define("book", {
     },
     coverArt: {
         type: Sequelize.STRING,
+        defaultValue: 'https://res.cloudinary.com/ddqp7dojc/image/upload/v1665424523/capstone/book-covers-big-2019101610_nlctt9.jpg',
         validate: {
             isUrl: true,
-        }
+        },
     },
     isPublished: {
         type: Sequelize.BOOLEAN,

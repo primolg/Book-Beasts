@@ -2413,7 +2413,6 @@
     {
       "id": 1,
       "title": "I Will Not Ever Eat a Tomato",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 17,
       "genre": "adventure",
@@ -2422,7 +2421,6 @@
     {
       "id": 2,
       "title": "So Much!",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 15,
       "genre": "fantasy",
@@ -2431,7 +2429,6 @@
     {
       "id": 3,
       "title": "The Iron Man",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 11,
       "genre": "autobiography",
@@ -2440,7 +2437,6 @@
     {
       "id": 4,
       "title": "Guess How Much I Love You",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 9,
       "genre": "mystery",
@@ -2449,7 +2445,6 @@
     {
       "id": 5,
       "title": "The Jungle Book",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 4,
       "genre": "action",
@@ -2458,7 +2453,6 @@
     {
       "id": 6,
       "title": "The Enormous Crocodile",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 12,
       "genre": "mystery",
@@ -2467,7 +2461,6 @@
     {
       "id": 7,
       "title": "The Twits",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 9,
       "genre": "mystery",
@@ -2476,7 +2469,6 @@
     {
       "id": 8,
       "title": "Just William",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 16,
       "genre": "fantasy",
@@ -2485,7 +2477,6 @@
     {
       "id": 9,
       "title": "Fungus the Bogeyman",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 13,
       "genre": "autobiography",
@@ -2494,7 +2485,6 @@
     {
       "id": 10,
       "title": "Mr Magnolia",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 5,
       "genre": "autobiography",
@@ -2503,7 +2493,6 @@
     {
       "id": 11,
       "title": "Lost and Found",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 18,
       "genre": "fantasy",
@@ -2512,7 +2501,6 @@
     {
       "id": 12,
       "title": "A Bear Called Paddington",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 15,
       "genre": "biography",
@@ -2521,7 +2509,6 @@
     {
       "id": 13,
       "title": "Just in Case",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 15,
       "genre": "poetry",
@@ -2530,7 +2517,6 @@
     {
       "id": 14,
       "title": "Camille and the Sunflowers",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 7,
       "genre": "poetry",
@@ -2539,7 +2525,6 @@
     {
       "id": 15,
       "title": "The Princess and the Wizard",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 19,
       "genre": "mystery",
@@ -2548,7 +2533,6 @@
     {
       "id": 16,
       "title": "The Tiger Who Came to Tea",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 7,
       "genre": "adventure",
@@ -2557,7 +2541,6 @@
     {
       "id": 17,
       "title": "The Hundred-Mile-an-Hour Dog",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 13,
       "genre": "biography",
@@ -2566,7 +2549,6 @@
     {
       "id": 18,
       "title": "Two Frogs",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 17,
       "genre": "biography",
@@ -2575,7 +2557,6 @@
     {
       "id": 19,
       "title": "The Little Prince",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 6,
       "genre": "autobiography",
@@ -2584,7 +2565,6 @@
     {
       "id": 20,
       "title": "The Very Hungry Caterpillar",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 8,
       "genre": "poetry",
@@ -2593,7 +2573,6 @@
     {
       "id": 21,
       "title": "The Lion, the Witch and the Wardrobe",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 13,
       "genre": "mystery",
@@ -2602,7 +2581,6 @@
     {
       "id": 22,
       "title": "Winnie the Pooh",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 11,
       "genre": "action",
@@ -2611,7 +2589,6 @@
     {
       "id": 23,
       "title": "Where the Wild Things Are",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 9,
       "genre": "fantasy",
@@ -2620,7 +2597,6 @@
     {
       "id": 24,
       "title": "The Cat in the Hat",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 11,
       "genre": "autobiography",
@@ -2629,7 +2605,6 @@
     {
       "id": 25,
       "title": "Charlotte's Web",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 19,
       "genre": "sci-fi",
@@ -2638,7 +2613,6 @@
     {
       "id": 26,
       "title": "Little House in the Big Woods",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 7,
       "genre": "fantasy",
@@ -2647,7 +2621,6 @@
     {
       "id": 27,
       "title": "Green Eggs and Ham",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 17,
       "genre": "sci-fi",
@@ -2656,7 +2629,6 @@
     {
       "id": 28,
       "title": "The Giving Tree",
-      "coverArt": null,
       "isPublished": true,
       "totalPages": 16,
       "genre": "autobiography",
@@ -2665,7 +2637,6 @@
     {
       "id": 29,
       "title": "The Giver",
-      "coverArt": null,
       "isPublished": false,
       "totalPages": 18,
       "genre": "adventure",

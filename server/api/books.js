@@ -4,8 +4,11 @@ const { Student, Book, User } = require('../db');
 //GET Books
 router.get('/', async(req, res, next) => {
     try {
-        const bookList = await Book.findAll();
-        console.log(bookList)
+        const bookList = await Book.findAll({
+            include: {
+                model: Student
+            }
+        });
         res.send(bookList)
     } catch (e) {
         next(e);
