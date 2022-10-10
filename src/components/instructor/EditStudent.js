@@ -8,9 +8,6 @@ const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
     const params = useParams();
 
-   
-   console.log('EDIT PARAMS', params.id);
-   console.log('EDIT STUDENT', student.id)
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
@@ -21,7 +18,7 @@ const EditStudent = ( {student} ) => {
         lastName: '',
         email: '',
         username: '',
-        password: '',
+        // password: '',
     });
 
     const handleChange = prop => event => {
@@ -38,7 +35,7 @@ const EditStudent = ( {student} ) => {
             lastName: form.lastName,
             email: form.email,
             username: form.username,
-            password: form.password,
+            // password: form.password,
         }, params.id, student.id, student));
     }
 
@@ -52,7 +49,7 @@ const EditStudent = ( {student} ) => {
             lastName: student.lastName,
             email: student.email,
             username: student.username,
-            password: student.password,
+            // password: student.password,
         })
     }, [student])
 
@@ -71,8 +68,8 @@ const EditStudent = ( {student} ) => {
                <input name="email" value={form.email} onChange={handleChange('email')}/>
                <label htmlFor="username">Username:</label>
                <input name='username' value={form.username} onChange={handleChange('username')}/>
-               <label htmlFor="password">Password:</label>
-               <input name="password" value={form.password} onChange={handleChange('password')}/>
+               {/* <label htmlFor="password">Password:</label>
+               <input name="password" value={form.password} onChange={handleChange('password')}/> */}
                <button type="submit">Submit Changes</button>
               </form> 
               <a className="close" onClick={close}>
