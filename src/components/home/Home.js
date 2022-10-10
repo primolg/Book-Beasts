@@ -13,18 +13,17 @@ const Home = () => {
   },[])
   
   console.log(books);
-  
-  
+  const featuredBooks = books.filter(book => book.isFeatured);
   
   return (
     <div className='content-container'>
       <div className='home-container'>
         <h1>Book Beasts</h1>
       </div>
-      <div className='all-book-slider'>
-        <div className="outer-div">All Books:
+      <div className='featured-book-slider'>
+        <div className="outer-div">Featured Books:
               <div className="shelf-div">
-                  {books.map(book => 
+                  {featuredBooks.map(book => 
                   <div>
                       <Link to={`/books/${book.id}`}>
                       <div className="book">

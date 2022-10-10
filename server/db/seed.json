@@ -2414,6 +2414,7 @@
       "id": 1,
       "title": "I Will Not Ever Eat a Tomato",
       "isPublished": false,
+      "isFeatured": true,
       "totalPages": 17,
       "genre": "adventure",
       "studentId": 182
@@ -2438,6 +2439,7 @@
       "id": 4,
       "title": "Guess How Much I Love You",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 9,
       "genre": "mystery",
       "studentId": 45
@@ -2502,6 +2504,7 @@
       "id": 12,
       "title": "A Bear Called Paddington",
       "isPublished": false,
+      "isFeatured": true,
       "totalPages": 15,
       "genre": "biography",
       "studentId": 141
@@ -2542,6 +2545,7 @@
       "id": 17,
       "title": "The Hundred-Mile-an-Hour Dog",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 13,
       "genre": "biography",
       "studentId": 138
@@ -2574,6 +2578,7 @@
       "id": 21,
       "title": "The Lion, the Witch and the Wardrobe",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 13,
       "genre": "mystery",
       "studentId": 150
@@ -2582,6 +2587,7 @@
       "id": 22,
       "title": "Winnie the Pooh",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 11,
       "genre": "action",
       "studentId": 18
@@ -2590,6 +2596,7 @@
       "id": 23,
       "title": "Where the Wild Things Are",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 9,
       "genre": "fantasy",
       "studentId": 73
@@ -2630,6 +2637,7 @@
       "id": 28,
       "title": "The Giving Tree",
       "isPublished": true,
+      "isFeatured": true,
       "totalPages": 16,
       "genre": "autobiography",
       "studentId": 64
@@ -2638,6 +2646,7 @@
       "id": 29,
       "title": "The Giver",
       "isPublished": false,
+      "isFeatured": true,
       "totalPages": 18,
       "genre": "adventure",
       "studentId": 109

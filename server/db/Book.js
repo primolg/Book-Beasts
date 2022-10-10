@@ -17,6 +17,10 @@ const Book = db.define("book", {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
     },
+    isFeatured: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+    },
     totalPages: {
         type: Sequelize.INTEGER,
     },
