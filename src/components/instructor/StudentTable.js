@@ -14,7 +14,7 @@ const StudentTable = () => {
         dispatch(fetchInstructorData(params.id));
     }, []);
 
-    console.log('STUDENT TABLE', students);
+    
     
 
 

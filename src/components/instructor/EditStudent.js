@@ -8,9 +8,6 @@ const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
     const params = useParams();
 
-   
-   console.log('EDIT PARAMS', params.id);
-   console.log('EDIT STUDENT', student.id)
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))

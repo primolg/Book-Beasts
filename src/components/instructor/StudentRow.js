@@ -8,7 +8,7 @@ import  EditStudent  from "./EditStudent";
 const StudentRow = ({ student }) => {
     const { pathname } = useLocation();
 
-    console.log('STUDENT ROW', student);
+   
     
     return(
         <>
