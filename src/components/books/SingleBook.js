@@ -27,7 +27,6 @@ const sortPages = (book) => {
 
         //all pages are put into an array, in the linked list order
         //this is done to make rendering easier.
-        console.log(orderedPages);
     }
 
     if(book){

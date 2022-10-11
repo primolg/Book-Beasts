@@ -7,7 +7,7 @@ import InstructorNav from './InstructorNav';
 
 const InstructorPortal = () => {
     const params = useParams();
-    const instructorData = useSelector((state) => state.instructorList.instructorData);
+    const instructorData = useSelector((state) => state.instructor.instructorData);
     const dispatch = useDispatch();
 
 
