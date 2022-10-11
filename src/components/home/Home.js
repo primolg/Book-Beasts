@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBooks } from '../../store/reducers/bookSlice';
 import { Link } from 'react-router-dom';
@@ -6,19 +6,30 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
+  const [ search, setSearch ] = useState('');
 
   
   useEffect(() => {
     dispatch(fetchBooks())
   },[])
   
-  console.log(books);
+  const handleChange = event => {
+    if(event.key === "Enter"){
+    setSearch(event.target.value)
+    }
+  }
+
   const featuredBooks = books.filter(book => book.isFeatured);
   
   return (
     <div className='content-container'>
       <div className='home-container'>
         <h1>Book Beasts</h1>
+      </div>
+      <div className='home-search-bar'>
+        <form>
+        <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
+        </form>
       </div>
       <div className='featured-book-slider'>
         <div className="outer-div">Featured Books:
