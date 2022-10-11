@@ -8,7 +8,7 @@
     "dev:noseed": "webpack -w & nodemon server -w",
     "build": "webpack",
     "test": "mocha tests --recursive -w",
-    "seed": ""
+    "seed": "node server/db"
   },
   "keywords": [],
   "author": "",

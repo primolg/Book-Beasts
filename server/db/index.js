@@ -38,7 +38,7 @@ const createBookTag = async (bookTag) => {
   return await book.addTag(tag);
 };
 
-const syncAndSeed = async () => {
+const syncAndSeed = async (closeConn=false) => {
   try {
     await db.sync({ force: true });
     console.log("Connected to database!");
@@ -58,10 +58,15 @@ const syncAndSeed = async () => {
       //"Page Special Methods: ", Object.keys(Page.prototype),
       //"PageItem Special Methods: ", Object.keys(PageItem.prototype)
     );
+    if (closeConn) await db.close();
   } catch (error) {
     console.error("Seeding database failed:", error);
   }
 };
+
+if (require.main === module) {
+  syncAndSeed(true);
+}
 
 module.exports = {
   db,
