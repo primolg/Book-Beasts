@@ -29,8 +29,11 @@ export default function LoginForm({ type, setAccountType }) {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         dispatch(login(form)).then(res => {
-            console.log(res);
-            if (res) navigate(`/instructorPortal/${res.id}`);
+            if (type === "student" && res?.id) {
+                navigate(`/studentPortal/${res.id}`);
+            } else if (res?.id) {
+                navigate(`/instructorPortal/${res.id}`);
+            }
         })
     }
     

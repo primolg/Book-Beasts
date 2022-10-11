@@ -7,11 +7,11 @@ const { User, Student } = require('../db');
 router.get("/", async (req, res) => {
     try {
         let user = await User.findByToken(req.headers.authorization);
-        if (user) {
-            res.send(user);
+        if (user?.id) {
+            res.send(user)
         } else {
             user = await Student.findByToken(req.headers.authorization);
-            if (user) {
+            if (user?.id) {
                 res.send(user);
             } else {
                 throw new Error("Unable to verify token");
