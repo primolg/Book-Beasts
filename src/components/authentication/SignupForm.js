@@ -35,7 +35,7 @@ export default function SignupForm({ type, setAccountType }) {
         // need to fix for students
         e.preventDefault();
         dispatch(signup(form)).then(res => {
-            if (res) navigate(`/instructorPortal/${res.id}`);
+            if (res?.id) navigate(`/instructorPortal/${res.id}`);
         });
     }
     
@@ -49,9 +49,6 @@ export default function SignupForm({ type, setAccountType }) {
                 </p>
                 <form>
                     {/* Still need local form validation */}
-                    <p>Email:</p>
-                    <input type="text" onChange={handleFormChange} placeholder="Email" />
-
                     <p>Username:</p>
                     <input type="text" onChange={handleFormChange} placeholder="Username" />
 
@@ -60,6 +57,9 @@ export default function SignupForm({ type, setAccountType }) {
 
                     <p>Last name:</p>
                     <input type="text" onChange={handleFormChange} placeholder="Last name" />
+
+                    <p>Email:</p>
+                    <input type="text" onChange={handleFormChange} placeholder="Email" />
                     
                     <p>Password:</p>
                     <input type="password" onChange={handleFormChange} placeholder="Password"/>

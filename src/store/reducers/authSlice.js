@@ -39,9 +39,12 @@ export const login = (credentials) => async (dispatch) => {
     }
 }
 
-// creates INSTRUCTOR account, generates token, and logs in
+// creates an account, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
+    // } else {
+    //     ({ data: user } = await axios.post("/api/auth/signup", credentials));
+    // }
     if (user.error) {
         alert(user.errorMessage);
         return {};
