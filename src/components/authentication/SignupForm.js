@@ -35,8 +35,8 @@ export default function SignupForm({ type, setAccountType }) {
         // need to fix for students
         e.preventDefault();
         dispatch(signup(form)).then(res => {
-            if (res) navigate("/");
-        })
+            if (res) navigate(`/instructorPortal/${res.id}`);
+        });
     }
     
     return(
