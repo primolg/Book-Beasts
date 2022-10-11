@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom';
 import { LogoutButton } from "./";
 import { verifyToken } from "../../store/reducers/authSlice";
-import Home from "../Home/Home";
+import Home from "../home/Home";
 import AllBooks from "../books/AllBooks";
 
 export default function UserStatus() {

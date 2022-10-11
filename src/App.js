@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import InstructorPortal from "./components/instructor/InstructorPortal";
 import InstructorStudents from "./components/instructor/InstructorStudents";
 import { LoginPage, SignupPage, UserStatus } from "./components/authentication";
-import Home from "./components/Home/Home";
+import Home from "./components/home/Home";
 import AllBooks from "./components/books/AllBooks";
 import SingleBook from "./components/books/SingleBook";
 
