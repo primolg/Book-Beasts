@@ -8,6 +8,7 @@ const Page = db.define("page", {
     },
     image: {
         type: Sequelize.STRING,
+        defaultValue: 'https://res.cloudinary.com/ddqp7dojc/image/upload/v1665439674/capstone/insertImage_vubntn.jpg',
         validate: {
             isUrl: true,
         }

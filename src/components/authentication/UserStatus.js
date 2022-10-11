@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from 'react-router-dom';
 import { LogoutButton } from "./";
 import { verifyToken } from "../../store/reducers/authSlice";
+import Home from "../home/Home";
+import AllBooks from "../books/AllBooks";
 
 export default function UserStatus() {
     const token = localStorage.getItem("token");
@@ -18,8 +20,12 @@ export default function UserStatus() {
 
     return(
         <div className="userStatus content">
-            <Link to="/">
+            <Link to="/" element={<Home/>}>
                 <p>Home</p>
+            </Link>
+
+            <Link to="/books" element={<AllBooks/>}>
+                <p>All Books</p>
             </Link>
 
             {token?.length && user?.firstName ?
