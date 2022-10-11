@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 const axios = require('axios');
 
-const instructorSlice = createSlice({
-  name: "instructorList",
+const studentSlice = createSlice({
+  name: "studentList",
   initialState: {},
   reducers: {
-    getInstructorList: (state, action) => {
-      state.instructorList = action.payload;
+    getStudentList: (state, action) => {
+      state.studentList = action.payload;
       return state;
     },
-    _deleteStudent: (state, action) => {
-      state.instructorData.students = state.instructorData.students.filter((student) =>
-          student.id !== action.payload.id
-    );
+    getStudent: (state, action) => {
+      state.studentData = action.payload;
       return state;
     },
     setErrorMsg: (state, action) => {
@@ -22,29 +20,20 @@ const instructorSlice = createSlice({
   },
 });
 
-export default instructorSlice.reducer;
+export default studentSlice.reducer;
 
 export const {
-  getInstructorList,
-  _deleteStudent,
-} = instructorSlice.actions;
+  getStudentList,
+  getStudent,
+} = studentSlice.actions;
 
-export const fetchInstructors = () => async(dispatch) => {
-  const { data: instructorList } = await axios.get("/api/instructors");
-  dispatch(getInstructorList(instructorList));
+export const fetchStudents = () => async(dispatch) => {
+  const { data: studentList } = await axios.get("/api/students");
+  dispatch(getStudentList(studentList));
 };
 
-export const fetchInstructorData = (instructorId) => async(dispatch) => {
-  const { data: instructorData } = await axios.get(`/api/instructors/${instructorId}`);
-  dispatch(getInstructor(instructorData));
+export const fetchStudentData = (studentId) => async(dispatch) => {
+  const { data: studentData } = await axios.get(`/api/students/${studentId}`);
+  dispatch(getStudent(studentData));
+  
 };
-
-export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
-  const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
-  dispatch(getInstructor(updatedInstructorData));
-};
-
-export const deleteStudent = (deletedStudent) => async(dispatch) => {
-  const { data: deletedStudentData } = await axios.put (`/api/students/${deletedStudent.id}`, deletedStudentData);
-  dispatch(_deleteStudent(deletedStudentData));
-  };
