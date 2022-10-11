@@ -14,6 +14,8 @@ const AllBooks = () => {
         dispatch(fetchBooks())
     }, [sort]);
 
+    //note: filter works, sort works, but the two do not work together.  debug later
+
     const sortBooks = (bookArray, sortOption) => {
         switch(sortOption) {
           case 'mystery':
