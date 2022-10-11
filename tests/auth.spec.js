@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { db, User, Student, Book, Page, Tag } = require("../server/db");
 const { users, students, books, pages, tags, bookTags } = require("./testSeed.json");
-const { login } = require("../src/store/reducers/authSlice");
+// const { login } = require("../src/store/reducers/authSlice");
 
 // creates localStorage copy (mocha runs in node - no window/ls)
 const createMockLocalStorage = () => {
