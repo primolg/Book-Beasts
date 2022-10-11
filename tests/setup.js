@@ -1,5 +1,5 @@
-const chai = require("chai");
+// const chai = require("chai");
 
-// this library extends chai to work with promises
-const chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
+// // this library extends chai to work with promises
+// const chaiAsPromised = require("chai-as-promised");
+// chai.use(chaiAsPromised);

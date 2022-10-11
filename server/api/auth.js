@@ -88,6 +88,7 @@ router.post("/signup", async (req, res) => {
             req.body.id = (await Student.count() + 1);
             const newStudent = await Student.create(req.body);
             if (newStudent?.id) {
+                delete newStudent.dataValues.password;
                 res.send(newStudent);
             } else {
                 throw new Error("Unable to register student");

@@ -42,16 +42,17 @@ export const login = (credentials) => async (dispatch) => {
 // creates an account, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
-    // } else {
-    //     ({ data: user } = await axios.post("/api/auth/signup", credentials));
-    // }
+
     if (user.error) {
         alert(user.errorMessage);
         return {};
-    } else {
+    } else if (credentials.type === "user") {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
         alert("Instructor account successfully created!");
+        return user;
+    } else {
+        alert("Student account successfully created!");
         return user;
     }
 }
