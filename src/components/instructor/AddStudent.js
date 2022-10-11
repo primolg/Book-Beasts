@@ -13,6 +13,9 @@ const AddStudent = () => {
         email: '',
         username: '',
         password: '',
+        age: '',
+        color: '',
+        userId: params.id,
     });
 
     const dispatch = useDispatch();
@@ -32,6 +35,9 @@ const AddStudent = () => {
         email: form.email,
         username: form.username,
         password: form.password,
+        userId: form.userId,
+        age: form.age,
+        color: form.color,
         }, params.id));
     };
 
@@ -56,6 +62,20 @@ const AddStudent = () => {
                <input name='username' value={form.username} onChange={handleChange('username')}/>
                <label htmlFor="password">Password:</label>
                <input name="password" value={form.password} onChange={handleChange('password')}/>
+               <label htmlFor="age">Student Age:</label>
+               <input name="age" value={form.age} onChange={handleChange('age')}/>
+               <label htmlFor="color">Color:</label>
+               <select name="color" value={form.color} onChange={handleChange('color')}>
+                <option>Select One:</option>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Green</option>
+                <option>Purple</option>
+                <option>Aqua</option>
+                <option>Yellow</option>
+                <option>Pink</option>
+                </select>
+               <input type='hidden' name='userId' value={params.id} onChange={handleChange('userId')}/>
                <button type="submit">Submit Changes</button>
                <Link to={`/instructorPortal/${params.id}/students`}>Cancel</Link>
               </form> 
