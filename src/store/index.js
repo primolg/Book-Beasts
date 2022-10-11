@@ -10,7 +10,7 @@ import loggerMiddleware from "redux-logger";
 
 export default configureStore ({
     reducer: {
-        instructor: instructorReducer,
+        instructorList: instructorReducer,
         student: studentReducer,
         book: bookReducer,
         user: authReducer,
