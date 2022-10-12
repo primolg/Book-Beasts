@@ -6,7 +6,7 @@ import Popup from 'reactjs-popup';
 
 const AddStudent = () => {
     const params = useParams();
-
+    
     const [ form, setForm ] = useState({
         firstName: '',
         lastName: '',

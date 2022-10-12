@@ -5,7 +5,6 @@ const {
   books,
   pages,
   tags,
-  bookTags,
 } = require("./seed.json");
 
 // models
@@ -14,6 +13,7 @@ const Student = require("./Student");
 const Book = require("./Book");
 const Page = require("./Page");
 const Tag = require("./Tag");
+const BookTag = require("./BookTag");
 
 // relations
 User.hasMany(Student);
@@ -28,8 +28,8 @@ Page.belongsTo(Student);
 Page.belongsTo(Book);
 Book.hasMany(Page);
 
-Tag.belongsToMany(Book, { through: "bookTags" });
-Book.belongsToMany(Tag, { through: "bookTags" });
+Tag.belongsToMany(Book, { through: BookTag });
+Book.belongsToMany(Tag, { through: BookTag });
 
 // seeding
 const createBookTag = async (bookTag) => {
@@ -43,12 +43,19 @@ const syncAndSeed = async () => {
     await db.sync({ force: true });
     console.log("Connected to database!");
 
-    await Promise.all(users.map((user) => User.create(user)));
-    await Promise.all(students.map((student) => Student.create(student)));
-    await Promise.all(books.map((book) => Book.create(book)));
-    await Promise.all(pages.map((page) => Page.create(page)));
-    await Promise.all(tags.map((tag) => Tag.create(tag)));
-    await Promise.all(bookTags.map((bookTag) => createBookTag(bookTag)));
+const user = await User.bulkCreate(users);
+const student = await Student.bulkCreate(students);
+const book = await Book.bulkCreate(books);
+const page = await Page.bulkCreate(pages);
+const tag = await Tag.bulkCreate(tags);
+ 
+        
+//     await Promise.all(users.map((user) => User.create(user)));
+//     await Promise.all(students.map((student) => Student.create(student)));
+//     await Promise.all(books.map((book) => Book.create(book)));
+//     await Promise.all(pages.map((page) => Page.create(page)));
+//     await Promise.all(tags.map((tag) => Tag.create(tag)));
+//     await Promise.all(bookTags.map((bookTag) => createBookTag(bookTag)));
 
     console.log(
       `Seeding Successful!`
@@ -71,6 +78,7 @@ module.exports = {
   Book,
   Page,
   Tag,
+  BookTag,
 };
 
 
