@@ -8,7 +8,7 @@ const StudentTable = () => {
     const dispatch = useDispatch();
     const params = useParams();
     const instructorData = useSelector((state) => state.instructorList.instructorData)
-    const students = instructorData.students;
+    const students = instructorData?.students;
 
     useEffect(() => {
         dispatch(fetchInstructorData(params.id));
