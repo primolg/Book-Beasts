@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../../store/reducers/bookSlice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AllBooks = () => {
     const dispatch = useDispatch();
-
+    const location = useLocation();
+console.log(location)
     const [ sort, setSort ] = useState('none');
     const [ search, setSearch ] = useState('');
 
     
     useEffect(() => {
         dispatch(fetchBooks())
+        if(location.state){
+            setSearch(location.state)
+        }
     }, [sort]);
 
     //note: filter works, sort works, but the two do not work together.  debug later
@@ -45,6 +49,7 @@ const AllBooks = () => {
         }
       }
 
+
     return (
         <>
         <div id='filter-wrap'>
@@ -57,7 +62,7 @@ const AllBooks = () => {
                     <option value='action'>View Action Books</option>
                     <option value='none'>View All</option>
                   </select>
-                  <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
+                     <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
                   </div>
             <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>

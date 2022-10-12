@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBooks } from '../../store/reducers/bookSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
-  const [ search, setSearch ] = useState('');
+  let [ search, setSearch ] = useState('');
 
   
   useEffect(() => {
     dispatch(fetchBooks())
-  },[])
+  },[search])
   
   const handleChange = event => {
     if(event.key === "Enter"){
-    setSearch(event.target.value)
+    setSearch(event.target.value);
+    const searchedBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
+    navigate('/books',  {state: event.target.value});
     }
   }
 
@@ -27,16 +31,14 @@ const Home = () => {
         <h1>Book Beasts</h1>
       </div>
       <div className='home-search-bar'>
-        <form>
         <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
-        </form>
       </div>
       <div className='featured-book-slider'>
         <div className="outer-div">Featured Books:
               <div className="shelf-div">
                   {featuredBooks.map(book => 
                   <div>
-                      <Link to={`/books/${book.id}`}>
+                      <Link to={`/books/${book.id}`} state={{}}>
                       <div className="book">
                         <img className="slider-image" src={book.coverArt}/>
                         <div>{book.title}</div>
