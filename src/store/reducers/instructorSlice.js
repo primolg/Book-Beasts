@@ -30,10 +30,10 @@ const instructorSlice = createSlice({
       state.currentStudent = action.payload;
       return state;
     },
-    // _addStudent: (state, action) => {
-    //   state.studentList.push(action.payload.studentList);
-    //   return state;
-    // },
+    _addStudent: (state, action) => {
+      state.currentStudent = action.payload;
+      return state;
+    },
     _deleteStudent: (state, action) => {
       state.studentList = state.studentList.filter((student) =>
           student.id !== action.payload.id
@@ -55,7 +55,7 @@ export const {
   getStudents,
   getStudent,
   _deleteInstructor,
-  // _addStudent,
+  _addStudent,
   _deleteStudent,
 } = instructorSlice.actions;
 
@@ -94,14 +94,16 @@ export const deleteInstructor = (instructorData, navigate) => async(dispatch) =>
   navigate('/');
 };
 
-// export const addStudent = (newStudent) => async(dispatch) => {
-//   try{
-//     const{ data: newStudentData } = await axios.post(`/api/instructors/students`, newStudent);
-//     dispatch(_addStudent(newStudentData));
-//   }catch(error){
-//     console.log('ADD STUDENT THUNK ERROR ', error);
-//   }
-// }
+export const addStudent = (newStudent, userId) => async(dispatch) => {
+  try{
+    console.log('ADD STUDENT THUNK', newStudent);
+    console.log('ADD STUDENT USERID', userId);
+    const{ data: newStudentData } = await axios.post(`/api/instructors/${userId}/students`, newStudent);
+    dispatch(_addStudent(newStudentData));
+  }catch(error){
+    console.log('ADD STUDENT THUNK ERROR ', error);
+  }
+};
 
 // export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
 //   const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);

@@ -26,10 +26,15 @@ export default function LoginForm({ type, setAccountType }) {
         }
     }
     
+    
     const handleFormSubmit = (e) => {
         e.preventDefault();
         dispatch(login(form)).then(res => {
-            if (res) navigate(`/`);
+            if (type === "student" && res?.id) {
+                navigate(`/studentPortal/${res.id}`);
+            } else if (res?.id) {
+                navigate(`/instructorPortal/${res.id}`);
+            }
         })
     }
     

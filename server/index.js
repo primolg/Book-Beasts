@@ -1,9 +1,14 @@
 const port = process.env.PORT || 3000;
 const app = require("./app");
-const { syncAndSeed } = require("./db");
+const { syncAndSeed, db } = require("./db");
+require('dotenv').config();
 
 const init = async () => {
-    // await syncAndSeed();
+    if (process.env.npm_lifecycle_event === "dev:noseed") {
+        await db.sync();
+    } else {
+        await syncAndSeed();
+    }
     app.listen(port, ()=> console.log(`listening on port ${port}`));
 };
 

@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const { User, Student } = require('../db');
 
+// === credential verification === //
+
 // verifies token, returns associated user (might need refactor later)
 router.get("/", async (req, res) => {
     try {
         let user = await User.findByToken(req.headers.authorization);
-        if (user) {
-            res.send(user);
+        if (user?.id) {
+            res.send(user)
         } else {
             user = await Student.findByToken(req.headers.authorization);
-            if (user) {
+            if (user?.id) {
                 res.send(user);
             } else {
                 throw new Error("Unable to verify token");
@@ -37,38 +39,61 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// adds user to database, returns newly created user
+
+// === user account creation === //
+
+// common error handling for both routes (might only need one)
+function handleSignupError(res, error) {
+    if (error.name.includes("UniqueConstraint")) {
+        const field = error.errors[0].path;
+        res.send({
+            error: true,
+            errorMessage: `That ${field} is already in use`,
+        });
+    } else if (error.name.includes("ValidationError")) {
+        let field = error.errors[0].path;
+        if (field === "firstName") field = "first name";
+        else if (field === "lastName") field = "last name";
+        res.send({
+            error: true,
+            errorMessage: `Invalid ${field}`,
+        });
+    } else {
+        res.send({
+            error: true,
+            errorMessage: error.message,
+        });
+    }
+}
+
+// have to manually assign an id due to pk autoIncrement not working as intended
+// this is a temporary fix - should try to figure this out when time allows
 router.post("/signup", async (req, res) => {
     try {
-        // have to manually assign an id due to pk autoIncrement not working as intended
-        // temporary fix - should try to figure this out when time allows
-        req.body.id = (await User.count() + 1);
-
-        const newUser = await User.create(req.body);
-        if (newUser?.id) {
-            const token = await newUser.generateToken();
-            newUser.dataValues.token = token;
-            delete newUser.dataValues.password;
-            res.send(newUser);
+        // registering a user
+        if (req.body.type === "user") {
+            const newUser = await User.create(req.body);
+            // automatically log them in
+            if (newUser?.id) {
+                const token = await newUser.generateToken();
+                newUser.dataValues.token = token;
+                delete newUser.dataValues.password;
+                res.send(newUser);
+            } else {
+                throw new Error("Unable to register user");
+            }
+        // registering a student
         } else {
-            throw new Error("Unable to register new user");
+            const newStudent = await Student.create(req.body);
+            if (newStudent?.id) {
+                delete newStudent.dataValues.password;
+                res.send(newStudent);
+            } else {
+                throw new Error("Unable to register student");
+            }
         }
     } catch (error) {
-        if (error.name.includes("UniqueConstraint")) {
-            const field = error.errors[0].path;
-            res.send({
-                error: true,
-                errorMessage: `That ${field} is already in use`,
-            });
-        } else if (error.name.includes("ValidationError")) {
-            let field = error.errors[0].path;
-            if (field === "firstName") field = "first name";
-            else if (field === "lastName") field = "last name";
-            res.send({
-                error: true,
-                errorMessage: `Invalid ${field}`,
-            });
-        }
+        handleSignupError(res, error);
     }
 });
 

@@ -3,3 +3,4 @@ node_modules
 bundle.js*
 main.css*
 .DS_Store
+todo*

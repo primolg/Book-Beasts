@@ -37,8 +37,8 @@ const Home = () => {
         <div className="outer-div">Featured Books:
               <div className="shelf-div">
                   {featuredBooks.map(book => 
-                  <div>
-                      <Link to={`/books/${book.id}`} state={{}}>
+                  <div key={book.id}>
+                      <Link to={`/books/${book.id}`}>
                       <div className="book">
                         <img className="slider-image" src={book.coverArt}/>
                         <div>{book.title}</div>

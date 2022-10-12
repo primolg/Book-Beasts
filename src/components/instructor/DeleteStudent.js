@@ -1,16 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteStudent } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
 const DeleteStudent = ( { student }) => {
+    const params = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleDelete = (event) => {
         event.preventDefault();
-        dispatch(deleteStudent(student));   
+        dispatch(deleteStudent(student));
+        navigate(`/instructorPortal/${params.id}`);
     };
 
     console.log('DELETE STUDENT', student);

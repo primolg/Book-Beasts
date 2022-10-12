@@ -3,6 +3,11 @@ const { Sequelize } = db;
 const { Op } = require("sequelize");
 
 const Page = db.define("page", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     content: {
         type: Sequelize.TEXT,
     },
