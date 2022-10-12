@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
@@ -8,6 +8,8 @@ const BookView = () => {
     const books = useSelector((state) => state.book.singleBook)
     const pages = books ? filterPages(books.pages) : undefined
     const dispatch = useDispatch();
+    //
+    const [currentPage, setCurrentPage] = useState(0)
 
 
     //function to sort through pages linked list + add page number to each obj
@@ -24,18 +26,21 @@ const BookView = () => {
         }
         return orderedPages;
     }
-    // console.log(pages)
     useEffect(() => {
         dispatch(fetchBookData(params.id))
     }, []);
 
     return pages ? (
-            <div>
-                {pages.map(page =>
-                <div key={page.page.id}>
-                    <h3>{page.pageNumber}</h3>
+            <div className="outer-div-book-view">
+                <div className="page-selector-shelf">
+                    {pages.map(page =>
+                        <div className="page-selector" id={currentPage === page.pageNumber - 1 ? "selected" : ""} key={page.page.id} onClick={()=>setCurrentPage(page.pageNumber - 1)}>{page.pageNumber}</div>
+                    )}
                 </div>
-                )}
+                <div className="page">
+                    <p id="page-content">{pages[currentPage].page.content}</p>
+                    <p id="page-number-on-page">page {pages[currentPage].pageNumber}</p>
+                </div>
             </div>
     ) : (
         <div>
