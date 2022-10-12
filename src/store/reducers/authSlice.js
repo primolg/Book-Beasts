@@ -27,34 +27,37 @@ export const login = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/login", credentials);
     if (!user.username) {
         alert("Could not find user with that email/username!");
-        return false;
+        return {};
     } else if (!user.token) {
         alert("Invalid login!");
-        return false;
+        return {};
     } else {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
         alert("Successfully logged in!");
-        return true;
+        return user;
     }
 }
 
-// signup creates acct, generates token, and logs in
+// creates an account, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
+
     if (user.error) {
         alert(user.errorMessage);
-        return false;
-    } else {
+        return {};
+    } else if (credentials.type === "user") {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
-        alert("Account successfully created!");
-        return true;
+        alert("Instructor account successfully created!");
+        return user;
+    } else {
+        alert("Student account successfully created!");
+        return user;
     }
 }
 
-// verifies that stored token is valid, stores user data in store
-// if valid token returns 'true', else returns 'false'
+// allows users to stay logged in when refreshing the page
 export const verifyToken = (token) => async (dispatch) => {
     const { data: user } = await axios.get("/api/auth", {
         headers: { authorization: token }
@@ -63,7 +66,8 @@ export const verifyToken = (token) => async (dispatch) => {
         dispatch(setLoggedInUser(user));
         return true;
     } else {
-        alert("Invalid token");
+        dispatch(setLoggedInUser({}));
+        localStorage.removeItem("token");
         return false;
     }
 }
