@@ -54,6 +54,7 @@ const findByToken = (model) => async(token) => {
         const { id } = jwt.verify(token, process.env.JWT);
         const user = await model.findByPk(id);
         if (user) {
+            delete user.dataValues.password;
             return user;
         } else {
             throw new Error("Invalid token");
