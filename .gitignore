@@ -4,3 +4,4 @@ bundle.js*
 main.css*
 .DS_Store
 todo*
+PageItem.js

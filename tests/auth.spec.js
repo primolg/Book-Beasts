@@ -40,7 +40,7 @@ const testSync = async () => {
     }
 };
 
-describe("Authorization and security", () => {
+xdescribe("Authorization and security", () => {
 
     describe("Basic functionality", () => {
         beforeEach(async () => {
@@ -63,9 +63,6 @@ describe("Authorization and security", () => {
             await testSync();
             createMockLocalStorage();
         })
-
-        it("", async () => {
-
-        });
+        
     })
 });
