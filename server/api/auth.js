@@ -72,7 +72,6 @@ router.post("/signup", async (req, res) => {
     try {
         // registering a user
         if (req.body.type === "user") {
-            req.body.id = (await User.count() + 1);
             const newUser = await User.create(req.body);
             // automatically log them in
             if (newUser?.id) {
@@ -85,7 +84,6 @@ router.post("/signup", async (req, res) => {
             }
         // registering a student
         } else {
-            req.body.id = (await Student.count() + 1);
             const newStudent = await Student.create(req.body);
             if (newStudent?.id) {
                 delete newStudent.dataValues.password;
