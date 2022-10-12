@@ -64,9 +64,20 @@ export const fetchInstructors = () => async(dispatch) => {
   dispatch(getInstructorList(instructorList));
 };
 
-export const fetchInstructorData = (instructorId) => async(dispatch) => {
-  const { data: instructorData } = await axios.get(`/api/instructors/${instructorId}`);
-  dispatch(getInstructor(instructorData));
+export const fetchInstructorData = (instructorId) => 
+async(dispatch) => {
+  try{
+    const token = window.localStorage.getItem('token');
+    console.log('FETCH INS THUNK TOKEN', token)
+    console.log('FETCH INST THUNK ID', instructorId);
+    const { data: instructorData } = await axios.get(`/api/instructors/${instructorId}`,{
+      headers: { authorization: token },
+    });
+    dispatch(getInstructor(instructorData));
+  }catch(error){
+    console.log('FETCH INSTRUCTOR ERROR', error);
+  }
+  
 };
 
 export const fetchStudents = (userId) => async(dispatch) => {
