@@ -12,10 +12,8 @@ const DeleteStudent = ( { student }) => {
     const handleDelete = (event) => {
         event.preventDefault();
         dispatch(deleteStudent(student));
-        navigate(`/instructorPortal/${params.id}`);
+        navigate(`/instructorPortal/${params.id}/students`);
     };
-
-    console.log('DELETE STUDENT', student);
 
     return (
         <>
