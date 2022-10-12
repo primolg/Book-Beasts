@@ -26,6 +26,7 @@ export default function LoginForm({ type, setAccountType }) {
         }
     }
     
+    
     const handleFormSubmit = (e) => {
         e.preventDefault();
         dispatch(login(form)).then(res => {
