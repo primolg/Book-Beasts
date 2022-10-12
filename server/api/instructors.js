@@ -23,7 +23,6 @@ router.get('/:id', requireUserToken, async(req, res, next) => {
                 model: Student
             }
         });
-        console.log('API GET INSTRUCTOR', instructor)
         res.send(instructor)
     }catch(error){
         next(error);
