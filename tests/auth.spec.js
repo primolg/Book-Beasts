@@ -40,29 +40,29 @@ const testSync = async () => {
     }
 };
 
-xdescribe("Authorization and security", () => {
+// describe("Authorization and security", () => {
 
-    describe("Basic functionality", () => {
-        beforeEach(async () => {
-            await db.sync({ force: true });
-        })
+//     describe("Basic functionality", () => {
+//         beforeEach(async () => {
+//             await db.sync({ force: true });
+//         })
 
-        it("Can login to an account", async () => {
+//         it("Can login to an account", async () => {
 
-        });
-        it("Can create a new account", async () => {
+//         });
+//         it("Can create a new account", async () => {
 
-        });
-        it("Remains logged in when refreshing the page", async () => {
+//         });
+//         it("Remains logged in when refreshing the page", async () => {
 
-        });
-    });
+//         });
+//     });
 
-    describe("Valid authorization", () => {
-        beforeEach(async () => {
-            await testSync();
-            createMockLocalStorage();
-        })
+//     describe("Valid authorization", () => {
+//         beforeEach(async () => {
+//             await testSync();
+//             createMockLocalStorage();
+//         })
         
-    })
-});
+//     })
+// });
