@@ -102,7 +102,9 @@ router.get('/:id/students/:studentId', async(req, res, next) => {
 
 router.post('/:id/students', async(req, res, next) => {
     try{
+        console.log('NEW STUDENT API', req.body.userId);
         const addStudent = await Student.create(req.body);
+        
         res.send(addStudent);
     }catch(error) {
         next(error);
@@ -112,7 +114,7 @@ router.post('/:id/students', async(req, res, next) => {
 router.put('/:id/students/:studentId', async(req, res, next) => {
     try{
     const editStudent = await Student.findByPk(req.params.studentId);
-    console.log('API STUDENT PUT', req.params)
+    //console.log('API STUDENT PUT', req.params)
     res.send(await editStudent.update(req.body));
     }catch(error){
         next(error);
@@ -122,6 +124,7 @@ router.put('/:id/students/:studentId', async(req, res, next) => {
 router.delete('/:id/students/:studentId', async(req, res, next) => {
     try{
     const deleteStudent = await Student.findByPk(req.params.studentId);
+    //console.log('DELETE STUDENT API', deleteStudent);
     await deleteStudent.destroy();
     }catch(error){
         next(error);
