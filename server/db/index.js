@@ -58,7 +58,8 @@ const tag = await Tag.bulkCreate(tags);
 //     await Promise.all(bookTags.map((bookTag) => createBookTag(bookTag)));
 
     console.log(
-      `Seeding Successful!`
+      `Seeding Successful!`,
+      'SARAH! GO TO INSTRUCTOR STUDENTS AND WORK ON REFRESHING ON CLOSE OF MODAL!!'
       //"User Special Methods: ", Object.keys(User.prototype),
       //"Student Special Methods: ", Object.keys(Student.prototype),
       //"Book Special Methods: ", Object.keys(Book.prototype),

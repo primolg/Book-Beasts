@@ -41,11 +41,10 @@ const AddStudent = () => {
         age: form.age,
         color: form.color,
         }, params.id));
-        navigate(`/instructorPortal/${params.id}/students`);
     };
 
-    // useEffect(() => {
-    // }, [form]);
+    useEffect(() => {
+    }, [form]);
 
     console.log('ADD STUDENT COMP', form.email);
 
@@ -82,7 +81,7 @@ const AddStudent = () => {
                <button type="submit">Submit Changes</button>
                <Link to={`/instructorPortal/${params.id}/students`}>Cancel</Link>
               </form> 
-          <a className="close" onClick={close}>
+          <a className="close" onClick={close} navigate={`instructorPortal/${params.id}/students`}>
             &times;
           </a>
           </div>

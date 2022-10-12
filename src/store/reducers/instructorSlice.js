@@ -32,7 +32,7 @@ const instructorSlice = createSlice({
       return state;
     },
     _addStudent: (state, action) => {
-      state.currentStudent = action.payload;
+      state.studentList.push(action.payload);
       return state;
     },
     _deleteStudent: (state, action) => {
