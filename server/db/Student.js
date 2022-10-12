@@ -58,8 +58,8 @@ const Student = db.define("student" , {
     },
 });
 
-Student.beforeCreate(hashPassword);
-Student.beforeUpdate(hashPassword);
+Student.beforeBulkCreate((students) => {students.forEach((student) => hashPassword(student))});
+Student.beforeBulkUpdate((students) => {students.forEach((student) => hashPassword(student))});
 Student.authenticate = authenticate(Student);
 Student.findByToken = findByToken(Student);
 Student.prototype.generateToken = generateToken;

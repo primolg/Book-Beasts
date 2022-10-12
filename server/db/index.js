@@ -43,8 +43,8 @@ const syncAndSeed = async (closeConn=false) => {
     await db.sync({ force: true });
     console.log("Connected to database!");
 
-const user = await User.bulkCreate(users);
-const student = await Student.bulkCreate(students);
+const user = await User.bulkCreate(users, { individualHooks: true });
+const student = await Student.bulkCreate(students, {individualHooks: true});
 const book = await Book.bulkCreate(books);
 const page = await Page.bulkCreate(pages);
 const tag = await Tag.bulkCreate(tags);
