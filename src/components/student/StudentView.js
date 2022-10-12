@@ -9,7 +9,7 @@ const StudentView = () => {
     const params = useParams();
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
-    console.log(studentData);
+
     useEffect(() => {
         dispatch(fetchStudentData(params.id));
     }, []);
