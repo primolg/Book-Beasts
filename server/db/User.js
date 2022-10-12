@@ -8,6 +8,11 @@ const {
 } = require("./utils");
 
 const User = db.define("user", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     email: {
         type: Sequelize.STRING,
         unique: true,
@@ -46,10 +51,13 @@ const User = db.define("user", {
     }
 });
 
-User.beforeCreate(hashPassword);
-User.beforeUpdate(hashPassword);
+
+User.beforeBulkCreate((users) => {users.forEach((user) => hashPassword(user))});
+User.beforeBulkUpdate((users) => {users.forEach((user) => hashPassword(user))});
 User.authenticate = authenticate(User);
 User.findByToken = findByToken(User);
 User.prototype.generateToken = generateToken;
+
+
 
 module.exports = User;
