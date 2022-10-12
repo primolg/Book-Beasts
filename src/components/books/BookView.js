@@ -29,6 +29,7 @@ const BookView = () => {
     useEffect(() => {
         dispatch(fetchBookData(params.id))
     }, []);
+    console.log(pages)
 
     return pages ? (
             <div className="outer-div-book-view">
