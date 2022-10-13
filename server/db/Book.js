@@ -40,8 +40,8 @@ Book.prototype.getOrderedPages = async function() {
     const firstPage = allPages.find(page => page.isFirstPage);
     const orderedPages = [firstPage];
 
-    for (let i = 0; i < allPages.length; i++) {
-        const nextPage = allPages.find(page => page.id === orderedPages[i].nextPage);
+    for (let i = 1; i < allPages.length; i++) {
+        const nextPage = allPages.find(page => page.id === orderedPages[i-1].nextPage);
         orderedPages.push(nextPage);
     }
     return orderedPages;
@@ -64,6 +64,27 @@ Book.prototype.createNewPage = async function() {
     await this.save();
     
     return newPage;
+}
+
+Book.prototype.deletePage = async function(page) {
+    if (page.nextPage) {
+        await Page.update(
+            { previousPage: page.previousPage },
+            { where: { id: page.nextPage }}
+        );
+    }
+    if (page.previousPage) {
+        await Page.update(
+            { nextPage: page.nextPage },
+            { where: { id: page.previousPage }}
+        );
+    }
+    await this.set({
+        totalPages: this.totalPages - 1,
+    });
+    await this.save();
+
+    await page.destroy();
 }
 
 // constructs a basic linked list of 2 pages for a new book
@@ -92,22 +113,29 @@ Book.afterCreate(async (book) => {
     // console.log(`page2 id: ${page2.id} | page2 prev/next: ${page2.previousPage}, ${page2.nextPage}`);
 });
 
-// const BookSpecialMethods = [
-//     '_customGetters',    '_customSetters',
-//     'validators',        '_hasCustomGetters',
-//     '_hasCustomSetters', 'rawAttributes',
-//     '_isAttribute',      'getStudent',
-//     'setStudent',        'createStudent',
-//     'getPages',          'countPages',
-//     'hasPage',           'hasPages',
-//     'setPages',          'addPage',
-//     'addPages',          'removePage',
-//     'removePages',       'createPage',
-//     'getTags',           'countTags',
-//     'hasTag',            'hasTags',
-//     'setTags',           'addTag',
-//     'addTags',           'removeTag',
-//     'removeTags',        'createTag'
-// ]
+Book.beforeDestroy(async (book) => {
+    const pages = await book.getPages();
+    for (let i = 0; i < pages.length; i++) {
+        await pages[i].destroy();
+    }
+});
+
+const BookSpecialMethods = [
+    '_customGetters',    '_customSetters',
+    'validators',        '_hasCustomGetters',
+    '_hasCustomSetters', 'rawAttributes',
+    '_isAttribute',      'getStudent',
+    'setStudent',        'createStudent',
+    'getPages',          'countPages',
+    'hasPage',           'hasPages',
+    'setPages',          'addPage',
+    'addPages',          'removePage',
+    'removePages',       'createPage',
+    'getTags',           'countTags',
+    'hasTag',            'hasTags',
+    'setTags',           'addTag',
+    'addTags',           'removeTag',
+    'removeTags',        'createTag'
+]
 
 module.exports = Book;

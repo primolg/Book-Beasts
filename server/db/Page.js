@@ -153,21 +153,21 @@ Page.prototype.insertAfter = async function (page) {
     }
 }
 
-// const PageSpecialMethods = [
-//     '_customGetters',
-//     '_customSetters',
-//     'validators',
-//     '_hasCustomGetters',
-//     '_hasCustomSetters',
-//     'rawAttributes',
-//     '_isAttribute',
-//     'insertAfter',
-//     'getStudent',
-//     'setStudent',
-//     'createStudent',
-//     'getBook',
-//     'setBook',
-//     'createBook'
-// ]
+const PageSpecialMethods = [
+    '_customGetters',
+    '_customSetters',
+    'validators',
+    '_hasCustomGetters',
+    '_hasCustomSetters',
+    'rawAttributes',
+    '_isAttribute',
+    'insertAfter',
+    'getStudent',
+    'setStudent',
+    'createStudent',
+    'getBook',
+    'setBook',
+    'createBook'
+]
 
 module.exports = Page;
