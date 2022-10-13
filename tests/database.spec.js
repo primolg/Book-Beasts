@@ -25,28 +25,32 @@ async function testSync() {
 
 describe("Pages model functions as a linked list data structure", () => {
     const runs = [
-        { iter: "before" },
-        { iter: "after" }
+        { iter: 1, msg: "before calling any methods" },
+        { iter: 2, msg: "after basic internal reordering" },
+        { iter: 3, msg: "after complex reordering" }
     ]
 
     runs.forEach(run => 
-        describe(`Intact ${run.iter} calling model methods`, async () => {
+        describe(`Intact ${run.msg}`, async () => {
             before(async () => {
-                if (run.iter === "before") {
+                if (run.iter === 1) {
                     await testSync();
-                } else {
+                } else if (run.iter === 2) {
                     await testSync();
-                    // book 1: 12 pages => move a page to the start and the end
-                    // book 2: 6 pages => move the last page to the middle
                     // book 3: 18 pages => reorder 3 pages internally
-                    // book 4: 13 pages => move the first page to the middle
-                    // book 5: 7 pages => reorder 1 page internally
-                    // book 6: 16 pages => 
-
                     // book 3 has 18 pages => here we are reordering 1
                     const pages = await Page.findAll({ where: { bookId: 3 }});
                     const selected = pages.filter(page => page.id === 23 || page.id == 36).sort();
                     await selected[1].insertAfter(selected[0]);
+
+                    // book 5: 7 pages => move the last page to the middle
+
+                } else {
+                    // insertFirst, insertLast
+                    await testSync();
+                    // book 1: 12 pages => move a page from middle to the start and the end
+                    // book 4: 13 pages => move the first page to the middle, then around, then to end
+                    // book 6: 16 pages => move pages from middle to ends, then again
 
                     // book 2 has 6 pages => here we are adding 1 to the start
                     // original pageIds: [13,14,15,16,17,18]

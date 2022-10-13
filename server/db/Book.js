@@ -50,9 +50,6 @@ Book.prototype.addNewPage = async function() {
 
 }
 
-Book.prototype.removeOnePage = async function() {
-
-}
 
 const BookSpecialMethods = [
     '_customGetters',    '_customSetters',
