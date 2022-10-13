@@ -54,7 +54,7 @@ const syncAndSeed = async (closeConn=false) => {
       //"User Special Methods: ", Object.keys(User.prototype),
       //"Student Special Methods: ", Object.keys(Student.prototype),
       // "Book Special Methods: ", Object.keys(Book.prototype),
-      "Page Special Methods: ", Object.keys(Page.prototype),
+      // "Page Special Methods: ", Object.keys(Page.prototype),
       //"PageItem Special Methods: ", Object.keys(PageItem.prototype)
     );
     if (closeConn) await db.close();

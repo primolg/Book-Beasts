@@ -15,7 +15,7 @@ const Page = db.define("page", {
         defaultValue: 'https://res.cloudinary.com/ddqp7dojc/image/upload/v1665439674/capstone/insertImage_vubntn.jpg',
         validate: {
             isUrl: true,
-        }
+        },
     },
     type: {
         type: Sequelize.STRING,
@@ -40,48 +40,76 @@ const Page = db.define("page", {
 });
 
 //=== PAGE PROTOTYPE METHODS === //
-// 1 - update previous/next on the node being moved
+// 1 - update previous/next on the nodes around the node being moved
 // 2/3 - update nodes before/after insertion point
 // 4 - update previous + next on current node
 
-// functions for inserting as first/last page
-Page.prototype.insertFirst = async function () {
-    // 1 
-    await Page.update(
-        { previousPage: this.previousPage },
-        { where: { id: this.nextPage }}
-    );
-    await Page.update(
-        { nextPage: this.nextPage },
-        { where: { id: this.previousPage }}
-    );
+// later should consolidate step 1 into a separate fn, since all methods use it (not a priority)
+// might also be able to consolidate insert(First/Last) into one (not a priority)
 
-    // 2/3 (only a node after this on - none before)
-    // Page.update(
-    //     { previousPage: this.id },
-    //     { where: {
-    //         previousPage: null,
-    //         bookId: this.bookId,
-    //     }}
-    // );
+Page.prototype.insertStart = async function () {
+    // 1 
+    if (this.nextPage) {
+        await Page.update(
+            { previousPage: this.previousPage },
+            { where: { id: this.nextPage }}
+        );
+    }
+    if (this.previousPage) {
+        await Page.update(
+            { nextPage: this.nextPage },
+            { where: { id: this.previousPage }}
+        );
+    }
+
+    // 2/3 (only a node after this one - none before)
     const book = await this.getBook();
-    const previousFirstPage = await book.getPages({
+    const originalFirstPage = await book.getPages({
         where: { previousPage: null }
     });
-    await previousFirstPage[0].set({
+    await originalFirstPage[0].set({
         previousPage: this.id,
     });
-    await previousFirstPage[0].save();
+    await originalFirstPage[0].save();
 
     // 4
     await this.set({
         previousPage: null,
-        nextPage: previousFirstPage.id,
+        nextPage: originalFirstPage.id,
     });
     this.save();
 }
-Page.prototype.insertLast = async function () {
+Page.prototype.insertEnd = async function () {
+    // 1
+    if (this.nextPage) {
+        await Page.update(
+            { previousPage: this.previousPage },
+            { where: { id: this.nextPage }}
+        );
+    }
+    if (this.previousPage) {
+        await Page.update(
+            { nextPage: this.nextPage },
+            { where: { id: this.previousPage }}
+        );
+    }
 
+    // 2/3
+    const book = await this.getBook();
+    const originalLastPage = await book.getPages({
+        where: { nextPage: null }
+    });
+    await originalLastPage[0].set({
+        nextPage: this.id,
+    });
+    await originalLastPage[0].save();
+
+    // 4
+    await this.set({
+        previousPage: originalLastPage[0].id,
+        nextPage: null,
+    });
+    this.save();
 }
 
 // call this on the page that you want to insert, param 'page' is the page it will be after
@@ -125,21 +153,21 @@ Page.prototype.insertAfter = async function (page) {
     }
 }
 
-const PageSpecialMethods = [
-    '_customGetters',
-    '_customSetters',
-    'validators',
-    '_hasCustomGetters',
-    '_hasCustomSetters',
-    'rawAttributes',
-    '_isAttribute',
-    'insertAfter',
-    'getStudent',
-    'setStudent',
-    'createStudent',
-    'getBook',
-    'setBook',
-    'createBook'
-]
+// const PageSpecialMethods = [
+//     '_customGetters',
+//     '_customSetters',
+//     'validators',
+//     '_hasCustomGetters',
+//     '_hasCustomSetters',
+//     'rawAttributes',
+//     '_isAttribute',
+//     'insertAfter',
+//     'getStudent',
+//     'setStudent',
+//     'createStudent',
+//     'getBook',
+//     'setBook',
+//     'createBook'
+// ]
 
 module.exports = Page;

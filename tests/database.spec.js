@@ -3,7 +3,7 @@ const { db, User, Student, Book, Page, Tag } = require("../server/db");
 const { users, students, books, pages, tags, bookTags } = require("./testSeed.json");
 const { logLinkedList, sleep } = require("./utils");
 
-async function testSync() {
+async function testSync(usersOnly=false) {
     const createBookTag = async (bookTag) => {
         const book = await Book.findByPk(bookTag.bookId);
         const tag = await Tag.findByPk(bookTag.tagId);
@@ -14,8 +14,10 @@ async function testSync() {
         
         await Promise.all(users.map((user) => User.create(user)));
         await Promise.all(students.map((student) => Student.create(student)));
-        await Promise.all(books.map((book) => Book.create(book)));
-        await Promise.all(pages.map((page) => Page.create(page)));
+        if (usersOnly) return;
+
+        await Book.bulkCreate(books);
+        await Page.bulkCreate(pages);
         await Promise.all(tags.map((tag) => Tag.create(tag)));
         await Promise.all(bookTags.map((bookTag) => createBookTag(bookTag)));
     } catch (error) {
@@ -23,21 +25,84 @@ async function testSync() {
     }
 };
 
-describe("Pages model functions as a linked list data structure", () => {
+describe("Books model", () => {
+    before(async () => {
+        await testSync(true);
+    });
+
+    it("Can create new books", async () => {
+        // manual id not required in prod (seed data doesn't have book ids)
+        const bookId = await Book.max("id") + 1;
+        const bookTitle = "I Love Mocha Tests";
+        const studentId = 3;
+
+        const newBook = await Book.create({
+            id: bookId,
+            title: bookTitle,
+            genre: "horror",
+            studentId: studentId,
+        });
+        expect(newBook.title).to.equal(bookTitle);
+        expect(newBook.studentId).to.equal(studentId);
+        expect(newBook.totalPages).to.equal(2);
+    });
+
+    it("Can add pages to books", async () => {
+        const book = await Book.findByPk(1);
+        const pages = await book.getPages();
+        const originalFirstId =  pages.find(p => !p.previousPage).id;
+        const originalLastId = pages.find(p => !p.nextPage).id;
+
+        let newPage = await book.createNewPage();
+        const newPage2 = await book.createNewPage();
+        newPage = await Page.findByPk(newPage.id);
+
+        const originalFirstPage = await Page.findByPk(originalFirstId);
+        const originalLastPage = await Page.findByPk(originalLastId);
+        
+        // expectations for each page
+        expect(originalFirstPage.previousPage).to.equal(null);
+        expect(originalFirstPage.nextPage).to.equal(originalLastId);
+
+        expect(originalLastPage.previousPage).to.equal(originalFirstId);
+        expect(originalLastPage.nextPage).to.equal(newPage.id);
+
+        expect(newPage.previousPage).to.equal(originalLastId);
+        expect(newPage.nextPage).to.equal(newPage2.id);
+
+        expect(newPage2.previousPage).to.equal(newPage.id);
+        expect(newPage2.nextPage).to.equal(null);
+    });
+
+    xit("Can remove pages from books", async () => {
+
+    });
+
+    xit("'getOrderedPages' returns the correct array", async () => {
+        const book = await Book.findByPk(1);
+        // await book.createNewPage();
+        // await book.createNewPage();
+
+
+    });
+});
+
+xdescribe("Pages model functions as a linked list data structure", () => {
     const runs = [
         // { iter: 1, msg: "before calling any methods" },
-        { iter: 2, msg: "after basic reordering" },
+        // { iter: 2, msg: "after basic reordering" },
         // { iter: 3, msg: "after complex reordering" },
-    ]
+        // { iter: 4, msg: "after adding/manipulating pages" },
+    ];
 
-    runs.forEach(run => 
+    runs.forEach(run =>
         describe(`Intact ${run.msg}`, async () => {
             before(async () => {
                 if (run.iter === 1) {
                     await testSync();
                 } else if (run.iter === 2) {
-                    // book 3: 2 internal reorders
-                    // book 5: first/last pages moved to middle
+                    // book3: 2 internal reorders
+                    // book5: first/last pages moved to middle
                     await testSync();
 
                     // book3 before: [19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
@@ -50,15 +115,13 @@ describe("Pages model functions as a linked list data structure", () => {
                     await selected[0].insertAfter(selected[1]);
                     // book3 after: [19,20,21,22,28,24,25,26,27,29,30,31,32,33,34,35,23,36]
 
-                    // [50,51,52,53,54,55,56]
+                    // book5 before: [50,51,52,53,54,55,56]
                     pages = await Page.findAll({ where: { bookId: 5 }});
-                    logLinkedList(pages, 5, "before");
                     selected = pages.filter(
                         page => page.id==52 || page.id==56
                         ).sort((a,b) => a.id - b.id);
                     await selected[1].insertAfter(selected[0]);
 
-                    // move 50 after 53
                     pages = await Page.findAll({ where: { bookId: 5 }});
                     selected = pages.filter(
                         page => page.id==50 || page.id==53
@@ -66,25 +129,15 @@ describe("Pages model functions as a linked list data structure", () => {
                     await selected[0].insertAfter(selected[1]);
 
                     pages = await Page.findAll({ where: { bookId: 5 }});
-                    logLinkedList(pages, 5, "after");
-                    // [51,52,56,53,50,54,55]
-
+                    // book5 after: [51,52,56,53,50,54,55]
                 } else {
-                    // insertFirst, insertLast
-                    // await testSync();
-                    // book 1: 12 pages => move a page from middle to the start and the end
-                    // book 4: 13 pages => move the first page to the middle, then around, then to end
-                    // book 6: 16 pages => move pages from middle to ends, then again
+                    // book1: move pages from middle to start and end
+                    // book2: move firstPage to end
+                    // book4: move lastPage to start
+                    // book6: swap first 2 pages (with eachother) and last 2 pages (with eachother)
+                    await testSync();
 
-                    // book 2 has 6 pages => here we are adding 1 to the start
-                    // original pageIds: [13,14,15,16,17,18]
-                    // const pages2 = await Page.findAll({ where: { bookId: 2 }});
-                    // if (logOnce) {
-                    //     console.log(getOrderedLinkedList(pages2));
-                    //     logOnce = false;
-                    // }
-                    // currently, pages 13 and 14 have same nextPage (15)
-                    // await pages2[4].makeFirst();
+                    // todo
                 }
             });
 
@@ -111,6 +164,7 @@ describe("Pages model functions as a linked list data structure", () => {
             });
 
             it(`The list of pages can be navigated from start to end`, async () => {
+                // should write a function to test every single book here
                 const pages = await Page.findAll({ where: { bookId: 3 }});
 
                 // counts the number of nodes traversed through to ensure it reaches every page
@@ -129,6 +183,7 @@ describe("Pages model functions as a linked list data structure", () => {
             });
 
             // it(`No page in a book points to a page from another book`)
+            // it(`~currentTest => check for new book on final test iteration`)
         })
     );
 });
