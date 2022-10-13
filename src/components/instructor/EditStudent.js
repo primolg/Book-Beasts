@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
+//This shows hashed password when opening Edit popup - need to fix that.
+
 const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
     const params = useParams();

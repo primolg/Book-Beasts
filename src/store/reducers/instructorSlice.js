@@ -110,7 +110,6 @@ export const deleteInstructor = (instructorData, navigate) => async(dispatch) =>
   try{
     const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
   dispatch(_deleteInstructor(deletedInstructor));
-  navigate('/');
   }catch(error){
     console.log('DELETE INSTRUCTOR THUNK ERROR', error);
   }

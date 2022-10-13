@@ -50,7 +50,6 @@ const AddStudent = () => {
     useEffect(() => {
     }, [form]);
 
-    console.log('ADD STUDENT COMP', form.email);
 
     return(
         <><Popup trigger={<button>Add Student</button>} position="bottom left">
