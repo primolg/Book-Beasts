@@ -12,8 +12,11 @@ const DeleteStudent = ( { student }) => {
     const handleDelete = (event) => {
         event.preventDefault();
         dispatch(deleteStudent(student));
-        navigate(`/instructorPortal/${params.id}/students`);
+        navigate(`/instructorPortal/${params.id}`);
     };
+//^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
+//the state change from showing immediately in the student table. Working on fixing this issue.
+
 
     return (
         <>

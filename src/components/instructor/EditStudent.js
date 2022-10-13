@@ -39,7 +39,10 @@ const EditStudent = ( {student} ) => {
             password: form.password,
         }, params.id, student.id, student));
         navigate(`/instructorPortal/${params.id}`);
-    }
+    };
+
+//^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
+//the state change from showing immediately in the student table. Working on fixing this issue.
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
