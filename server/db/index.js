@@ -32,11 +32,11 @@ Tag.belongsToMany(Book, { through: BookTag });
 Book.belongsToMany(Tag, { through: BookTag });
 
 // seeding
-const createBookTag = async (bookTag) => {
-  const book = await Book.findByPk(bookTag.bookId);
-  const tag = await Tag.findByPk(bookTag.tagId);
-  return await book.addTag(tag);
-};
+// const createBookTag = async (bookTag) => {
+//   const book = await Book.findByPk(bookTag.bookId);
+//   const tag = await Tag.findByPk(bookTag.tagId);
+//   return await book.addTag(tag);
+// };
 
 const syncAndSeed = async (closeConn=false) => {
   try {
@@ -53,8 +53,8 @@ const tag = await Tag.bulkCreate(tags);
       `Seeding Successful!`,
       //"User Special Methods: ", Object.keys(User.prototype),
       //"Student Special Methods: ", Object.keys(Student.prototype),
-      //"Book Special Methods: ", Object.keys(Book.prototype),
-      //"Page Special Methods: ", Object.keys(Page.prototype),
+      // "Book Special Methods: ", Object.keys(Book.prototype),
+      // "Page Special Methods: ", Object.keys(Page.prototype),
       //"PageItem Special Methods: ", Object.keys(PageItem.prototype)
     );
     if (closeConn) await db.close();
@@ -77,18 +77,3 @@ module.exports = {
   Tag,
   BookTag,
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
