@@ -1,24 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchBooks } from '../../store/reducers/bookSlice';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
+  let [ search, setSearch ] = useState('');
 
   
   useEffect(() => {
     dispatch(fetchBooks())
-  },[])
+  },[search])
   
-  console.log(books);
+  const handleChange = event => {
+    if(event.key === "Enter"){
+    setSearch(event.target.value);
+    const searchedBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
+    navigate('/books',  {state: event.target.value});
+    }
+  }
+
   const featuredBooks = books.filter(book => book.isFeatured);
   
   return (
     <div className='content-container'>
       <div className='home-container'>
         <h1>Book Beasts</h1>
+      </div>
+      <div className='home-search-bar'>
+        <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
       </div>
       <div className='featured-book-slider'>
         <div className="outer-div">Featured Books:
@@ -39,11 +52,6 @@ const Home = () => {
               </div>
           </div>
         </div>
-      <div>
-        <Link to='/books/'>
-          <button>All Books</button>
-        </Link>
-      </div>
     </div>
 )}
 
