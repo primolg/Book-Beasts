@@ -1,22 +1,22 @@
 const router = require('express').Router();
 const { Student, Book, User } = require('../db');
-//import requireToken, isAdmin from gatekeeper
+const { requireUserToken, isAdmin } = require('../gatekeeper');
 
 
 //GET Instructors (add gatekeeper function to get arguments)
-router.get('/', async(req, res, next) => {
-    try{
-        const instructorList = await User.findAll();
-        console.log('INSTRUCTOR LIST API', instructorList);
-        res.send(instructorList);
-    }catch(error){
-        next(error);
-    }
-});
+// router.get('/', requireUserToken, isAdmin, async(req, res, next) => {
+//     try{
+//         const instructorList = await User.findAll();
+//         console.log('INSTRUCTOR LIST API', instructorList);
+//         res.send(instructorList);
+//     }catch(error){
+//         next(error);
+//     }
+// });
 
 //add requireToken argument VV
 
-router.get('/:id', async(req, res, next) => {
+router.get('/:id', requireUserToken, async(req, res, next) => {
     try{
         const instructor = await User.findByPk(req.params.id, {
             include: {
@@ -47,7 +47,7 @@ router.post('/', async(req, res, next) => {
 
 //PUT edit Instructor (requireToken)
 
-router.put('/:id', async(req, res, next) => {
+router.put('/:id',  async(req, res, next) => {
     try{
     const updatedInstructor = await User.findByPk(req.params.id);
     await updatedInstructor.update(req.body);
@@ -59,7 +59,7 @@ router.put('/:id', async(req, res, next) => {
 
 //DELETE delete instructor account
 
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:id',  async(req, res, next) => {
     try{
     const deletedInstructor = await User.findByPk(req.params.id);
     await deletedInstructor.destroy();
@@ -73,7 +73,6 @@ router.delete('/:id', async(req, res, next) => {
 
 router.get('/:id/students', async(req, res, next) => {
     try{
-        console.log('API INST ID', req.params.userId)
     const allStudents = await Student.findAll({
         where: {
             userId: req.params.userId
@@ -102,7 +101,6 @@ router.get('/:id/students/:studentId', async(req, res, next) => {
 
 router.post('/:id/students', async(req, res, next) => {
     try{
-        console.log('NEW STUDENT API', req.body.userId);
         const addStudent = await Student.create(req.body);
         
         res.send(addStudent);
@@ -111,20 +109,18 @@ router.post('/:id/students', async(req, res, next) => {
     }
 });
 
-router.put('/:id/students/:studentId', async(req, res, next) => {
+router.put('/:id/students/:studentId',  async(req, res, next) => {
     try{
     const editStudent = await Student.findByPk(req.params.studentId);
-    //console.log('API STUDENT PUT', req.params)
     res.send(await editStudent.update(req.body));
     }catch(error){
         next(error);
     }
 });
 
-router.delete('/:id/students/:studentId', async(req, res, next) => {
+router.delete('/:id/students/:studentId',  async(req, res, next) => {
     try{
     const deleteStudent = await Student.findByPk(req.params.studentId);
-    //console.log('DELETE STUDENT API', deleteStudent);
     await deleteStudent.destroy();
     }catch(error){
         next(error);
@@ -133,7 +129,7 @@ router.delete('/:id/students/:studentId', async(req, res, next) => {
 
 //Instructor Child's books routes
 
-router.get('/:id/students/:studentId/books', async(req, res, next) => {
+router.get('/:id/students/:studentId/books',  async(req, res, next) => {
     try{
     const studentBooks = await Book.findAll({
         where: {

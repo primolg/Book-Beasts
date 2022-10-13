@@ -3,7 +3,12 @@ const axios = require('axios');
 
 const instructorSlice = createSlice({
   name: "instructorList",
-  initialState: {},
+  initialState: {
+    instructorList: [],
+    instructorData: {},
+    studentList: [],
+    currentStudent: {},
+  },
   reducers: {
     getInstructorList: (state, action) => {
       state.instructorList = action.payload;
@@ -13,10 +18,6 @@ const instructorSlice = createSlice({
       state.instructorData = action.payload;
       return state;
     },
-    // addInstructor: (state, action) => {
-    //   state.instructorList.push(action.payload);
-    //   return state;
-    // },
     _deleteInstructor: (state, action)=> {
       state.instructorList = state.instructorList.filter((instructor) =>
       instructor.id != action.payload.id
@@ -31,7 +32,7 @@ const instructorSlice = createSlice({
       return state;
     },
     _addStudent: (state, action) => {
-      state.currentStudent = action.payload;
+      state.studentList.push(action.payload);
       return state;
     },
     _deleteStudent: (state, action) => {
@@ -64,40 +65,58 @@ export const fetchInstructors = () => async(dispatch) => {
   dispatch(getInstructorList(instructorList));
 };
 
-export const fetchInstructorData = (instructorId) => async(dispatch) => {
-  const { data: instructorData } = await axios.get(`/api/instructors/${instructorId}`);
-  dispatch(getInstructor(instructorData));
+export const fetchInstructorData = (instructorId) => 
+async(dispatch) => {
+  try{
+    const token = window.localStorage.getItem('token');
+    const { data: instructorData } = await axios.get(`/api/instructors/${instructorId}`,{
+      headers: { authorization: token },
+    });
+    dispatch(getInstructor(instructorData));
+  }catch(error){
+    console.log('FETCH INSTRUCTOR ERROR', error);
+  }
 };
 
 export const fetchStudents = (userId) => async(dispatch) => {
-  const { data: studentList } = await axios.get(`/api/instructors/:id/students`, userId);
-  console.log('FETCH STUDENTS THUNK', userId);
+  try{
+    const { data: studentList } = await axios.get(`/api/instructors/:id/students`, {
+    });
   dispatch(getStudents(studentList));
+  }catch(error){
+    console.log('FETCH STUDENTS THUNK ERROR', error)
+  } 
 };
 
 export const fetchStudentData = (studentId) => async(dispatch) => {
-  console.log('FETCH STUDENT DATA THUNK ', studentId);
-  const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
-  
+  try{
+    const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
   dispatch(getStudent(studentData));
+  }catch(error){
+    console.log('FETCH STUDENT DATA ERROR', error)
+  } 
 };
 
 export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
-  console.log('STUDENT PUT THUNK ', updatedStudentInfo, userId, studentId)
+  try{
   const { data: updatedStudent } = await axios.put(`/api/instructors/${userId}/students/${studentId}`, updatedStudentInfo, userId, studentId);
   dispatch(getStudent(updatedStudent));
+  }catch(error){
+    console.log('UPDATE STUDENT THUNK ERROR', error);
+  } 
 };
 
 export const deleteInstructor = (instructorData, navigate) => async(dispatch) => {
-  const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
+  try{
+    const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
   dispatch(_deleteInstructor(deletedInstructor));
-  navigate('/');
+  }catch(error){
+    console.log('DELETE INSTRUCTOR THUNK ERROR', error);
+  }
 };
 
 export const addStudent = (newStudent, userId) => async(dispatch) => {
   try{
-    console.log('ADD STUDENT THUNK', newStudent);
-    console.log('ADD STUDENT USERID', userId);
     const{ data: newStudentData } = await axios.post(`/api/instructors/${userId}/students`, newStudent);
     dispatch(_addStudent(newStudentData));
   }catch(error){
@@ -105,14 +124,20 @@ export const addStudent = (newStudent, userId) => async(dispatch) => {
   }
 };
 
-// export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
-//   const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
-//   dispatch(getInstructor(updatedInstructorData));
-// };
+export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
+  try{
+    const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
+  dispatch(getInstructor(updatedInstructorData));
+  }catch(error){
+    console.log('UPDATE INSTRUCTOR THUNK ERROR', error);
+  }
+};
 
 export const deleteStudent = (student) => async(dispatch) => {
-  console.log('DELETE STUDENT', student)
+  try{
   const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
   dispatch(_deleteStudent(deletedStudentData));
-  
+  }catch(error){
+    console.log('DELETE STUDENT THUNK ERROR', error);
+  }
   };
