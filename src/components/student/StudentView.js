@@ -6,12 +6,12 @@ import { fetchBookData } from '../../store/reducers/bookSlice';
 import Bookshelf from './Bookshelf';
 
 const StudentView = () => {
-    const params = useParams();
+    const params = 5;
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchStudentData(params.id));
+        dispatch(fetchStudentData(params));
     }, []);
     
 
