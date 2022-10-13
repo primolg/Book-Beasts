@@ -4,6 +4,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
+//This shows hashed password when opening Edit popup - need to fix that.
+
 const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
     const params = useParams();
@@ -39,7 +41,10 @@ const EditStudent = ( {student} ) => {
             password: form.password,
         }, params.id, student.id, student));
         navigate(`/instructorPortal/${params.id}`);
-    }
+    };
+
+//^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
+//the state change from showing immediately in the student table. Working on fixing this issue.
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))

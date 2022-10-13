@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addStudent } from '../../store/reducers/instructorSlice';
 import Popup from 'reactjs-popup';
 
 const AddStudent = () => {
     const params = useParams();
-    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [ form, setForm ] = useState({
         firstName: '',
         lastName: '',
@@ -18,7 +20,7 @@ const AddStudent = () => {
         userId: params.id,
     });
 
-    const dispatch = useDispatch();
+    
 
     const handleChange = prop => event => {
         setForm({
@@ -39,12 +41,15 @@ const AddStudent = () => {
         age: form.age,
         color: form.color,
         }, params.id));
+        navigate(`/instructorPortal/${params.id}`)
     };
+//^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
+//the state change from showing immediately in the student table. Working on fixing this issue.
+
 
     useEffect(() => {
     }, [form]);
 
-    console.log('ADD STUDENT COMP', form.email);
 
     return(
         <><Popup trigger={<button>Add Student</button>} position="bottom left">
@@ -79,7 +84,7 @@ const AddStudent = () => {
                <button type="submit">Submit Changes</button>
                <Link to={`/instructorPortal/${params.id}/students`}>Cancel</Link>
               </form> 
-          <a className="close" onClick={close}>
+          <a className="close" onClick={close} navigate={`instructorPortal/${params.id}/students`}>
             &times;
           </a>
           </div>

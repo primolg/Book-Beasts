@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, Provider } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { InstructorPortal, InstructorStudents} from "./components/instructor";
@@ -11,9 +11,13 @@ import Footer from "./components/footer/Footer";
 import Team from "./components/footer/Team";
 import BookView from "./components/books/BookView";
 
+
 function App() {
+   
+
     return (
     <>
+    
         <UserStatus />
         <Footer />
         <Routes>
@@ -26,6 +30,7 @@ function App() {
             <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
             <Route path="/team" element={<Team />} />
             <Route path="/student/:id" element={<StudentView />} />
+            <Route path="/student" element={<StudentView />} />
         </Routes>
     </>
     )

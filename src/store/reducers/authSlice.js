@@ -42,7 +42,6 @@ export const login = (credentials) => async (dispatch) => {
 // creates an account, generates token, and logs in
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
-
     if (user.error) {
         alert(user.errorMessage);
         return {};
@@ -66,7 +65,7 @@ export const verifyToken = (token) => async (dispatch) => {
         dispatch(setLoggedInUser(user));
         return true;
     } else {
-        dispatch(setLoggedInUser({}));
+        dispatch(setLoggedInUser(user));
         localStorage.removeItem("token");
         return false;
     }
