@@ -45,7 +45,7 @@ const Page = db.define("page", {
 // 4 - update previous + next on current node
 
 // functions for inserting as first/last page
-Page.prototype.makeFirst = async function () {
+Page.prototype.insertFirst = async function () {
     // 1 
     await Page.update(
         { previousPage: this.previousPage },
@@ -80,7 +80,8 @@ Page.prototype.makeFirst = async function () {
     });
     this.save();
 }
-Page.prototype.makeLast = async function () {
+Page.prototype.insertLast = async function () {
+
 }
 
 // call this on the page that you want to insert, param 'page' is the page it will be after
@@ -107,19 +108,17 @@ Page.prototype.insertAfter = async function (page) {
         await previousPage.save();
         
         // 3 - update the node after insertion point
-        if (nextPage) {
-            await nextPage.set({ previousPage: this.id });
-            await nextPage.save();
-        }
+        await nextPage.set({ previousPage: this.id });
+        await nextPage.save();
 
         // 4 - update prev/next on current node
         if (previousPage) await this.set({
             previousPage: previousPage.id,
-        })
+        });
 
         if (nextPage) await this.set({
             nextPage: nextPage.id
-        })
+        });
         await this.save();
     } catch (error) {
         console.error("Unable to reorder pages:", error);
