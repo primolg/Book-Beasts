@@ -11,15 +11,18 @@ const BookView = () => {
     //
     const [currentPage, setCurrentPage] = useState(0)
 
+    console.log(pages)
 
     //function to sort through pages linked list + add page number to each obj
     function filterPages(pages){
+        console.log(pages)
         let orderedPages = [];
         let currentPage = pages.filter((page) => page.isFirstPage);
         orderedPages.push({pageNumber: 1, page : currentPage[0]});
 
         let counter = 0;
         while(orderedPages.length < pages.length){
+            console.log(counter)
             let nextPage = pages.filter((page) => page.id == orderedPages[counter].page.nextPage);
             orderedPages.push({pageNumber: (counter + 2), page : nextPage[0]});
             counter++;
@@ -29,7 +32,6 @@ const BookView = () => {
     useEffect(() => {
         dispatch(fetchBookData(params.id))
     }, []);
-    console.log(pages)
 
     return pages ? (
             <div className="outer-div-book-view">

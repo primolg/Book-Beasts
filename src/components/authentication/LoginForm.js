@@ -31,7 +31,7 @@ export default function LoginForm({ type, setAccountType }) {
         e.preventDefault();
         dispatch(login(form)).then(res => {
             if (type === "student" && res?.id) {
-                navigate(`/studentPortal/${res.id}`);
+                navigate(`/student`);
             } else if (res?.id) {
                 navigate(`/instructorPortal/${res.id}`);
             }
