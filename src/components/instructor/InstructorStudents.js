@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstructorData } from '../../store/reducers/instructorSlice';
 import { useParams, Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import AddStudent from './AddStudent';
 
 
 const InstructorStudents = () => {
+    
 
     return(
         <div>
@@ -15,7 +16,7 @@ const InstructorStudents = () => {
             <InstructorNav/>
             </div>
             <div>
-               <AddStudent />
+               <AddStudent  />
             <StudentTable />
             </div>
         </div>

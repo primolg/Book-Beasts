@@ -4,6 +4,8 @@ const cors = require("cors");
 const volleyball = require("volleyball");
 const app = express();
 
+
+
 // middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(express.json());
@@ -12,6 +14,7 @@ app.use(volleyball);
 
 // api router
 app.use("/api", require("./api"));
+
 
 // catch-all
 app.use("*", (req, res) => {
