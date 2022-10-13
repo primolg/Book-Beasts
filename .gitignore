@@ -4,3 +4,6 @@ bundle.js*
 main.css*
 .DS_Store
 todo*
+PageItem.js*
+DeleteConfirmation.js*
+DeleteInstructor.js*
