@@ -18,7 +18,7 @@ const StudentView = () => {
     
     useEffect(() => {
         dispatch(fetchStudentData(params));
-    }, [params]);
+    }, [params]); 
     
 
     return(
