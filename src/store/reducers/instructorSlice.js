@@ -124,9 +124,9 @@ export const addStudent = (newStudent, userId) => async(dispatch) => {
   }
 };
 
-export const updateInstructorData = (updatedInstructor) => async(dispatch) => {
+export const updateInstructorData = (updatedInstructor, instructorId) => async(dispatch) => {
   try{
-    const { data: updatedInstructorData } = await axios.put(`/api/instructors/${updatedInstructor.id}`, updatedInstructor);
+    const { data: updatedInstructorData } = await axios.put(`/api/instructors/${instructorId}`, updatedInstructor);
   dispatch(getInstructor(updatedInstructorData));
   }catch(error){
     console.log('UPDATE INSTRUCTOR THUNK ERROR', error);
