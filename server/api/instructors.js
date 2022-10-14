@@ -20,7 +20,7 @@ router.get('/:id', requireUserToken, async(req, res, next) => {
     try{
         const instructor = await User.findByPk(req.params.id, {
             include: {
-                model: Student
+                model: Student,
             }
         });
         res.send(instructor)
@@ -73,9 +73,10 @@ router.delete('/:id',  async(req, res, next) => {
 
 router.get('/:id/students', async(req, res, next) => {
     try{
+        console.log('API GET STUDENTS', req.body)
     const allStudents = await Student.findAll({
         where: {
-            userId: req.params.userId
+            userId: req.params.id
         },
         include: {
             model: Book,
@@ -89,7 +90,14 @@ router.get('/:id/students', async(req, res, next) => {
 
 router.get('/:id/students/:studentId', async(req, res, next) => {
     try{
-        const singleStudent = await Student.findByPk(req.params.studentId);
+        const singleStudent = await Student.findByPk(req.params.studentId, {
+            where: {
+                userId: req.params.id
+            },
+            include: {
+                model: Book,
+            }
+        });
         res.send(singleStudent);
     }catch(error){
         next(error);
@@ -127,23 +135,7 @@ router.delete('/:id/students/:studentId',  async(req, res, next) => {
     }
 });
 
-//Instructor Child's books routes
 
-router.get('/:id/students/:studentId/books',  async(req, res, next) => {
-    try{
-    const studentBooks = await Book.findAll({
-        where: {
-            studentId: req.params.studentId
-        },
-        include:{
-            model: Student
-        },
-    });
-    res.send(studentBooks);
-    }catch(error){
-        next(error);
-    }
-});
 
 router.get('/:id/students/:studentId/books/:bookId', async(req, res, next) => {
     try{

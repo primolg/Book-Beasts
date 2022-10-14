@@ -19,7 +19,7 @@ const InstructorPortal = () => {
 
     return(
         <div className='instructorPortal'>
-            <InstructorNav key={params.id} instructor={instructorData}/>
+            <InstructorNav key={params.id} />
             {instructorData ? (
                 <>
                 <h1>Welcome {instructorData.firstName}!</h1>

@@ -81,7 +81,8 @@ async(dispatch) => {
 
 export const fetchStudents = (userId) => async(dispatch) => {
   try{
-    const { data: studentList } = await axios.get(`/api/instructors/:id/students`, {
+    console.log('FETCH STUDENTS INS ID', userId);
+    const { data: studentList } = await axios.get(`/api/instructors/${userId}/students`, {
     });
   dispatch(getStudents(studentList));
   }catch(error){
@@ -89,9 +90,10 @@ export const fetchStudents = (userId) => async(dispatch) => {
   } 
 };
 
-export const fetchStudentData = (studentId) => async(dispatch) => {
+export const fetchStudentData = (userId, studentId) => async(dispatch) => {
   try{
-    const { data: studentData } = await axios.get(`/api/instructors/:id/students/${studentId}`, studentId);
+    console.log('FETCH STUDENT', userId, studentId)
+    const { data: studentData } = await axios.get(`/api/instructors/${userId}/students/${studentId}`, studentId);
   dispatch(getStudent(studentData));
   }catch(error){
     console.log('FETCH STUDENT DATA ERROR', error)
