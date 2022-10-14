@@ -62,23 +62,26 @@ Page.prototype.insertStart = async function () {
         );
     }
 
-    // 2/3 (only a node after this one - none before)
-    const book = await this.getBook();
-    const originalFirstPage = await book.getPages({
-        where: { previousPage: null }
+    // 2/3 (only updating a node after this one - none before)
+    const originalFirstPage = await Page.findOne({
+        where: {
+            bookId: this.bookId,
+            previousPage: null,
+        },
     });
-    await originalFirstPage[0].set({
+    await originalFirstPage.set({
         previousPage: this.id,
     });
-    await originalFirstPage[0].save();
+    await originalFirstPage.save();
 
     // 4
     await this.set({
         previousPage: null,
         nextPage: originalFirstPage.id,
     });
-    this.save();
+    await this.save();
 }
+
 Page.prototype.insertEnd = async function () {
     // 1
     if (this.nextPage) {
@@ -95,21 +98,23 @@ Page.prototype.insertEnd = async function () {
     }
 
     // 2/3
-    const book = await this.getBook();
-    const originalLastPage = await book.getPages({
-        where: { nextPage: null }
+    const originalLastPage = await Page.findOne({
+        where: {
+            bookId: this.bookId,
+            nextPage: null,
+        },
     });
-    await originalLastPage[0].set({
+    await originalLastPage.set({
         nextPage: this.id,
     });
-    await originalLastPage[0].save();
+    await originalLastPage.save();
 
     // 4
     await this.set({
-        previousPage: originalLastPage[0].id,
+        previousPage: originalLastPage.id,
         nextPage: null,
     });
-    this.save();
+    await this.save();
 }
 
 // call this on the page that you want to insert, param 'page' is the page it will be after

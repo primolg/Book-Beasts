@@ -35,10 +35,28 @@ const Book = db.define("book", {
     },
 });
 
+// function filterPages(pages){
+//     console.log(pages)
+//     let orderedPages = [];
+//     let currentPage = pages.filter((page) => page.isFirstPage);
+//     orderedPages.push({pageNumber: 1, page : currentPage[0]});
+
+//     let counter = 0;
+//     while(orderedPages.length < pages.length){
+//         console.log(counter)
+//         let nextPage = pages.filter((page) => page.id == orderedPages[counter].page.nextPage);
+//         orderedPages.push({pageNumber: (counter + 2), page : nextPage[0]});
+//         counter++;
+//     }
+//     return orderedPages;
+// }
+
 Book.prototype.getOrderedPages = async function() {
     const allPages = await this.getPages();
     const firstPage = allPages.find(page => page.isFirstPage);
     const orderedPages = [firstPage];
+
+    // implement page numbers
 
     for (let i = 1; i < allPages.length; i++) {
         const nextPage = allPages.find(page => page.id === orderedPages[i-1].nextPage);
