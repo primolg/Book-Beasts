@@ -59,6 +59,10 @@ const EditInstructor = () => {
         })
     }, [instructor])
 
+    const handleClose = event => {
+        navigate(`/instructorPortal/${params.id}`);
+    }
+
     return (
         <>
                 <div>
@@ -76,6 +80,9 @@ const EditInstructor = () => {
                <label htmlFor="password">Password:</label>
                <input name="password" value={form.password} onChange={handleChange('password')}/>
                <button type="submit">Submit Changes</button>
+               <button className="close" onClick={handleClose}>
+                CANCEL
+              </button>
               </form> 
               </div>
             

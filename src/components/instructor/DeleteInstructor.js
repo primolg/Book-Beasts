@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { deleteInstructor } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
@@ -15,7 +15,6 @@ const DeleteInstructor = ( { instructor }) => {
         navigate(`/`);
     };
 
-console.log('DELETE INSTRUCTOR', instructor);
 
     return (
         <>
@@ -28,9 +27,10 @@ console.log('DELETE INSTRUCTOR', instructor);
                    Click CANCEL to go back to editing your account.
                </p>
                <button onClick={handleDelete}>YES</button>
-              <a className="close" onClick={close}>
-                &times;
-              </a>
+               
+              <button className="close" onClick={close}>
+                CANCEL
+              </button>
               </div>
             )}
         </Popup>

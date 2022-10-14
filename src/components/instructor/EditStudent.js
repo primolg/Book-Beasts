@@ -79,9 +79,9 @@ const EditStudent = ( {student} ) => {
                <input name="password" value={form.password} onChange={handleChange('password')}/>
                <button type="submit">Submit Changes</button>
               </form> 
-              <a className="close" onClick={close}>
-                &times;
-              </a>
+              <button className="close" onClick={close}>
+                CANCEL
+              </button>
               </div>
             )}
         </Popup>

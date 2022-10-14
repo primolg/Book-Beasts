@@ -82,11 +82,11 @@ const AddStudent = () => {
                 </select>
                <input type='hidden' name='userId' value={params.id} onChange={handleChange('userId')}/>
                <button type="submit">Submit Changes</button>
-               <Link to={`/instructorPortal/${params.id}/students`}>Cancel</Link>
+               
               </form> 
-          <a className="close" onClick={close} navigate={`instructorPortal/${params.id}/students`}>
-            &times;
-          </a>
+              <button className="close" onClick={close}>
+                CANCEL
+              </button>
           </div>
         )}
     </Popup>
