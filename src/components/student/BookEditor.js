@@ -25,7 +25,8 @@ const BookEditor = () => {
                     {pages.map(page =>
                         <div className="page-selector" id={currentPage === page ? "selected" : ""} key={page} onClick={()=>setCurrentPage(page)}>{page}</div>
                     )}
-                    <div className="page-selector" key="new-page" onClick={addPage}>+</div>
+                    <div className="page-selector"onClick={addPage}>+</div>
+                    <div className="blank-page"></div>
                 </div>
                 <div className="page">
                     
