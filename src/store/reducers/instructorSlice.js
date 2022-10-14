@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logout } from './authSlice';
 const axios = require('axios');
 
 const instructorSlice = createSlice({
@@ -110,6 +111,7 @@ export const deleteInstructor = (instructorData, navigate) => async(dispatch) =>
   try{
     const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
   dispatch(_deleteInstructor(deletedInstructor));
+  dispatch(logout());
   }catch(error){
     console.log('DELETE INSTRUCTOR THUNK ERROR', error);
   }

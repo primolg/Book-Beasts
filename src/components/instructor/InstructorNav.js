@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { LogoutButton } from '../authentication/index.js';
 
 
-const InstructorNav = ({ instructor }) => {
+const InstructorNav = () => {
     const params = useParams();
 
    
@@ -13,7 +13,7 @@ const InstructorNav = ({ instructor }) => {
         <div className='nav-container'>
             <div className='navbar'>
                 <NavLink to={`/instructorPortal/${params.id}/students`} className='instructor-nav-item'>Your Students</NavLink>
-                <NavLink to={`/instructorPortal/${params.id}/edit`} instructor={instructor} className='instructor-nav-item'>Edit Your Account</NavLink>
+                <NavLink to={`/instructorPortal/${params.id}/edit`} className='instructor-nav-item'>Edit Your Account</NavLink>
                 <NavLink to={`/instructorPortal/${params.id}`} className='instructor-nav-item'>Back to Portal</NavLink>
                 <LogoutButton />
             </div>

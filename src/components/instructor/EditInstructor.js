@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from "react-router-dom";
 import { updateInstructorData, fetchInstructorData } from "../../store/reducers/instructorSlice";
-
+import DeleteInstructor from "./DeleteInstructor";
 
 const EditInstructor = () => {
     const dispatch = useDispatch();
@@ -62,6 +62,7 @@ const EditInstructor = () => {
     return (
         <>
                 <div>
+                <DeleteInstructor key={instructor.id} instructor={instructor}/>
                <form id='form' onSubmit={handleSubmit}>
                <h3>Edit instructor</h3>
                <label htmlFor="firstName">First Name:</label>
