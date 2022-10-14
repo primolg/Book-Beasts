@@ -7,10 +7,12 @@ import StudentView from "./components/student/StudentView";
 import Home from "./components/home/Home";
 import AllBooks from "./components/books/AllBooks";
 import BookView from "./components/books/BookView";
+import BookTest from "./components/student/BookTest";
+import BookEditor from "./components/student/BookEditor";
 
 
 function App() {
-   
+
 
     return (
     <>
@@ -27,6 +29,8 @@ function App() {
             <Route path="/instructorPortal/:id" element={<InstructorPortal />}/>
             <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
             <Route path="/student" element={<StudentView />} />
+            <Route path="/booktest" element={<BookTest />} />
+            <Route path="/bookedit" element={<BookEditor />} />
         </Routes>
     </>
     )

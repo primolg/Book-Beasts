@@ -12,19 +12,19 @@ const StudentView = () => {
 
     //right now it will pull based on id, so there is a bug that it'll pull student 1, if an admin with id 1 is logged in.
 
-    const params = useSelector((state) => state.user.id);
+    const params = useSelector((state) => state.user.isAdmin ? 0 : state.user.id);
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
     
     useEffect(() => {
         dispatch(fetchStudentData(params));
     }, [params]); 
-    
+    console.log(studentData)
 
     return(
         <div>
             <p>Student:</p>
-            <h4>{studentData? studentData.student.firstName + " " + studentData.student.lastName : "not found" }</h4>
+            <h4>{studentData ? studentData.student.firstName + " " + studentData.student.lastName : "not found" }</h4>
             <p>Books:</p>
             {studentData ? (
                 <Bookshelf books={studentData.books} />
