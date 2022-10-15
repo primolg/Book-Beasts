@@ -2,11 +2,10 @@ const { expect } = require("chai");
 const { Op } = require("sequelize");
 const { db, User, Student, Book, Page, Tag } = require("../server/db");
 const { users, students, books, pages, tags, bookTags } = require("./testSeed.json");
-const { sleep } = require("./utils");
 
 // These tests are somewhat inefficient, but they cover general functionality and should handle most edge cases
 
-// type: sync, users, custom, tags
+// type can be: sync, users, custom, tags
 async function testSyncAndSeed(type) {
     const createBookTag = async (bookTag) => {
         const book = await Book.findByPk(bookTag.bookId);
@@ -51,7 +50,7 @@ async function testSyncAndSeed(type) {
     }
 };
 
-xdescribe("Books model", () => {
+describe("'Book' model methods", () => {
     before(async () => {
         await testSyncAndSeed("custom");
     });
@@ -104,7 +103,6 @@ xdescribe("Books model", () => {
         expect(book.totalPages).to.equal(4);
     });
 
-    // should NOT allow totalPages to go below 2 (for now)
     it("Can remove pages from books", async () => {
         const book = await Book.findOne({
             where: {
@@ -141,10 +139,9 @@ xdescribe("Books model", () => {
     });
 
     xit("Books cannot have less than 2 pages", async () => {
-        // Maybe this should be 1 page instead of 2... TBD
+        // Maybe this should be 1 page instead of 2 (TBD)
     });
 
-    // should use this method in other pages tests
     it("'getOrderedPages' returns the correct array", async () => {
         const book = await Book.findOne({
             where: {
@@ -164,10 +161,9 @@ xdescribe("Books model", () => {
     });
 });
 
-
 describe("Pages model functions as a linked list data structure", () => {
-    // the array below determines which iterations are run
-    const testSelection = [/*1,2,3,*/4];
+    // 'testSelection' determines which iterations in 'runs' are tested
+    const testSelection = [2,3,4];
     const runs = [
         { iter: 1, msg: "Data seeds correctly", note: "hard-coded ids", books: [4]},
         { iter: 2, msg: "Intact after various 'insertAfter' usages", note: "hard-coded ids", books: [3,5]},
@@ -176,7 +172,6 @@ describe("Pages model functions as a linked list data structure", () => {
     ];
 
     runs.forEach(run =>
-        // disabled testing of seed data as it is no longer necessary
         (testSelection.includes(run.iter) ? describe : xdescribe)(run.msg + (run.note ? ` (${run.note})` : ""), async () => {
             before(async () => {
                 if (run.iter === 1) {
@@ -234,23 +229,23 @@ describe("Pages model functions as a linked list data structure", () => {
                     ).sort((a,b) => a.id - b.id);
                     await selected[0].insertAfter(selected[1]);
                     await selected[2].insertEnd();
+
                 } else if (run.iter === 4) {
-                    // advanced reordering without hard-coded ids, using all methods and hooks
                     await testSyncAndSeed("custom");
 
-                    // book.createNewPage, Book.beforeDestroy
+                    // book.createNewPage + Book.beforeDestroy
                     const book1 = await Book.findByPk(1);
                     await book1.createNewPage();
                     await book1.destroy();
 
-                    // book methods
+                    // a few book methods
                     const book2 = await Book.findByPk(2);
                     await book2.createNewPage();
                     await book2.createNewPage();
                     const page3 = (await book2.getOrderedPages())[2];
                     await book2.deletePage(page3);
                     
-                    // student.createBook, combining all page methods
+                    // student.createBook + all page methods together
                     const student = await Student.findByPk(1);
                     const newBook = await student.createBook({
                         title: "My Last Test",
@@ -291,17 +286,15 @@ describe("Pages model functions as a linked list data structure", () => {
                     if (page.previousPage || page.nextPage) {
                         expect(page.previousPage).to.not.equal(page.nextPage);
                     } else {
-                        // todo: handle books with 1 page (null for both previous/next)
+                        // Todo: handle books with 1 page (null for both previous/next)
                     }
                 });
             });
 
             it(`The list of pages can be navigated from start to end`, async () => {
-                // run 1/2: test 3/5 | run 3/4: test all in db
                 const testBook = async (firstPage) => {
                     const totalPages = (await firstPage.getBook()).totalPages;
                     let currentPage = firstPage;
-                    // counts the number of nodes traversed through to ensure it reaches every page
                     let traversalCounter = 0;
 
                     for (let i = 0; i < totalPages; i++) {
@@ -315,6 +308,7 @@ describe("Pages model functions as a linked list data structure", () => {
                         `Linked list count different from number of pages in book ${currentPage.bookId}`
                     );
                 };
+                
                 let firstPages = await Page.findAll({ where: { previousPage: null }});
                 // this allows us to specify which books to test here in 'runs' array
                 firstPages = (run.books && firstPages.filter(page => 
@@ -326,17 +320,23 @@ describe("Pages model functions as a linked list data structure", () => {
                 };
             });
 
-            // it(`No page in a book points to a page from another book`)
-            // it(`'getOrderedPages' still returns correct array after page manipulation (2/3/4)'`)
+            if (run.iter < 3) return;
+            it(`No page points to a page from a different book`, async () => {
+                const pages = await Page.findAll();
+                for (let i = 0; i < pages.length; i++) {
+                    if (pages[i].previousPage) {
+                        const page = pages.find(p => p.id === pages[i].previousPage);
+                        expect(pages[i].bookId).to.equal(page.bookId);
+                    }
+                    if (pages[i].nextPage) {
+                        const page = pages.find(p => p.id === pages[i].nextPage);
+                        expect(pages[i].bookId).to.equal(page.bookId);
+                    }
+                }
+            });
 
             if (run.iter < 4) return;
-
             describe(`Newly created books can use all methods properly`, async () => {
-                it(`Has the correct number of pages`, async () => {
-                    const newBook = await Book.findByPk(4);
-                    expect(newBook.totalPages).to.equal(7);
-                });
-
                 it(`Can use 'insertAfter'`, async () => {
                     const newBook = await Book.findByPk(4);
                     let pages = await newBook.getOrderedPages();
@@ -398,7 +398,7 @@ describe("Pages model functions as a linked list data structure", () => {
                     expect (pages[0].nextPage).to.equal(pages[1].id);
                 });
 
-                it(`'beforeDestory' hook works as intended`, async() => {
+                it(`'beforeDestroy' hook works as intended`, async() => {
                     const dbPageCount = await Page.count();
                     const newBook = await Book.findByPk(4);
                     await newBook.destroy();
