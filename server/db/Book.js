@@ -84,6 +84,7 @@ Book.prototype.createNewPage = async function() {
     return newPage;
 }
 
+// might be better to use 'beforeDestroy' hook on page model
 Book.prototype.deletePage = async function(page) {
     if (page.nextPage) {
         await Page.update(

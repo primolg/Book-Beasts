@@ -4,7 +4,9 @@ const { db, User, Student, Book, Page, Tag } = require("../server/db");
 const { users, students, books, pages, tags, bookTags } = require("./testSeed.json");
 const { sleep } = require("./utils");
 
-// types: sync, users, custom, tags
+// These tests are somewhat inefficient, but they cover general functionality and should handle most edge cases
+
+// type: sync, users, custom, tags
 async function testSyncAndSeed(type) {
     const createBookTag = async (bookTag) => {
         const book = await Book.findByPk(bookTag.bookId);
@@ -49,7 +51,7 @@ async function testSyncAndSeed(type) {
     }
 };
 
-describe("Books model", () => {
+xdescribe("Books model", () => {
     before(async () => {
         await testSyncAndSeed("custom");
     });
@@ -162,17 +164,20 @@ describe("Books model", () => {
     });
 });
 
+
 describe("Pages model functions as a linked list data structure", () => {
+    // the array below determines which iterations are run
+    const testSelection = [/*1,2,3,*/4];
     const runs = [
         { iter: 1, msg: "Data seeds correctly", note: "hard-coded ids", books: [4]},
         { iter: 2, msg: "Intact after various 'insertAfter' usages", note: "hard-coded ids", books: [3,5]},
         { iter: 3, msg: "Intact after using all 'Page' methods", note: "hard-coded ids"},
-        // { iter: 4, msg: "All methods work together seamlessly when starting from empty db" },
+        { iter: 4, msg: "All methods work together seamlessly when starting from empty db" },
     ];
 
     runs.forEach(run =>
         // disabled testing of seed data as it is no longer necessary
-        (run.iter===1 ? xdescribe : describe)(run.msg + (run.note && ` (${run.note})`), async () => {
+        (testSelection.includes(run.iter) ? describe : xdescribe)(run.msg + (run.note ? ` (${run.note})` : ""), async () => {
             before(async () => {
                 if (run.iter === 1) {
                     await testSyncAndSeed();
@@ -205,39 +210,63 @@ describe("Pages model functions as a linked list data structure", () => {
                     await testSyncAndSeed();
 
                     // book1: move pages from middle to start and end
-                    // book1 before: [1,2,3,4,5,6,7,8,9,10,11,12]
                     let pages = await Page.findAll({ where: { bookId: 1 }});
                     let selected = pages
                         .filter(page => page.id===5 || page.id===10)
                         .sort((a,b) => a.id - b.id);
                     await selected[0].insertEnd();
                     await selected[1].insertStart();
-                    // book1 after: [10,1,2,3,4,6,7,8,9,11,12,5]
 
                     // book2: move firstPage to end
-                    // book2 before: [13,14,15,16,17,18]
                     pages = await Page.findAll({ where: { bookId: 2 }});
                     selected = pages.find(page => !page.previousPage);
                     await selected.insertEnd();
-                    // book2 after: [14,15,16,17,18,13]
                     
                     // book4: move lastPage to start
-                    // book4 [37,38,39,40,41,42,43,44,45,46,47,48,49]
                     pages = await Page.findAll({ where: { bookId: 4 }})
                     selected = pages.find(page => !page.nextPage);
                     await selected.insertStart();
 
                     // book6: swap first 2 pages (with eachother) and last 2 pages (with eachother)
-                    // book6 before: [57,58,59 ... 70,71,72]
                     pages = await Page.findAll({ where: { bookId: 6 }})
                     selected = pages.filter(page =>
                         !page.previousPage || !page.nextPage || page.id===58 || page.id===71
                     ).sort((a,b) => a.id - b.id);
                     await selected[0].insertAfter(selected[1]);
                     await selected[2].insertEnd();
-                    // book6 after: [58,57,59 ... 70,72,71]
                 } else if (run.iter === 4) {
-                    // todo => tests for "custom" seed (advanced reordering without hard-coded ids)
+                    // advanced reordering without hard-coded ids, using all methods and hooks
+                    await testSyncAndSeed("custom");
+
+                    // book.createNewPage, Book.beforeDestroy
+                    const book1 = await Book.findByPk(1);
+                    await book1.createNewPage();
+                    await book1.destroy();
+
+                    // book methods
+                    const book2 = await Book.findByPk(2);
+                    await book2.createNewPage();
+                    await book2.createNewPage();
+                    const page3 = (await book2.getOrderedPages())[2];
+                    await book2.deletePage(page3);
+                    
+                    // student.createBook, combining all page methods
+                    const student = await Student.findByPk(1);
+                    const newBook = await student.createBook({
+                        title: "My Last Test",
+                        genre: "poetry"
+                    });
+                    await newBook.createNewPage();
+                    await newBook.createNewPage();
+                    await newBook.createNewPage();
+                    let pages = await newBook.getOrderedPages();
+                    await pages[2].insertStart();
+                    await newBook.createNewPage();
+                    await newBook.createNewPage();
+                    pages = await newBook.getOrderedPages();
+                    await pages[1].insertAfter(pages[4]);
+                    pages = await newBook.getOrderedPages();
+                    await pages[4].insertEnd();
                 }
             });
 
@@ -298,12 +327,86 @@ describe("Pages model functions as a linked list data structure", () => {
             });
 
             // it(`No page in a book points to a page from another book`)
-
             // it(`'getOrderedPages' still returns correct array after page manipulation (2/3/4)'`)
 
             if (run.iter < 4) return;
 
-            it(`Checks for new books on final test iteration`)
+            describe(`Newly created books can use all methods properly`, async () => {
+                it(`Has the correct number of pages`, async () => {
+                    const newBook = await Book.findByPk(4);
+                    expect(newBook.totalPages).to.equal(7);
+                });
+
+                it(`Can use 'insertAfter'`, async () => {
+                    const newBook = await Book.findByPk(4);
+                    let pages = await newBook.getOrderedPages();
+                    const  originalId = pages[1].id;
+
+                    await pages[1].insertAfter(pages[3]);
+                    pages = await newBook.getOrderedPages();
+                    expect(pages[3].id).to.equal(originalId);
+                });
+
+                it(`Can use 'insertStart'`, async () => {
+                    const newBook = await Book.findByPk(4);
+                    let pages = await newBook.getOrderedPages();
+                    const originalId = pages[3].id;
+
+                    await pages[3].insertStart();
+                    pages = await newBook.getOrderedPages();
+                    const page = pages.find(p => p.id===originalId);
+
+                    expect(pages[0].id).to.equal(originalId);
+                    expect(page.previousPage).to.equal(null);
+                });
+
+                it(`Can use 'insertEnd'`, async () => {
+                    const newBook = await Book.findByPk(4);
+                    let pages = await newBook.getOrderedPages();
+                    const originalId = pages[0].id;
+
+                    await pages[0].insertEnd();
+                    pages = await newBook.getOrderedPages();
+                    let page = pages.find(p => p.id===originalId);
+
+                    expect(page.nextPage).to.equal(null);
+                    expect(page.previousPage).to.not.equal(null);
+                });
+
+                it(`Can use 'deletePage'`, async () => {
+                    const newBook = await Book.findByPk(4);
+                    let pages = await newBook.getOrderedPages();
+
+                    // deleting last page
+                    let originalId = pages[6].id;
+                    await newBook.deletePage(pages[6]);
+                    await newBook.reload();
+                    pages = await newBook.getOrderedPages();
+
+                    expect(newBook.totalPages).to.equal(6);
+                    expect(pages[5].id).to.not.equal(originalId);
+                    expect (pages[5].nextPage).to.equal(null);
+
+                    // deleting 2nd page
+                    originalId = pages[1].id;
+                    await newBook.deletePage(pages[1]);
+                    await newBook.reload();
+                    pages = await newBook.getOrderedPages();
+
+                    expect(newBook.totalPages).to.equal(5);
+                    expect(pages[1].id).to.not.equal(originalId);
+                    expect (pages[0].nextPage).to.equal(pages[1].id);
+                });
+
+                it(`'beforeDestory' hook works as intended`, async() => {
+                    const dbPageCount = await Page.count();
+                    const newBook = await Book.findByPk(4);
+                    await newBook.destroy();
+
+                    const updatedDbPageCount = await Page.count();
+                    expect(dbPageCount).to.equal(updatedDbPageCount + 5);
+                });
+            });
         })
     );
 });
