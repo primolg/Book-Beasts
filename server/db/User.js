@@ -8,11 +8,6 @@ const {
 } = require("./utils");
 
 const User = db.define("user", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
     email: {
         type: Sequelize.STRING,
         unique: true,

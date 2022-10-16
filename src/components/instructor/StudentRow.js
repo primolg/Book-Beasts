@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 import  DeleteStudent  from "./DeleteStudent";
 import  EditStudent  from "./EditStudent";
 
-
-
-const StudentRow = ({ student }) => {
-
-   
+const StudentRow = ( {student}) => {
+    const params = useParams();
+    
     return(
         <>
             {student && (
@@ -16,12 +14,15 @@ const StudentRow = ({ student }) => {
                     <td>{student.lastName}</td>
                     <td>{student.username}</td>
                     <td>{student.color}</td>
-                    <td>Book List Placeholder</td>
+                    <td> <Link to={`/instructorPortal/${params.id}/students/${student.id}/books`}>
+                        <button>View Books</button>
+                    </Link>
+                        </td>
+                
                     <td>{student.email}</td>
-                        <td>
+                    <td>
                         <EditStudent student={student} />
                     </td>
-                    
                     <td>
                         <DeleteStudent student={student} />
                     </td>

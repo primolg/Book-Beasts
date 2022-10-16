@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { LogoutButton } from '../authentication/index.js';
@@ -6,8 +6,6 @@ import { LogoutButton } from '../authentication/index.js';
 
 const InstructorNav = () => {
     const params = useParams();
-
-   
 
     return(
         <div className='nav-container'>
