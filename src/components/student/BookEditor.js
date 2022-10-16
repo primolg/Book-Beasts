@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
+import templates from './bookTemplates';
 
 const BookEditor = () => {
     const [pages, setPages] = useState([1]);
@@ -22,6 +23,7 @@ const BookEditor = () => {
     return (
             <div className="outer-div-book-view">
                 <div className="page-selector-shelf">
+                    {/* {this can be done with bookshelf.js} */}
                     {pages.map(page =>
                         <div className="page-selector" id={currentPage === page ? "selected" : ""} key={page} onClick={()=>setCurrentPage(page)}>{page}</div>
                     )}
@@ -29,7 +31,9 @@ const BookEditor = () => {
                     <div className="blank-page"></div>
                 </div>
                 <div className="page">
-                    
+                    <templates.Template2
+                    //should give prop of current page ID for 
+                    />
                 </div>
             </div>
     )
