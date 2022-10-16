@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function SelectAccountType({ formType, setAccountType }) {
+const SelectAccountType = ({ formType, setAccountType }) => {
     return (
         <div className="content typeSelection">
             <h2>{formType}</h2>
@@ -12,3 +12,5 @@ export default function SelectAccountType({ formType, setAccountType }) {
         </div>
     )
 }
+
+export default SelectAccountType;
