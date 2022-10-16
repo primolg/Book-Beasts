@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { useNavigate, Link } from 'react-router-dom';
 // import { LogoutButton } from "../authentication";
 import { verifyToken } from "../../store/reducers/authSlice";
-import { Sidebar, ToggleButton, SearchBar } from "./";
+import { Sidebar, ShowSidebar, SearchBar } from "./";
 
 const Header = () => {
     const token = localStorage.getItem("token");
@@ -15,26 +15,14 @@ const Header = () => {
         dispatch(verifyToken(token));
     }
 
-    // guest, student, instructor
-    const [userType, setUserType] = useState("guest");
-    useEffect(() => {
-        if (user?.age) {
-            setUserType("student");
-        } else if (user?.id) {
-            setUserType("instructor");
-        } else {
-            setUserType("guest");
-        }
-    }, [user]);
-
     const [sidebarVisibility, setSidebarVisibility] = useState(false);
     
     return(
         <div id="header-container">
-            <ToggleButton set={setSidebarVisibility} state={sidebarVisibility} />
+            <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
             <SearchBar />
-            
-            <Sidebar type={userType} visibility={sidebarVisibility} />
+
+            <Sidebar visible={sidebarVisibility} set={setSidebarVisibility} />
         </div>
     )
 }

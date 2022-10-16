@@ -5,7 +5,7 @@
 @toggleBtnHeight: @headerHeight - 0.45em;
 
 #header-container {
-    background-color: purple;
+    background-color: @background;
     min-height: @headerHeight;
     padding: 0 0.7em;
 
@@ -13,12 +13,34 @@
     justify-content: space-between;
     align-items: center;
 
+    input {
+        height: 1.5em;
+        min-width: 14em;
+        padding-left: 0.4em;
+        border: 3px solid @blue;
+        border-radius: 1em;
+        // &:focus {
+
+        // }
+    }
+    button {
+        background: @blue;
+        color: white;
+        @flexCenter();
+        height: 2.1em;
+        width: 4.6em;
+        padding-top: 0.12em;
+        border: 3px solid @blue;
+        border-radius: 1em;
+    }
+
     @media screen and (min-width: 600px) {
         // specify what to do when screen larger than 600px
     }
 }
 
-#sidebar-toggle {
+// button (div) to toggle sidebar visibility
+.sidebar-toggle {
     height: @toggleBtnHeight;
     padding: (@headerHeight - @toggleBtnHeight) 0;
 
@@ -32,8 +54,60 @@
         background: @yellow;
         border-radius: 0.6em;
     }
+
+    &.x {
+        flex-direction: row;
+        justify-content: space-between;
+        z-index: 50;
+    }
 }
 
+@sidebarWidth: 11.8em;
 #sidebar {
+    color: @red;
+    background: @yellow;
+    text-shadow: 1px 1px 4px rgba(50,50,50,0.07);
+
+    transition: left 0.5s;
     position: absolute;
+    height: 100vh;
+    top: 0;
+    width: @sidebarWidth;
+    left: -@sidebarWidth;
+    z-index: 40;
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+        z-index: 45;
+    }
+    &.visible {
+        left: 0;
+    }
+
+    .sidebar-header {
+        padding: 0.7em 0.8em 0 0.8em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #x {
+            padding-bottom: 0.04em;
+            margin-bottom: 0.1em;
+            @flexCenter();
+            background: @orange;
+            min-width: 1.2em;
+            max-height: 1.2em;
+            border-radius: 0.2em;
+            border: 1px solid rgb(20,20,20);
+        }
+    }
+    .sidebar-contents {
+        color: @red;
+        padding: 0.8em;
+        list-style: none;
+        * {
+            margin-top: 0.5em;
+        }
+    }
 }
