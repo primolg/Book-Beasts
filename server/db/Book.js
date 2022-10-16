@@ -40,18 +40,19 @@ Book.prototype.getOrderedPages = async function() {
     const firstPage = allPages.find(page => page.isFirstPage);
     const orderedPages = [firstPage];
 
-    for (let i = 0; i < allPages.length; i++) {
-        const nextPage = allPages.find(page => page.id === orderedPages[i].nextPage);
+    // can implement page numbers here
+
+    for (let i = 1; i < allPages.length; i++) {
+        const nextPage = allPages.find(page => page.id === orderedPages[i-1].nextPage);
         orderedPages.push(nextPage);
     }
     return orderedPages;
 }
 
 Book.prototype.createNewPage = async function() {
-    // ***temporary*** work around for hard-coded seed ids
+    // *temporary* work around for hard-coded seed ids
     const newPageId = (await Page.max('id')) + 1;
 
-    // create new page, add to end
     const newPage = await this.createPage({
         id: newPageId,
         studentId: this.studentId,
@@ -66,13 +67,34 @@ Book.prototype.createNewPage = async function() {
     return newPage;
 }
 
+// might be better to use 'beforeDestroy' hook on page model
+Book.prototype.deletePage = async function(page) {
+    if (page.nextPage) {
+        await Page.update(
+            { previousPage: page.previousPage },
+            { where: { id: page.nextPage }}
+        );
+    }
+    if (page.previousPage) {
+        await Page.update(
+            { nextPage: page.nextPage },
+            { where: { id: page.previousPage }}
+        );
+    }
+    await this.set({
+        totalPages: this.totalPages - 1,
+    });
+    await this.save();
+
+    await page.destroy();
+}
+
 // constructs a basic linked list of 2 pages for a new book
 Book.afterCreate(async (book) => {
-    // ***temporary*** work around for hard-coded seed ids
+    // *temporary* work around for hard-coded seed ids
     const firstId = (await Page.max('id')) + 1;
     const secondId = firstId + 1;
 
-    // can change number of starting pages if needed
     const page1 = await book.createPage({
         id: firstId,
         nextPage: secondId,
@@ -87,27 +109,13 @@ Book.afterCreate(async (book) => {
         totalPages: 2,
     });
     await book.save();
-
-    // console.log(`page1 id: ${page1.id} | page1 prev/next: ${page1.previousPage}, ${page1.nextPage}`);
-    // console.log(`page2 id: ${page2.id} | page2 prev/next: ${page2.previousPage}, ${page2.nextPage}`);
 });
 
-// const BookSpecialMethods = [
-//     '_customGetters',    '_customSetters',
-//     'validators',        '_hasCustomGetters',
-//     '_hasCustomSetters', 'rawAttributes',
-//     '_isAttribute',      'getStudent',
-//     'setStudent',        'createStudent',
-//     'getPages',          'countPages',
-//     'hasPage',           'hasPages',
-//     'setPages',          'addPage',
-//     'addPages',          'removePage',
-//     'removePages',       'createPage',
-//     'getTags',           'countTags',
-//     'hasTag',            'hasTags',
-//     'setTags',           'addTag',
-//     'addTags',           'removeTag',
-//     'removeTags',        'createTag'
-// ]
+Book.beforeDestroy(async (book) => {
+    const pages = await book.getPages();
+    for (let i = 0; i < pages.length; i++) {
+        await pages[i].destroy();
+    };
+});
 
 module.exports = Book;
