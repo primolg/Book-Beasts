@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Student } = require('../db');
+const { User, Student, Book } = require('../db');
 
 // === credential verification === //
 

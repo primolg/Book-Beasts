@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../../store/reducers/bookSlice";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AllBooks = () => {
     const dispatch = useDispatch();
-
+    const location = useLocation();
+console.log(location)
     const [ sort, setSort ] = useState('none');
     const [ search, setSearch ] = useState('');
 
     
     useEffect(() => {
         dispatch(fetchBooks())
+        if(location.state){
+            setSearch(location.state)
+        }
     }, [sort]);
+
+    //note: filter works, sort works, but the two do not work together.  debug later
 
     const sortBooks = (bookArray, sortOption) => {
         switch(sortOption) {
           case 'mystery':
-            return bookArray.filter(book => book.genre.includes('mystery'));
+            return bookArray.filter(book => book.genre.includes('mystery') && book.title.toLowerCase().includes(search.toLowerCase()));
           case 'adventure':
-            return bookArray.filter(book => book.genre.includes('adventure'));
+            return bookArray.filter(book => book.genre.includes('adventure') && book.title.toLowerCase().includes(search.toLowerCase()));
           case 'fantasy':
-            return bookArray.filter(book => book.genre.includes('fantasy'));
+            return bookArray.filter(book => book.genre.includes('fantasy') && book.title.toLowerCase().includes(search.toLowerCase()));
           case 'action':
-            return bookArray.filter(book => book.genre.includes('action'));
+            return bookArray.filter(book => book.genre.includes('action') && book.title.toLowerCase().includes(search.toLowerCase()));
           case 'biography':
-            return bookArray.filter(book => book.genre.includes('biography'));
+            return bookArray.filter(book => book.genre.includes('biography') && book.title.toLowerCase().includes(search.toLowerCase()));
           case 'none':
             return bookArray.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
         }
@@ -38,8 +44,11 @@ const AllBooks = () => {
       }
   
       const handleChange = event => {
+        if(event.key === "Enter"){
         setSearch(event.target.value)
+        }
       }
+
 
     return (
         <>
@@ -53,7 +62,7 @@ const AllBooks = () => {
                     <option value='action'>View Action Books</option>
                     <option value='none'>View All</option>
                   </select>
-                  <input placeholder='search for book by name' value={search} onChange={handleChange}/>
+                     <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
                   </div>
             <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>
