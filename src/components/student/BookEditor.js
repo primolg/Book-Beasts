@@ -31,7 +31,7 @@ const BookEditor = () => {
                     <div className="blank-page"></div>
                 </div>
                 <div className="page">
-                    <templates.Template2
+                    <templates.Template3
                     //should give prop of current page ID for 
                     />
                 </div>
