@@ -10,7 +10,7 @@ import SingleBook from "./components/books/SingleBook";
 import Team from "./components/footer/Team";
 import BookView from "./components/books/BookView";
 
-function Routes() {
+const Router = () => {
     return(
         <Routes>
             <Route index path="/" element={<Home />} />
@@ -30,4 +30,4 @@ function Routes() {
     )
 }
 
-export default Routes;
+export default Router;
