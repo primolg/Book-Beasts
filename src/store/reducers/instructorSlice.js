@@ -9,6 +9,9 @@ const instructorSlice = createSlice({
     instructorData: {},
     studentList: [],
     currentStudent: {},
+    bookList: [],
+    currentBook: {},
+    allBooks: [],
   },
   reducers: {
     getInstructorList: (state, action) => {
@@ -30,6 +33,13 @@ const instructorSlice = createSlice({
     },
     getStudent: (state, action) => {
       state.currentStudent = action.payload;
+      return state;
+    },
+    getBooks: (state, action) => {
+      state.bookList = action.payload;
+    },
+    getBook: (state, action) => {
+      state.currentBook = action.payload;
       return state;
     },
     _addStudent: (state, action) => {
@@ -56,14 +66,20 @@ export const {
   getInstructor,
   getStudents,
   getStudent,
+  getBooks,
+  getBook,
   _deleteInstructor,
   _addStudent,
   _deleteStudent,
 } = instructorSlice.actions;
 
 export const fetchInstructors = () => async(dispatch) => {
-  const { data: instructorList } = await axios.get("/api/instructors");
+  try{
+    const { data: instructorList } = await axios.get("/api/instructors");
   dispatch(getInstructorList(instructorList));
+  }catch(error){
+    console.log('FETCH INSTRUCTOR ERROR', error);
+  }  
 };
 
 export const fetchInstructorData = (instructorId) => 
@@ -81,7 +97,6 @@ async(dispatch) => {
 
 export const fetchStudents = (userId) => async(dispatch) => {
   try{
-    console.log('FETCH STUDENTS INS ID', userId);
     const { data: studentList } = await axios.get(`/api/instructors/${userId}/students`, {
     });
   dispatch(getStudents(studentList));
@@ -92,13 +107,31 @@ export const fetchStudents = (userId) => async(dispatch) => {
 
 export const fetchStudentData = (userId, studentId) => async(dispatch) => {
   try{
-    console.log('FETCH STUDENT', userId, studentId)
-    const { data: studentData } = await axios.get(`/api/instructors/${userId}/students/${studentId}`, studentId);
+    const { data: studentData } = await axios.get(`/api/instructors/${userId}/students/${studentId}`, userId, studentId);
   dispatch(getStudent(studentData));
   }catch(error){
     console.log('FETCH STUDENT DATA ERROR', error)
   } 
 };
+
+export const fetchBooks = (userId, studentId) => async(dispatch) => {
+  try{
+    const { data: bookList } = await axios.get(`/instructors/${userId}/students/${studentId}/books`, userId, studentId);
+  dispatch(getBooks(bookList));
+  }catch(error){
+    console.log('FETCH STUDENTS THUNK ERROR', error)
+  } 
+};
+
+export const fetchBookData = (userId, studentId, bookId) => async(dispatch) => {
+  try{
+    const { data: bookData } = await axios.get(`/api/instructors/${userId}/students/${studentId}/books/${bookId}`, userId, studentId, bookId);
+  dispatch(getBook(bookData));
+  }catch(error){
+    console.log('FETCH BOOK DATA ERROR', error)
+  } 
+};
+
 
 export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
   try{

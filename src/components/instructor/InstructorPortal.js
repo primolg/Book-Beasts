@@ -10,12 +10,9 @@ const InstructorPortal = () => {
     const instructorData = useSelector((state) => state.instructorList.instructorData);
     const dispatch = useDispatch();
 
-
     useEffect(() => {
         dispatch(fetchInstructorData(params.id));
     }, []);
-
-    
 
     return(
         <div className='instructorPortal'>

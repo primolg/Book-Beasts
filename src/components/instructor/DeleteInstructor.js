@@ -1,11 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteInstructor } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
 const DeleteInstructor = ( { instructor }) => {
-    //const params = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -14,7 +13,6 @@ const DeleteInstructor = ( { instructor }) => {
         dispatch(deleteInstructor(instructor));
         navigate(`/`);
     };
-
 
     return (
         <>

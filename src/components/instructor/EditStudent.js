@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams, useNavigate } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
@@ -10,7 +10,6 @@ const EditStudent = ( {student} ) => {
     const dispatch = useDispatch();
     const params = useParams();
     const navigate  = useNavigate();
-
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
@@ -85,7 +84,6 @@ const EditStudent = ( {student} ) => {
               </div>
             )}
         </Popup>
-      
         </>
     )
 };

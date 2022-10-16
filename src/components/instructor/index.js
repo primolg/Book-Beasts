@@ -4,6 +4,8 @@ import InstructorStudents from './InstructorStudents';
 import EditInstructor from "./EditInstructor";
 import BookTable from "./BookTable";
 import BookRow from "./BookRow";
+import ViewSingleBook from "./ViewSingleBook";
+
 
 export {
     InstructorNav,
@@ -12,4 +14,5 @@ export {
     EditInstructor,
     BookTable,
     BookRow,
-};
+    ViewSingleBook,
+}

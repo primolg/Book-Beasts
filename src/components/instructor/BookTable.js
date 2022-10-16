@@ -2,33 +2,26 @@ import React, { useEffect } from 'react';
 import BookRow from './BookRow';
 import { fetchStudentData } from '../../store/reducers/instructorSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
-const BookTable = (props) => {
-    // const dispatch = useDispatch();
-    // const params = useParams();
-    // const student = useSelector((state) => state.instructorList.currentStudent);
+const BookTable = () => {
+    const dispatch = useDispatch();
+    const params = useParams();
+    const student = useSelector((state) => state.instructorList.currentStudent)
+    const bookList = student.books
     
-    // console.log('BOOK TABLE LIST', student.books);
-    // console.log('BOOK TABLE STUDENT', student)
-
-    // useEffect(() => {
-    //     dispatch(fetchStudentData(params.id, student.id));
-    // }, []);
+    useEffect(() => {
+        dispatch(fetchStudentData(params.id, params.studentId))
+    }, []);
    
-
-    console.log('BOOK TABLE STUDENT', props);
     return(
 
       <div className='booksTable'>
-            <h1>PLACEHOLDER</h1>
-     
-                
-{/* 
-            {student.books == [] ? (
+
+            {bookList.length !== 0 ? (
                 <div className='studentBooklist'>
-                    <h1>{`${student.firstName}'s`} Book List</h1>
+                    <h2>{`${student.firstName}'s`} Book List</h2>
                     <table className='table' id="booksTable">
                         <thead>
                             <tr>
@@ -43,15 +36,20 @@ const BookTable = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                          {student.books.map((book) => (
-                            <BookRow key={book.id} book={book} />
+                          {bookList.map((book) => (
+                            <BookRow key={book.id} book={book} student={student}/>
                           ))}
                         </tbody>
                     </table>
                     </div>
             ): (
-                <h3>This student hasn't created any books yet! PLACEHOLDER FOR ADD BUTTON</h3>
-            )} */}
+                <div>
+                <h3>This student hasn't created any books yet!</h3>
+                <Link to={`/instructorPortal/${params.id}/students`}>
+                        <button>Back to Student Roster</button>
+                    </Link>
+                </div>
+            )}
         </div>
        
         

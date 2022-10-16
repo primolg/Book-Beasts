@@ -10,7 +10,6 @@ const EditInstructor = () => {
     const navigate  = useNavigate();
     const instructor = useSelector((state) => state.instructorList.instructorData);
 
-
     useEffect(() => {
         dispatch(fetchInstructorData(params.id))
     }, []);

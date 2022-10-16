@@ -2,11 +2,6 @@ const db = require("./db");
 const { Sequelize } = db;
 
 const Book = db.define("book", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
     title: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -31,6 +26,14 @@ const Book = db.define("book", {
     },
     genre: {
         type: Sequelize.STRING,
+    },
+    createdAt: {
+        type: Sequelize.DATEONLY,
+        field: "created_at",
+    },
+    updatedAt: {
+        type: Sequelize.DATEONLY,
+        field: "updated_at",
     },
 });
 

@@ -1,18 +1,8 @@
 const router = require('express').Router();
-const { Student, Book, User } = require('../db');
+const { Sequelize } = require('sequelize');
+const { Student, Book, User, Page } = require('../db');
 const { requireUserToken, isAdmin } = require('../gatekeeper');
 
-
-//GET Instructors (add gatekeeper function to get arguments)
-// router.get('/', requireUserToken, isAdmin, async(req, res, next) => {
-//     try{
-//         const instructorList = await User.findAll();
-//         console.log('INSTRUCTOR LIST API', instructorList);
-//         res.send(instructorList);
-//     }catch(error){
-//         next(error);
-//     }
-// });
 
 //add requireToken argument VV
 
@@ -29,23 +19,8 @@ router.get('/:id', requireUserToken, async(req, res, next) => {
     }
 });
 
-//POST create new Instructor
-//{ token: await addInstructor.generateToken(), id: addInstructor.id}
 
-router.post('/', async(req, res, next) => {
-    try{
-    req.body.isAdmin = false;
-    const addInstructor = await User.create(req.body);
-    res.send(addInstructor);
-    }catch(error){
-        next(error);
-    }
-});
-
-//POST login as Instructor in auth file??
-
-
-//PUT edit Instructor (requireToken)
+//PUT edit Instructor 
 
 router.put('/:id',  async(req, res, next) => {
     try{
@@ -73,7 +48,6 @@ router.delete('/:id',  async(req, res, next) => {
 
 router.get('/:id/students', async(req, res, next) => {
     try{
-        console.log('API GET STUDENTS', req.body)
     const allStudents = await Student.findAll({
         where: {
             userId: req.params.id
@@ -90,13 +64,13 @@ router.get('/:id/students', async(req, res, next) => {
 
 router.get('/:id/students/:studentId', async(req, res, next) => {
     try{
-        const singleStudent = await Student.findByPk(req.params.studentId, {
+        const singleStudent = await Student.findByPk(req.params.studentId,{
             where: {
-                userId: req.params.id
+                userId: req.params.id,
             },
             include: {
                 model: Book,
-            }
+            },
         });
         res.send(singleStudent);
     }catch(error){
@@ -105,12 +79,10 @@ router.get('/:id/students/:studentId', async(req, res, next) => {
 })
 
 //Instructor Students Routes
-// add { token: await addStudent.generateToken(), id: addStudent.id, userId: req.params.userId} 
 
 router.post('/:id/students', async(req, res, next) => {
     try{
         const addStudent = await Student.create(req.body);
-        
         res.send(addStudent);
     }catch(error) {
         next(error);
@@ -135,17 +107,31 @@ router.delete('/:id/students/:studentId',  async(req, res, next) => {
     }
 });
 
+//get books routes
 
-
-router.get('/:id/students/:studentId/books/:bookId', async(req, res, next) => {
+router.get('/:id/students/:studentId/books', async(req, res, next) => {
     try{
-    const studentOneBook = await Book.findOne({
+    const studentBooks = await Book.findAll({
         where: {
-            bookId: req.params.bookId,
             studentId: req.params.studentId
         },
         include: {
             model: Student
+        },
+    });
+    res.send(studentBooks);
+    }catch(error){
+        next(error);
+    }
+});
+
+
+router.get('/:id/students/:studentId/books/:bookId', async(req, res, next) => {
+    try{
+    const studentOneBook = await Book.findByPk(req.params.bookId, {
+        include: {
+            model: Student,
+            model: Page,
         },
     });
     res.send(studentOneBook);

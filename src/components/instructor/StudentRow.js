@@ -1,24 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams, Link, useLocation, Navigate } from 'react-router-dom';
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 import  DeleteStudent  from "./DeleteStudent";
 import  EditStudent  from "./EditStudent";
-import BookTable from './BookTable';
-
-
-
-
 
 const StudentRow = ( {student}) => {
     const params = useParams();
-    const navigate = useNavigate()
-    const [ state, setState ] = useState({data: ''})
-    const handleState = (event) => {
-        event.preventDefault();
-        setState({ data: student });
-        navigate(`/instructorPortal/${params.id}/students/${student.id}/books`)
-    };
     
-   
     return(
         <>
             {student && (
@@ -27,7 +14,9 @@ const StudentRow = ( {student}) => {
                     <td>{student.lastName}</td>
                     <td>{student.username}</td>
                     <td>{student.color}</td>
-                    <td> <button onClick={handleState}>View Books</button>
+                    <td> <Link to={`/instructorPortal/${params.id}/students/${student.id}/books`}>
+                        <button>View Books</button>
+                    </Link>
                         </td>
                 
                     <td>{student.email}</td>

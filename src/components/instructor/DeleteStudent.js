@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteStudent } from "../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
@@ -39,13 +39,3 @@ const DeleteStudent = ( { student }) => {
 };
 
 export default DeleteStudent;
-
-{/* <Popup trigger={<button>Delete</button>} position="right center">
-            <div>
-                    <p>Are you sure you want to delete this student?
-                        Click CANCEL to keep this student.
-                    </p>
-                    <button onClick={handleDelete}>YES</button>
-                    <Link to={`/instructorPortal/${params.id}/students`}>Cancel</Link>
-                </div>
-        </Popup> */}
