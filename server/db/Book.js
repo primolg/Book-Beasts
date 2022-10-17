@@ -5,7 +5,7 @@ const Page = require("./Page");
 const Book = db.define("book", {
     title: {
         type: Sequelize.STRING,
-        allowNull: false,
+        defaultValue: "Untitled",
     },
     coverArt: {
         type: Sequelize.STRING,
@@ -24,17 +24,10 @@ const Book = db.define("book", {
     },
     totalPages: {
         type: Sequelize.INTEGER,
+        defaultValue: 2,
     },
     genre: {
         type: Sequelize.STRING,
-    },
-    createdAt: {
-        type: Sequelize.DATEONLY,
-        field: "created_at",
-    },
-    updatedAt: {
-        type: Sequelize.DATEONLY,
-        field: "updated_at",
     },
 });
 
@@ -71,7 +64,8 @@ Book.prototype.createNewPage = async function() {
 }
 
 // might be better to use 'beforeDestroy' hook on page model
-Book.prototype.deletePage = async function(page) {
+Book.prototype.deletePage = async function(pageId) {
+    const page = await Page.findByPk(pageId);
     if (page.nextPage) {
         await Page.update(
             { previousPage: page.previousPage },
@@ -90,6 +84,7 @@ Book.prototype.deletePage = async function(page) {
     await this.save();
 
     await page.destroy();
+    return (this);
 }
 
 // constructs a basic linked list of 2 pages for a new book
@@ -108,10 +103,6 @@ Book.afterCreate(async (book) => {
         previousPage: firstId,
         studentId: book.studentId,
     });
-    await book.set({
-        totalPages: 2,
-    });
-    await book.save();
 });
 
 Book.beforeDestroy(async (book) => {
