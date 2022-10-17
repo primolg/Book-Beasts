@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 const AllBooks = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-console.log(location)
+
     const [ sort, setSort ] = useState('none');
     const [ search, setSearch ] = useState('');
 
@@ -17,8 +17,6 @@ console.log(location)
             setSearch(location.state)
         }
     }, [sort]);
-
-    //note: filter works, sort works, but the two do not work together.  debug later
 
     const sortBooks = (bookArray, sortOption) => {
         switch(sortOption) {
@@ -41,19 +39,27 @@ console.log(location)
 
       const handleOptions = event => {
         setSort(event.target.value);
+        sortBooks(bookArray, '');
       }
   
-      const handleChange = event => {
-        if(event.key === "Enter"){
-        setSearch(event.target.value)
-        }
+      // const handleChange = event => {
+      //   if(event.key === "Enter"){
+      //   setSearch(event.target.value)
+      //   }
+      // }
+
+      const handleClick = () => {
+        setSearch('')
+        sortBooks(books, 'none')
+
       }
 
 
+      console.log(books)
     return (
         <>
         <div id='filter-wrap'>
-            <label htmlFor='filter-options' className='filter-label'>View Books: </label>
+            <label htmlFor='filter-options' className='filter-label'>Select genre: </label>
             <select name='filter-options' className='filter-options' onChange={handleOptions} defaultValue='none'>
                     <option value='mystery'>View Mystery Books</option>
                     <option value='adventure'>View Adventure Books</option>
@@ -62,29 +68,31 @@ console.log(location)
                     <option value='action'>View Action Books</option>
                     <option value='none'>View All</option>
                   </select>
-                     <input placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
+                  <button className="show-all-button" onClick={handleClick}>Show All</button>
                   </div>
             <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>
           <div className='featured-book-slider'>
-        <div className="outer-div">Books:
-              <div className="shelf-div">
-                  {books.map(book => 
-                  <div>
-                      <Link to={`/books/${book.id}`}>
-                      <div className="book">
-                        <img className="slider-image" src={book.coverArt}/>
-                        <div>{book.title}</div>
-                        <p>By: {book.student.firstName} {book.student.lastName}</p>
+            <div className="outer-div"> 
+                  <div className="shelf-div">
+                      {books.map(book => 
+                      <div className="book-container" key={book.id}>
+                          <Link to={`/books/${book.id}`}>
+                          <div className="book">
+                            <img className="slider-image" src={book.coverArt}/>
+                            <div className="title-box">
+                              <div className="book-title">{book.title}</div>
+                            </div>
+                          </div>
+                          </Link>
+                            <p>By: {book.student.firstName} {book.student.lastName}</p>
+                          <div>{book.totalPages} Pages</div>
+                          <div className="genre-tag">{book.genre}</div>
                       </div>
-                      </Link>
-                      <div>{book.totalPages} Pages</div>
-                      <div className="genre-tag">{book.genre}</div>
+                      )}
                   </div>
-                  )}
               </div>
-          </div>
-        </div>
+            </div>
           </div>
           </div>
         

@@ -29,6 +29,18 @@ const Book = db.define("book", {
     genre: {
         type: Sequelize.STRING,
     },
+    createdAt: {
+        type: Sequelize.DATEONLY,
+        field: "created_at",
+    },
+    updatedAt: {
+        type: Sequelize.DATEONLY,
+        field: "updated_at",
+    },
+    studentId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
 });
 
 Book.prototype.getOrderedPages = async function() {
