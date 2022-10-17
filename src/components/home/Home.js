@@ -35,17 +35,6 @@ console.log(books)
   
   return (
     <div className='content-container'>
-      <div className='home-container'>
-        <div className="nav-container">
-          <img src='https://cdn-icons-png.flaticon.com/512/2989/2989870.png' id="nav-holder"/>
-        </div>
-          {!window.mobileCheck () ? (
-          <h1 className="title">Book Beasts</h1>
-            ): <div></div>}
-          <div className='home-search-bar'>
-            <input className="home-search-bar" placeholder='search for book by name' type="text" onKeyDown={handleChange}/>
-      </div>
-      </div>
       <div className='featured-book-slider'>
         <div className="outer-div">Featured Books:
               <div className="shelf-div">
