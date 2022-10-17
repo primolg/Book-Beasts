@@ -1,23 +1,48 @@
+.content-container {
+  background-color: #FDF9F3;
+}
+
+.featured-book-slider {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  color: #E3A859;
+}
+
+.nav-title-container {
+  display: flex;
+}
+
 .outer-div{
   display: flex;
   align-items: center;
   justify-content: center;
-
   width:100vw;
   max-height: 50vh;
   overflow: scroll;
   flex-direction: column;
+  background-color: #FDF9F3;
+  color: #E3A859;
+}
+
+.filler {
+  opacity: 0;
+  height: 500px;
 }
 
 .shelf-div{
   display: flex;
   align-items: center;
   min-height: 190px;
-  width: 75vw;
+  width: 90%;
   border: 2px solid black;
   overflow: scroll;
-  background-color: rgb(252, 243, 232);
-  max-width: 60vw;
+  background-color: #FDF9F3;
+  border-color: #9F3628;
+  border-width: 5px;
+  border-radius: 5px;
 }
 
 .slider-image {
@@ -30,15 +55,44 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  justify-content: space-between;
   min-height: 220px;
-  max-height:221px;
+  max-height:300px;
   min-width: 150px;
   max-width: 151px;
   margin: 20px 10px;
-  border: 2px solid black;
   background-color: white;
 }
 
-.test {
-    height: 500px;
+.book-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+#nav-holder {
+  height: 25px;
+  width: 25px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-container {
+  height: 100%;
+  top: 0;
+}
+
+.genre-tag {
+  color: gray;
+}
+
+.home-search-bar {
+  border-radius: 10px;
+  border-color: #4F41BC;
 }
