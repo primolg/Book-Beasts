@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
 
 // "type" can be user/student
-export default function LoginForm({ type, setAccountType }) {
+const LoginForm = ({ type, setAccountType }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const initialForm = { key: "", password: "" };
-    const [form, setForm] = React.useState(initialForm);
+    const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
         setForm({...form, type});
@@ -25,7 +25,6 @@ export default function LoginForm({ type, setAccountType }) {
                 break;
         }
     }
-    
     
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -56,3 +55,5 @@ export default function LoginForm({ type, setAccountType }) {
         </div>
     )
 }
+
+export default LoginForm;

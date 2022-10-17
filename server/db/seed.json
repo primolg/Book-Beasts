@@ -2195,6 +2195,7 @@
     {
       "title": "So Much!",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 15,
       "genre": "fantasy",
       "studentId": 139
@@ -2202,6 +2203,7 @@
     {
       "title": "The Iron Man",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 11,
       "genre": "autobiography",
       "studentId": 80
@@ -2209,6 +2211,7 @@
     {
       "title": "Guess How Much I Love You",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 9,
       "genre": "mystery",
@@ -2217,6 +2220,7 @@
     {
       "title": "The Jungle Book",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 4,
       "genre": "action",
       "studentId": 69
@@ -2231,6 +2235,7 @@
     {
       "title": "The Twits",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 9,
       "genre": "mystery",
       "studentId": 131
@@ -2238,6 +2243,7 @@
     {
       "title": "Just William",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 16,
       "genre": "fantasy",
       "studentId": 68
@@ -2252,6 +2258,7 @@
     {
       "title": "Mr Magnolia",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 5,
       "genre": "autobiography",
       "studentId": 12
@@ -2274,6 +2281,7 @@
     {
       "title": "Just in Case",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 15,
       "genre": "poetry",
       "studentId": 134
@@ -2281,6 +2289,7 @@
     {
       "title": "Camille and the Sunflowers",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 7,
       "genre": "poetry",
       "studentId": 5
@@ -2288,6 +2297,7 @@
     {
       "title": "The Princess and the Wizard",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 19,
       "genre": "mystery",
       "studentId": 79
@@ -2302,6 +2312,7 @@
     {
       "title": "The Hundred-Mile-an-Hour Dog",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 13,
       "genre": "biography",
@@ -2310,6 +2321,7 @@
     {
       "title": "Two Frogs",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 17,
       "genre": "biography",
       "studentId": 166
@@ -2324,6 +2336,7 @@
     {
       "title": "The Very Hungry Caterpillar",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 8,
       "genre": "poetry",
       "studentId": 5
@@ -2331,6 +2344,7 @@
     {
       "title": "The Lion, the Witch and the Wardrobe",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 13,
       "genre": "mystery",
@@ -2339,6 +2353,7 @@
     {
       "title": "Winnie the Pooh",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 11,
       "genre": "action",
@@ -2347,6 +2362,7 @@
     {
       "title": "Where the Wild Things Are",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 9,
       "genre": "fantasy",
@@ -2362,6 +2378,7 @@
     {
       "title": "Charlotte's Web",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 19,
       "genre": "sci-fi",
       "studentId": 32
@@ -2369,6 +2386,7 @@
     {
       "title": "Little House in the Big Woods",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 7,
       "genre": "fantasy",
       "studentId": 44
@@ -2376,6 +2394,7 @@
     {
       "title": "Green Eggs and Ham",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "totalPages": 17,
       "genre": "sci-fi",
       "studentId": 169
@@ -2383,6 +2402,7 @@
     {
       "title": "The Giving Tree",
       "isPublished": true,
+      "publishedDate": "publishedDate",
       "isFeatured": true,
       "totalPages": 16,
       "genre": "autobiography",

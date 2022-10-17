@@ -40,7 +40,7 @@ const testSync = async () => {
     }
 };
 
-describe("Authorization and security", () => {
+xdescribe("Authorization and security", () => {
 
     describe("Basic functionality", () => {
         beforeEach(async () => {
@@ -58,13 +58,13 @@ describe("Authorization and security", () => {
         });
     });
 
-    describe("Valid authorization", () => {
+    describe("Valid token usage", () => {
         beforeEach(async () => {
             await testSync();
             createMockLocalStorage();
         })
 
-        it("", async () => {
+        it(`Verifies token`, async () => {
 
         });
     })

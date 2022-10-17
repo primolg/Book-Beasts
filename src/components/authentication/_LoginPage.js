@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LoginForm, SelectAccountType, LogoutButton } from "./";
 
-export default function LoginPage() {
+const LoginPage = () => {
     const token = localStorage.getItem("token");
     const [accountType, setAccountType] = useState(null);
 
@@ -22,3 +22,5 @@ export default function LoginPage() {
         </div>
     )
 }
+
+export default LoginPage;

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from "react-router-dom";
-import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
-import Popup from 'reactjs-popup';
+import { updateInstructorData, fetchInstructorData } from "../../store/reducers/instructorSlice";
+import DeleteInstructor from "./DeleteInstructor";
 
-//This shows hashed password when opening Edit popup - need to fix that.
-
-const EditStudent = ( {student} ) => {
+const EditInstructor = () => {
     const dispatch = useDispatch();
     const params = useParams();
     const navigate  = useNavigate();
+    const instructor = useSelector((state) => state.instructorList.instructorData);
 
     useEffect(() => {
-        dispatch(fetchStudentData(params.id, student.id))
+        dispatch(fetchInstructorData(params.id))
     }, []);
 
     const [ form, setForm ] = useState({
@@ -32,40 +31,43 @@ const EditStudent = ( {student} ) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(updateStudentData({
+        dispatch(updateInstructorData({
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
             username: form.username,
             password: form.password,
-        }, params.id, student.id, student));
+        }, params.id, instructor));
         navigate(`/instructorPortal/${params.id}`);
     };
 
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
-//the state change from showing immediately in the student table. Working on fixing this issue.
+//the state change from showing immediately in the instructor table. Working on fixing this issue.
 
     useEffect(() => {
-        dispatch(fetchStudentData(params.id, student.id))
+        dispatch(fetchInstructorData(params.id))
     }, []);
 
     useEffect(() => {
         setForm({
-            firstName: student.firstName,
-            lastName: student.lastName,
-            email: student.email,
-            username: student.username,
-            password: student.password,
+            firstName: instructor.firstName,
+            lastName: instructor.lastName,
+            email: instructor.email,
+            username: instructor.username,
+            password: instructor.password,
         })
-    }, [student])
+    }, [instructor])
+
+    const handleClose = event => {
+        navigate(`/instructorPortal/${params.id}`);
+    }
 
     return (
         <>
-        <Popup trigger={<button>Edit</button>} position="top left">
-            {close => (
                 <div>
+                <DeleteInstructor key={instructor.id} instructor={instructor}/>
                <form id='form' onSubmit={handleSubmit}>
-               <h3>Edit Student</h3>
+               <h3>Edit instructor</h3>
                <label htmlFor="firstName">First Name:</label>
                <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
                <label htmlFor="lastName">Last Name:</label>
@@ -77,15 +79,16 @@ const EditStudent = ( {student} ) => {
                <label htmlFor="password">Password:</label>
                <input name="password" value={form.password} onChange={handleChange('password')}/>
                <button type="submit">Submit Changes</button>
-              </form> 
-              <button className="close" onClick={close}>
+               <button className="close" onClick={handleClose}>
                 CANCEL
               </button>
+              </form> 
               </div>
-            )}
-        </Popup>
+            
+       
+      
         </>
     )
 };
 
-export default EditStudent;
+export default EditInstructor;
