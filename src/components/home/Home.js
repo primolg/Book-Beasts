@@ -9,7 +9,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
   let [ search, setSearch ] = useState('');
-
+console.log(books)
   
   useEffect(() => {
     dispatch(fetchBooks())
@@ -23,7 +23,7 @@ const Home = () => {
     }
   }
 
-  const featuredBooks = books.filter(book => book.isFeatured);
+  const featuredBooks = books?.filter(book => book.isFeatured);
 
   window.mobileCheck = function() {
     let check = false;
@@ -49,7 +49,7 @@ const Home = () => {
       <div className='featured-book-slider'>
         <div className="outer-div">Featured Books:
               <div className="shelf-div">
-                  {featuredBooks.map(book => 
+                  {featuredBooks?.map(book => 
                   <div className="book-container" key={book.id}>
                       <Link to={`/books/${book.id}`}>
                       <div className="book">
