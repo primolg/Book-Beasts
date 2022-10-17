@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import templates from './bookTemplates';
+// import { createNewBook } from "../../store/reducers/editorSlice";
 
 const BookEditor = () => {
     const [pages, setPages] = useState([1]);

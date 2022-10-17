@@ -27,7 +27,7 @@ const editorSlice = createSlice({
 });
 
 export default editorSlice.reducer;
-export const { setBook, _updateBook, _updatePages } = authSlice.actions;
+export const { setBook, _updateBook, _updatePages } = editorSlice.actions;
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
@@ -43,8 +43,10 @@ export const createNewBook = (book) => async (dispatch) => {
     const { data: newBook } = await axios.post("/api/editor", book);
     if (!newBook || newBook === {}) {
         alert("Unable to create book");
+        return false;
     } else {
         dispatch(setBook(newBook));
+        return true;
     }
 }
 

@@ -1,8 +1,23 @@
-import React, {useState, useEffect} from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { createNewBook } from "../../store/reducers/editorSlice";
 
+// theme == genre
 const Bookshelf = ({books, themes}) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const student = useSelector(state => state.user);
+
+    const handleClick = async (theme) => {
+        const res = await dispatch(createNewBook({
+            genre: theme,
+            studentId: student?.id,
+        }));
+        if (res) navigate("/editor");
+        else alert("Could not create book");
+    };
+
     return !themes ? (
             <div className="shelf-div-student">
                 {books.map(book => 
@@ -16,7 +31,9 @@ const Bookshelf = ({books, themes}) => {
         <div className="shelf-div-student">
             {themes.map(theme => 
                 <div key={theme} className="book-in-shelf-student">
-                    <Link to={"/books/" + theme}>{theme}</Link>
+                    <p onClick={() => handleClick(theme)}>
+                        {theme}
+                    </p>
                 </div>
             )}
         </div>
