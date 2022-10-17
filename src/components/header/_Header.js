@@ -20,8 +20,8 @@ const Header = () => {
     return(
         <div id="header-container">
             <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
+            <h1 id="header-title">Book Beasts</h1>
             <SearchBar />
-
             <Sidebar visible={sidebarVisibility} set={setSidebarVisibility} />
         </div>
     )

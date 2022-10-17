@@ -19,9 +19,6 @@
         padding-left: 0.4em;
         border: 3px solid @blue;
         border-radius: 1em;
-        // &:focus {
-
-        // }
     }
     button {
         background: @blue;
@@ -34,8 +31,13 @@
         border-radius: 1em;
     }
 
+    #header-title {
+        display: none;
+    }
     @media screen and (min-width: 600px) {
-        // specify what to do when screen larger than 600px
+        #header-title {
+            display: block;
+        }
     }
 }
 
