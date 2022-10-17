@@ -67,17 +67,19 @@ console.log(location)
             <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>
           <div className='featured-book-slider'>
-        <div className="outer-div">Books:
+        <div className="outer-div">Featured Books:
               <div className="shelf-div">
-                  {books.map(book => 
-                  <div>
+                  {featuredBooks.map(book => 
+                  <div className="book-container" key={book.id}>
                       <Link to={`/books/${book.id}`}>
                       <div className="book">
                         <img className="slider-image" src={book.coverArt}/>
-                        <div>{book.title}</div>
-                        <p>By: {book.student.firstName} {book.student.lastName}</p>
+                        <div className="title-box">
+                          <div className="book-title">{book.title}</div>
+                        </div>
                       </div>
                       </Link>
+                        <p>By: {book.student.firstName} {book.student.lastName}</p>
                       <div>{book.totalPages} Pages</div>
                       <div className="genre-tag">{book.genre}</div>
                   </div>
