@@ -17,7 +17,7 @@ const InstructorStudents = () => {
     }, []);
 
     return(
-        <div>
+        <div id="instructor-students">
             <div>
             <InstructorNav/>
             </div>

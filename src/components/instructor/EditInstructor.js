@@ -64,7 +64,7 @@ const EditInstructor = () => {
 
     return (
         <>
-                <div>
+                <div id="edit-instructor">
                 <DeleteInstructor key={instructor.id} instructor={instructor}/>
                <form id='form' onSubmit={handleSubmit}>
                <h3>Edit instructor</h3>

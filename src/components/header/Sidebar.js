@@ -29,7 +29,7 @@ const Sidebar = ({ set, visible }) => {
             sidebarContents = [
                 { name: "Home page", route: "/" },
                 { name: "View all books", route: "/books" },
-                { name: "Instructor portal", route: `/instructorPortal${user?.id}` },
+                { name: "Instructor portal", route: `/instructorPortal/${user?.id}` },
             ];
             break;
         case "student":

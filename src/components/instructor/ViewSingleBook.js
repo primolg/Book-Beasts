@@ -29,7 +29,7 @@ const ViewSingleBook = () => {
     }, []);
 
   return pages ? (
-        <div className="outer-div-book-view">
+        <div className="outer-div-book-view" id="instructor-book-view">
             <div className="page-selector-shelf">
                 {pages.map(page =>
                     <div className="page-selector" id={currentPage === page.pageNumber - 1 ? "selected" : ""} key={page.page.id} onClick={()=>setCurrentPage(page.pageNumber - 1)}>{page.pageNumber}</div>
