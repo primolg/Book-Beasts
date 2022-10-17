@@ -39,14 +39,10 @@ const AllBooks = () => {
 
       const handleOptions = event => {
         setSort(event.target.value);
-        sortBooks(bookArray, '');
+        console.log(sort);
+
+        sortBooks(books, '');
       }
-  
-      // const handleChange = event => {
-      //   if(event.key === "Enter"){
-      //   setSearch(event.target.value)
-      //   }
-      // }
 
       const handleClick = () => {
         setSearch('')
@@ -54,8 +50,6 @@ const AllBooks = () => {
 
       }
 
-
-      console.log(books)
     return (
         <>
         <div id='filter-wrap'>
