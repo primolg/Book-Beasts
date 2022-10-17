@@ -28,7 +28,7 @@ const BookEditor = () => {
                     <div className="blank-page-editor"></div>
                 </div>
                 <div className="page-editor">
-                    <templates.Template3
+                    <templates.Template4
                     //should give prop of current page ID to be able to post 
                     />
                 </div>
