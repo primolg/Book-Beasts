@@ -28,6 +28,12 @@ const instructorSlice = createSlice({
       );
       return state;
     },
+    _deleteStudents: (state, action)=> {
+      state.studentList = state.studentList.filter((student) =>
+      student.id != action.payload.id
+      );
+      return state;
+    },
     getStudents: (state, action) => {
       state.studentList = action.payload;
     },
@@ -40,6 +46,12 @@ const instructorSlice = createSlice({
     },
     getBook: (state, action) => {
       state.currentBook = action.payload;
+      return state;
+    },
+    _deleteBooks: (state, action) => {
+      state.bookList = state.bookList.filter((book) =>
+      book.id != action.payload.id
+      );
       return state;
     },
     _addStudent: (state, action) => {
@@ -69,8 +81,10 @@ export const {
   getBooks,
   getBook,
   _deleteInstructor,
+  _deleteStudents,
   _addStudent,
   _deleteStudent,
+  _deleteBooks,
 } = instructorSlice.actions;
 
 export const fetchInstructors = () => async(dispatch) => {
@@ -142,15 +156,16 @@ export const updateStudentData = (updatedStudentInfo, userId, studentId) => asyn
   } 
 };
 
-export const deleteInstructor = (instructorData, navigate) => async(dispatch) => {
+export const deleteInstructor = (instructorId, navigate) => async(dispatch) => {
   try{
-    const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorData.id}`);
+    const { data: deletedInstructor } = await axios.delete(`/api/instructors/${instructorId}`);
   dispatch(_deleteInstructor(deletedInstructor));
   dispatch(logout());
   }catch(error){
     console.log('DELETE INSTRUCTOR THUNK ERROR', error);
   }
 };
+
 
 export const addStudent = (newStudent, userId) => async(dispatch) => {
   try{
@@ -170,9 +185,9 @@ export const updateInstructorData = (updatedInstructor, instructorId) => async(d
   }
 };
 
-export const deleteStudent = (student) => async(dispatch) => {
+export const deleteStudent = (studentId) => async(dispatch) => {
   try{
-  const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${student.id}`);
+  const { data: deletedStudentData } = await axios.delete(`/api/instructors/:id/students/${studentId}`);
   dispatch(_deleteStudent(deletedStudentData));
   }catch(error){
     console.log('DELETE STUDENT THUNK ERROR', error);
