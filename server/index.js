@@ -4,7 +4,7 @@ const { syncAndSeed, db } = require("./db");
 require('dotenv').config();
 
 const init = async () => {
-    if (process.env.npm_lifecycle_event === "dev:noseed") {
+    if (process.env.npm_lifecycle_event.startsWith("dev:")) {
         await db.sync();
     } else {
         await syncAndSeed();
