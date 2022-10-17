@@ -11,7 +11,7 @@ const DeleteStudent = ( { student }) => {
 
     const handleDelete = (event) => {
         event.preventDefault();
-        dispatch(deleteStudent(student));
+        dispatch(deleteStudent(student.id));
         navigate(`/instructorPortal/${params.id}`);
     };
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 

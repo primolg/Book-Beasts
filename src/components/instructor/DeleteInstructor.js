@@ -10,7 +10,7 @@ const DeleteInstructor = ( { instructor }) => {
 
     const handleDelete = (event) => {
         event.preventDefault();
-        dispatch(deleteInstructor(instructor));
+        dispatch(deleteInstructor(instructor.id));
         navigate(`/`);
     };
 
