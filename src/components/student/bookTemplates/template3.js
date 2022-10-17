@@ -4,11 +4,11 @@ const Template3 = () => {
     const [textOne, setTextOne] = useState('');
     const [textTwo, setTextTwo] = useState('');
     const [image, setImage] = useState(undefined);
-    
+
     return (
         <div className="page-outer-div temp3-outer-div">
             <div className='text-img-div'>
-                <textarea className={(textOne ? "" : " textBorder ") +"small-text-page"} onChange={(event) => setTextOne(event.target.value)} rows = "10" cols="20"></textarea>
+                <textarea className="small-text-page" onChange={(event) => setTextOne(event.target.value)} rows = "10" cols="20"></textarea>
                 <div className="small-image-page">
                     {image ? 
                         image : 
@@ -16,7 +16,7 @@ const Template3 = () => {
                     }
                 </div>
             </div>
-            <textarea className={(textTwo ? "" : " textBorder ") +"large-horizontal-text"} onChange={(event) => setTextTwo(event.target.value)} rows = "10" cols="40"></textarea>
+            <textarea className="large-horizontal-text" onChange={(event) => setTextTwo(event.target.value)} rows = "10" cols="40"></textarea>
         </div>
     );
 };

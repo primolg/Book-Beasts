@@ -14,9 +14,9 @@ const Template4 = () => {
                         <input type="file" name="img" accept=".jpg,.jpeg,.png" onChange={(event) => setImage(event.target.value)}></input>
                     }
                 </div>
-                <textarea className={(textOne ? "" : " textBorder ") +"small-text-page"} onChange={(event) => setTextOne(event.target.value)} rows = "10" cols="20"></textarea>
+                <textarea className="small-text-page" onChange={(event) => setTextOne(event.target.value)} rows = "10" cols="20"></textarea>
             </div>
-            <textarea className={(textTwo ? "" : " textBorder ") + "large-horizontal-text"} onChange={(event) => setTextTwo(event.target.value)} rows = "10" cols="40"></textarea>
+            <textarea className="large-horizontal-text" onChange={(event) => setTextTwo(event.target.value)} rows = "10" cols="40"></textarea>
         </div>
     );
 };

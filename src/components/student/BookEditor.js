@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchBookData } from '../../store/reducers/bookSlice';
 import templates from './bookTemplates';
 
 const BookEditor = () => {
@@ -22,17 +19,17 @@ const BookEditor = () => {
 
     return (
             <div className="outer-div-book-view">
-                <div className="page-selector-shelf">
+                <div className="page-selector-shelf-editor">
                     {/* {this can be done with bookshelf.js} */}
                     {pages.map(page =>
-                        <div className="page-selector" id={currentPage === page ? "selected" : ""} key={page} onClick={()=>setCurrentPage(page)}>{page}</div>
+                        <div className="page-selector-editor" id={currentPage === page ? "selected-editor" : ""} key={page} onClick={()=>setCurrentPage(page)}>{page}</div>
                     )}
-                    <div className="page-selector"onClick={addPage}>+</div>
-                    <div className="blank-page"></div>
+                    <div className="page-selector-editor"onClick={addPage}>+</div>
+                    <div className="blank-page-editor"></div>
                 </div>
-                <div className="page">
+                <div className="page-editor">
                     <templates.Template3
-                    //should give prop of current page ID for 
+                    //should give prop of current page ID to be able to post 
                     />
                 </div>
             </div>

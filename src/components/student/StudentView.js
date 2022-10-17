@@ -13,6 +13,7 @@ const StudentView = () => {
     const params = useSelector((state) => state.user.isAdmin ? 0 : state.user.id);
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
+    const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"]
     
     useEffect(() => {
         dispatch(fetchStudentData(params));
@@ -20,11 +21,15 @@ const StudentView = () => {
     console.log(studentData)
 
     return studentData ? (
-        <div>
+        <div className="outer-div-student">
             <p>Student:</p>
             <h4>{studentData.student.firstName + " " + studentData.student.lastName}</h4>
-            <p>Books:</p>
+            <br></br>
+            <p>My Books:</p>
             <Bookshelf books={studentData.books} />
+            <br></br>
+            <p>Create New Book:</p>
+            <Bookshelf themes={themes} />
         </div>      
     ) : (
         <div>
