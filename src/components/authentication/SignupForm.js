@@ -1,15 +1,15 @@
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signup } from "../../store/reducers/authSlice";
 
 // "type" can be user/student
-export default function SignupForm({ type, setAccountType }) {
+const SignupForm = ({ type, setAccountType }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const initialForm = { type };
-    const [form, setForm] = React.useState(initialForm);
+    const [form, setForm] = useState(initialForm);
     
     const handleFormChange = (e) => {
         switch (e.target.placeholder) {
@@ -78,3 +78,5 @@ export default function SignupForm({ type, setAccountType }) {
         </div>
     )
 }
+
+export default SignupForm;

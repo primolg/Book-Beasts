@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SignupForm, SelectAccountType, LogoutButton } from "./";
 
-export default function SignupPage() {
+const SignupPage = () => {
     const token = localStorage.getItem("token");
     const [accountType, setAccountType] = useState(null);
 
@@ -21,3 +21,5 @@ export default function SignupPage() {
         </div>
     )
 }
+
+export default SignupPage;
