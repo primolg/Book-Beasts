@@ -51,6 +51,10 @@ const Student = db.define("student" , {
         // identifier for parent
         type: Sequelize.STRING,
     },
+    userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    }
 });
 
 Student.beforeBulkCreate((students) => {students.forEach((student) => hashPassword(student))});

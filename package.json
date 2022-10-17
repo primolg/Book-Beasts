@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.5",
+    "@reduxjs/toolkit": "^1.8.6",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "chalk": "^5.0.1",
@@ -31,14 +31,14 @@
     "react-flip-page": "^1.6.4",
     "react-pageflip": "^2.0.3",
     "react-redux": "^8.0.4",
-    "react-router-dom": "^6.4.1",
+    "react-router-dom": "^6.4.2",
     "reactjs-popup": "^2.0.5",
+    "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "sequelize": "^6.24.0",
     "use-sound": "^4.0.1",
     "volleyball": "^1.5.1",
-    "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   },
   "devDependencies": {
@@ -54,6 +54,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "mocha": "^10.0.0",
     "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
     "webpack-dev-server": "^4.11.1"
   }
 }
