@@ -26,23 +26,29 @@ const StudentView = () => {
 
     useEffect(() => {
         dispatch(fetchStudentData(params));
-    }, [params]); 
-    console.log(studentData)
+    }, [params]);
 
     return studentData ? (
         <div className="outer-div-student">
-            <p>Student:</p>
-            <h4>{studentData.student.firstName + " " + studentData.student.lastName}</h4>
-            <br></br>
-            <p>My Published Books:</p>
-            <Bookshelf books={finishedBooks} />
-            <br></br>
-            <p>Books in progress:</p>
-            <Bookshelf books={unfinishedBooks} />
-            <br></br>
+            {finishedBooks.length ?
+                <>
+                <p>My Published Books:</p>
+                <Bookshelf books={finishedBooks} />
+                <br></br>
+                </> :
+                <></>
+            }
+            {unfinishedBooks.length ?
+                <>
+                <p>Books in progress:</p>
+                <Bookshelf books={unfinishedBooks} />
+                <br></br>
+                </> :
+                <></>
+            }
             <p>Create New Book:</p>
             <Bookshelf themes={themes} />
-        </div>      
+            </div>      
     ) : (
         <div>
             <p>you aren't logged in</p>  
