@@ -10,7 +10,7 @@ const StudentView = () => {
     //right now it's pulling the id from the "user" in state, and then adding studentData to state, to access the users books.
     //I'd like to change this so that the books are added upon the initial user login to avoid having to do any authentication or axios get calls after login!
 
-    const params = useSelector((state) => state.user.isAdmin ? 0 : state.user.id);
+    const params = useSelector((state) => state.user.id);
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
     const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"]
@@ -33,6 +33,7 @@ const StudentView = () => {
         </div>      
     ) : (
         <div>
+            <p>you aren't logged in</p>  
             <Link to="/login">Login</Link>
         </div>
     )

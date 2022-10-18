@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Template4 = () => {
+const Template5 = () => {
     const [text, setText] = useState('');
     const [image, setImage] = useState(undefined);
 
@@ -14,11 +14,11 @@ const Template4 = () => {
                     }
                 </div>
                 <div className="small-text-page" contentEditable="true">
-                    "type here"
+                    type here
                 </div>
             </div>        
         </div>
     );
 };
 
-export default Template4;
+export default Template5;

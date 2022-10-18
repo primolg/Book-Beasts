@@ -7,8 +7,11 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let [ search, setSearch ] = useState('');
-    const books = useSelector((state) => state.book.books);
-    console.log(books)
+    let books;
+    if (!books) {
+        books= useSelector((state) => state.book.books);
+    }
+    
 
 
     useEffect(() => {
@@ -24,7 +27,7 @@ const SearchBar = () => {
             navigate('/books',  {state: event.target.value});
             window.location.reload();
         }
-      }
+    }
 
     return(
         <>

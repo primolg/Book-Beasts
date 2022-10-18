@@ -12,8 +12,7 @@ function App() {
         {/* <UserStatus /> */}
         <Header/>
         <Routes />
-        <Footer /> 
-        <InstructorRoutes/>
+        {/* <Footer /> */}
     </>
     )
 }
