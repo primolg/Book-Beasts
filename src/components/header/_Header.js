@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { verifyToken } from "../../store/reducers/authSlice";
 import { Sidebar, ShowSidebar, SearchBar } from "./";
-import { InstructorHeader } from "../instructor";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const token = localStorage.getItem("token");
@@ -25,7 +25,9 @@ const Header = () => {
     return(
         <div id="header-container">
             <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
-            <h1 id="header-title">Book Beasts</h1>
+                <Link to="/">
+                    <h1 id="header-title">Book Beasts</h1>
+                </Link>
             <SearchBar />
             <Sidebar visible={sidebarVisibility} set={setSidebarVisibility} />
         </div>
