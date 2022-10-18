@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { SaveProgressButton } from './';
 
 const EditorBookInfo = ({ book }) => {
     if (!book?.id) {

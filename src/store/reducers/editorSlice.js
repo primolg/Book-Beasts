@@ -14,9 +14,6 @@ const editorSlice = createSlice({
                 ...action.payload,
             }
         },
-        // _updateSinglePage: (state, action) => {
-        //     // find page in .pages, only update that one
-        // },
         _updatePages: (state, action) => {
             return {
                 ...state,
@@ -78,6 +75,7 @@ export const updatePage = (page) => async (dispatch) => {
     const { data: pages } = await axios.put(`/api/editor/${page.bookId}/pages/${page.id}`, page);
     if (pages) {
         dispatch(_updatePages(pages));
+        return true;
     }
 }
 

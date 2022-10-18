@@ -1,4 +1,4 @@
-import Template1 from "./Template1";
+import Template1 from "./template1";
 import Template2 from "./template2";
 import Template3 from "./template3";
 import Template4 from "./template4";
@@ -17,4 +17,4 @@ const templates = {
     Template4
 }
 
-export default templates
+export default templates;
