@@ -25,6 +25,7 @@ const SearchBar = () => {
             setSearch(event.target.value)
             const searchedBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
             navigate('/books',  {state: event.target.value});
+            window.location.reload();
         }
     }
 

@@ -24,9 +24,11 @@ const Header = () => {
     
     return(
         <div id="header-container">
-            <div className="header-button-title">
+            <div id="header-button-title">
                 <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
-                <Link id="header-title" to="/">Book Beasts</Link>
+                <Link to="/books">
+                    <h1 id="header-title">Book Beasts</h1>
+                </Link>
             </div>
             <SearchBar />
             <Sidebar visible={sidebarVisibility} set={setSidebarVisibility} />

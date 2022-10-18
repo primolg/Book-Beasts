@@ -4,11 +4,146 @@
 @med_grey: #a6acaf;
 @light_grey: #e4e6e7;
 
-//hide header and footer
+//instructor header
 
+@headerHeight: 2.3em;
 
+#header-container {
+    background-color: @background;
+    min-height: @headerHeight;
+    padding: 0 0.7em;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    button {
+        background: @blue;
+        color: white;
+        @flexCenter();
+        height: 2.1em;
+        width: 4.6em;
+        padding-top: 0.12em;
+        border: 3px solid @blue;
+        border-radius: 1em;
+    }
+
+    #header-welcome {
+        display: none;
+    }
+    @media screen and (min-width: 600px) {
+        #header-welcome {
+            display: block;
+        }
+    }
+}
+
+//buttons
+//logout
+
+.draw-border {
+	box-shadow: inset 0 0 0 4px @blue;
+	color: @blue;
+	transition: color 0.25s 0.08333s;
+	position: relative;
+  }
+  .draw-border::before, .draw-border::after {
+	border: 0 solid transparent;
+	box-sizing: border-box;
+	content: '';
+	pointer-events: none;
+	position: absolute;
+	width: 0;
+	height: 0;
+	bottom: 0;
+	right: 0;
+  }
+  .draw-border::before {
+	border-bottom-width: 4px;
+	border-left-width: 4px;
+  }
+  .draw-border::after {
+	border-top-width: 4px;
+	border-right-width: 4px;
+  }
+  .draw-border:hover {
+	color: @med_grey;
+  }
+  .draw-border:hover::before, .draw-border:hover::after {
+	border-color: @med_grey;
+	transition: border-color 0s, width 0.25s, height 0.25s;
+	width: 100%;
+	height: 100%;
+  }
+  .draw-border:hover::before {
+	transition-delay: 0s, 0s, 0.25s;
+  }
+  .draw-border:hover::after {
+	transition-delay: 0s, 0.25s, 0s;
+  }
+  .btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	line-height: 1.5;
+	font: 700 1.2rem 'Roboto Slab', sans-serif;
+	padding: 1em 2em;
+	letter-spacing: 0.05rem;
+  }
+//   .btn:focus {
+// 	outline: 2px dotted @light_grey;
+//   }
+ 
+
+//tab navigation
+@color_1: #E8F0F2;
+
+.instructor-tabs {
+	width: 80%;
+	height: auto;
+	min-height: 400px;
+	background: @light_grey;
+	margin: 3.5rem auto 1.5rem;
+	padding: 2rem 1rem;
+	color: @dark_grey;
+	border-radius: 2rem;
+}
+ul.instructor-nav {
+	width: 60%;
+	margin: 0 auto 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 3px solid @blue;
+	border-radius: 2rem;
+	padding-left: 0px;
+	li {
+		width: 50%;
+		padding: 1rem;
+		list-style: none;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.7s;
+		border-bottom-left-radius: 2rem;
+		border-top-left-radius: 2rem;
+		&:nth-child(2) {
+			border-radius: 0;
+		}
+		&:nth-child(3) {
+			border-radius: 0;
+			border-bottom-right-radius: 2rem;
+			border-top-right-radius: 2rem;
+		}
+		&:hover {
+			background: @med_grey;
+		}
+	}
+}
+
+.TabContent {
+	font-size: 2rem;
+	text-align: center;
+  }
 
 
 //popup
