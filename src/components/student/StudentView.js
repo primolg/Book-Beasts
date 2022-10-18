@@ -14,7 +14,16 @@ const StudentView = () => {
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
     const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"]
+    let finishedBooks = [];
+    let unfinishedBooks = [];
+
+    if (studentData?.books){
+        studentData.books.map(book => {
+            book.isPublished ? finishedBooks.push(book) : unfinishedBooks.push(book);
+        });
+    };
     
+
     useEffect(() => {
         dispatch(fetchStudentData(params));
     }, [params]); 
@@ -25,8 +34,11 @@ const StudentView = () => {
             <p>Student:</p>
             <h4>{studentData.student.firstName + " " + studentData.student.lastName}</h4>
             <br></br>
-            <p>My Books:</p>
-            <Bookshelf books={studentData.books} />
+            <p>My Published Books:</p>
+            <Bookshelf books={finishedBooks} />
+            <br></br>
+            <p>Books in progress:</p>
+            <Bookshelf books={unfinishedBooks} />
             <br></br>
             <p>Create New Book:</p>
             <Bookshelf themes={themes} />
