@@ -14,7 +14,7 @@ import { InstructorNav } from "./components/instructor";
 const Router = () => {
     return(
         <Routes>
-            <Route index path="/" element={<Home />} />
+            <Route index path="/" element={<AllBooks />} />
             <Route index path="/books" element={<AllBooks />} />
             <Route index path="/books/:id" element={<BookView />} />
             <Route path="/login" element={<LoginPage />} />

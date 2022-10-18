@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
 import HTMLFlipBook from 'react-pageflip'
+import BookView3 from './BookView3';
 
 const BookView = () => {
     const params = useParams();
@@ -10,7 +11,21 @@ const BookView = () => {
     const pages = books ? filterPages(books.pages) : undefined
     const dispatch = useDispatch();
 
-    const [currentPage, setCurrentPage] = useState(0)
+
+    // show the photo with this index
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // move to the next photo
+    // if we are at the end, go to the first photo
+    const next = () => {
+        setCurrentIndex((currentIndex + 1) % pages.length);
+    };
+
+    // move to the previous photo
+    // if we are at the beginning, go to the last photo
+    const prev = () => {
+        setCurrentIndex((currentIndex - 1 + pages.length) % pages.length);
+    };
 
 
     //function to sort through pages linked list + add page number to each obj
@@ -31,27 +46,18 @@ const BookView = () => {
     useEffect(() => {
         dispatch(fetchBookData(params.id))
     }, []);
+    
 
-
-      const Page = React.forwardRef((props, ref) => {
-        return (
-            <div className="demoPage" ref={ref}>
-                /* ref required */
-                <h1>Page Header</h1>
-                <p>{props.children}</p>
-                <p>Page number: {props.number}</p>
-            </div>
-        );
-    });
-
+if(pages){
+    console.log(pages)
+}
 return ( pages ? (
   <div className="content-container">
     <HTMLFlipBook width={300} height={500}>
-            <Page number="1">Page text</Page>
-            <Page number="2">Page text</Page>
-            <Page number="3">Page text</Page>
-            <Page number="4">Page text</Page>
-        </HTMLFlipBook>
+      {pages.map((page) => 
+        <BookView3 key={page.page.id} page={page}/>
+      )}
+    </HTMLFlipBook>
   </div>
   ) : (
     <div>no data</div>

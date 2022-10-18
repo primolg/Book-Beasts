@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../../store/reducers/bookSlice";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const AllBooks = () => {
     const dispatch = useDispatch();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [ sort, setSort ] = useState('none');
     const [ search, setSearch ] = useState('');
@@ -39,23 +40,18 @@ const AllBooks = () => {
 
       const handleOptions = event => {
         setSort(event.target.value);
-        sortBooks(bookArray, '');
+        console.log(sort);
+
+        sortBooks(books, '');
       }
-  
-      // const handleChange = event => {
-      //   if(event.key === "Enter"){
-      //   setSearch(event.target.value)
-      //   }
-      // }
 
       const handleClick = () => {
         setSearch('')
         sortBooks(books, 'none')
-
+        navigate('/books',  {state: ''});
+        window.location.reload();
       }
 
-
-      console.log(books)
     return (
         <>
         <div id='filter-wrap'>
