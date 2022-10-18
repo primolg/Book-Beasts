@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createNewBook } from "../../store/reducers/editorSlice";
+import Popup from 'reactjs-popup';
 
 // theme == genre
 const Bookshelf = ({books, themes}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const student = useSelector(state => state.user);
 
-    const handleClick = async (theme) => {
+    const student = useSelector(state => state.user);
+    const [theme, setTheme] = useState("");
+    const titleRef = useRef();
+
+    const createBookAndRedirect = async () => {
+        console.log(titleRef.current.value);
         const res = await dispatch(createNewBook({
+            title: titleRef.current.value,
             genre: theme,
             studentId: student?.id,
         }));
@@ -18,26 +24,50 @@ const Bookshelf = ({books, themes}) => {
         else alert("Could not create book");
     };
 
-    return !themes ? (
-            <div className="shelf-div-student">
-                {books.map(book => 
-                    <div key={book.id} className="book-in-shelf-student">
-                        <Link to={"/books/" + book.id}>{book.title}</Link>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (titleRef.current.value.length < 3) {
+            alert("Book title must be more than 3 letters!")
+        } else {
+            createBookAndRedirect();
+        }
+    };
 
-                    </div>
-                )}
-            </div>
-    ) : (
-        <div className="shelf-div-student">
-            {themes.map(theme => 
-                <div key={theme} className="book-in-shelf-student">
-                    <p onClick={() => handleClick(theme)}>
-                        {theme}
-                    </p>
+    const handleClick = (theme) => {
+        setTheme(theme);
+    };
+
+    return !themes ? (
+                <div className="shelf-div-student">
+                    {books.map(book => 
+                        <div key={book.id} className="book-in-shelf-student">
+                            <Link to={"/books/" + book.id}>{book.title}</Link>
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
-    )
+        ) : (
+            <div className="shelf-div-student">
+                {themes.map((theme, i) => 
+                <Popup key={i} modal className="new-book" trigger={
+                    <div className="book-in-shelf-student">
+                        <p onClick={() => handleClick(theme)}>
+                            {theme}
+                        </p>
+                    </div>
+                }>
+                    {close => (
+                        <div className="new-book-popup-form">
+                            <h3>What will your<i>{` ${theme} `}</i>book be titled?</h3>
+                            <form>
+                                <input type="text" ref={titleRef}></input>
+                                <button id="new-book-btn" type="submit" onClick={handleSubmit}>Start new book!</button>
+                            </form>
+                            <p onClick={close} id="close-popup">Select a different genre</p>
+                        </div>
+                    )}
+                </Popup>
+                )}
+            </div>)
 }
 
 

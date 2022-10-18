@@ -22,7 +22,8 @@ router.post('/', async (req, res, next) => {
     try {
         const student = await Student.findByPk(req.body.studentId);
         const newBook = await student.createBook({
-            genre: req.body.genre
+            title: req.body.title,
+            genre: req.body.genre,
         });
         const pages = await newBook.getOrderedPages();
         newBook.dataValues.pages = pages;

@@ -6,13 +6,26 @@ const EditorBookInfo = ({ book }) => {
         return("Loading...");
     } else {
         return(
-            <>
+            <div id="basicInfoContainer">
                 {/* need buttons to change these attributes */}
-                <h2>{`Editing "${book.title}"`}</h2>
+                <div className="attribute">
+                    <h2>{`"${book.title}"`}</h2>
+                    <button>✏️</button>
+                </div>
+
+                <div className="attribute">
+                    <p>{`Genre: ${book.genre}`}</p>
+                    <button>✏️</button>
+                </div>
+
+                <div className="attribute">
+                    <p>{`Update cover art: `}</p>
+                    <button>✏️</button>
+                </div>
+
                 <p>{`${book.totalPages} pages`}</p>
-                <p>{`Genre: ${book.genre}`}</p>
                 {/* publish button here */}
-            </>
+            </div>
         )
     }
 };

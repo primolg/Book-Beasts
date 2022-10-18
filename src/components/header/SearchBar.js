@@ -8,7 +8,7 @@ const SearchBar = () => {
     const navigate = useNavigate();
     let [ search, setSearch ] = useState('');
     const books = useSelector((state) => state.book.books);
-    console.log(books)
+    // console.log(books)
 
 
     useEffect(() => {
