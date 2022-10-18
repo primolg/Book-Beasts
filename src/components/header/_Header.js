@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { verifyToken } from "../../store/reducers/authSlice";
 import { Sidebar, ShowSidebar, SearchBar } from "./";
+import { InstructorHeader } from "../instructor";
 
 const Header = () => {
     const token = localStorage.getItem("token");

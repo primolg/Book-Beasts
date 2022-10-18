@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchStudents } from '../../store/reducers/instructorSlice';
+import { fetchStudents } from '../../../store/reducers/instructorSlice';
 import { useParams } from 'react-router-dom';
 import StudentTable from './StudentTable';
-import InstructorNav from './InstructorNav';
+import InstructorNav from '../instructorTabs/InstructorNav';
 import AddStudent from './AddStudent';
 
 
@@ -17,14 +17,10 @@ const InstructorStudents = () => {
     }, []);
 
     return(
-        <div id="instructor-students">
-            <div>
-            <InstructorNav/>
-            </div>
-            <div>
-               <AddStudent  />
+        <div id="students-tab">
+            <AddStudent  />
             <StudentTable studentList={studentList} />
-            </div>
+            
         </div>
     )
 }

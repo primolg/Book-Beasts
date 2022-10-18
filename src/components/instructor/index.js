@@ -1,10 +1,25 @@
 import InstructorPortal from "./InstructorPortal";
-import InstructorNav from "./InstructorNav";
-import InstructorStudents from './InstructorStudents';
+import {
+    InstructorNav,
+    TabContent,
+    TabNavItem,
+    InstructorHeader,
+} from "./instructorTabs";
 import EditInstructor from "./EditInstructor";
-import BookTable from "./BookTable";
-import BookRow from "./BookRow";
-import ViewSingleBook from "./ViewSingleBook";
+import{
+    BookRow,
+    BookTable,
+    ViewSingleBook,
+} from "./instructorBooks";
+
+import {
+    AddStudent,
+    DeleteStudent,
+    EditStudent,
+    InstructorStudents,
+    StudentRow,
+    StudentTable
+} from "./instructorStudentRoster";
 
 
 export {
@@ -15,4 +30,12 @@ export {
     BookTable,
     BookRow,
     ViewSingleBook,
+    TabContent,
+    TabNavItem,
+    AddStudent,
+    DeleteStudent,
+    EditStudent,
+    StudentRow,
+    StudentTable,
+    InstructorHeader,
 }
