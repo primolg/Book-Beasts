@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBookData } from '../../store/reducers/instructorSlice';
+import { fetchBookData } from '../../../store/reducers/instructorSlice';
 
 const ViewSingleBook = () => {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const ViewSingleBook = () => {
     }, []);
 
   return pages ? (
-        <div className="outer-div-book-view">
+        <div className="outer-div-book-view" id="instructor-book-view">
             <div className="page-selector-shelf">
                 {pages.map(page =>
                     <div className="page-selector" id={currentPage === page.pageNumber - 1 ? "selected" : ""} key={page.page.id} onClick={()=>setCurrentPage(page.pageNumber - 1)}>{page.pageNumber}</div>

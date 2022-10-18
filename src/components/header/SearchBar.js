@@ -7,8 +7,11 @@ const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let [ search, setSearch ] = useState('');
-    const books = useSelector((state) => state.book.books);
-    // console.log(books)
+    let books;
+    if (!books) {
+        books= useSelector((state) => state.book.books);
+    }
+    
 
 
     useEffect(() => {
@@ -22,8 +25,9 @@ const SearchBar = () => {
             setSearch(event.target.value)
             const searchedBooks = books.filter(book => book.title.toLowerCase().includes(search.toLowerCase()));
             navigate('/books',  {state: event.target.value});
+            window.location.reload();
         }
-      }
+    }
 
     return(
         <>

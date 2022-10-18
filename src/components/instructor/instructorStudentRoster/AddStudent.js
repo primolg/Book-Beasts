@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addStudent } from '../../store/reducers/instructorSlice';
+import { addStudent } from '../../../store/reducers/instructorSlice';
 import Popup from 'reactjs-popup';
 
 const AddStudent = () => {
