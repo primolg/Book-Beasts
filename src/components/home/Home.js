@@ -36,7 +36,8 @@ console.log(books)
   return (
     <div className='content-container'>
       <div className='featured-book-slider'>
-        <div className="outer-div">Featured Books:
+        <div className="outer-div">
+          <h2>Featured Books:</h2>
               <div className="shelf-div">
                   {featuredBooks?.map(book => 
                   <div className="book-container" key={book.id}>
