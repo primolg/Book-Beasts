@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useParams, useNavigate } from "react-router-dom";
-import { updateStudentData, fetchStudentData } from "../../store/reducers/instructorSlice";
+import { updateStudentData, fetchStudentData } from "../../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
 //This shows hashed password when opening Edit popup - need to fix that.

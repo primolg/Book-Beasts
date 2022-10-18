@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteStudent } from "../../store/reducers/instructorSlice";
+import { deleteStudent } from "../../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
 const DeleteStudent = ( { student }) => {

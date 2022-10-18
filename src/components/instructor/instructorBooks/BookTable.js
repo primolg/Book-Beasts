@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import BookRow from './BookRow';
-import { fetchStudentData } from '../../store/reducers/instructorSlice';
+import { fetchStudentData } from '../../../store/reducers/instructorSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
