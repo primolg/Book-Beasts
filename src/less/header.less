@@ -1,8 +1,8 @@
 @import "./common.less";
 
 @headerHeight: 2.3em;
-@toggleBtnWidth: @headerHeight - 0.6em;
-@toggleBtnHeight: @headerHeight - 0.45em;
+@toggleBtnWidth: @headerHeight - 0.7em;
+@toggleBtnHeight: @headerHeight - 0.55em;
 
 #header-container {
     background-color: @background;
@@ -45,15 +45,21 @@
     #header-title {
         display: none;
         position: relative;
-        left: 80px;
-        font-family: 'Times New Roman', Times, serif;
-        color: #E3A859;
+        margin: 5px 0 0 10px;
+        font-family:sans-serif;
+        font-size:xx-large;
+        color: @orange;
         text-decoration: none;
     }
     @media screen and (min-width: 600px) {
         #header-title {
             display: block;
         }
+    }
+    
+    .header-button-title{
+        display: flex;
+        justify-content: space-around;
     }
 }
 
@@ -69,7 +75,7 @@
     span {
         width: @toggleBtnWidth;
         height: 0.33em;
-        background: @yellow;
+        background: @orange;
         border-radius: 0.6em;
     }
 
@@ -82,8 +88,8 @@
 
 @sidebarWidth: 11.8em;
 #sidebar {
-    color: @red;
-    background: @yellow;
+    color: @yellow;
+    background: @orange;
     text-shadow: 1px 1px 4px rgba(50,50,50,0.07);
 
     transition: left 0.5s;
@@ -93,6 +99,7 @@
     width: @sidebarWidth;
     left: -@sidebarWidth;
     z-index: 40;
+    border-right: 5px @orange solid;
     
     a {
         color: inherit;
@@ -101,6 +108,7 @@
     }
     &.visible {
         left: 0;
+        border-right: 5px #fcc059 solid;
     }
 
     .sidebar-header {
@@ -110,18 +118,19 @@
         align-items: center;
 
         #x {
-            padding-bottom: 0.04em;
-            margin-bottom: 0.1em;
+            padding-bottom: 0.12em;
+            // margin-bottom: 1.4em;
             @flexCenter();
-            background: @orange;
+            background: @yellow;
+            color: @orange;
             min-width: 1.2em;
             max-height: 1.2em;
             border-radius: 0.2em;
-            border: 1px solid rgb(20,20,20);
+            // border: 1px solid rgb(20,20,20);
         }
     }
     .sidebar-contents {
-        color: @red;
+        color: @yellow;
         padding: 0.8em;
         list-style: none;
         * {

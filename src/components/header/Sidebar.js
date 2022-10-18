@@ -36,6 +36,7 @@ const Sidebar = ({ set, visible }) => {
             sidebarContents = [
                 { name: "Home page", route: "/" },
                 { name: "View all books", route: "/books" },
+                { name: "Your books", route: `/student` },
                 { name: "Start a new book!", route: "/" },
                 { name: "Work on your books", route: "/student" },
             ];
