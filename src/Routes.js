@@ -26,7 +26,6 @@ const Router = () => {
             <Route path="/instructorPortal/:id/students/:studentId/books/:bookId" element={<ViewSingleBook />}/>
             <Route path="/bookedit" element={<BookEditor />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/student/:id" element={<StudentView />} />
             <Route path="/student" element={<StudentView />} />
         </Routes>
     )
