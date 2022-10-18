@@ -32,26 +32,26 @@ const BookView = () => {
         dispatch(fetchBookData(params.id))
     }, []);
 
-
-      const Page = React.forwardRef((props, ref) => {
-        return (
-            <div className="demoPage" ref={ref}>
-                /* ref required */
-                <h1>Page Header</h1>
-                <p>{props.children}</p>
-                <p>Page number: {props.number}</p>
-            </div>
-        );
-    });
-
+if(pages){
+    console.log(pages)
+}
 return ( pages ? (
   <div className="content-container">
-    <HTMLFlipBook width={300} height={500}>
-            <Page number="1">Page text</Page>
-            <Page number="2">Page text</Page>
-            <Page number="3">Page text</Page>
-            <Page number="4">Page text</Page>
-        </HTMLFlipBook>
+    <div className="carousel">
+        {pages.map((page) => {
+            <div key={page.page.id} className="carousel-item">
+                <p className="page-content">
+                {page.page.content}
+                </p>
+                <div className="page-number">
+                    {page.pageNumber}
+                </div>
+            </div>
+            // console.log(page.page.content, page.pageNumber)
+        })}
+    </div>
+        <button className="prev-button">Previous Page</button>
+        <button className="next-button">Next Page</button>
   </div>
   ) : (
     <div>no data</div>
