@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBook } from "../../store/reducers/editorSlice";
+import { fetchBook, addNewPage } from "../../store/reducers/editorSlice";
 // components
 import templates from './bookTemplates';
 import { EditorBookInfo } from "./";
@@ -11,23 +11,26 @@ const BookEditor = () => {
     const currentBook = useSelector(state => state.editor);
     const dispatch = useDispatch();
 
-    const [pages, setPages] = useState([1]);
+    const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState({});
 
-    const addPage = () => {
-        //this should be calling a the add page prototype function on the db model 
-        const newPages = pages;
-        newPages.push(pages.length ? pages[pages.length - 1] + 1 : 1);
-        setPages(newPages);
-        setCurrentPage(pages[pages.length - 1]);
+    const addPage = async () => {
+        const updatedBook = await dispatch(addNewPage(bookId));
+        if (!updatedBook) {
+            alert("Could not add new page!");
+        } else {
+            setCurrentPage(updatedBook.pages[updatedBook.pages.length-1]);
+        }
     };
 
-    // if creating a new book, gets the info from state
-    // if navigating directly to this page, fetch the book from db (needs auth)
+    // if creating new book, gets info from state; if navigating directly to page, fetch from db
     useEffect(() => {
         if (currentBook.pages) {
             setPages(currentBook.pages);
-            setCurrentPage(currentBook.pages[0]);
+            // only selects 1st page if no page is selected
+            if (currentPage !== {}) {
+                setCurrentPage(currentBook.pages[0]);
+            }
         } else if (!currentBook.id) {
             dispatch(fetchBook(bookId));
         }

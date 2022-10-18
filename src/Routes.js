@@ -3,13 +3,12 @@ import { Routes, Route } from "react-router-dom";
 // components
 import { InstructorPortal, InstructorStudents, EditInstructor, BookTable, ViewSingleBook } from "./components/instructor";
 import { LoginPage, SignupPage } from "./components/authentication";
-import StudentView from "./components/student/StudentView";
+import { BookEditor, StudentView } from "./components/student";
 import Home from "./components/home/Home";
 import AllBooks from "./components/books/AllBooks";
 import SingleBook from "./components/books/SingleBook";
 import Team from "./components/footer/Team";
 import BookView from "./components/books/BookView";
-import BookEditor from "./components/student/_BookEditor";
 
 const Router = () => {
     return(

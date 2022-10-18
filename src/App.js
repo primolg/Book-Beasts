@@ -10,7 +10,7 @@ function App() {
         {/* <UserStatus /> */}
         <Header />
         <Routes />
-        <Footer />
+        {/* <Footer /> */}
     </>
     )
 }

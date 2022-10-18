@@ -52,7 +52,7 @@ export const createNewBook = (book) => async (dispatch) => {
 export const updateBook = (book) => async (dispatch) => {
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
     if (!updatedBook || updatedBook === {}) {
-        console.log("Error:", updatedBook);
+        // console.log("Error:", updatedBook);
         alert("Unable to edit book");
     } else {
         dispatch(_updateBook(updatedBook));
@@ -67,9 +67,10 @@ export const deleteBook = (bookId) => async (dispatch) => {
 }
 
 export const addNewPage = (bookId) => async (dispatch) => {
-    const { data: book } = await axios.post(`/api/${bookId}/pages`);
+    const { data: book } = await axios.post(`/api/editor/${bookId}/pages`);
     if (book) {
         dispatch(setBook(book));
+        return book;
     }
 }
 

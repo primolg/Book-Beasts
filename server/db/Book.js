@@ -48,8 +48,6 @@ Book.prototype.getOrderedPages = async function() {
     const firstPage = allPages.find(page => page.isFirstPage);
     const orderedPages = [firstPage];
 
-    // can implement page numbers here
-
     for (let i = 1; i < allPages.length; i++) {
         const nextPage = allPages.find(page => page.id === orderedPages[i-1].nextPage);
         orderedPages.push(nextPage);

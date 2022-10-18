@@ -1,5 +1,6 @@
 const db = require("./db");
 const { Sequelize } = db;
+const { Op } = require("sequelize");
 
 const Page = db.define("page", {
     content: {
@@ -85,6 +86,9 @@ Page.prototype.insertEnd = async function () {
         where: {
             bookId: this.bookId,
             nextPage: null,
+            previousPage: {
+                [Op.not]: null,
+            },
         },
     });
     await originalLastPage.set({
