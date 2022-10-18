@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom';
 import InstructorNav from './InstructorNav';
 
 
+
 const InstructorPortal = () => {
     const params = useParams();
     const instructorData = useSelector((state) => state.instructorList.instructorData);
     const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(fetchInstructorData(params.id));
