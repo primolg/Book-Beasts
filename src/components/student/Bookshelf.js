@@ -14,7 +14,7 @@ const Bookshelf = ({books, themes}) => {
             genre: theme,
             studentId: student?.id,
         }));
-        if (res) navigate("/editor");
+        if (res) navigate(`/editor/${res.id}`);
         else alert("Could not create book");
     };
 

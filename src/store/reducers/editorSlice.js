@@ -33,7 +33,6 @@ export const { setBook, _updateBook, _updatePages } = editorSlice.actions;
 export const fetchBook = (bookId) => async (dispatch) => {
     const { data: book } = await axios.get(`/api/editor/${bookId}`);
     if (book) {
-        console.log(book);
         dispatch(setBook(book));
     }
 }
@@ -46,7 +45,7 @@ export const createNewBook = (book) => async (dispatch) => {
         return false;
     } else {
         dispatch(setBook(newBook));
-        return true;
+        return newBook;
     }
 }
 
@@ -64,6 +63,13 @@ export const deleteBook = (bookId) => async (dispatch) => {
     const { data } = await axios.delete(`/api/editor/${bookId}`);
     if (data) {
         dispatch(setBook({}));
+    }
+}
+
+export const addNewPage = (bookId) => async (dispatch) => {
+    const { data: book } = await axios.post(`/api/${bookId}/pages`);
+    if (book) {
+        dispatch(setBook(book));
     }
 }
 

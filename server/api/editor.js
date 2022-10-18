@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Student, Book, Page } = require('../db');
 // should consider token verification for most of these actions
+// make a separate function to get and attach pages to a book before res.send
 
 // === Create/edit/delete books === //
 
@@ -9,7 +10,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.id);
         const pages = await book.getOrderedPages();
-        book.pages = pages;
+        book.dataValues.pages = pages;
         res.send(book);
     } catch (error) {
         next(error);
@@ -23,6 +24,8 @@ router.post('/', async (req, res, next) => {
         const newBook = await student.createBook({
             genre: req.body.genre
         });
+        const pages = await newBook.getOrderedPages();
+        newBook.dataValues.pages = pages;
         res.send(newBook);
     } catch (error) {
         next(error);
@@ -63,7 +66,7 @@ router.post('/:bookId/pages', async (req, res, next) => {
         const newPage = await book.createNewPage();
         await book.reload();
         const pages = await book.getOrderedPages();
-        book.pages = pages;
+        book.dataValues.pages = pages;
         res.send(book);
     } catch (error) {
         next(error);
@@ -92,7 +95,7 @@ router.delete('/:bookId/pages/:pageId', async (req, res, next) => {
         let book = await Book.findByPk(req.params.bookId);
         book = await book.deletePage(req.params.pageId);
         const pages = await book.getOrderedPages();
-        book.pages = pages;
+        book.dataValues.pages = pages;
         res.send(book);
     } catch (error) {
         next(error);

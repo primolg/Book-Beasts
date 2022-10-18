@@ -54,7 +54,10 @@ Book.prototype.getOrderedPages = async function() {
         const nextPage = allPages.find(page => page.id === orderedPages[i-1].nextPage);
         orderedPages.push(nextPage);
     }
-    return orderedPages;
+    return orderedPages.map((page, i) => {
+        page.dataValues.pageNumber = i+1;
+        return page;
+    });
 }
 
 Book.prototype.createNewPage = async function() {

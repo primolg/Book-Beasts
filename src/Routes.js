@@ -9,7 +9,7 @@ import AllBooks from "./components/books/AllBooks";
 import SingleBook from "./components/books/SingleBook";
 import Team from "./components/footer/Team";
 import BookView from "./components/books/BookView";
-import BookEditor from "./components/student/BookEditor";
+import BookEditor from "./components/student/_BookEditor";
 
 const Router = () => {
     return(
@@ -24,7 +24,7 @@ const Router = () => {
             <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
             <Route path="/instructorPortal/:id/students/:studentId/books" element={<BookTable/>}/>
             <Route path="/instructorPortal/:id/students/:studentId/books/:bookId" element={<ViewSingleBook />}/>
-            <Route path="/editor" element={<BookEditor />} />
+            <Route path="/editor/:id" element={<BookEditor />} />
             <Route path="/team" element={<Team />} />
             <Route path="/student/:id" element={<StudentView />} />
             <Route path="/student" element={<StudentView />} />
