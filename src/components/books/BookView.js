@@ -39,6 +39,7 @@ return ( pages ? (
   <div className="content-container">
     <div className="carousel">
         {pages.map((page) => {
+            return (
             <div key={page.page.id} className="carousel-item">
                 <p className="page-content">
                 {page.page.content}
@@ -46,7 +47,7 @@ return ( pages ? (
                 <div className="page-number">
                     {page.pageNumber}
                 </div>
-            </div>
+            </div>)
             // console.log(page.page.content, page.pageNumber)
         })}
     </div>
