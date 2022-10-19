@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
 import HTMLFlipBook from 'react-pageflip'
 import BookView3 from './BookView3';
+import disableScroll from 'disable-scroll';
 
 const BookView = () => {
     const params = useParams();
@@ -48,17 +49,14 @@ const BookView = () => {
     }, []);
     
 
-if(pages){
-    console.log(pages)
-}
 return ( pages ? (
   <div className="content-container">
-    <HTMLFlipBook width={300} height={500}>
-      {pages.map((page) => 
-        <BookView3 key={page.page.id} page={page}/>
-      )}
-    </HTMLFlipBook>
-  </div>
+        <HTMLFlipBook width={300} height={500}>
+        {pages.map((page) => 
+            <BookView3 key={page.page.id} page={page}/>
+        )}
+        </HTMLFlipBook>
+    </div>
   ) : (
     <div>no data</div>
   )
