@@ -45,20 +45,18 @@ const BookView = () => {
 
     useEffect(() => {
         dispatch(fetchBookData(params.id))
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }, []);
     
 
-if(pages){
-    console.log(pages)
-}
 return ( pages ? (
   <div className="content-container">
-    <HTMLFlipBook width={300} height={500}>
-      {pages.map((page) => 
-        <BookView3 key={page.page.id} page={page}/>
-      )}
-    </HTMLFlipBook>
-  </div>
+        <HTMLFlipBook width={300} height={500}>
+        {pages.map((page) => 
+            <BookView3 key={page.page.id} page={page}/>
+        )}
+        </HTMLFlipBook>
+    </div>
   ) : (
     <div>no data</div>
   )

@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: black;
 }
 
 .outer-div-book-view{
@@ -89,8 +91,30 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background-color: #eee;
 }
 
 .filter-container {
     padding: 20px;
+}
+
+.all-book-view {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+    background-color: #FDF9F3;
+}
+
+@media only screen and (min-width: 768px) {
+    .all-book-view {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
+.author-tag {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

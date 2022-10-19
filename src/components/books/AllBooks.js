@@ -68,9 +68,7 @@ const AllBooks = () => {
                   </div>
             <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>
-          <div className='featured-book-slider'>
-            <div className="outer-div"> 
-                  <div className="shelf-div">
+          <div className='all-book-view'>
                       {books.map(book => 
                       <div className="book-container" key={book.id}>
                           <Link to={`/books/${book.id}`}>
@@ -81,13 +79,13 @@ const AllBooks = () => {
                             </div>
                           </div>
                           </Link>
+                          <div className="author-tag">  
                             <p>By: {book.student.firstName} {book.student.lastName}</p>
-                          <div>{book.totalPages} Pages</div>
-                          <div className="genre-tag">{book.genre}</div>
+                            <div className="page-numbers">{book.totalPages} Pages</div>
+                            <div className="genre-tag">{book.genre}</div>
+                          </div>
                       </div>
                       )}
-                  </div>
-              </div>
             </div>
           </div>
           </div>
