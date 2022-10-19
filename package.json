@@ -6,6 +6,7 @@
     "start": "node server",
     "dev": "webpack -w & nodemon server -w",
     "dev:noseed": "webpack -w & nodemon server -w",
+    "dev:seedonce": "webpack -w & node server/db && nodemon server -w",
     "build": "webpack",
     "test": "mocha tests --recursive -w",
     "seed": "node server/db"
@@ -32,6 +33,7 @@
     "react-pageflip": "^2.0.3",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
+    "react-toastify": "^9.0.8",
     "reactjs-popup": "^2.0.5",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",

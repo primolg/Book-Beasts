@@ -110,7 +110,7 @@ describe("'Book' model methods", () => {
             },
         });
         let pages = (await book.getPages()).sort((a,b) => a.id - b.id);
-        await book.deletePage(pages[2]);
+        await book.deletePage(pages[2].id);
 
         await book.reload();
         pages = (await book.getPages()).sort((a,b) => a.id - b.id);
@@ -243,7 +243,7 @@ describe("Pages model functions as a linked list data structure", () => {
                     await book2.createNewPage();
                     await book2.createNewPage();
                     const page3 = (await book2.getOrderedPages())[2];
-                    await book2.deletePage(page3);
+                    await book2.deletePage(page3.id);
                     
                     // student.createBook + all page methods together
                     const student = await Student.findByPk(1);
@@ -379,7 +379,7 @@ describe("Pages model functions as a linked list data structure", () => {
 
                     // deleting last page
                     let originalId = pages[6].id;
-                    await newBook.deletePage(pages[6]);
+                    await newBook.deletePage(pages[6].id);
                     await newBook.reload();
                     pages = await newBook.getOrderedPages();
 
@@ -389,7 +389,7 @@ describe("Pages model functions as a linked list data structure", () => {
 
                     // deleting 2nd page
                     originalId = pages[1].id;
-                    await newBook.deletePage(pages[1]);
+                    await newBook.deletePage(pages[1].id);
                     await newBook.reload();
                     pages = await newBook.getOrderedPages();
 
