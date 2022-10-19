@@ -1,18 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 // components
+import { LoginPage, SignupPage } from "./components/authentication";
+import { BookEditor, StudentView } from "./components/student";
 import Home from "./components/home/Home";
 import Team from "./components/footer/Team";
-
-import {
-    LoginPage,
-    SignupPage
-} from "./components/authentication";
-
-import {
-    StudentView,
-    BookEditor
-} from "./components/student";
 
 import{
     AllBooks,
@@ -38,7 +30,7 @@ const Router = () => {
             <Route index path="/books/:id" element={<BookView />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/bookedit" element={<BookEditor />} />
+            <Route path="/editor/:id" element={<BookEditor />} />
             <Route path="/team" element={<Team />} />
             <Route path="/student" element={<StudentView />} />
             <Route path="/instructorPortal/:id" element={<InstructorNav/>}/>

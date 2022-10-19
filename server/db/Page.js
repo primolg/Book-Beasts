@@ -1,12 +1,8 @@
 const db = require("./db");
 const { Sequelize } = db;
+const { Op } = require("sequelize");
 
 const Page = db.define("page", {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
     content: {
         type: Sequelize.TEXT,
     },
@@ -17,8 +13,9 @@ const Page = db.define("page", {
             isUrl: true,
         },
     },
-    type: {
-        type: Sequelize.STRING,
+    templateId: { // templateId: currently 1-4
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
     },
     previousPage: Sequelize.INTEGER,
     nextPage: Sequelize.INTEGER,
@@ -89,6 +86,9 @@ Page.prototype.insertEnd = async function () {
         where: {
             bookId: this.bookId,
             nextPage: null,
+            previousPage: {
+                [Op.not]: null,
+            },
         },
     });
     await originalLastPage.set({

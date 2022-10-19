@@ -1,12 +1,8 @@
-import StudentView from "./StudentView";
-import BookTest from "./BookTest";
+import BookEditor from "./_BookEditor";
 import Bookshelf from "./Bookshelf";
-import BookEditor from "./BookEditor";
+import EditorBookInfo from "./EditorBookInfo";
+import StudentView from "./StudentView";
+import SaveProgressButton from "./SaveProgressButton";
+import PublishDeleteButtons from "./PublishDeleteButtons";
 
-
-export {
-    StudentView,
-    BookTest,
-    Bookshelf,
-    BookEditor,
-}
+export { BookEditor, Bookshelf, EditorBookInfo, StudentView, SaveProgressButton, PublishDeleteButtons };
