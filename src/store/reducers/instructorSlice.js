@@ -9,7 +9,6 @@ const instructorSlice = createSlice({
     instructorData: {},
     studentList: [],
     currentStudent: {},
-    bookList: [],
     currentBook: {},
     allBooks: [],
   },
@@ -42,14 +41,14 @@ const instructorSlice = createSlice({
       return state;
     },
     getBooks: (state, action) => {
-      state.bookList = action.payload;
+      state.allBooks = action.payload;
     },
     getBook: (state, action) => {
       state.currentBook = action.payload;
       return state;
     },
     _deleteBooks: (state, action) => {
-      state.bookList = state.bookList.filter((book) =>
+      state.allBooks = state.bookList.filter((book) =>
       book.id != action.payload.id
       );
       return state;
@@ -130,8 +129,9 @@ export const fetchStudentData = (userId, studentId) => async(dispatch) => {
 
 export const fetchBooks = (userId, studentId) => async(dispatch) => {
   try{
-    const { data: bookList } = await axios.get(`/instructors/${userId}/students/${studentId}/books`, userId, studentId);
-  dispatch(getBooks(bookList));
+    const { data: allBooks } = await axios.get(`/instructors/${userId}/students/${studentId}/books`, userId, studentId);
+    console.log('FETCH BOOKS', allBooks)
+  dispatch(getBooks(allBooks));
   }catch(error){
     console.log('FETCH STUDENTS THUNK ERROR', error)
   } 

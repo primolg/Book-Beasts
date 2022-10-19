@@ -31,8 +31,7 @@ const StudentTable = ({ studentList }) => {
                 </table>
             </div>
             ) : (
-                <h3>No Students are enrolled yet.
-                Click 'Add Student' button to get started!</h3>
+                <h3>No Students are enrolled yet</h3>
         )}           
         </>     
         );
