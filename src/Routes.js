@@ -6,16 +6,6 @@ import { BookEditor, StudentView } from "./components/student";
 import Home from "./components/home/Home";
 import Team from "./components/footer/Team";
 
-import {
-    LoginPage,
-    SignupPage
-} from "./components/authentication";
-
-import {
-    StudentView,
-    BookEditor
-} from "./components/student";
-
 import{
     AllBooks,
     SingleBook,
