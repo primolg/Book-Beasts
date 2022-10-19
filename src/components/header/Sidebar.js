@@ -35,16 +35,16 @@ const Sidebar = ({ set, visible }) => {
         case "student":
             sidebarContents = [
                 { name: "Home page", route: "/" },
-                { name: "View all books", route: "/books" },
-                { name: "Your books", route: `/student` },
-                { name: "Start a new book!", route: "/" },
-                { name: "Work on your books", route: "/student" },
+                // { name: "View all books", route: "/books" },
+                { name: "View your books", route: `/student` },
+                // { name: "Start a new book!", route: "/" },
+                { name: "Edit books", route: "/student" },
             ];
             break;
         default: // for "guest"
             sidebarContents = [
                 { name: "Home page", route: "/" },
-                { name: "View all books", route: "/books" },
+                // { name: "View all books", route: "/books" },
                 { name: "Login", route: "/login" },
                 { name: "Signup", route: "/signup" },
             ];
