@@ -33,9 +33,9 @@ const Router = () => {
             <Route path="/editor/:id" element={<BookEditor />} />
             <Route path="/team" element={<Team />} />
             <Route path="/student" element={<StudentView />} />
-            <Route path="instructorPortal/:id" element={<InstructorNav/>}/>
-            <Route path="/instructorPortal/:id/edit" element={<EditInstructor />} />
-            <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
+            <Route path="/instructorPortal/:id" element={<InstructorNav/>}/>
+            {/* <Route path="/instructorPortal/:id/edit" element={<EditInstructor />} />
+            <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} /> */}
             <Route path="/instructorPortal/:id/students/:studentId/books" element={<BookTable />} />
             <Route path="/instructorPortal/:id/students/:studentId/books/:bookId" element={<ViewSingleBook />} />
         </Routes>
