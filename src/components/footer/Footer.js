@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
+    const { pathname } = useLocation();
+    const withoutFooterRoutes = ["/instructorPortal"];
+    if(withoutFooterRoutes.some((item) => pathname.includes(item))) return null;
+    
     return (
         <div class="footer">
             <Link to="/team">

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { BookTable } from '../instructorBooks';
 
 const BookRow = ({ book, student }) => {
     const updatedAt = book.updatedAt;
@@ -69,9 +70,10 @@ const BookRow = ({ book, student }) => {
                     <td>{book.isPublished === false &&
                     <div>{workTime()}</div>}</td>
                     <td>
-                    <Link to={`/instructorPortal/${params.id}/students/${student.id}/books/${book.id}`}>
+                        <BookTable/>
+                    {/* <NavLink to={`/instructorPortal/${params.id}/students/${student.id}/books/${book.id}`}>
                         <button>{`View ${book.title}`}</button>
-                    </Link> 
+                    </NavLink>  */}
                     </td>
                 </tr>
             )}

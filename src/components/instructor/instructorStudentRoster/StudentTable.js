@@ -7,8 +7,10 @@ const StudentTable = ({ studentList }) => {
        <>          
         {studentList.length !==0 ? (
             <div className='studentRoster'>
+                <div className='table-title'>
                 <h1>Student Roster</h1>
-                <table className='table' id="studentTable">
+                </div>
+                <table className='table-fill' id="studentTable">
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -21,7 +23,7 @@ const StudentTable = ({ studentList }) => {
                             <th>Delete Student</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='table-hover'>
                         {studentList.map((student) => (
                         <StudentRow key={student.id} student={student} />
                         ))}

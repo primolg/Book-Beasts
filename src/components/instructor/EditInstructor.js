@@ -54,7 +54,7 @@ const EditInstructor = () => {
             lastName: instructor.lastName,
             email: instructor.email,
             username: instructor.username,
-            password: instructor.password,
+            password: '######',
         })
     }, [instructor])
 
@@ -66,23 +66,49 @@ const EditInstructor = () => {
         <>
                 <div id="edit-tab">
                 <DeleteInstructor key={instructor.id} instructor={instructor}/>
-               <form id='form' onSubmit={handleSubmit}>
-               <h3>Edit instructor</h3>
-               <label htmlFor="firstName">First Name:</label>
-               <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-               <label htmlFor="lastName">Last Name:</label>
-               <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-               <label htmlFor="email">Email:</label>
-               <input name="email" value={form.email} onChange={handleChange('email')}/>
-               <label htmlFor="username">Username:</label>
-               <input name='username' value={form.username} onChange={handleChange('username')}/>
-               <label htmlFor="password">Password:</label>
-               <input name="password" value={form.password} onChange={handleChange('password')}/>
-               <button type="submit">Submit Changes</button>
-               <button className="close" onClick={handleClose}>
-                CANCEL
-              </button>
-              </form> 
+                <div className="form-card">
+                <h2 className="card-heading">
+                        Edit Profile
+                    </h2>
+               <form className="card-form" onSubmit={handleSubmit}>
+
+               <div className="input">
+               <input className="input-field" name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
+               <label className="input-label" htmlFor="firstName">First Name:</label>
+               </div>
+
+               <div className="input">
+               <input className="input-field" name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
+               <label className="input-label" htmlFor="lastName">Last Name:</label>
+               </div>
+
+               <div className="input">
+               <input className="input-field" name="email" value={form.email} onChange={handleChange('email')}/>
+               <label className="input-label" htmlFor="email">Email:</label>
+               </div>
+
+               <div className="input">
+               <input className="input-field" name='username' value={form.username} onChange={handleChange('username')}/>
+               <label className="input-label" htmlFor="username">Username:</label>
+               </div>
+
+               <div className="input">
+               <input className="input-field" name="password" value={form.password} onChange={handleChange('password')}/>
+               <label className="input-label" htmlFor="password">Password:</label>
+               </div>
+
+               <div className="action">
+                    <button className="btn draw-border" type="submit">Submit</button>
+                    <button className="close action-button" onClick={close}>
+                            CANCEL
+                    </button>
+               </div>
+                        </form>
+                        
+                        <div className="card-info">
+                            <p>By clicking submit you are changing this student's profile.</p>
+                        </div>
+              </div>
               </div>
             
        
