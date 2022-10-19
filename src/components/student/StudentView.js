@@ -12,7 +12,7 @@ const StudentView = () => {
     const params = useSelector((state) => state.user.id);
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
-    const themes = ["sci-fi", "spooky", "ocean", "racecar", "fantasy", "forest"]
+    const themes = ["general fiction", "autobiography", "sci-fi", "fantasy", "poetry", "historical", "adventure", "mystery"];
 
     
     useEffect(() => {

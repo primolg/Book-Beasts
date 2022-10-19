@@ -5,14 +5,13 @@ const Template2 = () => {
     const cloudName = "ddqp7dojc"; // replace with your own cloud name
     const uploadPreset = "yyl4ywcc";
     const [image, setImage] = useState(undefined);
-    console.log(image)
     
     const myWidget = cloudinary.createUploadWidget(
         {
             cloudName: cloudName,
             uploadPreset: uploadPreset,
             cropping: true,
-            croppingAspectRatio: 0.7,
+            croppingAspectRatio: 0.9,
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
