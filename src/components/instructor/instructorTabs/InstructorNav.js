@@ -15,18 +15,18 @@ import {
 
 
 const InstructorNav = () => {
-    const [ activeTab, setActiveTab ] = useState("tab1");
+    const [ activeTab, setActiveTab ] = useState("portal-home");
     const params = useParams();
 
     return(
         <><InstructorHeader /><div className='instructor-tabs'>
             <ul className='instructor-nav'>
-                <TabNavItem title="Portal Home" id="home" activeTab={setActiveTab} setActiveTab={setActiveTab} />
+                <TabNavItem title="Portal Home" id="portal-home" activeTab={setActiveTab} setActiveTab={setActiveTab} />
                 <TabNavItem title="Student Roster" id="roster" activeTab={setActiveTab} setActiveTab={setActiveTab} />
                 <TabNavItem title="Profile & Setting" id="edit" activeTab={setActiveTab} setActiveTab={setActiveTab} />
             </ul>
             <div className='outlet'>
-                <TabContent id="home" activeTab={activeTab}>
+                <TabContent id="portal-home" activeTab={activeTab}>
                     <InstructorPortal />
                 </TabContent>
                 <TabContent id="roster" activeTab={activeTab}>

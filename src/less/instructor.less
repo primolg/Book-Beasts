@@ -8,38 +8,39 @@
 
 @headerHeight: 2.3em;
 
-#header-container {
+#instructor-header {
     background-color: @background;
     min-height: @headerHeight;
     padding: 0 0.7em;
-
+	width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    button {
-        background: @blue;
-        color: white;
-        @flexCenter();
-        height: 2.1em;
-        width: 4.6em;
-        padding-top: 0.12em;
-        border: 3px solid @blue;
-        border-radius: 1em;
-    }
+    // button {
+    //     background: @blue;
+    //     color: white;
+    //     @flexCenter();
+    //     height: 2.1em;
+    //     width: 4.6em;
+    //     padding-top: 0.12em;
+    //     border: 3px solid @blue;
+    //     border-radius: 1em;
+    // }
 
     #header-welcome {
         display: none;
     }
-    @media screen and (min-width: 600px) {
-        #header-welcome {
-            display: block;
-        }
-    }
+    // @media screen and (min-width: 600px) {
+    //     #header-welcome {
+    //         display: block;
+    //     }
+    // }
 }
 
 //buttons
 //logout
+
 
 .draw-border {
 	box-shadow: inset 0 0 0 4px @blue;
@@ -87,13 +88,210 @@
 	cursor: pointer;
 	line-height: 1.5;
 	font: 700 1.2rem 'Roboto Slab', sans-serif;
-	padding: 1em 2em;
+	padding: .5em 1em;
 	letter-spacing: 0.05rem;
   }
-//   .btn:focus {
-// 	outline: 2px dotted @light_grey;
-//   }
+
+  .small-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	line-height: 1.5;
+	font: 400 1.2rem 'Roboto Slab', sans-serif;
+	padding: .5em .75em;
+	letter-spacing: 0.05rem;
+  }
+
+  .btn:focus {
+	outline: 2px dotted @light_grey;
+  }
  
+//tables
+//student roster
+// Color variables (appears count calculates by raw css)
+@color0: #c1c3d1; // Appears 3 times
+@color1: #4e5066; // Appears 2 times
+@color2: #ffffff; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width0: 600px; // Appears 2 times
+@width1: 100%; // Appears 2 times
+
+.studentRoster{
+	display: block;
+	margin: auto;
+	max-width: 100%;
+	padding:5px;
+	width: 100%;
+}
+div.table-title {
+	display: flex;
+	margin: auto;
+	max-width: @width0;
+	padding:5px;
+	width: @width1;
+}
+.table-title {
+	h3 {
+		color: #fafafa;
+		font-family: "Roboto", helvetica, arial, sans-serif;
+		font-size: 30px;
+		font-style:normal;
+		font-weight: 400;
+		text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+		text-transform:uppercase;
+	}
+}
+.table-fill {
+	animation: float 5s infinite;
+	background: white;
+	border-collapse: collapse;
+	border-top-left-radius:2rem;
+	border-top-right-radius:2rem;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	height: auto;
+	margin: auto;
+	max-width: 100%;
+	padding:5px;
+	width: 100%;
+}
+th {
+	background:@blue;
+	border-bottom:4px solid #9ea7af;
+	border-right: 1px solid #343a45;
+	color:#D5DDE5;
+	font-size:23px;
+	font-weight: 100;
+	padding:24px;
+	text-align:left;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	vertical-align:middle;
+	&:first-child {
+		border-top-left-radius:2rem;
+	}
+	&:last-child {
+		border-right:none;
+		border-top-right-radius:2rem;
+	}
+}
+tr {
+	border-bottom: 1px solid @color0;
+	border-top: 1px solid @color0;
+	color:#666B85;
+	font-size:16px;
+	font-weight:normal;
+	text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+	&:hover {
+		td {
+			background: @med_grey;
+			border-top: 1px solid #22262e;
+			color: @blue;
+		}
+	}
+	&:first-child {
+		border-top:none;
+	}
+	&:last-child {
+		border-bottom:none;
+		td {
+			&:first-child {
+				border-bottom-left-radius:3px;
+			}
+			&:last-child {
+				border-bottom-right-radius:3px;
+			}
+		}
+	}
+	&:nth-child(odd) {
+		td {
+			background:#EBEBEB;
+		}
+		&:hover {
+			td {
+				background: @med_grey;
+			}
+		}
+	}
+}
+td {
+	background:@color2;
+	border-right: 1px solid @color0;
+	font-size:18px;
+	font-weight:300;
+	padding:20px;
+	text-align:left;
+	text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+	vertical-align:middle;
+	&:last-child {
+		border-right: 0px;
+	}
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+	table, thead, tbody, th, td, tr {
+		display: block;
+		margin: auto;
+	}
+	
+	table {
+		height: auto;
+	}
+	thead {
+		tr {
+			left: -9999px;
+			position: absolute;
+			top: -9999px;
+		}
+	}
+	tr {
+		border-bottom: none;
+		color:#666B85;
+		font-size:16px;
+		font-weight:normal;
+		text-shadow: none;
+		// &:hover {
+		// 	td {
+		// 		background: @med_grey;
+		// 		border-top: 1px solid #22262e;
+		// 		color: @blue;
+		// 	}
+		// }
+	}
+	td {
+		border-bottom: 1px solid @color1;
+		padding-left: 50%;
+		position: relative;
+		&:first-child {
+			border-top-left-radius:2rem;
+			border-top-right-radius:2rem;
+		}
+		&:last-child {
+			border-bottom-left-radius:2rem;
+			border-bottom-right-radius:2rem;
+		}
+	}
+	td {
+		&:before {
+			left: 6px;
+			padding-right: 10px;
+			position: absolute;
+			top: 6px;
+			white-space: nowrap;
+			width: 45%;
+		}
+	}
+	td:nth-of-type(1):before { content: "First Name"; }
+	td:nth-of-type(2):before { content: "Last Name"; }
+	td:nth-of-type(3):before { content: "Username"; }
+	td:nth-of-type(4):before { content: "Color"; }
+	td:nth-of-type(5):before { content: "Book List"; }
+	td:nth-of-type(6):before { content: "Email"; }
+	td:nth-of-type(7):before { content: "Edit Student"; }
+	td:nth-of-type(8):before { content: "Delete Student"; }
+}
+
+
 
 //tab navigation
 @color_1: #E8F0F2;
@@ -181,4 +379,122 @@ ul.instructor-nav {
 }
 [data-popup='tooltip'].popup-overlay {
 	background: transparent;
+}
+
+//Forms
+// Color variables (appears count calculates by raw css)
+@color0: #6658d3; // Appears 6 times
+@color1: #ffffff; // Appears 2 times
+@color2: #8597a3; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width1: 100%; // Appears 2 times
+
+
+.form-card {
+	background-color: @color1;
+	border-radius: 10px;
+	box-shadow: 0 10px 20px 0 rgba(153, 153, 153, .25);
+	display: flex;
+	flex-direction: column;
+	margin: 2rem auto;
+	max-width: 100%;
+	max-height: 100%;
+	padding: 0.75rem;
+	width: @width1;
+}
+.card-image {
+	background-image: url('https://assets.codepen.io/285131/coffee_1.jpg');
+	background-position: 0 5%;
+	background-repeat: no-repeat;
+	background-size: 150%;
+	border-radius: 8px;
+	overflow: hidden;
+	padding-bottom: 65%;
+	position: relative;
+}
+.card-heading {
+	color: #735400;
+	font-size: 1.75rem;
+	font-weight: 700;
+	left: 10%;
+	line-height: 1.222;
+	position: absolute;
+	small {
+		display: block;
+		font-size: 0.75em;
+		font-weight: 400;
+		margin-top: 0.25em;
+	}
+}
+.card-form {
+	padding: 2rem 1rem 0;
+}
+.input {
+	display: flex;
+	flex-direction: column-reverse;
+	padding-top: 1.5rem;
+	position: relative;
+}
+.input+.input {
+	margin-top: 1.5rem;
+}
+.input-label {
+	color: @color2;
+	position: absolute;
+	top: 1.5rem;
+	transition: 0.25s ease;
+}
+.input-field {
+	background-color: transparent;
+	border-bottom: 2px solid #eeeeee;
+	border: 0;
+	font-size: 1.125rem;
+	font: inherit;
+	padding: 0.25rem 0;
+	z-index: 1;
+	&:focus {
+		border-bottom-color: @color0;
+		outline: 0;
+	}
+	&:valid {
+		border-bottom-color: @color0;
+		outline: 0;
+	}
+	&:focus+.input-label {
+		color: @color0;
+		transform: translateY(-1.5rem);
+	}
+	&:valid+.input-label {
+		color: @color0;
+		transform: translateY(-1.5rem);
+	}
+}
+.action {
+	margin-top: 2rem;
+}
+.action-button {
+	background-color: @color0;
+	border-radius: 6px;
+	border: 0;
+	color: @color1;
+	font-size: 1.25rem;
+	font-weight: 500;
+	font: inherit;
+	padding: 1em;
+	width: @width1;
+	&:focus {
+		outline: 0;
+	}
+}
+.card-info {
+	color: @color2;
+	font-size: 0.875rem;
+	padding: 1rem 1rem;
+	text-align: center;
+	a {
+		color: @color0;
+		display: block;
+		text-decoration: none;
+	}
 }

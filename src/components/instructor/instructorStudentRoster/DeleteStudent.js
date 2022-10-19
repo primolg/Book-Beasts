@@ -20,7 +20,7 @@ const DeleteStudent = ( { student }) => {
 
     return (
         <>
-            <Popup trigger={<button>Delete This Account</button>} position="bottom left">
+            <Popup trigger={<button className="small-btn draw-border">Delete</button>} position="bottom left">
             {close => (
                <div>
                <h2>CAUTION!</h2>
