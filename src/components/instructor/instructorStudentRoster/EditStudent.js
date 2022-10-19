@@ -6,7 +6,7 @@ import Popup from 'reactjs-popup';
 
 //This shows hashed password when opening Edit popup - need to fix that.
 
-const EditStudent = ( {student} ) => {
+const EditStudent = ( {student, activeTab, setActiveTab } ) => {
     const dispatch = useDispatch();
     const params = useParams();
     const navigate  = useNavigate();
@@ -39,7 +39,7 @@ const EditStudent = ( {student} ) => {
             username: form.username,
             password: form.password,
         }, params.id, student.id, student));
-        navigate(`/instructorPortal/${params.id}`);
+        setActiveTab("portal-home");
     };
 
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
@@ -55,33 +55,61 @@ const EditStudent = ( {student} ) => {
             lastName: student.lastName,
             email: student.email,
             username: student.username,
-            password: student.password,
+            password: '#######',
         })
     }, [student])
 
     return (
         <>
-        <Popup trigger={<button>Edit</button>} position="top left">
+        <Popup trigger={<button className="small-btn draw-border">Edit</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
             {close => (
-                <div>
-               <form id='form' onSubmit={handleSubmit}>
-               <h3>Edit Student</h3>
-               <label htmlFor="firstName">First Name:</label>
-               <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-               <label htmlFor="lastName">Last Name:</label>
-               <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-               <label htmlFor="email">Email:</label>
-               <input name="email" value={form.email} onChange={handleChange('email')}/>
-               <label htmlFor="username">Username:</label>
-               <input name='username' value={form.username} onChange={handleChange('username')}/>
-               <label htmlFor="password">Password:</label>
-               <input name="password" value={form.password} onChange={handleChange('password')}/>
-               <button type="submit">Submit Changes</button>
-              </form> 
-              <button className="close" onClick={close}>
-                CANCEL
-              </button>
-              </div>
+                
+                  <div className="form-card">
+                        <h2 className="card-heading">
+                        Edit Student
+                    </h2>
+                    <form className="card-form" onSubmit={handleSubmit}>
+
+                            <div className="input">
+                                <input className="input-field" name='firstName' value={form.firstName} onChange={handleChange('firstName')} />
+                                <label className="input-label" htmlFor="firstName">First Name:</label>
+                            </div>
+
+                            <div className="input">
+                                <input className="input-field" name='lastName' value={form.lastName} onChange={handleChange('lastName')} />
+                                <label className="input-label" htmlFor="lastName">Last Name:</label>  
+                            </div>
+
+                            <div className="input">
+                                <input className="input-field" name="email" value={form.email} onChange={handleChange('email')} />
+                                <label className="input-label" htmlFor="email">Email:</label>
+                            </div>
+
+                            <div className="input">
+                                <input className="input-field" name='username' value={form.username} onChange={handleChange('username')} />
+                                <label className="input-label" htmlFor="username">Username:</label>
+                            </div>
+
+                            <div className="input">
+                                <input className="input-field" name="password" value={form.password} onChange={handleChange('password')} />
+                                <label className="input-label" htmlFor="password">Password:</label>
+                            </div>
+
+                            <div className="action">
+                                <button className="btn draw-border" type="submit">Submit</button>
+                            
+                        
+                        <button className="close action-button" onClick={close}>
+                            CANCEL
+                        </button>
+                        </div>
+                        </form>
+                        
+                        <div className="card-info">
+                            <p>By clicking submit you are changing this student's profile.</p>
+                        </div>
+                        </div>
+              
             )}
         </Popup>
         </>

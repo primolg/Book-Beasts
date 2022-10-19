@@ -16,19 +16,29 @@ const DeleteInstructor = ( { instructor }) => {
 
     return (
         <>
-         <Popup trigger={<button>Delete This Account</button>} position="bottom left">
+         <Popup trigger={<button className="small-btn draw-border">Delete This Account</button>} position="bottom left">
             {close => (
-               <div>
-               <h2>CAUTION!</h2>
-               <p>Deleting this instructor account will also delete all student
+               <div className="form-card">
+               <h2 className="card-heading">CAUTION!</h2>
+               <small>Deleting this instructor account will also delete all student
                    accounts associated with it. Click DELETE if you still wish to continue.
                    Click CANCEL to go back to editing your account.
-               </p>
-               <button onClick={handleDelete}>YES</button>
-               
-              <button className="close" onClick={close}>
+               </small>
+               <form className="card-form">
+                        <div className="input no-border">
+                        <input className="is-hidden" type="hidden"/>
+                        <label className="is-hidden"></label>
+                        </div>
+                    <div className="action">
+                    <div className="delete-button">
+                        
+               <button className="plus" onClick={handleDelete}></button> 
+               </div>
+              <button className="close action-button" onClick={close}>
                 CANCEL
               </button>
+              </div>
+              </form>
               </div>
             )}
         </Popup>

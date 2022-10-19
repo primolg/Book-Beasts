@@ -20,17 +20,31 @@ const DeleteStudent = ( { student }) => {
 
     return (
         <>
-            <Popup trigger={<button>Delete This Account</button>} position="bottom left">
+            <Popup trigger={<button className="small-btn draw-border">Delete</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
             {close => (
-               <div>
-               <h2>CAUTION!</h2>
-               <p>Are you sure you want to delete this student?
-                        Click CANCEL to keep this student.
-                    </p>
-               <button onClick={handleDelete}>YES</button> 
-              <button className="close" onClick={close}>
+               <div className="form-card">
+                
+               <h2 className="card-heading">CAUTION!
+               <small>Are you sure you want to delete this student?
+                         Click CANCEL to keep this student.
+                    </small>
+               </h2>
+               
+                    <form className="card-form">
+                        <div className="input no-border">
+                        <input className="is-hidden" type="hidden"/>
+                        <label className="is-hidden"></label>
+                        </div>
+                    <div className="action">
+                    <div className="delete-button">
+                        
+               <button className="plus" onClick={handleDelete}></button> 
+               </div>
+              <button className="close action-button" onClick={close}>
                 CANCEL
               </button>
+              </div>
+              </form>
               </div>
             )}
         </Popup>

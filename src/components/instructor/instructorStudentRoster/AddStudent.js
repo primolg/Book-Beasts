@@ -48,7 +48,7 @@ const AddStudent = () => {
 
 
     return(
-        <><Popup trigger={<button>Add Student</button>} position="bottom left">
+        <><Popup trigger={<button className="btn draw-border">Add Student</button>} position="bottom left">
         {close => (
             <div>
           <form id='form' onSubmit={handleSubmit}>
