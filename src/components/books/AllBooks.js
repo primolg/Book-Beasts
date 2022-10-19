@@ -80,9 +80,9 @@ const AllBooks = () => {
                           </div>
                           </Link>
                           <div className="author-tag">  
-                            <p>By: {book.student.firstName} {book.student.lastName}</p>
-                            <div className="page-numbers">{book.totalPages} Pages</div>
-                            <div className="genre-tag">{book.genre}</div>
+                            <p className="author-info">By: {book.student.firstName} {book.student.lastName}</p>
+                            <div className="page-numbers author-info">{book.totalPages} Pages</div>
+                            <div className="genre-tag author-info">{book.genre}</div>
                           </div>
                       </div>
                       )}

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
 import HTMLFlipBook from 'react-pageflip'
 import BookView3 from './BookView3';
+import disableScroll from 'disable-scroll';
 
 const BookView = () => {
     const params = useParams();
@@ -45,7 +46,6 @@ const BookView = () => {
 
     useEffect(() => {
         dispatch(fetchBookData(params.id))
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }, []);
     
 
