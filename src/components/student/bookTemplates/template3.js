@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
-import imageTools from './ImageGetter';
 
 const Template3 = () => {
     const [text, setText] = useState('');
     const [image, setImage] = useState(undefined);
-    const [start, setStart] = useState(false)
+
+    // console.log(text)
     return (
         <div className="page-outer-div temp3-outer-div">
             <div className='text-img-div'>
                 <div className="small-image-page">
                     {image ? 
-                        <img src={image} /> : 
-                        <button 
-                            onClick={()=>imageTools.smallImage.open()}
-                            class="cloudinary-button">
-                            Upload image
-                        </button>
+                        image : 
+                        <input type="file" name="img" accept=".jpg,.jpeg,.png" onChange={(event) => setImage(event.target.value)}></input>
                     }
                 </div>
                 <div className="small-text-page" id="pageText" contentEditable="true">
-                    {start ? "" : "Type Here"}
+                    "hello"
                 </div>
             </div>
         </div>
