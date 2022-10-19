@@ -16,10 +16,7 @@ const BookTable = () => {
         dispatch(fetchStudentData(params.id, params.studentId))
     }, []);
 
-    const handleBack = () => {
-        navigate(`/instructorPortal/${params.id}`);
-    }
-   
+   console.log('BOOKLIST', bookList)
     return(
 
       <div className='booksTable' id="book-table">
@@ -50,7 +47,7 @@ const BookTable = () => {
             ): (
                 <div>
                 <h3>This student hasn't created any books yet!</h3>
-                <button className='btn draw-border' onClick={handleBack}>Back To Roster</button>
+                <button onClick={() => navigate(-1)}>Back To Roster</button>
                 </div>
             )}
         </div>

@@ -19,7 +19,8 @@ const InstructorNav = () => {
     const params = useParams();
 
     return(
-        <><InstructorHeader /><div className='instructor-tabs'>
+        <><InstructorHeader />
+        <div className='instructor-tabs tooltipBoundary'>
             <ul className='instructor-nav'>
                 <TabNavItem title="Portal Home" id="portal-home" activeTab={setActiveTab} setActiveTab={setActiveTab} />
                 <TabNavItem title="Student Roster" id="roster" activeTab={setActiveTab} setActiveTab={setActiveTab} />
@@ -30,7 +31,7 @@ const InstructorNav = () => {
                     <InstructorPortal />
                 </TabContent>
                 <TabContent id="roster" activeTab={activeTab}>
-                    <InstructorStudents />
+                    <InstructorStudents activeTab={activeTab} setActiveTab={setActiveTab}/>
                 </TabContent>
                 <TabContent id="edit" activeTab={activeTab}>
                     <EditInstructor />
