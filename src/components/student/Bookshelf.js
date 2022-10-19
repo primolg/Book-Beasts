@@ -14,7 +14,6 @@ const Bookshelf = ({books, themes}) => {
     const titleRef = useRef();
 
     const createBookAndRedirect = async () => {
-        console.log(titleRef.current.value);
         const res = await dispatch(createNewBook({
             title: titleRef.current.value,
             genre: theme,
@@ -41,7 +40,7 @@ const Bookshelf = ({books, themes}) => {
                 <div className="shelf-div-student">
                     {books.map(book => 
                         <div key={book.id} className="book-in-shelf-student">
-                            <Link to={"/books/" + book.id}>{book.title}</Link>
+                            <Link to={(book.isPublished ? "/books/" : "/editor/") + book.id}>{book.title}</Link>
                         </div>
                     )}
                 </div>

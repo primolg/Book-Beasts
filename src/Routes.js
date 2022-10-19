@@ -8,7 +8,6 @@ import AllBooks from "./components/books/AllBooks";
 import SingleBook from "./components/books/SingleBook";
 import Team from "./components/footer/Team";
 import BookView from "./components/books/BookView";
-import BookEditor from "./components/student/BookEditor";
 import { InstructorNav } from "./components/instructor";
 
 const Router = () => {

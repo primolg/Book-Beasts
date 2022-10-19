@@ -48,6 +48,7 @@ export const createNewBook = (book) => async (dispatch) => {
 
 export const updateBook = (book) => async (dispatch) => {
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
+    console.log(updatedBook);
     if (!updatedBook || updatedBook === {}) {
         // console.log("Error:", updatedBook);
         alert("Unable to edit book");

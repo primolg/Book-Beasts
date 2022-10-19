@@ -36,6 +36,12 @@ const BookEditor = () => {
         }
     }, [currentBook.pages]);
 
+    useEffect(() => {
+        if (currentBook?.id !== bookId) {
+            dispatch(fetchBook(bookId));
+        }
+    }, [bookId])
+
     const autosave = () => {
 
     };
