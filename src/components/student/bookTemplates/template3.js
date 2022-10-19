@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const Template3 = () => {
     const [text, setText] = useState('');
     const [image, setImage] = useState(undefined);
-    const [start, setStart] = useState(false)
+
+    // console.log(text)
     return (
         <div className="page-outer-div temp3-outer-div">
             <div className='text-img-div'>
@@ -14,7 +15,7 @@ const Template3 = () => {
                     }
                 </div>
                 <div className="small-text-page" id="pageText" contentEditable="true">
-                    {start ? "" : "Type Here"}
+                    "hello"
                 </div>
             </div>
         </div>
