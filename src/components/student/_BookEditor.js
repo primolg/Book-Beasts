@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchBook, addNewPage } from "../../store/reducers/editorSlice";
 // components
 import templates from './bookTemplates';
-import { EditorBookInfo } from "./";
+import { EditorBookInfo, PublishDeleteButtons } from "./";
 
 const BookEditor = () => {
     const bookId = useParams().id;
@@ -42,9 +42,7 @@ const BookEditor = () => {
         }
     }, [bookId])
 
-    const autosave = () => {
-
-    };
+    // const autosave = () => {};
 
     if (currentBook.isPublished) {
         return (
@@ -70,6 +68,8 @@ const BookEditor = () => {
                     <div className="page-editor">
                         <templates.Template1 page={currentPage} />
                     </div>
+
+                    <PublishDeleteButtons bookId={currentBook?.id} />
                 </div>
         )
     }

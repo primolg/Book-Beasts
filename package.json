@@ -33,12 +33,12 @@
     "react-pageflip": "^2.0.3",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
+    "react-toastify": "^9.0.8",
     "reactjs-popup": "^2.0.5",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "sequelize": "^6.24.0",
-    "toastify": "^2.0.1",
     "use-sound": "^4.0.1",
     "volleyball": "^1.5.1",
     "webpack-cli": "^4.10.0"

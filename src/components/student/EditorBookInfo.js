@@ -9,22 +9,27 @@ const EditorBookInfo = ({ book }) => {
     const genreRef = useRef();
     const dispatch = useDispatch();
 
+    // TEMPORARY THEMES
+    const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"];
+
     const handleSubmit = async (e, close) => {
         e.preventDefault();
         console.log(book.id);
 
         if (titleRef.current?.value) {
-            dispatch(updateBook({
+            await dispatch(updateBook({
                 id: book.id,
                 title: titleRef.current.value
             }));
         } else if (genreRef.current?.value) {
-            dispatch(updateBook({
+            await dispatch(updateBook({
                 id: book.id,
                 genre: genreRef.current.value
             }))
         }
         // handle image uploading here
+
+        close();
     };
 
     if (!book?.id) {
@@ -59,10 +64,12 @@ const EditorBookInfo = ({ book }) => {
                             <div className="edit-book-popup-form">
                                 <h3>Change your book's genre:</h3>
                                 <form>
-                                    <select name="genre" ref={genreRef}>
-                                        <option value="">Select</option>
-                                        <option value="racecar">Racecar</option>
-                                        <option value="spooky">Spooky</option>
+                                    <select name="genre" ref={genreRef} defaultValue={book.genre}>
+                                        {themes.map((theme, i) => 
+                                            <option value={theme} key={i}>
+                                                {theme}
+                                            </option>    
+                                        )}
                                     </select>
                                     <button id="new-book-btn" type="submit" onClick={(e)=>handleSubmit(e,close)}>Submit</button>
                                 </form>
@@ -80,7 +87,7 @@ const EditorBookInfo = ({ book }) => {
                                 <h3>Upload cover art:</h3>
                                 <form>
                                     <p>Cloudinary placeholder</p>
-                                    <button id="new-book-btn" type="submit" onClick={() => console.log("Placeholder")}>Submit</button>
+                                    <button id="new-book-btn" type="submit" onClick={()=>console.log("Placeholder")}>Submit</button>
                                 </form>
                                 <p onClick={close} id="close-popup">Cancel</p>
                             </div>
