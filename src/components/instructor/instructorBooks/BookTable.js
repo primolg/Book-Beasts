@@ -2,19 +2,21 @@ import React, { useEffect } from 'react';
 import BookRow from './BookRow';
 import { fetchStudentData } from '../../../store/reducers/instructorSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 
 const BookTable = () => {
     const dispatch = useDispatch();
     const params = useParams();
+    const navigate = useNavigate();
     const student = useSelector((state) => state.instructorList.currentStudent)
     const bookList = student.books
     
     useEffect(() => {
         dispatch(fetchStudentData(params.id, params.studentId))
     }, []);
-   
+
+   console.log('BOOKLIST', bookList)
     return(
 
       <div className='booksTable' id="book-table">
@@ -45,9 +47,7 @@ const BookTable = () => {
             ): (
                 <div>
                 <h3>This student hasn't created any books yet!</h3>
-                <Link to={`/instructorPortal/${params.id}/students`}>
-                        <button>Back to Student Roster</button>
-                    </Link>
+                <button onClick={() => navigate(-1)}>Back To Roster</button>
                 </div>
             )}
         </div>

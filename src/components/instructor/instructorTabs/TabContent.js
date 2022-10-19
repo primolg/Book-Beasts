@@ -1,6 +1,6 @@
 import React from "react";
  
-const TabContent = ({id, activeTab, children}) => {
+const TabContent = ({ id, activeTab, children }) => {
 
  return (
    activeTab === id ? <div className="TabContent">

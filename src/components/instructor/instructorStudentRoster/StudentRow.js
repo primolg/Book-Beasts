@@ -10,20 +10,20 @@ const StudentRow = ( {student}) => {
         <>
             {student && (
                 <tr>
-                    <td>{student.firstName}</td>
-                    <td>{student.lastName}</td>
-                    <td>{student.username}</td>
-                    <td>{student.color}</td>
-                    <td> <Link to={`/instructorPortal/${params.id}/students/${student.id}/books`}>
-                        <button>View Books</button>
+                    <td className='text-center'>{student.firstName}</td>
+                    <td className='text-center'>{student.lastName}</td>
+                    <td className='text-center'>{student.username}</td>
+                    <td className='text-center'>{student.color}</td>
+                    <td className='text-center'> <Link to={`/instructorPortal/${params.id}/students/${student.id}/books`}>
+                        <button className="small-btn draw-border">View Books</button>
                     </Link>
                         </td>
                 
-                    <td>{student.email}</td>
-                    <td>
+                    <td className='text-center'>{student.email}</td>
+                    <td className='text-center'>
                         <EditStudent student={student} />
                     </td>
-                    <td>
+                    <td className='text-center'>
                         <DeleteStudent student={student} />
                     </td>
                 </tr>
