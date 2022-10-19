@@ -6,7 +6,6 @@ import { fetchBookData } from '../../store/reducers/bookSlice';
 import Bookshelf from './Bookshelf';
 
 const StudentView = () => {
-
     //right now it's pulling the id from the "user" in state, and then adding studentData to state, to access the users books.
     //I'd like to change this so that the books are added upon the initial user login to avoid having to do any authentication or axios get calls after login!
 
@@ -16,7 +15,6 @@ const StudentView = () => {
     const themes = ["sci-fi", "spooky", "ocean", "racecar", "fantasy", "forest"]
 
     
-
     useEffect(() => {
         if (params) dispatch(fetchStudentData(params));
     }, [params]);

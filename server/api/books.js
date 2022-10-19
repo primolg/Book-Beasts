@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { Student, Book, Page } = require('../db');
 
+// for viewing published books //
+// post/put/delete books have been moved to ./editor.js //
+
 //GET Books
 router.get('/', async(req, res, next) => {
     try {
@@ -27,37 +30,6 @@ router.get('/:id', async(req, res, next) => {
         res.send(book);
     } catch (e) {
         next(e);
-    }
-})
-
-//POST create new Book
-router.post('/', async (req, res, next) => {
-    try {
-
-    } catch (e) {
-        next(e);
-    }
-});
-
-//PUT edit Book
-router.put('/:id', async (req, res, next) => {
-    try {
-        const updatedBook = await Book.findByPk(req.params.id);
-        await updatedBook.update(req.body);
-        res.send(updatedBook);
-    } catch (e) {
-        next(e);
-    }
-});
-
-//DELETE book
-router.delete('/:id', async(req, res, next) => {
-    try {
-        const deletedBook = await Book.findByPk(req.params.id);
-        await deletedBook.destroy();
-        res.send (deletedBook);
-    } catch(e) {
-
     }
 })
 

@@ -1,10 +1,14 @@
+@import "./common.less";
+
 .page-selector-shelf-editor{
     display: flex;
     align-items: center;
     border: 3px black solid;
     overflow: scroll;
+
     padding: 1vh;
-    margin-top: 8vh;
+
+    margin-top: 0.2em;
     max-height: 10vh;
     width: 80vw;
     max-width: 320px;
@@ -43,4 +47,139 @@
     border: 3px black solid;
 }
 
+#selected-editor{
+    border-color: black;
+    color: black;
+}
 
+// === css for creating / editing books === //
+
+@spaceBetween: 1em;
+@keyframes popup {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0px 0px 8px rgba(0,0,0,1);
+    }
+}
+@mediumPopup: {
+    min-width: 17.5em;
+    max-width: 500px;
+    height: fit-content;
+    background: @background;
+    animation: popup 0.3s;
+    border-radius: 1em;
+}
+@subtleLink: {
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
+// popup form for creating a new book
+.new-book-content {
+    @mediumPopup();
+
+    .new-book-popup-form {
+        margin: 1.3em auto 0;
+        text-align: center;
+
+        >*, form>* {
+            margin: 0.5em 2em;
+            width: fit-content;
+        }
+        h3 {
+            margin-bottom: 0.5em;
+        }
+        input {
+            margin: 0 auto 0.35em;
+            width: 70%;
+            padding: 0.3em 0.7em;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        #new-book-btn {
+            font-size: 1.01em;
+            padding: 0.5em 0.8em 0.4em;
+            border-radius: 1em;
+        }
+        #close-popup {
+            @subtleLink();
+            margin: 0.45em auto 0.75em;
+        }
+    }
+}
+
+#basicInfoContainer {
+    min-width: 220px;
+    width: fit-content;
+    padding: 0.8em;
+    
+    > p {
+        margin-top: 0.3em;
+        text-align: center;
+        font-style: italic;
+    }
+    .attribute {
+        padding: 0.2em 1em;
+        @flexSpaceBetween();
+        button {
+            margin-left: @spaceBetween;
+        }
+        p, h2 {
+            margin-right: @spaceBetween;
+        }
+    }
+}
+
+// popup form for changing a field on the book
+.edit-book-attribute-content {
+    @mediumPopup();
+
+    .edit-book-popup-form {
+        margin: 1.3em auto 0;
+        text-align: center;
+
+        h3 {
+            margin: 0 auto 0.5em;
+        }
+        >*, form>* {
+            margin: 0.4em auto;
+            width: fit-content;
+        }
+        input, select {
+            margin: 0 auto 0.3em;
+            width: 70%;
+            padding: 0.2em 0.5em;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        button {
+            font-size: 1.01em;
+            padding: 0.5em 0.8em 0.4em;
+            border-radius: 1em;
+        }
+        #close-popup {
+            @subtleLink();
+            margin: 0 auto 0.5em;
+        }
+    }
+}
+
+#publish-delete-container {
+    min-width: 310px;
+    max-width: 80%;
+    padding: 1em;
+    @flexSpaceBetween();
+    
+    button {
+        font-size: 1.01em;
+        padding: 0.3em 0.5em 0.2em;
+        border-radius: 1em;
+    }
+}
