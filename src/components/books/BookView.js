@@ -45,7 +45,10 @@ const BookView = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchBookData(params.id))
+    const asyncFetchBookData = async () =>{
+        const fetchBooks = await dispatch(fetchBookData(params.id))
+    }
+    asyncFetchBookData();
     }, []);
     
 
