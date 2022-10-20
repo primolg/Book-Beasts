@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateBook, deleteBook } from "../../store/reducers/editorSlice";
 
-const PublishDeleteButtons = ({ bookId }) => {
+const PublishDeleteButtons = () => {
+    const bookId = useSelector(state => state.editor.currentBook.id);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

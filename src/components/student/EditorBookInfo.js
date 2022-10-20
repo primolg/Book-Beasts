@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import Popup from 'reactjs-popup';
 import { updateBook } from "../../store/reducers/editorSlice";
+import { FaPencilAlt } from "react-icons/fa";
 
 // need to separate popup forms into separate component at some point
 const EditorBookInfo = ({ book }) => {
@@ -36,10 +37,10 @@ const EditorBookInfo = ({ book }) => {
         return("Loading...");
     } else {
         return(
-            <div id="basicInfoContainer">
+            <div id="basic-info-container">
                 <div className="attribute">
                     <h2>{`"${book.title}"`}</h2>
-                    <Popup modal className="edit-book-attribute" trigger={<button>✏️</button>}>
+                    <Popup modal className="edit-book-attribute" trigger={<div><FaPencilAlt /></div>}>
                         {close => (
                             <div className="edit-book-popup-form">
                                 <h3>Update your book title:</h3>
@@ -59,7 +60,7 @@ const EditorBookInfo = ({ book }) => {
 
                 <div className="attribute">
                     <p>{`Genre: ${book.genre}`}</p>
-                    <Popup modal className="edit-book-attribute" trigger={<button>✏️</button>}>
+                    <Popup modal className="edit-book-attribute" trigger={<div><FaPencilAlt /></div>}>
                         {close => (
                             <div className="edit-book-popup-form">
                                 <h3>Change your book's genre:</h3>
@@ -81,7 +82,7 @@ const EditorBookInfo = ({ book }) => {
 
                 <div className="attribute">
                     <p>{`Update cover art: `}</p>
-                    <Popup modal className="edit-book-attribute" trigger={<button>✏️</button>}>
+                    <Popup modal className="edit-book-attribute" trigger={<div><FaPencilAlt /></div>}>
                         {close => (
                             <div className="edit-book-popup-form">
                                 <h3>Upload cover art:</h3>

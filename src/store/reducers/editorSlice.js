@@ -3,28 +3,43 @@ const axios = require("axios");
 
 const editorSlice = createSlice({
     name: "editorSlice",
-    initialState: {},
+    initialState: {
+        currentBook: {},
+        currentPage: {},
+    },
     reducers: {
         setBook: (state, action) => {
-            return action.payload
+            return {
+                ...state,
+                currentBook: action.payload
+            };
         },
         _updateBook: (state, action) => {
             return {
                 ...state,
-                ...action.payload,
-            }
+                currentBook: action.payload,
+            };
         },
         _updatePages: (state, action) => {
             return {
                 ...state,
-                pages: action.payload,
+                currentBook: {
+                    ...state.currentBook,
+                    pages: action.payload
+                },
+            };
+        },
+        setCurrentPage: (state, action) => {
+            return {
+                ...state,
+                currentPage: action.payload
             };
         }
     },
 });
 
 export default editorSlice.reducer;
-export const { setBook, _updateBook, _updatePages } = editorSlice.actions;
+export const { setBook, _updateBook, _updatePages, setCurrentPage } = editorSlice.actions;
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
@@ -50,7 +65,7 @@ export const createNewBook = (book) => async (dispatch) => {
 
 export const updateBook = (book) => async (dispatch) => {
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
-    console.log(updatedBook);
+    // console.log(updatedBook);
     if (!updatedBook || updatedBook === {}) {
         // console.log("Error:", updatedBook);
         alert("Unable to edit book");

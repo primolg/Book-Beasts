@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBook } from "../../store/reducers/editorSlice";
+import { fetchBook, setCurrentPage } from "../../store/reducers/editorSlice";
 // components
-import templates from './bookTemplates';
 import { EditorBookInfo, PublishDeleteButtons, Pageshelf } from "./";
+// import { Template1, Template2, Template3, Template4, Template5 } from "./bookTemplates";
 
 const BookEditor = () => {
     const bookId = useParams().id;
-    const currentBook = useSelector(state => state.editor);
+    const currentBook = useSelector(state => state.editor.currentBook);
+    const currentPage = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
 
+    // const templates = [Template1, Template2, Template3, Template4, Template5];
+
     const [pages, setPages] = useState([]);
-    const [currentPage, setCurrentPage] = useState({});
 
     // if creating new book, gets info from state; if navigating directly to page, fetch from db
+    // currently a bug where it is updating state twice in a row
     useEffect(() => {
-        if (currentBook.pages) {
+        if (currentBook.pages && !pages.length) {
             setPages(currentBook.pages);
             // only selects 1st page if no page is selected
             if (!currentPage || !currentPage?.id) {
-                setCurrentPage(currentBook.pages[0]);
+                // console.log(currentBook.pages[0]);
+                dispatch(setCurrentPage(currentBook.pages[0]));
             }
         } else if (!currentBook.id) {
             dispatch(fetchBook(bookId));
         }
-    }, [currentBook.pages]);
+    }, [currentBook?.pages]);
 
     // need to fix bug where this will fetch nothing after deleting a book
     useEffect(() => {
@@ -48,14 +52,11 @@ const BookEditor = () => {
                 <div className="outer-div-book-view">
 
                     <EditorBookInfo book={currentBook} />
-                    <Pageshelf 
-                        pages={pages}
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                    />
+                    <Pageshelf />
 
                     <div className="page-editor">
-                        <templates.Template4 page={currentPage} />
+                        {/* {templates[(currentPage.templateId || 0)]} */}
+                        {/* <templates.Template4 page={currentPage} /> */}
                     </div>
 
                     <PublishDeleteButtons bookId={currentBook?.id} />
