@@ -48,25 +48,47 @@ const AddStudent = () => {
 
 
     return(
-        <><Popup trigger={<button className="btn draw-border">Add Student</button>} position="bottom left">
+        <>
+        <Popup trigger={<button className="btn draw-border">Add Student</button>}  position="bottom right" keepTooltipInside=".tooltipBoundary">
         {close => (
-            <div>
-          <form id='form' onSubmit={handleSubmit}>
-               <h3>Edit Student</h3>
-               <label htmlFor="firstName">First Name:</label>
+            <div className="form-card">
+                <h2 className="card-heading">
+                Add Student
+                </h2>
+            <form className="card-form" onSubmit={handleSubmit}>
+
+            <div className="input">
                <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-               <label htmlFor="lastName">Last Name:</label>
+               <label className="input-field" htmlFor="firstName">First Name:</label>
+            </div>   
+
+            <div className='input'>
                <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-               <label htmlFor="email">Email:</label>
+               <label className="input-field" htmlFor="lastName">Last Name:</label>
+               </div>
+
+            <div className="input">  
                <input name="email" value={form.email} onChange={handleChange('email')}/>
-               <label htmlFor="username">Username:</label>
+               <label className="input-field" htmlFor="email">Email:</label>
+            </div>
+
+            <div className="input">   
                <input name='username' value={form.username} onChange={handleChange('username')}/>
-               <label htmlFor="password">Password:</label>
+               <label className="input-field" htmlFor="username">Username:</label>
+            </div>   
+
+            <div className="input">  
                <input name="password" value={form.password} onChange={handleChange('password')}/>
-               <label htmlFor="age">Student Age:</label>
+               <label className="input-field" htmlFor="password">Password:</label>
+            </div>
+
+            <div className="input">  
                <input name="age" value={form.age} onChange={handleChange('age')}/>
-               <label htmlFor="color">Color:</label>
-               <select name="color" value={form.color} onChange={handleChange('color')}>
+               <label className="input-field" htmlFor="age">Student Age:</label>
+            </div>   
+
+            <div className="input"> 
+               <select className="input-field" name="color" value={form.color} onChange={handleChange('color')}>
                 <option>Select One:</option>
                 <option>Red</option>
                 <option>Blue</option>
@@ -76,9 +98,19 @@ const AddStudent = () => {
                 <option>Yellow</option>
                 <option>Pink</option>
                 </select>
-               <input type='hidden' name='userId' value={params.id} onChange={handleChange('userId')}/>
-               <button type="submit">Submit Changes</button>
+               <label htmlFor="color">Color:</label>
+            </div>
                
+            <div className="input no-border">
+               <input type='hidden' name='userId' value={params.id} onChange={handleChange('userId')}/>
+               <label className="is-hidden"></label>
+            </div>
+            <div className="action">
+                <button className="btn draw-border" type="submit">Submit</button>
+                <button className="close action-button" onClick={close}>
+                    CANCEL
+                </button>
+            </div>
               </form> 
               <button className="close" onClick={close}>
                 CANCEL

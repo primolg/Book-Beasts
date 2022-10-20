@@ -193,14 +193,26 @@
 @width1: 100%; // Appears 2 times
 
 .studentRoster{
-	display: block;
+	display: flex;
+	flex-direction: column;
 	margin: auto;
+	align-items: flex-start;
+	text-align: center;
+	justify-content:center;
 	max-width: 100%;
 	padding:5px;
 	width: 100%;
 }
-div.table-title {
-	margin: auto;
+// .bookList{
+// 	display: block;
+// 	margin: auto;
+// 	max-width: 100%;
+// 	padding:5px;
+// 	width: 100%;
+// }
+
+.table-title {
+	margin: auto auto 1em auto;
 	text-align: center;
 	max-width:100%;
 	padding:5px;
@@ -208,16 +220,19 @@ div.table-title {
 }
 .table-title {
 	h3 {
-		color: @light_grey;
+		color: @blue;
 		font-family: "Roboto", helvetica, arial, sans-serif;
 		font-size: 30px;
 		font-style:normal;
 		font-weight: 400;
+		text-decoration: underline;
 		text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
 		text-transform:uppercase;
 	}
 }
 .table-fill {
+	display:block;
+	flex: 1 0 50%;
 	animation: float 5s infinite;
 	background: @light_grey;
 	border-collapse: collapse;
@@ -358,10 +373,7 @@ td {
 			width: 45%;
 		}
 	}
-	td:nth-of-type(1):before { 
-		content: "First Name";
-		
-	}
+	td:nth-of-type(1):before { content: "First Name"; }
 	td:nth-of-type(2):before { content: "Last Name"; }
 	td:nth-of-type(3):before { content: "Username"; }
 	td:nth-of-type(4):before { content: "Color"; }
@@ -371,6 +383,195 @@ td {
 	td:nth-of-type(8):before { content: "Delete Student"; }
 }
 
+
+//books table
+// .table-container {
+// 	width: 80%;
+// 	height: auto;
+// 	min-height: 400px;
+// 	background: @light_grey;
+// 	margin: 3.5rem auto 1.5rem;
+// 	padding: 2rem 1rem;
+// 	color: @dark_grey;
+// 	border-radius: 2rem;
+// }
+// .bookList{
+// 	display: block;
+// 	margin: auto;
+// 	max-width: 100%;
+// 	padding:5px;
+// 	width: 100%;
+// }
+
+// div.table-title {
+// 	margin: auto auto 1em auto;
+// 	text-align: center;
+// 	max-width:100%;
+// 	padding:5px;
+// 	width: 100%;
+// }
+// .table-title {
+// 	h3 {
+// 		color: @blue;
+// 		font-family: "Roboto", helvetica, arial, sans-serif;
+// 		font-size: 30px;
+// 		font-style:normal;
+// 		font-weight: 400;
+// 		text-decoration: underline;
+// 		text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+// 		text-transform:uppercase;
+// 	}
+// }
+// .table-fill {
+// 	animation: float 5s infinite;
+// 	background: @light_grey;
+// 	border-collapse: collapse;
+// 	border-top-left-radius:2rem;
+// 	border-top-right-radius:2rem;
+// 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+// 	height: auto;
+// 	margin: auto;
+// 	max-width: 100%;
+// 	padding:5px;
+// 	width: 100%;
+// }
+// th {
+// 	background:@blue;
+// 	border-bottom:4px solid @blue;
+// 	border-right: 1px solid @dark_grey;
+// 	color: @light_grey;
+// 	font-size:23px;
+// 	font-weight: 100;
+// 	padding:24px;
+// 	text-align:left;
+// 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+// 	vertical-align:middle;
+// 	&:first-child {
+// 		border-top-left-radius:2rem;
+// 	}
+// 	&:last-child {
+// 		border-right:none;
+// 		border-top-right-radius:2rem;
+// 	}
+// }
+// tr {
+// 	border-bottom: 1px solid @color0;
+// 	border-top: 1px solid @color0;
+// 	color: @med_grey;
+// 	font-size:16px;
+// 	font-weight:normal;
+// 	text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+// 	&:hover {
+// 		td {
+// 			background: @med_grey;
+// 			border-top: 1px solid #22262e;
+// 			color: @blue;
+// 		}
+// 	}
+// 	&:first-child {
+// 		border-top:none;
+// 	}
+// 	&:last-child {
+// 		border-bottom:1px solid @blue;
+// 		td {
+// 			&:first-child {
+// 				border-bottom-left-radius:3px;
+// 			}
+// 			&:last-child {
+// 				border-bottom-right-radius:3px;
+// 			}
+// 		}
+// 	}
+// 	&:nth-child(odd) {
+// 		td {
+// 			background:@light_grey;
+// 		}
+// 		&:hover {
+// 			td {
+// 				background: @med_grey;
+// 			}
+// 		}
+// 	}
+// }
+// td {
+// 	background:@light_grey;
+// 	border-right:1px solid @blue;
+// 	border-left:1px solid @blue;
+// 	font-size:22px;
+// 	font-weight:500;
+// 	padding:18px;
+// 	text-align:left;
+// 	// text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+// 	vertical-align:middle;
+// 	&:last-child {
+// 		border-right: 0px;
+// 	}
+// }
+
+// @media only screen and (max-width: 760px),
+// (min-device-width: 768px) and (max-device-width: 1024px)  {
+// 	table, thead, tbody, th, td, tr {
+// 		display: block;
+// 		margin: auto;
+// 	}
+	
+// 	table {
+// 		height: auto;
+// 	}
+// 	thead {
+// 		tr {
+// 			left: -9999px;
+// 			position: absolute;
+// 			top: -9999px;
+// 		}
+// 	}
+// 	tr {
+// 		border-bottom: none;
+// 		color:@dark_grey;
+// 		font-size:12px;
+// 		font-weight:normal;
+// 		text-shadow: none;
+// 		// &:hover {
+// 		// 	td {
+// 		// 		background: @med_grey;
+// 		// 		border-top: 1px solid #22262e;
+// 		// 		color: @blue;
+// 		// 	}
+// 		// }
+// 	}
+// 	td {
+// 		border-bottom: 1px solid @dark_grey;
+// 		padding-left: 50%;
+// 		position: relative;
+// 		font-size: 16px;
+// 		&:first-child {
+// 			border-top-left-radius:2rem;
+// 			border-top-right-radius:2rem;
+// 		}
+// 		&:last-child {
+// 			border-bottom-left-radius:2rem;
+// 			border-bottom-right-radius:2rem;
+// 		}
+// 	}
+// 	td {
+// 		&:before {
+// 			left: 1px;
+			
+// 			position: absolute;
+// 			top: 6px;
+// 			white-space: nowrap;
+// 			width: 45%;
+// 		}
+// 	}
+// 	td:nth-of-type(1):before { content: "Title"; }
+// 	td:nth-of-type(2):before { content: "Total Pages"; }
+// 	td:nth-of-type(3):before { content: "Genre"; }
+// 	td:nth-of-type(4):before { content: "Published"; }
+// 	td:nth-of-type(5):before { content: "Completion Time"; }
+// 	td:nth-of-type(6):before { content: "Incomplete"; }
+// 	td:nth-of-type(7):before { content: "Last Changed"; }
+// 	td:nth-of-type(8):before { content: "View Book"; }
+// }
 
 
 //tab navigation
@@ -420,7 +621,7 @@ ul.instructor-nav {
 
 .TabContent {
 	font-size: 2rem;
-	text-align: center;
+	text-align: left;
   }
 
 

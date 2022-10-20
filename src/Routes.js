@@ -27,15 +27,15 @@ const Router = () => {
         <Routes>
             <Route index path="/" element={<AllBooks />} />
             <Route index path="/books" element={<AllBooks />} />
-            <Route index path="/books/:id" element={<BookView />} />
+            <Route path="/books/:id" element={<BookView />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/editor/:id" element={<BookEditor />} />
             <Route path="/team" element={<Team />} />
             <Route path="/student" element={<StudentView />} />
-            <Route path="instructorPortal/:id" element={<InstructorNav/>}/>
-            <Route path="/instructorPortal/:id/edit" element={<EditInstructor />} />
-            <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} />
+            <Route path="/instructorPortal/:id" element={<InstructorNav/>}/>
+            {/* <Route path="/instructorPortal/:id/edit" element={<EditInstructor />} />
+            <Route path="/instructorPortal/:id/students" element={<InstructorStudents />} /> */}
             <Route path="/instructorPortal/:id/students/:studentId/books" element={<BookTable />} />
             <Route path="/instructorPortal/:id/students/:studentId/books/:bookId" element={<ViewSingleBook />} />
         </Routes>

@@ -20,14 +20,17 @@ const Header = () => {
     }
 
     const [sidebarVisibility, setSidebarVisibility] = useState(false);
+    
     if(withoutHeaderRoutes.some((item) => pathname.includes(item))) return null;
     
     return(
         <div id="header-container">
-            <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
+            <div id="header-button-title">
+                <ShowSidebar set={setSidebarVisibility} visible={sidebarVisibility} />
                 <Link to="/books">
                     <h1 id="header-title">Book Beasts</h1>
                 </Link>
+            </div>
             <SearchBar />
             <Sidebar visible={sidebarVisibility} set={setSidebarVisibility} />
         </div>
