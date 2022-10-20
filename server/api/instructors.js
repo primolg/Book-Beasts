@@ -112,6 +112,7 @@ router.delete('/:id/students/:studentId',  async(req, res, next) => {
 
 router.get('/:id/students/:studentId/books', async(req, res, next) => {
     try{
+        console.log("API BOOKS", req.params)
     const studentBooks = await Book.findAll({
         where: {
             studentId: req.params.studentId

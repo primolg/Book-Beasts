@@ -20,6 +20,7 @@ const Header = () => {
     }
 
     const [sidebarVisibility, setSidebarVisibility] = useState(false);
+    
     if(withoutHeaderRoutes.some((item) => pathname.includes(item))) return null;
     
     return(

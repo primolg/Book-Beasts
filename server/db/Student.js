@@ -62,8 +62,8 @@ const Student = db.define("student" , {
     }
 });
 
-Student.beforeBulkCreate((students) => {students.forEach((student) => hashPassword(student))});
-Student.beforeBulkUpdate((students) => {students.forEach((student) => hashPassword(student))});
+Student.beforeCreate((student) => hashPassword(student));
+Student.beforeUpdate((student) => hashPassword(student));
 Student.authenticate = authenticate(Student);
 Student.findByToken = findByToken(Student);
 Student.prototype.generateToken = generateToken;
