@@ -55,8 +55,9 @@ const BookView = () => {
 return ( pages ? (
   <div className="content-container">
         <HTMLFlipBook width={300} height={500}>
-        {pages.map((page) => 
+        {pages.map((page) => <div className="demoPage">
             <BookView3 key={page.page.id} page={page}/>
+            </div>
         )}
         </HTMLFlipBook>
     </div>
