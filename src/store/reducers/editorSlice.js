@@ -31,6 +31,8 @@ export const fetchBook = (bookId) => async (dispatch) => {
     const { data: book } = await axios.get(`/api/editor/${bookId}`);
     if (book) {
         dispatch(setBook(book));
+    } else {
+        alert("Unable to find that book");
     }
 }
 
@@ -54,6 +56,7 @@ export const updateBook = (book) => async (dispatch) => {
         alert("Unable to edit book");
     } else {
         dispatch(_updateBook(updatedBook));
+        return true;
     }
 }
 
@@ -61,6 +64,7 @@ export const deleteBook = (bookId) => async (dispatch) => {
     const { data } = await axios.delete(`/api/editor/${bookId}`);
     if (data) {
         dispatch(setBook({}));
+        return true;
     }
 }
 

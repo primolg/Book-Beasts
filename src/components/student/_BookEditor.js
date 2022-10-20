@@ -36,11 +36,12 @@ const BookEditor = () => {
         }
     }, [currentBook.pages]);
 
+    // need to fix bug where this will fetch nothing after deleting a book
     useEffect(() => {
         if (currentBook?.id !== bookId) {
             dispatch(fetchBook(bookId));
         }
-    }, [bookId])
+    }, [bookId]);
 
     // const autosave = () => {};
 
