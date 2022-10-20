@@ -54,6 +54,8 @@ const User = db.define("user", {
 
 User.beforeBulkCreate((users) => {users.forEach((user) => hashPassword(user))});
 User.beforeBulkUpdate((users) => {users.forEach((user) => hashPassword(user))});
+User.beforeCreate((user) => {hashPassword(user)});
+User.beforeUpdate((user) => {hashPassword(user)});
 User.authenticate = authenticate(User);
 User.findByToken = findByToken(User);
 User.prototype.generateToken = generateToken;
