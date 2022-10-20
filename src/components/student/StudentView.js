@@ -12,37 +12,34 @@ const StudentView = () => {
     const params = useSelector((state) => state.user.id);
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
-    const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"]
-    let finishedBooks = [];
-    let unfinishedBooks = [];
+    const themes = ["general fiction", "autobiography", "sci-fi", "fantasy", "poetry", "historical", "adventure", "mystery"];
 
-    if (studentData?.books){
-        studentData.books.map(book => {
-            book.isPublished ? finishedBooks.push(book) : unfinishedBooks.push(book);
-        });
-    };
     
     useEffect(() => {
-        dispatch(fetchStudentData(params));
-    }, [params]); 
-    // console.log(studentData)
+        if (params) dispatch(fetchStudentData(params));
+    }, [params]);
 
     return studentData ? (
         <div className="outer-div-student">
-            <p>Student:</p>
-            <h4>{studentData.student.firstName + " " + studentData.student.lastName}</h4>
-            <br></br>
-            <p>My Published Books:</p>
-            <Bookshelf books={finishedBooks} />
-            <br></br>
-            <p>Books in progress:</p>
-            <Bookshelf books={unfinishedBooks} />
-            <br></br>
-            <p>Create New Book:</p>
-            <Bookshelf themes={themes} />
+            <div className="my-books">
+                <div className="shelf-and-text">  
+                    {studentData?.books ?
+                        <>
+                        <p>My Books ({studentData.books.length})</p>
+                        <Bookshelf books={studentData.books} />
+                        <br></br>
+                        </> :
+                        <></>
+                    }
+                </div>
+            </div>
+            <div className="shelf-and-text">
+                <p>Create New Book</p>
+                <Bookshelf themes={themes} />
+            </div>
         </div>      
     ) : (
-        <div>
+        <div className="outer-div-student">
             <p>you aren't logged in</p>  
             <Link to="/login">Login</Link>
         </div>
