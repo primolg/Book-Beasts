@@ -10,7 +10,7 @@ const Template4 = () => {
     }
 
     return (
-        <div className="page-outer-div temp3-outer-div">
+        <div className="page-outer-div temp4-outer-div">
             <div className='text-img-div'>
                 <div className="small-image-page">
                     <ImageWidget 
