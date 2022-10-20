@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ImageWidget from './uploadWidget';
 
 const Template3 = () => {
     const [text, setText] = useState('');
+
+    const pageText = useRef(null);
+
+    function textSetter(){
+        setText(pageText.current.innerHTML);
+    }
 
     return (
         <div className="page-outer-div temp3-outer-div">
@@ -15,7 +21,7 @@ const Template3 = () => {
                         minWidth={130}
                     />
                 </div>
-                <div className="small-text-page" id="pageText" contentEditable="true">
+                <div className="small-text-page" ref={pageText} contentEditable="true">
                     Type here...
                 </div>
             </div>

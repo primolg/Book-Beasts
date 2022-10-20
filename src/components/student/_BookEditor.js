@@ -66,7 +66,7 @@ const BookEditor = () => {
                     </div>
 
                     <div className="page-editor">
-                        <templates.Template1 page={currentPage} />
+                        <templates.Template5 page={currentPage} />
                     </div>
 
                     <PublishDeleteButtons bookId={currentBook?.id} />

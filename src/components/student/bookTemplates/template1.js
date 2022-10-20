@@ -11,27 +11,18 @@ const Template1 = ({ page }) => {
     }, [page])
 
     const pageText = useRef(null);
+
     function textSetter(){
-        console.log(pageText.current);
+        setText(pageText.current.innerHTML);
     }
-    // const pageText = document.getElementById("pageText")
-    // console.log(pageText);
 
     return (
         <div className="page-outer-div temp1-outer-div">
             <div className='text-div'>
-                <div className="full-text-page" ref={pageText} contentEditable="true" onClick={textSetter}>
-                    helloo
+                <div className="full-text-page" ref={pageText} contentEditable="true">
                 </div>
             </div>
         </div>
-            //         {/* <textarea 
-            //             onChange={(event)=>setText(event.target.value)} 
-            //             rows="20"
-            //             cols="41"
-            //             value={text}
-            //             placeholder="Write your story here...">
-            //         </textarea> */}
     );
 };
 
