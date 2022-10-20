@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ImageWidget from './uploadWidget';
 
 const Template5 = () => {
     const [text, setText] = useState('');
-    const [image, setImage] = useState(undefined);
+    const pageText = useRef(null);
+
+    function textSetter(){
+        setText(pageText.current.innerHTML);
+    }
 
     return (
-        <div className="page-outer-div temp3-outer-div">
-            <div className='text-img-div'>
-                <div className="small-image-page">
-                    {image ? 
-                        image : 
-                        <input type="file" name="img" accept=".jpg,.jpeg,.png" onChange={(event) => setImage(event.target.value)}></input>
-                    }
-                </div>
-                <div className="small-text-page" contentEditable="true">
-                    type here
-                </div>
-            </div>        
+        <div className="page-outer-div">
+            <div className="title-text-temp5" ref={pageText} contentEditable="true">
+                TITLE
+            </div>
+            <div className="image-center">
+                <ImageWidget 
+                    croppingRatio={0.9}
+                />
+            </div>
         </div>
     );
 };

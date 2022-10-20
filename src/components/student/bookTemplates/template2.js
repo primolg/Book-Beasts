@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-
-
-
+import ImageWidget from './uploadWidget';
 const Template2 = () => {
-
-    const [image, setImage] = useState(undefined);
-    console.log(image)
+    
     return (
         <div className="page-outer-div">
             <div className="image-center">
-                {image ? 
-                    image : 
-                    <input type="file" name="img"  accept=".jpg,.jpeg,.png" onChange={(event)=>setImage(event.target.value)}></input>
-                }
+                <ImageWidget 
+                    croppingRatio={0.9}
+                />
             </div>
         </div>
     );

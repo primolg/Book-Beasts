@@ -1,28 +1,89 @@
-.outer-div-student{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.shelf-div-student{
-    display: flex;
-    align-items: center;
-    border: 3px black solid;
-    overflow: scroll;
-    padding: 1vh;
-    max-height: 28vh;
-    max-width: 75vw;
-}
+@import "./common.less";
+    .outer-div-student {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 10vw;
+        background-color: @background;
 
-.book-in-shelf-student{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25vh;
-    min-width: 10rem;
-    max-width: 10rem;
-    margin-left: 10px;
-    margin: 0px 7px;
-    border: 3px rgb(131, 131, 131) solid;
-    color: rgb(109, 109, 109);
+        .shelf-and-text{
+            margin-top: 20px;
+            p {
+                font-family:sans-serif;
+                color: black;
+                font-weight:600;
+                padding-bottom: 5px;
+            }
+        }
+        
+        .shelf-div-student{
+            display: flex;
+            align-items: center;
+            border: 3px black solid;
+            border-radius: 5px;
+            overflow: scroll;
+            padding: 1vh;
+            max-height: 15em;
+            max-width: 75vw;
+            background-color: white;
+
+            p {
+                color:@orange;
+            }
+            
+            
+            .book-in-shelf-student{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 13em;
+                min-width: 8em;
+                max-width: 8em;
+                margin-left: 10px;
+                margin: 0px 7px;
+                border: 3px rgb(0, 0, 0) solid;
+                background-color: @background;
+            }
+            
+            #link{
+            text-decoration: none;
+        }
+        .sci-fi{
+            background-color: rgb(0, 0, 0);
+            #link{
+                color:rgb(78, 245, 145)
+            }
+        }
+        .spooky{
+            background-color: rgb(234, 86, 0);
+            #link{
+                color:rgb(76, 0, 0);
+            }
+        }
+        .sea-world{
+            background-color: rgb(31, 48, 100);
+            #link{
+                color:rgb(0, 191, 255)
+            }
+        }
+        .racecar{
+            background-color: rgb(164, 52, 38);
+            #link{
+                color:rgb(255, 179, 0);
+            }
+        }
+        .fantasy{
+            background-color: rgb(110, 49, 138);
+            #link{
+                color: rgb(244, 238, 131);
+            }
+        }
+        .forest{
+            background-color: rgb(58, 93, 38);
+            #link{
+                color:rgb(197, 205, 115);
+            }
+        }
+    }
 }

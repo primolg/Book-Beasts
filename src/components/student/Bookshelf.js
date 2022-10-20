@@ -6,13 +6,25 @@ import Popup from 'reactjs-popup';
 
 // theme == genre
 const Bookshelf = ({books, themes}) => {
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     const student = useSelector(state => state.user);
     const [theme, setTheme] = useState("");
     const titleRef = useRef();
-
+    const bookArray = []
+    
+    if (books?.length){
+        for (let i = 0; i < books.length; i++){
+            if (books[i].isPublished){
+                bookArray.push(books[i])
+            } else {
+                bookArray.unshift(books[i])
+            }
+        }
+    }
+    
     const createBookAndRedirect = async () => {
         const res = await dispatch(createNewBook({
             title: titleRef.current.value,
@@ -22,7 +34,7 @@ const Bookshelf = ({books, themes}) => {
         if (res) navigate(`/editor/${res.id}`);
         else alert("Could not create book");
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (titleRef.current.value.length < 3) {
@@ -38,7 +50,7 @@ const Bookshelf = ({books, themes}) => {
 
     return !themes ? (
                 <div className="shelf-div-student">
-                    {books.map(book => 
+                    {bookArray.map(book => 
                         <div key={book.id} className="book-in-shelf-student">
                             <Link to={(book.isPublished ? "/books/" : "/editor/") + book.id}>{book.title}</Link>
                         </div>
