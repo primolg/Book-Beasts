@@ -26,7 +26,7 @@ const Bookshelf = ({books, themes}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (titleRef.current.value.length < 3) {
-            alert("Book title must be more than 3 letters!")
+            alert("Book title must be more than 2 letters!")
         } else {
             createBookAndRedirect();
         }

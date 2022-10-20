@@ -68,8 +68,8 @@ export const deleteBook = (bookId) => async (dispatch) => {
     }
 }
 
-export const addNewPage = (bookId) => async (dispatch) => {
-    const { data: book } = await axios.post(`/api/editor/${bookId}/pages`);
+export const addNewPage = (bookId, templateId=1) => async (dispatch) => {
+    const { data: book } = await axios.post(`/api/editor/${bookId}/pages`, { templateId });
     if (book) {
         dispatch(setBook(book));
         return book;

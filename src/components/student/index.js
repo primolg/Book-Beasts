@@ -5,5 +5,15 @@ import StudentView from "./StudentView";
 import SaveProgressButton from "./SaveProgressButton";
 import PublishDeleteButtons from "./PublishDeleteButtons";
 import Autosave from "./Autosave";
+import Pageshelf from "./Pageshelf";
 
-export { BookEditor, Bookshelf, EditorBookInfo, StudentView, SaveProgressButton, PublishDeleteButtons, Autosave };
+export {
+  BookEditor,
+  Bookshelf,
+  EditorBookInfo,
+  StudentView,
+  SaveProgressButton,
+  PublishDeleteButtons,
+  Autosave,
+  Pageshelf,
+};

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBook, addNewPage } from "../../store/reducers/editorSlice";
+import { fetchBook } from "../../store/reducers/editorSlice";
 // components
 import templates from './bookTemplates';
-import { EditorBookInfo, PublishDeleteButtons } from "./";
+import { EditorBookInfo, PublishDeleteButtons, Pageshelf } from "./";
 
 const BookEditor = () => {
     const bookId = useParams().id;
@@ -13,15 +13,6 @@ const BookEditor = () => {
 
     const [pages, setPages] = useState([]);
     const [currentPage, setCurrentPage] = useState({});
-
-    const addPage = async () => {
-        const updatedBook = await dispatch(addNewPage(bookId));
-        if (!updatedBook) {
-            alert("Could not add new page!");
-        } else {
-            setCurrentPage(updatedBook.pages[updatedBook.pages.length-1]);
-        }
-    };
 
     // if creating new book, gets info from state; if navigating directly to page, fetch from db
     useEffect(() => {
@@ -57,14 +48,11 @@ const BookEditor = () => {
                 <div className="outer-div-book-view">
 
                     <EditorBookInfo book={currentBook} />
-                    <div className="page-selector-shelf-editor">
-                        {/* {this can be done with bookshelf.js} */}
-                        {pages.map(page =>
-                            <div className="page-selector-editor" id={currentPage.id === page.id ? "selected-editor" : ""} key={page.id || page} onClick={()=>setCurrentPage(page)}>{page.pageNumber}</div>
-                        )}
-                        <div className="page-selector-editor"onClick={addPage}>+</div>
-                        <div className="blank-page-editor"></div>
-                    </div>
+                    <Pageshelf 
+                        pages={pages}
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                    />
 
                     <div className="page-editor">
                         <templates.Template1 page={currentPage} />
