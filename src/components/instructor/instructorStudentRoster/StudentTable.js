@@ -8,9 +8,9 @@ const StudentTable = ({ studentList }) => {
         {studentList.length !==0 ? (
             <div className='studentRoster'>
                 <div className='table-title'>
-                <h1>Student Roster</h1>
+                <h3>Student Roster</h3>
                 </div>
-                <table className='table-fill' id="studentTable">
+                <table className='table-fill'>
                     <thead>
                         <tr>
                             <th>First Name</th>

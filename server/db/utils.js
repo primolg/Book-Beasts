@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 require('dotenv').config();
 
 const hashPassword = async function(user) {
-    user.password = await bcrypt.hashSync(user.password, 10);
+    console.log("HASH NEW", user.password)
+    user.password = await bcrypt.hash(user.password, 10);
 }
 
 const authenticate = (model) => async function({ key, password }) {
@@ -24,7 +25,7 @@ const authenticate = (model) => async function({ key, password }) {
 
         // if the user is found but password incorrect, return username with null token
        
-        const isPasswordValid = await bcrypt.compareSync(password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return { username: user.username, token: null };
 
         // if all credentials are valid, return user object with token attached

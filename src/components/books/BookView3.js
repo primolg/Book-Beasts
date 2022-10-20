@@ -1,6 +1,7 @@
 import React from 'react';
 
 const BookView3 = React.forwardRef(({page}, ref) => {
+
     return (
         <div ref={ref} className="demoPage view-page-outer-div bookview3-outer-div">
                 <div className="view-small-image-page">
