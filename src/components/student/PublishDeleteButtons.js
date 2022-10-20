@@ -16,7 +16,7 @@ const PublishDeleteButtons = ({ bookId }) => {
                 isPublished: true,
             }));
             if (res) {
-                alert("Book successfully published!");
+                alert("Successfully published book!");
                 navigate(`/books/${bookId}`);
             }
         } else if (e.target.name==="delete") {
@@ -31,8 +31,6 @@ const PublishDeleteButtons = ({ bookId }) => {
             // console.log("Unable to process request");
             return;
         }
-
-        // notifications/redirect here
     }
     
     return(

@@ -28,7 +28,7 @@ const BookEditor = () => {
         if (currentBook.pages) {
             setPages(currentBook.pages);
             // only selects 1st page if no page is selected
-            if (currentPage !== {}) {
+            if (!currentPage || !currentPage?.id) {
                 setCurrentPage(currentBook.pages[0]);
             }
         } else if (!currentBook.id) {
@@ -43,8 +43,6 @@ const BookEditor = () => {
         }
     }, [bookId]);
 
-    // const autosave = () => {};
-
     if (currentBook.isPublished) {
         return (
             <h2>Cannot edit published book!</h2>
@@ -55,7 +53,9 @@ const BookEditor = () => {
         )
     } else {
         return (
+            <>
                 <div className="outer-div-book-view">
+
                     <EditorBookInfo book={currentBook} />
                     <div className="page-selector-shelf-editor">
                         {/* {this can be done with bookshelf.js} */}
@@ -72,6 +72,7 @@ const BookEditor = () => {
 
                     <PublishDeleteButtons bookId={currentBook?.id} />
                 </div>
+            </>
         )
     }
 }
