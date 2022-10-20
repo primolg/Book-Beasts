@@ -22,6 +22,7 @@ const InstructorPortal = () => {
         <div className='portal-tab'>
             {instructorData ? (
                 <>
+                <h1>TESTING</h1>
                     <h1>Guides and how-to container</h1>
                     <h1>Join our Community container</h1>
                 </>
