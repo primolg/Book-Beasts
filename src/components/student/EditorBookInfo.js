@@ -10,7 +10,7 @@ const EditorBookInfo = ({ book }) => {
     const dispatch = useDispatch();
 
     // TEMPORARY THEMES
-    const themes = ["sci-fi", "spooky", "sea life", "racecar", "fantasy", "forest"];
+    const themes = ["general fiction", "autobiography", "sci-fi", "fantasy", "poetry", "historical", "adventure", "mystery"];
 
     const handleSubmit = async (e, close) => {
         e.preventDefault();
