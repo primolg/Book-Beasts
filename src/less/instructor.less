@@ -192,16 +192,16 @@
 @width0: 600px; // Appears 2 times
 @width1: 100%; // Appears 2 times
 
+
+
 .studentRoster{
-	display: flex;
-	flex-direction: column;
 	margin: auto;
-	align-items: flex-start;
 	text-align: center;
 	justify-content:center;
-	max-width: 100%;
+	max-width: 90%;
 	padding:5px;
 	width: 100%;
+	box-sizing: border-box;
 }
 // .bookList{
 // 	display: block;
@@ -230,9 +230,9 @@
 		text-transform:uppercase;
 	}
 }
+
 .table-fill {
-	display:block;
-	flex: 1 0 50%;
+	//display:block;
 	animation: float 5s infinite;
 	background: @light_grey;
 	border-collapse: collapse;
@@ -243,7 +243,10 @@
 	margin: auto;
 	max-width: 100%;
 	padding:5px;
-	width: 100%;
+	width: 90%;
+	position:-webkit-sticky;
+	position:sticky;
+	top:0;
 }
 th {
 	background:@blue;
@@ -252,10 +255,10 @@ th {
 	color: @light_grey;
 	font-size:23px;
 	font-weight: 100;
-	padding:24px;
+	padding:0.5em;
 	text-align:left;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	vertical-align:middle;
+	
 	&:first-child {
 		border-top-left-radius:2rem;
 	}
@@ -264,6 +267,8 @@ th {
 		border-top-right-radius:2rem;
 	}
 }
+
+
 tr {
 	border-bottom: 1px solid @color0;
 	border-top: 1px solid @color0;
@@ -309,7 +314,7 @@ td {
 	border-left:1px solid @blue;
 	font-size:22px;
 	font-weight:500;
-	padding:18px;
+	padding:.5em;
 	text-align:left;
 	// text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
 	vertical-align:middle;
@@ -317,6 +322,7 @@ td {
 		border-right: 0px;
 	}
 }
+
 
 @media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
@@ -372,6 +378,23 @@ td {
 			white-space: nowrap;
 			width: 45%;
 		}
+	}
+	#view{
+		background-color: green;
+  		color: black;
+  		padding: 5px;
+	}
+	#view{
+		visibility: hidden;
+	}
+	#view:before{
+		content:'X'; 
+		visibility: visible;
+		display: block;
+		position: absolute;
+		background-color: red;
+		padding: 5px;
+		top: 2px;
 	}
 	td:nth-of-type(1):before { content: "First Name"; }
 	td:nth-of-type(2):before { content: "Last Name"; }
@@ -578,7 +601,7 @@ td {
 @color_1: #E8F0F2;
 
 .instructor-tabs {
-	width: 80%;
+	width: 90%;
 	height: auto;
 	min-height: 400px;
 	background: @light_grey;

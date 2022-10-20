@@ -11,23 +11,23 @@ const StudentRow = ( {student}) => {
     return(
         <>
             {student && (
-                <tr>
-                    <td className='text-center'>{student.firstName}</td>
-                    <td className='text-center'>{student.lastName}</td>
-                    <td className='text-center'>{student.username}</td>
-                    <td className='text-center'>{student.color}</td>
-                    <td className='text-center'> 
+                <tr className='flex-table row' role="rowgroup">
+                    <td className='flex-row first text-center' role="cell">{student.firstName}</td>
+                    <td className='flex-row text-center' role="cell">{student.lastName}</td>
+                    <td className='flex-row text-center' role="cell">{student.username}</td>
+                    <td className='flex-row text-center' role="cell">{student.color}</td>
+                    <td className='flex-row text-center' role="cell"> 
                     <Link to={`/instructorPortal/${params.id}/students/${student.id}/books`} student={student}>
-                        <button className="small-btn draw-border">View Books</button>
+                        <button className="small-btn draw-border" id="view">View Books</button>
                     </Link>
                         </td>
                 
-                    <td className='text-center'>{student.email}</td>
-                    <td className='text-center'>
-                        <EditStudent student={student} />
+                    <td className='flex-row text-center' role="cell">{student.email}</td>
+                    <td className='flex-row text-center' role="cell">
+                        <EditStudent id="view" student={student} />
                     </td>
-                    <td className='text-center'>
-                        <DeleteStudent student={student} />
+                    <td className='flex-row text-center' role="cell">
+                        <DeleteStudent id="view" student={student} />
                     </td>
                 </tr>
             )}

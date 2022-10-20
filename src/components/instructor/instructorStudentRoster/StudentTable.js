@@ -10,17 +10,17 @@ const StudentTable = ({ studentList }) => {
                 <div className='table-title'>
                 <h3>Student Roster</h3>
                 </div>
-                <table className='table-fill'>
+                <table className='table-fill' role="table" area-label="students">
                     <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                            <th>Color</th>
-                            <th>Book List</th>
-                            <th>Email</th>
-                            <th>Edit Student</th>
-                            <th>Delete Student</th>
+                        <tr class="flex-table header" role="rowgroup">
+                            <th className='flex-row first' role='columnheader'>First Name</th>
+                            <th className='flex-row' role='columnheader'>Last Name</th>
+                            <th className='flex-row' role='columnheader'>Username</th>
+                            <th className='flex-row' role='columnheader'>Color</th>
+                            <th className='flex-row' role='columnheader'>Book List</th>
+                            <th className='flex-row' role='columnheader'>Email</th>
+                            <th className='flex-row' role='columnheader'>Edit Student</th>
+                            <th className='flex-row' role='columnheader'>Delete Student</th>
                         </tr>
                     </thead>
                     <tbody className='table-hover'>
