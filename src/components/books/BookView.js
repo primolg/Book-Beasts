@@ -45,15 +45,19 @@ const BookView = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchBookData(params.id))
+    const asyncFetchBookData = async () =>{
+        const fetchBooks = await dispatch(fetchBookData(params.id))
+    }
+    asyncFetchBookData();
     }, []);
     
 
 return ( pages ? (
   <div className="content-container">
         <HTMLFlipBook width={300} height={500}>
-        {pages.map((page) => 
+        {pages.map((page) => <div className="demoPage">
             <BookView3 key={page.page.id} page={page}/>
+            </div>
         )}
         </HTMLFlipBook>
     </div>
