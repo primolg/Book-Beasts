@@ -24,7 +24,7 @@ const Template3 = ({ setChanges }) => {
                         minWidth={130}
                     />
                 </div>
-                <div className="small-text-page" ref={pageText} contentEditable="true">
+                <div className="small-text-page" ref={pageText} contentEditable="true" suppressContentEditableWarning={true}>
                     Type here...
                 </div>
             </div>

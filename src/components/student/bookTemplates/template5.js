@@ -14,7 +14,7 @@ const Template5 = ({ setChanges }) => {
 
     return (
         <div className="page-outer-div">
-            <div className="title-text-temp5" ref={pageText} contentEditable="true">
+            <div className="title-text-temp5" ref={pageText} contentEditable="true" suppressContentEditableWarning={true}>
                 TITLE
             </div>
             <div className="image-center">
