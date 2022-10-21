@@ -11,6 +11,10 @@
     "test": "mocha tests --recursive -w",
     "seed": "node server/db"
   },
+  "engines" : { 
+    "npm" : "8.19.2",
+    "node" : "16.18.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
