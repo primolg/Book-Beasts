@@ -6,6 +6,8 @@ import SaveProgressButton from "./SaveProgressButton";
 import PublishDeleteButtons from "./PublishDeleteButtons";
 import Autosave from "./Autosave";
 import Pageshelf from "./Pageshelf";
+import TemplateContainer from "./bookTemplates/TemplateContainer";
+import PageEditor from "./PageEditor";
 
 export {
   BookEditor,
@@ -16,4 +18,6 @@ export {
   PublishDeleteButtons,
   Autosave,
   Pageshelf,
+  TemplateContainer,
+  PageEditor,
 };

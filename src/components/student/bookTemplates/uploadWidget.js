@@ -28,7 +28,7 @@ const ImageWidget = (props) => {
             <img src={image} /> : 
             <button 
             onClick={()=>myWidget.open()}
-            class="cloudinary-button">Upload image</button>
+            className="cloudinary-button">Upload image</button>
         }
         </>
     )

@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { SaveProgressButton } from '../';
+import { useSelector, useDispatch } from "react-redux";
 
-const Template1 = ({ page }) => {
+// when changes are made, "setChanges" to true to signal the autosave
+const Template1 = ({ setChanges }) => {
+    const page = useSelector(state => state.editor.currentPage);
+    const dispatch = useDispatch();
     const [text, setText] = useState("");
     
     useEffect(() => {
@@ -12,9 +15,9 @@ const Template1 = ({ page }) => {
 
     const pageText = useRef(null);
 
-    function textSetter(){
-        setText(pageText.current.innerHTML);
-    }
+    // function textSetter(){
+    //     setText(pageText.current.innerHTML);
+    // }
 
     return (
         <div className="page-outer-div temp1-outer-div">

@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import ImageWidget from './uploadWidget';
 
-const Template3 = () => {
+const Template3 = ({ setChanges }) => {
+    const page = useSelector(state => state.editor.currentPage);
+    const dispatch = useDispatch();
     const [text, setText] = useState('');
 
     const pageText = useRef(null);

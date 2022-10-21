@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBook, addNewPage, setCurrentPage } from "../../store/reducers/editorSlice";
 import Popup from 'reactjs-popup';
+import { fetchBook, addNewPage, setCurrentPage } from "../../store/reducers/editorSlice";
+import templates from "./bookTemplates";
 
 const Pageshelf = () => {
     const currentBook = useSelector(state => state.editor.currentBook);
@@ -9,9 +10,6 @@ const Pageshelf = () => {
     const currentPage = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
     const shelf = useRef();
-
-    // placeholder
-    let templates = [1,2,3,4,5];
 
     const addPage = async (templateId) => {
         const updatedBook = await dispatch(addNewPage(currentPage.bookId, templateId));

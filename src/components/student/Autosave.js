@@ -1,25 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { updatePage } from "../../store/reducers/editorSlice";
 
-// most likely should be in template container so it has access to page + content
-
-const Autosave = ({ page, content }) => {
+const Autosave = ({ changes }) => {
+    const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
+    // const [changesMade, setChangesMade] = useState(false);
 
     const save = async () => {
-        const res = await dispatch(updatePage({
-            ...page, content,
-        }));
+        const res = await dispatch(updatePage(page));
     };
 
     useEffect(() => {
+        console.log("changes");
+    }, [changes]);
+
+    useEffect(() => {
+        // need to ensure this only happens once when page is updated!
         const interval = setInterval(() => {
             save();
             console.log("Work saved");
         }, 30000);
         return () => clearInterval(interval);
-    }, [content]);
+    }, [page]);
 }
 
 export default Autosave;

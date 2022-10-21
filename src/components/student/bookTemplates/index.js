@@ -11,12 +11,6 @@ import Template5 from "./template5";
 // T4: top left image
 // T5: full screen image with title
 
-const templates = {
-    Template1,
-    Template2,
-    Template3,
-    Template4,
-    Template5
-}
+const templates = [Template1, Template2, Template3, Template4, Template5];
 
 export default templates;

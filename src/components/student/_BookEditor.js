@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBook, setCurrentPage } from "../../store/reducers/editorSlice";
 // components
-import { EditorBookInfo, PublishDeleteButtons, Pageshelf } from "./";
+import { EditorBookInfo, PublishDeleteButtons, Pageshelf, TemplateContainer } from "./";
 // import { Template1, Template2, Template3, Template4, Template5 } from "./bookTemplates";
 
 const BookEditor = () => {
@@ -55,8 +55,7 @@ const BookEditor = () => {
                     <Pageshelf />
 
                     <div className="page-editor">
-                        {/* {templates[(currentPage.templateId || 0)]} */}
-                        {/* <templates.Template4 page={currentPage} /> */}
+                        <TemplateContainer templateId={currentPage?.templateId} />
                     </div>
 
                     <PublishDeleteButtons bookId={currentBook?.id} />
