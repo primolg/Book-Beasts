@@ -21,7 +21,25 @@ const Template4 = () => {
                     />
                 </div>
                 <div className="small-text-page" ref={pageText} contentEditable="true">
-                    "type here"
+                    <br></br><br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </div>
             </div>        
         </div>
