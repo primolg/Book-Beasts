@@ -50,12 +50,17 @@ const BookView = () => {
     }
     asyncFetchBookData();
     }, []);
-    const blankPage = {
-        page: {
-            content: '',
-        }
-    }
     
+    
+    if(pages && pages.length % 2 !== 0){ 
+        const blankPage = {
+            page: {
+                content: '',
+                image: '',
+            }
+        }
+        pages.push(blankPage);
+    }
 
 return ( pages ? (
   <div className="content-container">
@@ -64,7 +69,6 @@ return ( pages ? (
             <BookView3 key={page.page.id} page={page}/>
             </div>
         )}
-        {pages.length % 2 !== 0 ? <BookView3 page={blankPage}/> : (null)}
         </HTMLFlipBook>
     </div>
   ) : (
