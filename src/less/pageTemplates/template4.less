@@ -1,15 +1,30 @@
+@import "../common.less";
 
 .temp4-outer-div{
-
-    .small-image-page{
-        float: left;
-        margin: 0 10px 5px 5px;
-    }
+    max-height: 100%;
     
-    .small-text-page{
-        max-width: 95%;
-        min-height: 90%;
-        max-height: 90%;
+    .text-img-div{
+        width: 100%;
+        
+        .small-image-page{
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 130px;
+            max-width: 130px;
+            min-height: 175px;
+            max-height: 175px;
+            margin: 0 10px 5px 5px;
+            border: dashed rgb(245, 227, 136) 2px;
+        }
+    
+        .small-text-page{
+            margin-left: 10px;
+            max-width: 95%;
+            min-height: 90%;
+            max-height: 90%;
+            
+        }
     }
 }
-    
