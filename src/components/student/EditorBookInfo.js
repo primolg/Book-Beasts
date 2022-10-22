@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import { FaPencilAlt, FaCog } from "react-icons/fa";
-import { updateBook, deleteBook } from "../../store/reducers/editorSlice";
-import { ImageWidget } from "./bookTemplates";
+import { updateBook, deleteBook, clearUploadImg } from "../../store/reducers/editorSlice";
+import { ImageWidget } from "./";
 
 // need to separate popup forms into separate component at some point
 const EditorBookInfo = () => {
@@ -12,6 +12,7 @@ const EditorBookInfo = () => {
     const themes = ["general fiction", "autobiography", "sci-fi", "fantasy", "poetry", "historical", "adventure", "mystery"];
 
     const book = useSelector(state => state.editor.currentBook);
+    const uploadedImg = useSelector(state => state.editor.uploadedImg);
     const student = useSelector(state => state.user);
     const titleRef = useRef();
     const genreRef = useRef();
@@ -34,17 +35,12 @@ const EditorBookInfo = () => {
     }
 
     const handleSubmit = async (e, close) => {
-        e.preventDefault();
+        const updated = { id: book.id };
+        if (titleRef.current?.value) updated.title = titleRef.current.value;
+        if (genreRef.current?.value) updated.genre = genreRef.current.value;
+        if (uploadedImg) updated.coverArt = uploadedImg;
 
-        if (titleRef.current?.value) {
-            await dispatch(updateBook({
-                id: book.id,
-                title: titleRef.current.value,
-                genre: genreRef.current.value
-            }));
-        }
-        // handle image uploading here
-
+        await dispatch(updateBook(updated));
         close();
     };
 
@@ -58,8 +54,8 @@ const EditorBookInfo = () => {
                     <Popup modal className="edit-book-attribute" trigger={<div id="book-settings-btn">{/*<p>Book Settings</p>*/}<FaCog size={20}/></div>}>
                         {close => (
                             <div className="edit-book-popup-form">
-                                <h3>Edit your book:</h3>
-                                <form id="edit-form">
+                                <h2>Book Options</h2>
+                                <div id="edit-form">
                                     <label htmlFor="title">Title:
                                         <input type="text"
                                             name="title"
@@ -68,7 +64,7 @@ const EditorBookInfo = () => {
                                         </input>
                                     </label>
                                     
-                                    <label htmlFor="genre">Genre:
+                                    <label htmlFor="genre" id="form-genre">Genre:
                                         <select name="genre" ref={genreRef} defaultValue={book.genre}>
                                             {themes.map((theme, i) => 
                                                 <option value={theme} key={i}>
@@ -78,13 +74,16 @@ const EditorBookInfo = () => {
                                         </select>
                                     </label>
 
-                                    <label htmlFor="coverArt">Upload cover art</label>
-                                    {/* Cover image upload */}
+                                    <ImageWidget isCover={true} croppingRatio={0.9}/>
 
-                                    <button id="new-book-btn" type="submit" onClick={(e)=>handleSubmit(e,close)}>Update</button>
-                                </form>
-                                <button id="delete-button" onClick={handleDelete} name="delete">Delete Book</button>
-                                <p onClick={close} id="close-popup">Cancel changes</p>
+                                    <div className="form-btn-container">
+                                        <button id="delete-button" onClick={handleDelete} name="delete">Delete Book</button>
+                                        {/* <PublishButton /> */}
+                                        <button id="new-book-btn" onClick={(e)=>handleSubmit(e,close)}>Save changes</button>
+                                    </div>        
+        
+                                    <p onClick={close} id="close-popup">Cancel changes</p>
+                                </div>
                             </div>
                         )}
                     </Popup>

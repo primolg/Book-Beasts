@@ -6,6 +6,7 @@ const editorSlice = createSlice({
     initialState: {
         currentBook: {},
         currentPage: {},
+        uploadedImg: "",
     },
     reducers: {
         setBook: (state, action) => {
@@ -37,12 +38,24 @@ const editorSlice = createSlice({
                 ...state,
                 currentPage: action.payload
             };
-        }
+        },
+        setUploadImg: (state, action) => {
+            return {
+                ...state,
+                uploadedImg: action.payload
+            }
+        },
+        clearUploadImg: (state, action) => {
+            return {
+                ...state,
+                uploadedImg: ""
+            }
+        },
     },
 });
 
 export default editorSlice.reducer;
-export const { setBook, _updateBook, _updatePages, setCurrentPage } = editorSlice.actions;
+export const { setBook, _updateBook, _updatePages, setCurrentPage, setUploadImg, clearUploadImg } = editorSlice.actions;
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
@@ -67,6 +80,7 @@ export const createNewBook = (book) => async (dispatch) => {
 }
 
 export const updateBook = (book) => async (dispatch) => {
+    console.log("in slice:", book.coverArt);
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
     // console.log(updatedBook);
     if (!updatedBook || updatedBook === {}) {

@@ -178,7 +178,7 @@
             flex-direction: column;
             justify-content: center;
         }
-        h3 {
+        h2, h3 {
             margin: 0 auto 0.5em;
         }
         >*, form>* {
@@ -204,19 +204,42 @@
         label {
             width: 100%;
             @flexSpaceBetween();
+            margin: 0.3em 0;
+        }
+        #form-genre {
+            margin-bottom: 0.7em;
         }
     }
 }
 
-#publish-delete-container {
+#publish-container {
     min-width: 310px;
     max-width: 80%;
     padding: 1em;
-    @flexSpaceBetween();
+    @flexCenter();
     
     button {
+        margin: 0 auto;
         font-size: 1.01em;
         padding: 0.3em 0.5em 0.2em;
         border-radius: 1em;
     }
+}
+
+.form-btn-container {
+    @flexSpaceBetween();
+    margin: 1em;
+    max-width: 80%;
+}
+
+#delete-button {
+    background: darkred;
+    color: white;
+}
+
+.book-form-coverart {
+    margin: 0.3em auto;
+    overflow: hidden;
+    max-width: 80%;
+    max-height: 20em;
 }

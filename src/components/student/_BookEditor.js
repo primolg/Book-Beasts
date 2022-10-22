@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBook, setCurrentPage } from "../../store/reducers/editorSlice";
 // components
-import { EditorBookInfo, PublishDeleteButtons, Pageshelf, PageEditor } from "./";
+import { EditorBookInfo, PublishButton, Pageshelf, PageEditor } from "./";
 
 const BookEditor = () => {
     const bookId = useParams().id;
@@ -49,10 +49,10 @@ const BookEditor = () => {
         return (
             <>
                 <div className="outer-div-book-view">
-                    <EditorBookInfo book={currentBook} />
+                    <EditorBookInfo />
                     <Pageshelf /> 
                     <PageEditor />
-                    <PublishDeleteButtons bookId={currentBook?.id} />
+                    <PublishButton bookId={currentBook?.id} />
                 </div>
             </>
         )
