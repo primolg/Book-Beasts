@@ -17,7 +17,10 @@ const editorSlice = createSlice({
         _updateBook: (state, action) => {
             return {
                 ...state,
-                currentBook: action.payload,
+                currentBook: {
+                    ...state.currentBook,
+                    ...action.payload,
+                }
             };
         },
         _updatePages: (state, action) => {
@@ -47,7 +50,7 @@ export const fetchBook = (bookId) => async (dispatch) => {
     if (book) {
         dispatch(setBook(book));
     } else {
-        alert("Unable to find that book");
+        // alert("Unable to find that book");
     }
 }
 

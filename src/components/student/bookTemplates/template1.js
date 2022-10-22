@@ -15,6 +15,10 @@ const Template1 = ({ setChanges }) => {
 
     const pageText = useRef(null);
 
+    // useEffect(() => {
+    //     setChanges(true);
+    // }, [pageText.current?.innerText])
+
     // function textSetter(){
     //     setText(pageText.current.innerHTML);
     // }

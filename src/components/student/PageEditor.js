@@ -8,11 +8,11 @@ const PageEditor = () => {
     const [changes, setChanges] = useState(false);
 
     return(
-        <>
+        <div className="page-editor">
             {/* Can add settings/delete button at top (for editing template+) */}
             <TemplateContainer setChanges={setChanges} />
-            <Autosave changes={changes} setChanges={setChanges}/>
-        </>
+            <Autosave changes={changes} setChanges={setChanges} />
+        </div>
     );
 };
 

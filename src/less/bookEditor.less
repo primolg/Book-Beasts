@@ -132,6 +132,10 @@
     min-width: calc(@maxPageEditorWidth - 6em);
     width: @maxPageEditorWidth;
     padding: 0.8em;
+
+    #book-settings-btn {
+        display: flex;
+    }
     
     > p {
         margin-top: 0.3em;
@@ -139,10 +143,9 @@
         font-style: italic;
     }
     .attribute {
-        &:nth-child(even) {
-            background: rgba(0,0,0,0.07);
-        }
-
+        // &:nth-child(even) {
+        //     background: rgba(0,0,0,0.07);
+        // }
         padding: 0.2em 0.5em;
         @flexSpaceBetween();
         button {
@@ -151,18 +154,30 @@
         p, h2 {
             margin-right: @spaceBetween;
         }
+
+        #book-settings-btn {
+            p {
+                width: 5em;
+            }
+            // font-size: 0.95em;
+        }
     }
 }
 
 // popup form for changing a field on the book
 .edit-book-attribute-content {
     @mediumPopup();
-    max-width: 80%;
+    max-width: 400px;
 
     .edit-book-popup-form {
         margin: 1.3em auto 0;
         text-align: center;
-
+        #edit-form {
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
         h3 {
             margin: 0 auto 0.5em;
         }
@@ -185,6 +200,10 @@
         #close-popup {
             @subtleLink();
             margin: 0 auto 0.5em;
+        }
+        label {
+            width: 100%;
+            @flexSpaceBetween();
         }
     }
 }
