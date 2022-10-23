@@ -53,6 +53,7 @@ const Bookshelf = ({books, themes}) => {
                     {bookArray.map(book => 
                         <div key={book.id} className="book-in-shelf-student">
                             <Link to={(book.isPublished ? "/books/" : "/editor/") + book.id}>{book.title}</Link>
+                            {book.isPublished ? "" : <p>in progress</p>}
                         </div>
                     )}
                 </div>
