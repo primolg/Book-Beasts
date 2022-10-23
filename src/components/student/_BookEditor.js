@@ -39,11 +39,15 @@ const BookEditor = () => {
 
     if (currentBook.isPublished) {
         return (
-            <h2>Cannot edit published book!</h2>
+            <div id="loading-error-container">
+                <h2 id="error-page-header">Cannot edit published book!</h2>
+            </div>
         )
     } else if (!currentBook.title) {
         return (
-            <h3>Loading...</h3>
+            <div id="loading-error-container">
+                <h3>Loading...</h3>
+            </div>
         )
     } else {
         return (

@@ -37,7 +37,7 @@ const Pageshelf = () => {
             >
                 {close => (
                     <div className="new-book-popup-form">
-                        <h3>Select a template for your new page:</h3>
+                        <h3 id="temp-selection-header">Select a template for your new page:</h3>
                         <div className="template-selection" onClick={close}>
                         {templates.map((t, i) => 
                             <div key={i} className="template-single" onClick={(e) => addPage(i+1)}>

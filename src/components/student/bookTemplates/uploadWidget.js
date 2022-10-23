@@ -39,7 +39,7 @@ const ImageWidget = (props) => {
             <button 
             onClick={()=>myWidget.open()}
             className="cloudinary-button">
-                {props.isCover ? "Upload cover art" : "Upload image"}
+                {props.hasCover ? "Replace cover art" : props.isCover ? "Upload cover art" : "Upload image"}
             </button>
         }
         </>
