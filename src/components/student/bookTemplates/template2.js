@@ -7,10 +7,12 @@ const Template2 = ({ setChanges }) => {
     const dispatch = useDispatch();
     
     return (
-        <div className="page-outer-div">
-            <div className="image-center">
+        <div className="page-outer-div temp2-outer-div">
+            <div className={"image-center "}>
                 <ImageWidget 
-                    croppingRatio={0.9}
+                    croppingRatio={0.57916666666}
+                    maxHeight={480}
+                    maxWidth={278}
                 />
             </div>
         </div>

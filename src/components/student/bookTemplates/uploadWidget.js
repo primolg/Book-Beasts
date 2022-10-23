@@ -14,7 +14,6 @@ const ImageWidget = (props) => {
             croppingAspectRatio: props.croppingRatio,
             maxImageHeight: props.maxHeight ? props.maxHeight : 1000,
             maxImageWidth: props.maxWidth ? props.maxWidth : 1000,
-            minImageWidth: props.minWidth ? props.minWidth : 0,
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
