@@ -4,6 +4,7 @@ import { Header } from "./components/header";
 import Footer from "./components/footer/Footer";
 import Routes from "./Routes";
 import InstructorRoutes from "./InstructorRoutes";
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
    

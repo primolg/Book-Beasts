@@ -2812,7 +2812,8 @@
       "previousPage": null,
       "nextPage": 34,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -2824,7 +2825,8 @@
       "previousPage": 33,
       "nextPage": 35,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -2836,7 +2838,8 @@
       "previousPage": 34,
       "nextPage": 36,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -2848,7 +2851,8 @@
       "previousPage": 35,
       "nextPage": 37,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -2860,7 +2864,8 @@
       "previousPage": 38,
       "nextPage": 40,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -3316,7 +3321,8 @@
       "previousPage": 36,
       "nextPage": 38,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -3328,7 +3334,8 @@
       "previousPage": 42,
       "nextPage": null,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -3772,7 +3779,8 @@
       "previousPage": 37,
       "nextPage": 39,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -3784,7 +3792,8 @@
       "previousPage": 41,
       "nextPage": 43,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,
@@ -4192,7 +4201,8 @@
       "previousPage": 39,
       "nextPage": 41,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": true,
@@ -4624,7 +4634,8 @@
       "previousPage": 40,
       "nextPage": 42,
       "studentId": 80,
-      "bookId": 3
+      "bookId": 3,
+      "templateId": 3
     },
     {
       "isFirstPage": false,

@@ -58,12 +58,13 @@ Book.prototype.getOrderedPages = async function() {
     });
 }
 
-Book.prototype.createNewPage = async function() {
+Book.prototype.createNewPage = async function(templateId=1) {
     // *temporary* work around for hard-coded seed ids
     const newPageId = (await Page.max('id')) + 1;
 
     const newPage = await this.createPage({
         id: newPageId,
+        templateId,
         studentId: this.studentId,
     });
     await newPage.insertEnd();

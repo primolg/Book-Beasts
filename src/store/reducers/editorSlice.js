@@ -1,36 +1,90 @@
 import { createSlice } from "@reduxjs/toolkit";
 const axios = require("axios");
 
+const initialState = {
+    currentBook: {},
+    currentPage: {},
+    currentText: "",
+    uploadedImg: "",
+};
+
 const editorSlice = createSlice({
     name: "editorSlice",
-    initialState: {},
+    initialState: initialState,
     reducers: {
         setBook: (state, action) => {
-            return action.payload
+            return {
+                ...state,
+                currentBook: action.payload
+            };
         },
         _updateBook: (state, action) => {
             return {
                 ...state,
-                ...action.payload,
-            }
+                currentBook: {
+                    ...state.currentBook,
+                    ...action.payload,
+                }
+            };
         },
         _updatePages: (state, action) => {
             return {
                 ...state,
-                pages: action.payload,
+                currentBook: {
+                    ...state.currentBook,
+                    pages: action.payload
+                },
             };
-        }
+        },
+        setCurrentPage: (state, action) => {
+            return {
+                ...state,
+                currentPage: action.payload
+            };
+        },
+        setUploadImg: (state, action) => {
+            return {
+                ...state,
+                uploadedImg: action.payload
+            }
+        },
+        clearUploadImg: (state, action) => {
+            return {
+                ...state,
+                uploadedImg: ""
+            }
+        },
+        setCurrentText: (state, action) => {
+            return {
+                ...state,
+                currentText: action.payload
+            }
+        },
+        clearCurrentBook: (state, action) => {
+            return initialState;
+        },
     },
 });
 
 export default editorSlice.reducer;
-export const { setBook, _updateBook, _updatePages } = editorSlice.actions;
+export const { 
+    setBook,
+    _updateBook,
+    _updatePages,
+    setCurrentPage,
+    setUploadImg,
+    clearUploadImg,
+    setCurrentText,
+    clearCurrentBook
+} = editorSlice.actions;
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
     const { data: book } = await axios.get(`/api/editor/${bookId}`);
     if (book) {
         dispatch(setBook(book));
+    } else {
+        // alert("Unable to find that book");
     }
 }
 
@@ -48,12 +102,11 @@ export const createNewBook = (book) => async (dispatch) => {
 
 export const updateBook = (book) => async (dispatch) => {
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
-    console.log(updatedBook);
     if (!updatedBook || updatedBook === {}) {
-        // console.log("Error:", updatedBook);
         alert("Unable to edit book");
     } else {
         dispatch(_updateBook(updatedBook));
+        return true;
     }
 }
 
@@ -61,11 +114,12 @@ export const deleteBook = (bookId) => async (dispatch) => {
     const { data } = await axios.delete(`/api/editor/${bookId}`);
     if (data) {
         dispatch(setBook({}));
+        return true;
     }
 }
 
-export const addNewPage = (bookId) => async (dispatch) => {
-    const { data: book } = await axios.post(`/api/editor/${bookId}/pages`);
+export const addNewPage = (bookId, templateId=1) => async (dispatch) => {
+    const { data: book } = await axios.post(`/api/editor/${bookId}/pages`, { templateId });
     if (book) {
         dispatch(setBook(book));
         return book;
@@ -76,7 +130,11 @@ export const updatePage = (page) => async (dispatch) => {
     const { data: pages } = await axios.put(`/api/editor/${page.bookId}/pages/${page.id}`, page);
     if (pages) {
         dispatch(_updatePages(pages));
+        const updatedPage = pages.find(p => p.id==page.id);
+        dispatch(setCurrentPage(updatedPage));
         return true;
+    } else {
+        return false;
     }
 }
 
@@ -84,5 +142,9 @@ export const deletePage = (page) => async (dispatch) => {
     const { data: book } = await axios.delete(`/api/editor/${page.bookId}/pages/${page.id}`);
     if (book) {
         dispatch(_updateBook(book));
+        dispatch(setCurrentPage(book.pages[0]));
+        return true;
+    } else {
+        return false;
     }
 }

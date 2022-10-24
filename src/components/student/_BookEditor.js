@@ -1,76 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchBook, addNewPage } from "../../store/reducers/editorSlice";
+import { fetchBook, setCurrentPage } from "../../store/reducers/editorSlice";
 // components
-import templates from './bookTemplates';
-import { EditorBookInfo, PublishDeleteButtons } from "./";
+import { EditorBookInfo, PublishButton, Pageshelf, PageEditor } from "./";
 
 const BookEditor = () => {
     const bookId = useParams().id;
-    const currentBook = useSelector(state => state.editor);
+    const currentBook = useSelector(state => state.editor.currentBook);
+    const currentPage = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
 
     const [pages, setPages] = useState([]);
-    const [currentPage, setCurrentPage] = useState({});
-
-    const addPage = async () => {
-        const updatedBook = await dispatch(addNewPage(bookId));
-        if (!updatedBook) {
-            alert("Could not add new page!");
-        } else {
-            setCurrentPage(updatedBook.pages[updatedBook.pages.length-1]);
-        }
-    };
 
     // if creating new book, gets info from state; if navigating directly to page, fetch from db
+    // currently a bug where it is updating state twice in a row
     useEffect(() => {
-        if (currentBook.pages) {
+        if (bookId != currentBook.id) {
+            // for switching between books
+            dispatch(fetchBook(bookId));
+        } else if (currentBook.pages && !pages.length) {
             setPages(currentBook.pages);
             // only selects 1st page if no page is selected
-            if (currentPage !== {}) {
-                setCurrentPage(currentBook.pages[0]);
+            if (!currentPage || !currentPage.id) {
+                dispatch(setCurrentPage(currentBook.pages[0]));
             }
         } else if (!currentBook.id) {
             dispatch(fetchBook(bookId));
         }
     }, [currentBook.pages]);
 
+    // need to fix bug where this will fetch nothing after deleting a book
     useEffect(() => {
-        if (currentBook?.id !== bookId) {
+        if (currentBook.id !== bookId) {
             dispatch(fetchBook(bookId));
         }
-    }, [bookId])
-
-    // const autosave = () => {};
+    }, [bookId]);
 
     if (currentBook.isPublished) {
         return (
-            <h2>Cannot edit published book!</h2>
+            <div id="loading-error-container">
+                <h2 id="error-page-header">Cannot edit published book!</h2>
+            </div>
         )
     } else if (!currentBook.title) {
         return (
-            <h3>Loading...</h3>
+            <div id="loading-error-container">
+                <h3>Loading...</h3>
+            </div>
         )
     } else {
         return (
+            <>
                 <div className="outer-div-book-view">
-                    <EditorBookInfo book={currentBook} />
-                    <div className="page-selector-shelf-editor">
-                        {/* {this can be done with bookshelf.js} */}
-                        {pages.map(page =>
-                            <div className="page-selector-editor" id={currentPage.id === page.id ? "selected-editor" : ""} key={page.id || page} onClick={()=>setCurrentPage(page)}>{page.pageNumber}</div>
-                        )}
-                        <div className="page-selector-editor"onClick={addPage}>+</div>
-                        <div className="blank-page-editor"></div>
-                    </div>
-
-                    <div className="page-editor">
-                        <templates.Template4 page={currentPage} />
-                    </div>
-
-                    <PublishDeleteButtons bookId={currentBook?.id} />
+                    <EditorBookInfo />
+                    <Pageshelf /> 
+                    <PageEditor />
+                    <PublishButton />
                 </div>
+            </>
         )
     }
 }
