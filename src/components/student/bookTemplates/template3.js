@@ -9,7 +9,7 @@ const Template3 = ({ defaultPageArt }) => {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
 
-    const hasImage = page.image !== defaultPageArt;
+    const hasImage = page.image && page.image !== defaultPageArt;
     const image = page.image;
 
     useEffect(() => {

@@ -6,9 +6,7 @@ const Template2 = ({ defaultPageArt }) => {
     const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
 
-    const hasImage = page.image !== defaultPageArt;
-    console.log(defaultPageArt);
-    console.log(hasImage)
+    const hasImage = page.image && page.image !== defaultPageArt;
     const image = page.image;
     
     return (

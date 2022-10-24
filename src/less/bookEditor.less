@@ -38,6 +38,7 @@
 
 @maxPageEditorWidth: 335px;
 .page-editor{
+    background: rgba(230,229,225,1);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -48,6 +49,10 @@
     max-height: 500px;
     overflow: hidden;
     border: 3px black solid;
+    
+    textarea {
+        padding: 8px;
+    }
 }
 
 #selected-editor{
@@ -295,6 +300,7 @@
 }
 
 #page-editor-options {
+    background: white;
     @flexSpaceBetween();
     min-width: 300px;
     max-width: 300px;
@@ -364,4 +370,8 @@
         font-size: 0.9em;
         width: fit-content;
     }
+}
+
+.upload-widget-cover {
+    
 }

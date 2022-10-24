@@ -7,6 +7,7 @@ const ImageWidget = (props) => {
     const [image, setImage] = useState(undefined);
     const book = useSelector(state => state.editor.currentBook);
     const page = useSelector(state => state.editor.currentPage);
+    const [isFirstLoad, setFirstLoad] = useState(true);
 
     const myWidget = cloudinary.createUploadWidget(
         {
@@ -27,17 +28,22 @@ const ImageWidget = (props) => {
     )
 
     useEffect(() => {
-        if (image) {
+        if ((image && !isFirstLoad) || (image && !props.hasImage && !props.hasCover)) {
             dispatch(setUploadImg(image));
         } else if (!props.isCover && props.hasImage) {
+            setFirstLoad(false);
             setImage(props.image)
         } else if (props.isCover && props.hasCover) {
             setImage(book.coverArt);
         }
     }, [image]);
+
+    useEffect(() => {
+        setFirstLoad(true);
+    }, [page])
     
     return (
-        <div className="upload-widget-page-template">
+        <div className={!props.isCover ? "upload-widget-page-template" : "upload-widget-cover" }>
             {image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>}
             <button
                 onClick={()=>myWidget.open()}

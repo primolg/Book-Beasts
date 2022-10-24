@@ -8,8 +8,8 @@ const Template4 = ({ defaultPageArt }) => {
     const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
     const [text, setText] = useState('');
-    
-    const hasImage = page.image !== defaultPageArt;
+
+    const hasImage = page.image && page.image !== defaultPageArt;
     const image = page.image;
 
     useEffect(() => {
