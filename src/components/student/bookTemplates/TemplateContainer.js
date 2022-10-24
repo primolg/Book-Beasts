@@ -14,12 +14,10 @@ const TemplateContainer = (props) => {
     // clear book in store when leaving the editor
     useEffect(() => {
         return () => {
-            console.log("here");
             dispatch(clearCurrentBook());
         }
     }, []);
 
-    // currently does not work as intended - updates the book in db with the cover art it already has (when loading)
     useEffect(() => {
         if (uploadedImg !== "") {
             dispatch(updatePage({

@@ -148,3 +148,16 @@ export const deletePage = (page) => async (dispatch) => {
         return false;
     }
 }
+
+export const updateCoverArt = (bookId, url) => async (dispatch) => {
+    console.log("here REDUCER")
+    const { data: book } = await axios.put(`/api/editor/${bookId}`, {
+        coverArt: url,
+    });
+    if (book) {
+        dispatch(_updateBook(book));
+        return true;
+    } else {
+        return false;
+    }
+}

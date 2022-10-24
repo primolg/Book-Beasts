@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { setUploadImg } from "../../../store/reducers/editorSlice";
+import { setUploadImg, updateCoverArt } from "../../../store/reducers/editorSlice";
 
 const ImageWidget = (props) => {
     const dispatch = useDispatch();
@@ -20,27 +20,48 @@ const ImageWidget = (props) => {
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
+                // console.log("Setting image");
                 setImage(result.info.secure_url)
             } else {
-                // console.log(result)
+                // console.log("Upload error")
             }
         }
     )
 
     useEffect(() => {
-        if ((image && !isFirstLoad) || (image && !props.hasImage && !props.hasCover)) {
-            dispatch(setUploadImg(image));
-        } else if (!props.isCover && props.hasImage) {
+        return () => {
+            console.log("Unmounting");
+        }
+    }, [])
+
+    useEffect(() => {
+        if (isFirstLoad && image) {
             setFirstLoad(false);
-            setImage(props.image)
-        } else if (props.isCover && props.hasCover) {
-            setImage(book.coverArt);
+        }
+
+        if (props.isCover) {
+            if (!image && props.hasCover) {
+                setImage(book.coverArt);
+            } else if (!isFirstLoad) {
+                console.log("here 2")
+                dispatch(updateCoverArt(book.id, image));
+            }
+        } else {
+            if (image && (!isFirstLoad || !props.hasImage)) {
+                console.log("here 1");
+                dispatch(setUploadImg(image));
+            } else if (props.hasImage) {
+                setImage(props.image);
+            }
         }
     }, [image]);
 
     useEffect(() => {
-        setFirstLoad(true);
-    }, [page])
+        if (!props.isCover) {
+            setImage(props.image || "");
+            setFirstLoad(true);
+        }
+    }, [props.image])
     
     return (
         <div className={!props.isCover ? "upload-widget-page-template" : "upload-widget-cover" }>
