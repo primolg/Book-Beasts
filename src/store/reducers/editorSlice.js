@@ -135,6 +135,9 @@ export const updatePage = (page) => async (dispatch) => {
         dispatch(_updatePages(pages));
         const updatedPage = pages.find(p => p.id==page.id);
         dispatch(setCurrentPage(updatedPage));
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -142,5 +145,9 @@ export const deletePage = (page) => async (dispatch) => {
     const { data: book } = await axios.delete(`/api/editor/${page.bookId}/pages/${page.id}`);
     if (book) {
         dispatch(_updateBook(book));
+        dispatch(setCurrentPage(book.pages[0]));
+        return true;
+    } else {
+        return false;
     }
 }

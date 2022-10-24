@@ -18,6 +18,8 @@ const Template1 = () => {
 
     useEffect(() => {
         dispatch(setCurrentText(text));
+
+        // will move this autosave feature to template container
         // if (page.id) {
         //     const interval = setInterval(() => {
         //         console.log("Saving...");

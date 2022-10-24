@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Popup from 'reactjs-popup';
 import { FaPencilAlt, FaRegSave } from "react-icons/fa";
-import { updatePage } from "../../store/reducers/editorSlice";
+import { updatePage, deletePage } from "../../store/reducers/editorSlice";
 import templates from "./bookTemplates";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer, Slide } from "react-toastify";
 
 const PageEditorOptions = () => {
     const book = useSelector(state => state.editor.currentBook);
@@ -12,27 +12,55 @@ const PageEditorOptions = () => {
     const text = useSelector(state => state.editor.currentText);
     const dispatch = useDispatch();
 
+    const [canUpdate, setCanUpdate] = useState(true);
+
     const changeTemplate = async (templateId, close) => {
-        // console.log("updating template");
-        const updatedPage = await dispatch(updatePage({
+        await dispatch(updatePage({
             ...page,
             templateId,
         }))
-        console.log(updatedPage);
         close();
     };
 
+    const popupTimer = 3000;
     // should disable save button for a few seconds after clicking
     const handleSave = async () => {
-        console.log("Manually saving page content...");
-        await dispatch(updatePage({
+        if (!canUpdate) return;
+
+        const res = await dispatch(updatePage({
             ...page,
             content: text,
         }));
-    }
+        if (res) toast.success("Saved your page!");
+        else toast.error("Unable to save. Try again later!");
+        setCanUpdate(false);
+    };
+
+    const handleDelete = async (close) => {
+        close();
+        const res = await dispatch(deletePage(page));
+        if (res) toast.success("Page deleted!");
+        else toast.error("Unable to delete page. Try again later!");
+    };
+
+    useEffect(() => {
+        if (canUpdate===false) {
+            console.log("canUpdate is false")
+            setTimeout(() => {
+                console.log("setting canUpdate to true");
+                setCanUpdate(true);
+            }, (popupTimer * 1.5))
+        }
+    }, [canUpdate])
 
     return(
         <div id="page-editor-options">
+            <ToastContainer
+                position="top-center"
+                hideProgressBar={true}
+                transition={Slide}
+                autoClose={popupTimer}
+            />
             <Popup modal className="edit-book-attribute" trigger={
                 <div className="page-settings-btn">
                     <p>Page Settings</p><FaPencilAlt size={19}/>
@@ -53,7 +81,7 @@ const PageEditorOptions = () => {
                                 </div>
                             </div>    
                             {book.totalPages > 2 && (
-                                <button className="delete-button">
+                                <button className="delete-button" onClick={(e) => handleDelete(close)}>
                                     {`Delete Page ${page?.pageNumber}`}
                                 </button>
                             )}
