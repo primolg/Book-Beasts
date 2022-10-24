@@ -22,7 +22,7 @@ const BookTable = () => {
         <div className='table-container'>
       <div className='booksTable' id="book-table">
 
-            {books ? (
+            {books.length !==0 ? (
                 <div className='bookList'>
                     <div className='table-title'>
                     <h1> Book List</h1>
