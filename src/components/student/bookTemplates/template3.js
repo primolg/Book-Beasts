@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ImageWidget from './uploadWidget';
 import rowLimiter from './rowLimiter';
 
-const Template3 = ({ setChanges }) => {
+const Template3 = () => {
     const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
     const [text, setText] = useState("");
@@ -12,7 +12,7 @@ const Template3 = ({ setChanges }) => {
         if (page.id) {
             setText(page.content || "");
         }
-    }, [page])
+    }, [page]);
 
     return (
         <div className="page-outer-div temp3-outer-div">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import ImageWidget from './uploadWidget';
 
-const Template2 = ({ setChanges }) => {
+const Template2 = () => {
     const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
     

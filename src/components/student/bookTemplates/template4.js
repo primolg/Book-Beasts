@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ImageWidget from './uploadWidget';
 import rowLimiter from './rowLimiter';
 
-const Template4 = ({ setChanges }) => {
+const Template4 = () => {
     const page = useSelector(state => state.editor.currentPage);
     const dispatch = useDispatch();
     const [text, setText] = useState('');

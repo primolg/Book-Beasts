@@ -246,7 +246,7 @@
     margin: 1em auto;
 }
 
-#delete-button {
+#delete-button, .delete-button {
     background: darkred;
     color: white;
 }
@@ -291,5 +291,39 @@
     #error-page-header {
         width: fit-content;
         margin: 2em auto;
+    }
+}
+
+#page-editor-options {
+    @flexSpaceBetween();
+    min-width: 300px;
+    max-width: 300px;
+    border: 3px black solid;
+}
+
+.page-settings-btn {
+    width: fit-content;
+    padding: 0.6em 0.7em;
+    * {
+        margin-left: 0.4em;
+    }
+    p {
+        margin-left: 0;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-edit-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.92em;
+
+    button  {
+        margin: 0 auto;
+        width: fit-content;
     }
 }

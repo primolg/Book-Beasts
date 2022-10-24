@@ -56,7 +56,7 @@ const BookEditor = () => {
                     <EditorBookInfo />
                     <Pageshelf /> 
                     <PageEditor />
-                    <PublishButton bookId={currentBook?.id} />
+                    <PublishButton />
                 </div>
             </>
         )

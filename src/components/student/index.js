@@ -9,6 +9,7 @@ import Pageshelf from "./Pageshelf";
 import TemplateContainer from "./bookTemplates/TemplateContainer";
 import PageEditor from "./PageEditor";
 import ImageWidget from "./bookTemplates/uploadWidget";
+import PageEditorOptions from "./PageEditorOptions";
 
 export {
   BookEditor,
@@ -21,5 +22,6 @@ export {
   Pageshelf,
   TemplateContainer,
   PageEditor,
-  ImageWidget
+  ImageWidget,
+  PageEditorOptions
 };
