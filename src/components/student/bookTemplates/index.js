@@ -9,11 +9,6 @@ import Template4 from "./template4";
 // T3: top image bottom text
 // T4: top text bottom image
 
-const templates = {
-    Template1,
-    Template2,
-    Template3,
-    Template4
-}
+const templates = [Template1, Template2, Template3, Template4];
 
 export default templates;
