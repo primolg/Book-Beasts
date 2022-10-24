@@ -18,17 +18,16 @@ const Template1 = () => {
 
     useEffect(() => {
         dispatch(setCurrentText(text));
-        
-        if (page.id) {
-            const interval = setInterval(() => {
-                console.log("Saving...");
-                dispatch(updatePage({
-                    ...page,
-                    content: text,
-                }))
-            }, 15000);
-            return () => clearInterval(interval);
-        }
+        // if (page.id) {
+        //     const interval = setInterval(() => {
+        //         console.log("Saving...");
+        //         dispatch(updatePage({
+        //             ...page,
+        //             content: text,
+        //         }))
+        //     }, 15000);
+        //     return () => clearInterval(interval);
+        // }
     }, [text])
 
     return (

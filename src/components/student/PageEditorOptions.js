@@ -14,11 +14,12 @@ const PageEditorOptions = () => {
 
     const changeTemplate = async (templateId, close) => {
         // console.log("updating template");
-        await dispatch(updatePage({
+        const updatedPage = await dispatch(updatePage({
             ...page,
             templateId,
         }))
-        // close();
+        console.log(updatedPage);
+        close();
     };
 
     // should disable save button for a few seconds after clicking

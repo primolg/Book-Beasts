@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 const axios = require("axios");
 
+const initialState = {
+    currentBook: {},
+    currentPage: {},
+    currentText: "",
+    uploadedImg: "",
+};
+
 const editorSlice = createSlice({
     name: "editorSlice",
-    initialState: {
-        currentBook: {},
-        currentPage: {},
-        uploadedImg: "",
-    },
+    initialState: initialState,
     reducers: {
         setBook: (state, action) => {
             return {
@@ -51,11 +54,29 @@ const editorSlice = createSlice({
                 uploadedImg: ""
             }
         },
+        setCurrentText: (state, action) => {
+            return {
+                ...state,
+                currentText: action.payload
+            }
+        },
+        clearCurrentBook: (state, action) => {
+            return initialState;
+        },
     },
 });
 
 export default editorSlice.reducer;
-export const { setBook, _updateBook, _updatePages, setCurrentPage, setUploadImg, clearUploadImg } = editorSlice.actions;
+export const { 
+    setBook,
+    _updateBook,
+    _updatePages,
+    setCurrentPage,
+    setUploadImg,
+    clearUploadImg,
+    setCurrentText,
+    clearCurrentBook
+} = editorSlice.actions;
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
@@ -112,7 +133,8 @@ export const updatePage = (page) => async (dispatch) => {
     const { data: pages } = await axios.put(`/api/editor/${page.bookId}/pages/${page.id}`, page);
     if (pages) {
         dispatch(_updatePages(pages));
-        return true;
+        const updatedPage = pages.find(p => p.id==page.id);
+        dispatch(setCurrentPage(updatedPage));
     }
 }
 
