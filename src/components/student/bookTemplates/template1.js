@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
 import { SaveProgressButton } from '../';
+import rowLimiter from './rowLimiter';
 
 const Template1 = ({ page }) => {
     const [text, setText] = useState("");
-    
+
     useEffect(() => {
         if (page.id) {
             setText(page.content || "");
@@ -11,20 +13,15 @@ const Template1 = ({ page }) => {
     }, [page])
 
     return (
-        <>
-            <div className="page-outer-div">
-                <div className="t1-textarea">
-                    <textarea 
-                        onChange={(event)=>setText(event.target.value)} 
-                        rows="20"
-                        cols="41"
-                        value={text}
-                        placeholder="Write your story here...">
-                    </textarea>
-                </div>
+        <div className="page-outer-div temp1-outer-div">
+            <div className='text-div'>
+                <textarea className="full-text-page" defaultValue={text } onChange={(event) => setText(event.target.value) }
+                    rows="13" cols="30"
+                    spellCheck="true"
+                    onKeyPress={rowLimiter(event, 17)}
+                ></textarea>
             </div>
-            <SaveProgressButton page={page} content={text} />
-        </>
+        </div>
     );
 };
 

@@ -1,8 +1,7 @@
 import React from 'react';
 
 const BookView3 = React.forwardRef(({page}, ref) => {
-
-    return (
+    return ( page ? (
         <div ref={ref} className="demoPage view-page-outer-div bookview3-outer-div">
                 <div className="view-small-image-page">
                     <img className="view-page-image" src={page.page.image}/>
@@ -11,6 +10,7 @@ const BookView3 = React.forwardRef(({page}, ref) => {
                     <p>{page.page.content}</p>
                 </div>
         </div>
+        ) : (<div className="demoPage filler-page"></div>)
     );
 });
 

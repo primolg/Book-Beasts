@@ -1,11 +1,32 @@
+@import "../common.less";
 
-.small-image-page{
-    float: right;
-    margin: 0 10px 5px 5px;
+.temp4-outer-div{
+    
+    .text-div{
+        height: 100%;
+        justify-content: space-between;
+        margin: 5px 10px;
+
+        .small-image-page{
+            min-height: 180px;
+            max-height: 180px;
+            background-color: rgb(240, 240, 240);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+        }
+
+        .full-text-page{
+            min-width: 278px;
+            max-width: 278px;
+            min-height: 278px;
+            max-height: 278px;
+            font-size:x-large;
+            overflow: hidden;
+            resize:none;
+            border: none;
+        }
+    }
 }
 
-.small-text-page{
-    max-width: 95%;
-    min-height: 90%;
-    max-height: 90%;
-}

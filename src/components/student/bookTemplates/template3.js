@@ -1,22 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ImageWidget from './uploadWidget';
+import rowLimiter from './rowLimiter';
 
-const Template3 = () => {
-    const [text, setText] = useState('');
-    const [image, setImage] = useState(undefined);
+const Template3 = ({ page }) => {
+    const [text, setText] = useState("");
 
-    // console.log(text)
+    useEffect(() => {
+        if (page.id) {
+            setText(page.content || "");
+        }
+    }, [page])
+
     return (
         <div className="page-outer-div temp3-outer-div">
-            <div className='text-img-div'>
+            <div className='text-div'>
                 <div className="small-image-page">
-                    {image ? 
-                        image : 
-                        <input type="file" name="img" accept=".jpg,.jpeg,.png" onChange={(event) => setImage(event.target.value)}></input>
-                    }
+                    <ImageWidget 
+                        croppingRatio={1.54444444444}
+                        maxHeight={180}
+                        maxWidth={278}
+                    />
                 </div>
-                <div className="small-text-page" id="pageText" contentEditable="true">
-                    "hello"
-                </div>
+                <textarea className="full-text-page" defaultValue={text } onChange={(event) => setText(event.target.value) }
+                    rows="10" cols="30"
+                    spellCheck="true"
+                    onKeyPress={rowLimiter(event, 10)}
+                ></textarea>
             </div>
         </div>
     );
