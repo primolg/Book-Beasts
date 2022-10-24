@@ -51,8 +51,8 @@ const AllBooks = () => {
         navigate('/books',  {state: ''});
         window.location.reload();
       }
-
-    return (
+console.log(books)
+    return ( books ? (
         <>
         <div id='filter-wrap'>
             <label htmlFor='filter-options' className='filter-label'>Select genre: </label>
@@ -68,8 +68,8 @@ const AllBooks = () => {
                   </div>
           <div className='wrapper'>
           <div className='all-book-view'>
-                      {books.map(book => 
-                      <div className="book-container" key={book.id}>
+                      {books.filter(book => book.isPublished).map(book => 
+                      (<div className="book-container" key={book.id}>
                           <Link to={`/books/${book.id}`}>
                           <div className="book">
                             <div className="image-wrapper">
@@ -85,12 +85,12 @@ const AllBooks = () => {
                             <div className="page-numbers author-info">{book.totalPages} Pages</div>
                             <div className="genre-tag author-info">{book.genre}</div>
                           </div>
-                      </div>
+                      </div>)
                       )}
             </div>
           </div>
         
-        </>
+        </>) : <div>no data</div>
        )
 }
 
