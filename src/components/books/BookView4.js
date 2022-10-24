@@ -6,7 +6,7 @@ const BookView4 = React.forwardRef(({page}, ref) => {
                 <div className="view-small-text-page" id="view-pageText">
                     <p>{page.page.content}</p>
                 </div>
-                <div className="view-small-image-page">
+                <div className="view-small-image-page-4">
                     {page.page.image ? (<img className="view-page-image" src={page.page.image}/>) : <div className="filler-image"></div>}
                 </div>
         </div>
