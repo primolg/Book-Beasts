@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateBook, updatePage } from "../../store/reducers/editorSlice";
 
-// for page content
 const SaveProgressButton = ({ page, content }) => {
     const dispatch = useDispatch();
 
@@ -12,6 +11,7 @@ const SaveProgressButton = ({ page, content }) => {
         }));
     };
     
+    // currently this component is not in use
     return(
         <button onClick={() => save()}>Save progress!</button>
     )

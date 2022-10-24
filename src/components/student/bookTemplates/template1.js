@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 // import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
 import { useSelector, useDispatch } from "react-redux";
-import { updatePage } from "../../../store/reducers/editorSlice";
+import { updatePage, setCurrentText } from "../../../store/reducers/editorSlice";
 import rowLimiter from './rowLimiter';
 // import { Autosave } from "../";
 
@@ -17,6 +17,8 @@ const Template1 = () => {
     }, [page.content]);
 
     useEffect(() => {
+        dispatch(setCurrentText(text));
+        
         if (page.id) {
             const interval = setInterval(() => {
                 console.log("Saving...");

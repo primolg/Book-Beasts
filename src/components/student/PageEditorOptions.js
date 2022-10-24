@@ -4,14 +4,16 @@ import Popup from 'reactjs-popup';
 import { FaPencilAlt, FaRegSave } from "react-icons/fa";
 import { updatePage } from "../../store/reducers/editorSlice";
 import templates from "./bookTemplates";
-// toastify
+import { toast, ToastContainer } from "react-toastify";
 
 const PageEditorOptions = () => {
+    const book = useSelector(state => state.editor.currentBook);
     const page = useSelector(state => state.editor.currentPage);
+    const text = useSelector(state => state.editor.currentText);
     const dispatch = useDispatch();
 
     const changeTemplate = async (templateId, close) => {
-        console.log("updating template");
+        // console.log("updating template");
         await dispatch(updatePage({
             ...page,
             templateId,
@@ -19,8 +21,13 @@ const PageEditorOptions = () => {
         // close();
     };
 
-    const save = async () => {
-
+    // should disable save button for a few seconds after clicking
+    const handleSave = async () => {
+        console.log("Manually saving page content...");
+        await dispatch(updatePage({
+            ...page,
+            content: text,
+        }));
     }
 
     return(
@@ -30,35 +37,31 @@ const PageEditorOptions = () => {
                     <p>Page Settings</p><FaPencilAlt size={19}/>
                 </div>
             }>
-                {close1 => (
+                {close => (
                     <div className="edit-book-popup-form">
                         <div id="page-edit-form">
-                            <button className="delete-button">{`Delete Page ${page?.pageNumber}`}</button>
-                            <Popup
-                                modal
-                                className="new-book"
-                                trigger={<button>Change Page Template</button>}
-                            >
-                                {close2 => (
-                                    <div className="new-book-popup-form">
-                                        <h3 id="temp-selection-header">Select a new template for your page:</h3>
-                                        <div className="template-selection">
-                                        {templates.map((t, i) => 
-                                            <div key={i} className="template-single" onClick={(e) => console.log("hello")}>
-                                                <p>{`Template ${i + 1}`}</p>
-                                                <img src={`/templates/temp${i+1}.png`}/>
-                                            </div>
-                                        )}
+                            <div id="change-template-container">
+                                <h3 id="temp-selection-header">Change page template:</h3>
+                                <div className="template-selection-page">
+                                    {templates.map((t, i) => 
+                                        <div key={i} className="template-single" onClick={(e) => changeTemplate(i+1, close)}>
+                                            <p>{`Template ${i + 1}`}</p>
+                                            <img src={`/templates/temp${i+1}.png`} className="change-temp-img"/>
                                         </div>
-                                    </div>
-                                )}
-                            </Popup>                            
+                                    )}
+                                </div>
+                            </div>    
+                            {book.totalPages > 2 && (
+                                <button className="delete-button">
+                                    {`Delete Page ${page?.pageNumber}`}
+                                </button>
+                            )}
                         </div>
-                        <p id="close-popup">Cancel Changes</p>
+                        <p id="close-popup" onClick={close}>Cancel Changes</p>
                     </div>
                 )}
             </Popup>
-            <div className="page-settings-btn">
+            <div className="page-settings-btn" onClick={handleSave}>
                 <p>Save Work</p><FaRegSave size={22} />
             </div>
         </div>
