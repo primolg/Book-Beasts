@@ -91,7 +91,7 @@ const EditorBookInfo = () => {
                                             <ImageWidget isCover={true} hasCover={false} croppingRatio={0.9}/>
                                         ) : (
                                             <>
-                                                <img src={book.coverArt} className="book-form-coverart" hidden={hideOldCover}/>
+                                                {/* <img src={book.coverArt} className="book-form-coverart" hidden={hideOldCover}/> */}
                                                 <ImageWidget isCover={true} hasCover={true} croppingRatio={0.9}/>
                                             </>
                                         )

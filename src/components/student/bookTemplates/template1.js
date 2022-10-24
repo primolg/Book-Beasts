@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 // import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
 import { useSelector, useDispatch } from "react-redux";
-import { updatePage, setCurrentText } from "../../../store/reducers/editorSlice";
+import { setCurrentText } from "../../../store/reducers/editorSlice";
 import rowLimiter from './rowLimiter';
-// import { Autosave } from "../";
 
 const Template1 = () => {
     const page = useSelector(state => state.editor.currentPage);

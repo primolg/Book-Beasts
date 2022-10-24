@@ -5,6 +5,8 @@ import { setUploadImg } from "../../../store/reducers/editorSlice";
 const ImageWidget = (props) => {
     const dispatch = useDispatch();
     const [image, setImage] = useState(undefined);
+    const book = useSelector(state => state.editor.currentBook);
+    const page = useSelector(state => state.editor.currentPage);
 
     const myWidget = cloudinary.createUploadWidget(
         {
@@ -26,22 +28,25 @@ const ImageWidget = (props) => {
 
     useEffect(() => {
         if (image) {
-            console.log(image);
             dispatch(setUploadImg(image));
+        } else if (!props.isCover && props.hasImage) {
+            setImage(props.image)
+        } else if (props.isCover && props.hasCover) {
+            setImage(book.coverArt);
         }
     }, [image]);
     
     return (
-        <>
-        {image ? 
-            <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/> : 
-            <button 
-            onClick={()=>myWidget.open()}
-            className="cloudinary-button">
-                {props.hasCover ? "Replace cover art" : props.isCover ? "Upload cover art" : "Upload image"}
+        <div className="upload-widget-page-template">
+            {image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>}
+            <button
+                onClick={()=>myWidget.open()}
+                className="cloudinary-button">
+                    {props.hasCover ? "Replace cover art" :
+                        props.isCover ? "Upload cover art" :
+                        props.hasImage ? "Replace image" : "Upload image"}
             </button>
-        }
-        </>
+        </div>
     )
 }
     

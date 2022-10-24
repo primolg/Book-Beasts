@@ -12,8 +12,6 @@ const PageEditorOptions = () => {
     const text = useSelector(state => state.editor.currentText);
     const dispatch = useDispatch();
 
-    const [canUpdate, setCanUpdate] = useState(true);
-
     const changeTemplate = async (templateId, close) => {
         await dispatch(updatePage({
             ...page,
@@ -22,8 +20,9 @@ const PageEditorOptions = () => {
         close();
     };
 
+    const [canUpdate, setCanUpdate] = useState(true);
     const popupTimer = 3000;
-    // should disable save button for a few seconds after clicking
+
     const handleSave = async () => {
         if (!canUpdate) return;
 
@@ -36,22 +35,21 @@ const PageEditorOptions = () => {
         setCanUpdate(false);
     };
 
+    // only allows clicking 'save' every 4.5s
+    useEffect(() => {
+        if (canUpdate===false) {
+            setTimeout(() => {
+                setCanUpdate(true);
+            }, (popupTimer * 1.5))
+        }
+    }, [canUpdate])
+
     const handleDelete = async (close) => {
         close();
         const res = await dispatch(deletePage(page));
         if (res) toast.success("Page deleted!");
         else toast.error("Unable to delete page. Try again later!");
     };
-
-    useEffect(() => {
-        if (canUpdate===false) {
-            console.log("canUpdate is false")
-            setTimeout(() => {
-                console.log("setting canUpdate to true");
-                setCanUpdate(true);
-            }, (popupTimer * 1.5))
-        }
-    }, [canUpdate])
 
     return(
         <div id="page-editor-options">
@@ -80,10 +78,12 @@ const PageEditorOptions = () => {
                                     )}
                                 </div>
                             </div>    
-                            {book.totalPages > 2 && (
+                            {book.totalPages > 2 ? (
                                 <button className="delete-button" onClick={(e) => handleDelete(close)}>
                                     {`Delete Page ${page?.pageNumber}`}
                                 </button>
+                            ) : (
+                                <p id="page-min-tooltip"><i>Note: Books have a minimum of 2 pages.</i></p>
                             )}
                         </div>
                         <p id="close-popup" onClick={close}>Cancel Changes</p>
@@ -91,7 +91,7 @@ const PageEditorOptions = () => {
                 )}
             </Popup>
             <div className="page-settings-btn" onClick={handleSave}>
-                <p>Save Work</p><FaRegSave size={22} />
+                <p>Save Page</p><FaRegSave size={22} />
             </div>
         </div>
     )
