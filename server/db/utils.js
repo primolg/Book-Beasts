@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 require('dotenv').config();
 
 const hashPassword = async function(user) {
-    console.log("HASH NEW", user.password)
+    // console.log("HASH NEW", user.password)
     user.password = await bcrypt.hash(user.password, 10);
 }
 

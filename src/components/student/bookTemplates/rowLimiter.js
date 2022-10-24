@@ -121,4 +121,4 @@ function rowLimiter(event, limit) {
     }
 }
 
-export default rowLimiter
+export default rowLimiter;
