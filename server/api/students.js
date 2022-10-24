@@ -14,7 +14,7 @@ router.get('/', async(req, res, next) => {
 });
 
 //GET single student & their books
-router.get('/:id', requireStudentToken, async(req, res, next) => {
+router.get('/:id', async(req, res, next) => {
     try{
         const student = await Student.findByPk(req.params.id);
         const books = await Book.findAll({

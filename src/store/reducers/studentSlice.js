@@ -36,10 +36,8 @@ export const fetchStudents = () => async(dispatch) => {
 
 export const fetchStudentData = (studentId) => async(dispatch) => {
   try {
-    const token = window.localStorage.getItem('token');
-    const { data: studentData } = await axios.get(`/api/students/${studentId}`, {
-      headers: { authorization: token },
-    });
+    // const token = window.localStorage.getItem('token');
+    const { data: studentData } = await axios.get(`/api/students/${studentId}`)
     dispatch(getStudent(studentData));
   } catch(error){
     console.log('FETCH STUDENT ERROR', error);
