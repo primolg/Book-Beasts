@@ -4,7 +4,7 @@ import { BookTable } from '../instructorBooks';
 import  DeleteStudent  from "./DeleteStudent";
 import  EditStudent  from "./EditStudent";
 
-const StudentRow = ( {student}) => {
+const StudentRow = ({ student, activeTab, setActiveTab }) => {
     const params = useParams();
     console.log('STUDENT ROW STUDENT', student)
     
@@ -24,10 +24,10 @@ const StudentRow = ( {student}) => {
                 
                     <td className='flex-row text-center' role="cell">{student.email}</td>
                     <td className='flex-row text-center' role="cell">
-                        <EditStudent id="view" student={student} />
+                        <EditStudent id="view" student={student} activeTab={activeTab} setActiveTab={setActiveTab}/>
                     </td>
                     <td className='flex-row text-center' role="cell">
-                        <DeleteStudent id="view" student={student} />
+                        <DeleteStudent id="view" student={student} activeTab={activeTab} setActiveTab={setActiveTab}/>
                     </td>
                 </tr>
             )}

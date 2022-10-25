@@ -15,7 +15,7 @@ const InstructorLogout = () => {
 
     return(
             
-            <button className="small-btn draw-border" onClick={handleLogout}>Logout</button>
+            <button className="small-btn inst-logout" onClick={handleLogout}>Logout</button>
         );
     
 };

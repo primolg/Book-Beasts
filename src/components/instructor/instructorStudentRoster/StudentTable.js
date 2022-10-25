@@ -1,7 +1,7 @@
 import React from 'react';
 import StudentRow from './StudentRow';
 
-const StudentTable = ({ studentList }) => {
+const StudentTable = ({ studentList, activeTab, setActiveTab }) => {
 
     return(
        <>          
@@ -25,7 +25,7 @@ const StudentTable = ({ studentList }) => {
                     </thead>
                     <tbody className='table-hover'>
                         {studentList.map((student) => (
-                        <StudentRow key={student.id} student={student} />
+                        <StudentRow key={student.id} student={student} activeTab={activeTab} setActiveTab={setActiveTab}/>
                         ))}
                     </tbody>
                 </table>

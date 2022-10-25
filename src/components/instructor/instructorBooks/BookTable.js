@@ -3,12 +3,13 @@ import BookRow from './BookRow';
 import { fetchStudentData } from '../../../store/reducers/instructorSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { InstructorHeader } from '../instructorTabs';
 
 
 const BookTable = () => {
     const dispatch = useDispatch();
     const params = useParams();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const student = useSelector((state) => state.instructorList.currentStudent)
     const books= student.books;
     // //
@@ -19,6 +20,8 @@ const BookTable = () => {
    console.log('BOOKLIST', student)
    console.log("BOOKLIST", books)
     return(
+        <div>
+        <InstructorHeader/>
         <div className='table-container'>
       <div className='booksTable' id="book-table">
 
@@ -48,16 +51,14 @@ const BookTable = () => {
                     </table>
                     </div>
             ): (
-                <div>
-                <h3>This student hasn't created any books yet!</h3>
-                <button className='small-btn' onClick={() => navigate(-1)}>Back To Roster</button>
+                <div className='nunsuch-container'>
+                <h1>This student hasn't created any books yet!</h1>
+                <button className='nunsuch-button' onClick={() => navigate(-1)}>Back</button>
                 </div>
             )}
         </div>
-       
-        
+       </div>
         </div>
-       
     )
 }
 

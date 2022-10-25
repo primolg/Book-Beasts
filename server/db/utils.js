@@ -52,6 +52,7 @@ function generateToken() {
 
 const findByToken = (model) => async(token) => {
     try {
+        console.log("TOKEN MODEL", model)
         const { id } = jwt.verify(token, process.env.JWT);
         const user = await model.findByPk(id);
         if (user) {

@@ -32,7 +32,7 @@ const LoginForm = ({ type, setAccountType }) => {
             if (type === "student" && res?.id) {
                 navigate(`/student`);
             } else if (res?.id) {
-                navigate(`/instructorPortal/${res.id}`);
+                navigate(`/instructorPortal/${res?.id}`);
             }
         })
     }

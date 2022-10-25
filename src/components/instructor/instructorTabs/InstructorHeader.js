@@ -28,8 +28,10 @@ const InstructorHeader = ({ instructorId }) => {
             <div id="inst-header-button-title">
              <h2 id="inst-header-title" key={params.id}>{`Welcome ${instructor.firstName}!`}</h2>
             </div>
-                <Link  to="/books"><button className="small-btn draw-border">All Books</button></Link>
-                <InstructorLogout/>
+           
+                <Link  to="/books"><button className="small-btn">Home</button></Link>
+                <InstructorLogout />
+            
         </div>
     )
 }

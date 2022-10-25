@@ -61,6 +61,7 @@ export const verifyToken = (token) => async (dispatch) => {
     const { data: user } = await axios.get("/api/auth", {
         headers: { authorization: token }
     });
+    console.log("VERIFY TOKEN", user);
     if (user?.email) {
         dispatch(setLoggedInUser(user));
         return true;

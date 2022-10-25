@@ -10,6 +10,7 @@ const StudentView = () => {
     //I'd like to change this so that the books are added upon the initial user login to avoid having to do any authentication or axios get calls after login!
 
     const params = useSelector((state) => state.user.id);
+    //const params = useParams();
     const studentData = useSelector((state) => state.student.studentData)
     const dispatch = useDispatch();
     const themes = ["general fiction", "autobiography", "sci-fi", "fantasy", "poetry", "historical", "adventure", "mystery"];

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { deleteStudent } from "../../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
-const DeleteStudent = ( { student }) => {
+const DeleteStudent = ( { student, activeTab, setActiveTab }) => {
     const params = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const DeleteStudent = ( { student }) => {
     const handleDelete = (event) => {
         event.preventDefault();
         dispatch(deleteStudent(student.id));
-        navigate(`/instructorPortal/${params.id}`);
+        setActiveTab("portal-home");
     };
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
 //the state change from showing immediately in the student table. Working on fixing this issue.

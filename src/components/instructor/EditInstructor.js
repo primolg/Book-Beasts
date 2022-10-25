@@ -66,7 +66,7 @@ const EditInstructor = () => {
         <>
                 <div id="edit-tab">
                 <DeleteInstructor key={instructor.id} instructor={instructor}/>
-                <div className="form-card">
+                <div className="edit-form-card">
                 <h2 className="card-heading">
                         Edit Profile
                     </h2>
