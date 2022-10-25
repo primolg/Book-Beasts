@@ -26,15 +26,13 @@ export const { setLoggedInUser, logout } = authSlice.actions;
 export const login = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/login", credentials);
     if (!user.username) {
-        alert("Could not find user with that email/username!");
-        return {};
+        return undefined;
     } else if (!user.token) {
-        alert("Invalid login!");
-        return {};
+        return null;
     } else {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
-        alert("Successfully logged in!");
+        // alert("Successfully logged in!");
         return user;
     }
 }
@@ -43,15 +41,15 @@ export const login = (credentials) => async (dispatch) => {
 export const signup = (credentials) => async (dispatch) => {
     const { data: user } = await axios.post("/api/auth/signup", credentials);
     if (user.error) {
-        alert(user.errorMessage);
+        // alert(user.errorMessage);
         return {};
     } else if (credentials.type === "user") {
         dispatch(setLoggedInUser(user));
         window.localStorage.setItem("token", user.token);
-        alert("Instructor account successfully created!");
+        // alert("Instructor account successfully created!");
         return user;
     } else {
-        alert("Student account successfully created!");
+        // alert("Student account successfully created!");
         return user;
     }
 }
