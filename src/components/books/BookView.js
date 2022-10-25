@@ -59,7 +59,8 @@ const BookView = () => {
         const blankPage = {
             page: {
                 content: '',
-            }
+            },
+            pageNumber: pages.length + 1,
         }
         pages.push(blankPage);
     }
