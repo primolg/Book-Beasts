@@ -20,8 +20,13 @@ const EditorBookInfo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const [hideOldCover, setHideOldCover] = useState(false);
     const [hasCover, setHasCover] = useState(book?.coverArt!==defaultCoverArt);
+
+    useEffect(() => {
+        if (book?.coverArt!==defaultCoverArt) {
+            setHasCover(true);
+        }
+    }, [book])
 
     const handleDelete = async (e) => {
         if (e.target.name==="delete") {
@@ -37,12 +42,6 @@ const EditorBookInfo = () => {
             return;
         }
     }
-
-    useEffect(() => {
-        if (hasCover && uploadedImg) {
-            setHideOldCover(true);
-        }
-    }, [uploadedImg]);
 
     const handleSubmit = async (e, close) => {
         const updated = { id: book.id };

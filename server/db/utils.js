@@ -42,6 +42,8 @@ const authenticate = (model) => async function({ key, password }) {
 }
 
 // adding 'username' ensures students/instructors can't log into eachothers' accounts
+// needs to be verified afterwards somehow (without breaking instructor login)
+// maybe can use 'age' as well, since only students have it
 function generateToken() {
     try {
         return jwt.sign({ id: this.id, username: this.username }, process.env.JWT);

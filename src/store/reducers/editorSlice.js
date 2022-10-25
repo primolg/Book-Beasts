@@ -78,18 +78,24 @@ export const {
     clearCurrentBook
 } = editorSlice.actions;
 
-// gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
-    const { data: book } = await axios.get(`/api/editor/${bookId}`);
-    if (book) {
+    const token = localStorage.getItem("token");
+    const { data: book } = await axios.get(`/api/editor/${bookId}`, {
+        headers: { authorization: token },
+    });
+    
+    // Should redirect if the book does not exist or they don't have credentials
+    
+    if (book && !book?.error) {
         dispatch(setBook(book));
+    } else if (book.errorType==="undefined") {
+        // alert("That book does not exist!");
     } else {
-        // alert("Unable to find that book");
+        // alert("You do not have access to edit that book");
     }
 }
 
 export const createNewBook = (book) => async (dispatch) => {
-    // "book" should be === { studentId: 5, genre: "racecar" };
     const { data: newBook } = await axios.post("/api/editor", book);
     if (!newBook || newBook === {}) {
         // alert("Unable to create book");
@@ -160,7 +166,6 @@ export const deletePage = (page) => async (dispatch) => {
 }
 
 export const updateCoverArt = (bookId, url) => async (dispatch) => {
-    console.log("here REDUCER")
     const { data: book } = await axios.put(`/api/editor/${bookId}`, {
         coverArt: url,
     });
