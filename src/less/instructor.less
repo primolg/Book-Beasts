@@ -14,7 +14,7 @@
     align-items: center;
 
 	a{
-		margin-left: 63em;
+		margin-left: 59em;
 		padding: 2rem;
 	}
 	.inst-logout{
@@ -47,7 +47,7 @@
 //buttons
 //main
 
-  .btn {
+.btn {
 	border-radius: 2em;
 	background-color: transparent;
 	border: 4px solid @blue;
@@ -82,7 +82,7 @@
   }
   
 
-  .small-btn {
+.small-btn {
 	border-radius: 2em;
 	background-color: @blue;
 	border: none;
@@ -115,6 +115,77 @@
 	  transform:scale(1);
 	}
   }
+
+
+.back-btn {
+	border-radius: 2em;
+	background-color: @blue;
+	border: none;
+	line-height: 1.5;
+	letter-spacing: 0.05rem;
+	font: 400 1.2rem 'Roboto Slab', sans-serif;
+	color: #ffffff;
+	padding: .5em .75em;
+	width: 6em;
+	height: 80%;
+	align-self: flex-end;
+	margin-top: 1rem;
+	margin-left:1rem;
+	&:hover {
+		transform:scale(1.2);
+		&.notinview {
+			opacity:0;
+		  }
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+@keyframes pop {
+	0% {
+	  clip-path:circle(5%);
+	  transform:scale(0.5);
+	}
+	100% {
+	  clip-path:circle(50%);
+	  transform:scale(1);
+	}
+  }
+
+  .book-back-btn {
+	border-radius: 2em;
+	background-color: @light_grey;
+	border: none;
+	line-height: 1.5;
+	letter-spacing: 0.05rem;
+	font: 400 1.2rem 'Roboto Slab', sans-serif;
+	color: @blue;
+	padding: .5em .75em;
+	width: 6em;
+	//height: 80%;
+	align-self: flex-end;
+	margin-right:91rem;
+	margin-bottom: 5rem;
+	&:hover {
+		transform:scale(1.2);
+		&.notinview {
+			opacity:0;
+		  }
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+@keyframes pop {
+	0% {
+	  clip-path:circle(5%);
+	  transform:scale(0.5);
+	}
+	100% {
+	  clip-path:circle(50%);
+	  transform:scale(1);
+	}
+  }
   
   .small-btn-outline {
 	border-radius: 2em;
@@ -127,6 +198,41 @@
 	padding: .5em .75em;
 	width: 6em;
 	height: 80%;
+	align-self: flex-end;
+	&:hover {
+		//background-color: @med_grey;
+		transform:scale(1.2);
+		&.notinview {
+			opacity:0;
+		  }
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+@keyframes pop {
+	0% {
+	  clip-path:circle(5%);
+	  transform:scale(0.5);
+	}
+	100% {
+	  clip-path:circle(50%);
+	  transform:scale(1);
+	}
+  }
+
+  .pop-btn-outline {
+	border-radius: 2em;
+	background-color: transparent;
+	border: 4px solid @blue;
+	line-height: 1.5;
+	letter-spacing: 0.05rem;
+	font: 700 1.2rem 'Roboto Slab', sans-serif;
+	color: @blue;
+	padding: .5em .75em;
+	width: 12rem;
+	height: 80%;
+	margin-left: 5rem;
 	align-self: flex-end;
 	&:hover {
 		//background-color: @med_grey;
@@ -709,10 +815,10 @@ ul.instructor-nav {
 
 
 .popup-content {
-	margin: auto;
+	margin-top: 6rem;
 	background: @color_2;
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	padding: 5px;
 	border: 1px solid #d7d7d7;
 }
@@ -764,6 +870,8 @@ input{
 	padding: 0 2rem 2rem 2rem;
 	line-height: 1.5;
 	text-align: center;
+	height: 96%;
+	
 }
 .edit-form-card {
 	background-color: @color1;
@@ -774,11 +882,59 @@ input{
 	font-family: "DM Sans", sans-serif;
 	padding: 0 2rem 2rem 2rem;
 	line-height: 1.5;
-	margin-left: 16rem;
-	margin-top: 5rem;
-	width: 60%;
+	margin-left: 25rem;
+	margin-right: 20rem;
+	margin-top: 3rem;
+	width: 40%;
 	height: 90%;
 	text-align: center;
+}
+
+.edit-input+.edit-input {
+	margin-top: 1.5rem;
+}
+
+.edit-input {
+	display: flex;
+	flex-direction: column-reverse;
+	padding-top: 1.5rem;
+	position: relative;
+	border-bottom: 2px solid @blue;
+}
+
+.edit-input-label {
+	color: @color2;
+	position: absolute;
+	top: 1.5rem;
+	transition: 0.25s ease;
+}
+
+.edit-input-field {
+	background-color: transparent;
+	border-bottom: 2px solid @blue;
+	border: 0;
+	font-size: 1.125rem;
+	font: inherit;
+	padding: 0.25rem 0;
+	z-index: 1;
+	margin-top: .5rem;
+	
+	&:focus {
+		border-bottom-color: @blue;
+		outline: 0;
+	}
+	&:valid {
+		border-bottom-color: @blue;
+		outline: 0;
+	}
+	&:focus+.edit-input-label {
+		color: @blue;
+		transform: translateY(-1.5rem);
+	}
+	&:valid+.edit-input-label {
+		color: @blue;
+		transform: translateY(-1.5rem);
+	}
 }
 
 .card-heading {
@@ -789,7 +945,7 @@ input{
 	position: absolute;
 	margin: .5rem;
 	padding-bottom: 2rem;
-	text-align: center;
+	align-self: center;
 	small {
 		display: block;
 		font-size: 0.75em;
@@ -798,6 +954,7 @@ input{
 	}
 }
 .card-form {
+	height: 100%;
 	padding: 2rem 1rem 0;
 	margin: 1rem;
 }
@@ -815,7 +972,6 @@ input{
 	color: @color2;
 	position: absolute;
 	top: 1.5rem;
-	
 	transition: 0.25s ease;
 }
 .input-field {
@@ -867,4 +1023,11 @@ input{
 
 .no-border{
 	border-bottom: none;
+}
+//single book view
+.content-container{
+	h1{
+		color: @light_grey;
+		margin-bottom: 2rem;
+	}
 }

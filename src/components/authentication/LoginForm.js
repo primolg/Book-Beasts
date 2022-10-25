@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
 
+
 // "type" can be user/student
 const LoginForm = ({ type, setAccountType }) => {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const LoginForm = ({ type, setAccountType }) => {
 
     const initialForm = { key: "", password: "" };
     const [form, setForm] = useState(initialForm);
+
 
     useEffect(() => {
         setForm({...form, type});

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const BookRow = ({ singleBook }) => {
@@ -8,7 +8,7 @@ const BookRow = ({ singleBook }) => {
     const params = useParams();
     const current = new Date();
     const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
-   
+   //
 
     const workTime = () => {
         let [ upYear, upMonth, upDay ] = updatedAt.split('-');
@@ -50,7 +50,7 @@ const BookRow = ({ singleBook }) => {
             }
         }
     }
-    console.log("SINGLE BOOK", singleBook)
+   
     return(
         <>
          {singleBook && (
@@ -70,9 +70,9 @@ const BookRow = ({ singleBook }) => {
                     <td>{singleBook.isPublished === false &&
                     <div>{workTime()}</div>}</td>
                     <td>
-                    <NavLink to={`/instructorPortal/${params.id}/students/${params.studentId}/books/${singleBook.id}`}>
+                    <Link to={`/instructorPortal/${params.id}/students/${params.studentId}/books/${singleBook.id}`} >
                         <button className='small-btn draw-border'>{`View ${singleBook.title}`}</button>
-                    </NavLink> 
+                    </Link> 
                     </td>
                 </tr>
             )}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchInstructorData } from '../../store/reducers/instructorSlice';
 import { useParams } from 'react-router-dom';
-import { InstructorHeader } from './instructorTabs';
 import { FaFacebookSquare, FaGoogle } from "react-icons/fa";
 
 

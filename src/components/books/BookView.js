@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
-import HTMLFlipBook from 'react-pageflip'
+import HTMLFlipBook from 'react-pageflip';
 import BookView1 from './BookView1';
 import BookView2 from './BookView2';
 import BookView3 from './BookView3';

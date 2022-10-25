@@ -17,7 +17,7 @@ const InstructorStudents = ({ activeTab, setActiveTab }) => {
     }, []);
 
     return(
-        <div id="students-tab">
+        <div className='tooltipBoundary' id="students-tab">
             <AddStudent activeTab={activeTab} setActiveTab={setActiveTab} />
             <StudentTable studentList={studentList} activeTab={activeTab} setActiveTab={setActiveTab}/>
             

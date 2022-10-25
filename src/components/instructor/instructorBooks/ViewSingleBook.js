@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBookData } from '../../../store/reducers/instructorSlice';
+import { fetchBookData, fetchStudentData } from '../../../store/reducers/instructorSlice';
 import { InstructorHeader } from '../instructorTabs';
+import HTMLFlipBook from 'react-pageflip';
+import ViewSingleBook1 from './ViewSingleBook1';
+import ViewSingleBook2 from './ViewSingleBook2';
+import ViewSingleBook3 from './ViewSingleBook3';
+import ViewSingleBook4 from './ViewSingleBook4';
+
+//
 
 const ViewSingleBook = () => {
     const dispatch = useDispatch();
     const params = useParams();
+    const navigate = useNavigate();
+    const student = useSelector((state) => state.instructorList.currentStudent);
     const book = useSelector((state) => state.instructorList.currentBook);
     const pages = book && book.pages ? filterPages(book.pages) : undefined;
     const [currentPage, setCurrentPage] = useState(0);
@@ -29,21 +38,51 @@ const ViewSingleBook = () => {
         dispatch(fetchBookData(params.id, params.studentId, params.bookId));
     }, []);
 
+    console.log("BOOK STUDENT", book);
+
   return pages ? (
-    <div>
-        <InstructorHeader/>
-        <div className="outer-div-book-view" id="instructor-book-view">
-            <div className="page-selector-shelf">
-                {pages.map(page =>
-                    <div className="page-selector" id={currentPage === page.pageNumber - 1 ? "selected" : ""} key={page.page.id} onClick={()=>setCurrentPage(page.pageNumber - 1)}>{page.pageNumber}</div>
-                )}
+    <>
+    <InstructorHeader/>
+    <div className="content-container">
+    <button className='book-back-btn' onClick={() => navigate(-1)}>Back</button>
+    <h1>{`"${book.title}" by ${student.firstName} ${student.lastName}`}</h1>
+        <HTMLFlipBook width={300} height={500}>
+        {pages.map((page) => {
+        switch(page.page.templateId){
+            case 1:
+                return (
+            <div className="demoPage">
+                <ViewSingleBook1 key={page.page.id} page={page}/>
+            </div>)
+            case 2:
+                return (
+            <div className="demoPage">
+                <ViewSingleBook2 key={page.page.id} page={page}/>
+            </div>)
+            case 3:
+                return (
+            <div className="demoPage">
+                <ViewSingleBook3 key={page.page.id} page={page}/>
             </div>
-            <div className="page">
-                <p id="page-content">{pages[currentPage].page.content}</p>
-                <p id="page-number-on-page">page {pages[currentPage].pageNumber}</p>
+                )
+            case 4:
+                return (
+            <div className="demoPage">
+                <ViewSingleBook4 key={page.page.id} page={page}/>
             </div>
-        </div>
-        </div>
+                )
+            default:
+                return (
+            <div className="demoPage">
+                <ViewSingleBook3 key={page.page.id} page={page}/>
+            </div>)
+            }
+        }
+    )}
+        </HTMLFlipBook>
+        <div className="book-view-instructions">Swipe or click to turn the page!</div>
+    </div>
+    </>
     ) : (
         <div>
         no book data

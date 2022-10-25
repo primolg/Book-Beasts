@@ -20,7 +20,7 @@ const DeleteStudent = ( { student, activeTab, setActiveTab }) => {
 
     return (
         <>
-            <Popup trigger={<button className="small-btn draw-border">Delete</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
+            <Popup trigger={<button className="small-btn draw-border">Delete</button>} position="left center">
             {close => (
                <div className="form-card">
                 

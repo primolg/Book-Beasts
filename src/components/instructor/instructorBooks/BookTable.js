@@ -17,19 +17,18 @@ const BookTable = () => {
         dispatch(fetchStudentData(params.id, params.studentId))
     }, []);
 
-   console.log('BOOKLIST', student)
-   console.log("BOOKLIST", books)
+   
     return(
         <div>
         <InstructorHeader/>
         <div className='table-container'>
-        <button className='small-btn' onClick={() => navigate(-1)}>Back</button>
+        <button className='back-btn' onClick={() => navigate(-1)}>Back</button>
       <div className='booksTable' id="book-table">
 
             {books.length !==0 ? (
                 <div className='bookList'>
                     <div className='table-title'>
-                    <h1> Book List</h1>
+                    <h3>{`${student.firstName}'s`} Book List</h3>
                     </div>
                     <table className='table-fill' id="booksTable">
                         <thead>
@@ -46,7 +45,7 @@ const BookTable = () => {
                         </thead>
                         <tbody className='table-hover'>
                           {books.map((book) => (
-                            <BookRow key={book.id} singleBook={book} />
+                            <BookRow key={book.id} singleBook={book} student={student}/>
                           ))}
                         </tbody>
                     </table>

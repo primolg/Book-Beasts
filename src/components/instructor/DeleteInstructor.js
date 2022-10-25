@@ -16,7 +16,7 @@ const DeleteInstructor = ( { instructor }) => {
 
     return (
         <>
-         <Popup trigger={<button className="small-btn-outline">Delete Account</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
+         <Popup trigger={<button className="pop-btn-outline">Delete Account</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
             {close => (
                <div className="form-card">
                <h2 className="card-heading">CAUTION!

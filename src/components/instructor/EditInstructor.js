@@ -4,10 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { updateInstructorData, fetchInstructorData } from "../../store/reducers/instructorSlice";
 import DeleteInstructor from "./DeleteInstructor";
 
-const EditInstructor = () => {
+const EditInstructor = ({ activeTab, setActiveTab }) => {
     const dispatch = useDispatch();
     const params = useParams();
-    const navigate  = useNavigate();
     const instructor = useSelector((state) => state.instructorList.instructorData);
 
     useEffect(() => {
@@ -18,7 +17,6 @@ const EditInstructor = () => {
         firstName: '',
         lastName: '',
         email: '',
-        username: '',
         password: '',
     });
 
@@ -35,10 +33,9 @@ const EditInstructor = () => {
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
-            username: form.username,
             password: form.password,
         }, params.id, instructor));
-        navigate(`/instructorPortal/${params.id}`);
+        setActiveTab("portal-home")
     };
 
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
@@ -53,7 +50,6 @@ const EditInstructor = () => {
             firstName: instructor.firstName,
             lastName: instructor.lastName,
             email: instructor.email,
-            username: instructor.username,
             password: '######',
         })
     }, [instructor])
@@ -72,29 +68,25 @@ const EditInstructor = () => {
                     </h2>
                <form className="card-form" onSubmit={handleSubmit}>
 
-               <div className="input">
-               <input className="input-field" name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-               <label className="input-label" htmlFor="firstName">First Name:</label>
+               <div className="edit-input">
+               <input className="edit-input-field" name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
+               <label className="edit-input-label" htmlFor="firstName">First Name:</label>
                </div>
 
-               <div className="input">
-               <input className="input-field" name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-               <label className="input-label" htmlFor="lastName">Last Name:</label>
+               <div className="edit-input">
+               <input className="edit-input-field" name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
+               <label className="edit-input-label" htmlFor="lastName">Last Name:</label>
                </div>
 
-               <div className="input">
-               <input className="input-field" name="email" value={form.email} onChange={handleChange('email')}/>
-               <label className="input-label" htmlFor="email">Email:</label>
+               <div className="edit-input">
+               <input className="edit-input-field" name="email" value={form.email} onChange={handleChange('email')}/>
+               <label className="edit-input-label" htmlFor="email">Email:</label>
                </div>
 
-               <div className="input">
-               <input className="input-field" name='username' value={form.username} onChange={handleChange('username')}/>
-               <label className="input-label" htmlFor="username">Username:</label>
-               </div>
 
-               <div className="input">
-               <input className="input-field" name="password" value={form.password} onChange={handleChange('password')}/>
-               <label className="input-label" htmlFor="password">Password:</label>
+               <div className="edit-input">
+               <input className="edit-input-field" name="password" value={form.password} onChange={handleChange('password')}/>
+               <label className="edit-input-label" htmlFor="password">Password:</label>
                </div>
 
                <div className="action">

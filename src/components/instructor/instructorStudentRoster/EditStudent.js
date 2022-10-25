@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
@@ -8,10 +8,7 @@ import Popup from 'reactjs-popup';
 const EditStudent = ( { student, activeTab, setActiveTab } ) => {
     const dispatch = useDispatch();
     const params = useParams();
-    const navigate  = useNavigate();
-
-    console.log("EDIT PARAMS", params.id);
-
+    
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
     }, []);
@@ -20,7 +17,6 @@ const EditStudent = ( { student, activeTab, setActiveTab } ) => {
         firstName: '',
         lastName: '',
         email: '',
-        username: '',
         password: '',
     });
 
@@ -37,15 +33,11 @@ const EditStudent = ( { student, activeTab, setActiveTab } ) => {
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
-            username: form.username,
             password: form.password,
         }, params.id, student.id, student));
         setActiveTab("portal-home")
     };
 
-//^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
-//the state change from showing immediately in the student table. Working on fixing this issue.
-    console.log("EDIT STUDENT", params.id, student.id, student)
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
     }, []);
@@ -55,14 +47,13 @@ const EditStudent = ( { student, activeTab, setActiveTab } ) => {
             firstName: student.firstName,
             lastName: student.lastName,
             email: student.email,
-            username: student.username,
             password: '#######',
         })
     }, [student])
 
     return (
         <>
-        <Popup trigger={<button className="small-btn-outline ">Edit</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
+        <Popup trigger={<button className="small-btn-outline ">Edit</button>} position="left center">
             {close => (
                 
                   <div className="form-card">
@@ -84,11 +75,6 @@ const EditStudent = ( { student, activeTab, setActiveTab } ) => {
                             <div className="input">
                                 <input className="input-field" name="email" value={form.email} onChange={handleChange('email')} />
                                 <label className="input-label" htmlFor="email">Email:</label>
-                            </div>
-
-                            <div className="input">
-                                <input className="input-field" name='username' value={form.username} onChange={handleChange('username')} />
-                                <label className="input-label" htmlFor="username">Username:</label>
                             </div>
 
                             <div className="input">

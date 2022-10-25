@@ -34,7 +34,7 @@ const InstructorNav = () => {
                     <InstructorStudents activeTab={activeTab} setActiveTab={setActiveTab}/>
                 </TabContent>
                 <TabContent id="edit" activeTab={activeTab}>
-                    <EditInstructor />
+                    <EditInstructor activeTab={activeTab} setActiveTab={setActiveTab} />
                 </TabContent>
             </div>
         </div></>
