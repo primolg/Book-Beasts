@@ -51,8 +51,8 @@ const AllBooks = () => {
         navigate('/books',  {state: ''});
         window.location.reload();
       }
-
-    return (
+console.log(books)
+    return ( books ? (
         <>
         <div id='filter-wrap'>
             <label htmlFor='filter-options' className='filter-label'>Select genre: </label>
@@ -66,14 +66,15 @@ const AllBooks = () => {
                   </select>
                   <button className="show-all-button" onClick={handleClick}>Show All</button>
                   </div>
-            <div className='book-div'> {/* What is this div?  Check later */}
           <div className='wrapper'>
           <div className='all-book-view'>
-                      {books.map(book => 
-                      <div className="book-container" key={book.id}>
+                      {books.filter(book => book.isPublished).map(book => 
+                      (<div className="book-container" key={book.id}>
                           <Link to={`/books/${book.id}`}>
                           <div className="book">
-                            <img className="slider-image" src={book.coverArt}/>
+                            <div className="image-wrapper">
+                              <img className="slider-image" src={book.coverArt}/>
+                            </div>
                             <div className="title-box">
                               <div className="book-title">{book.title}</div>
                             </div>
@@ -84,13 +85,12 @@ const AllBooks = () => {
                             <div className="page-numbers author-info">{book.totalPages} Pages</div>
                             <div className="genre-tag author-info">{book.genre}</div>
                           </div>
-                      </div>
+                      </div>)
                       )}
             </div>
           </div>
-          </div>
         
-        </>
+        </>) : <div>no data</div>
        )
 }
 

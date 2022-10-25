@@ -1,6 +1,8 @@
 @import "./common.less";
 
 .page-selector-shelf-editor{
+    background: white;
+
     display: flex;
     align-items: center;
     border: 3px black solid;
@@ -34,17 +36,23 @@
     }
 }
 
+@maxPageEditorWidth: 335px;
 .page-editor{
+    background: rgba(230,229,225,1);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     margin: 5px;
     min-width: 300px;
-    max-width: 300px;
+    max-width: @maxPageEditorWidth;
     min-height: 500px;
     max-height: 500px;
     overflow: hidden;
     border: 3px black solid;
+    
+    textarea {
+        padding: 8px;
+    }
 }
 
 #selected-editor{
@@ -69,7 +77,7 @@
 }
 @mediumPopup: {
     min-width: 17.5em;
-    max-width: 500px;
+    max-width: 450px;
     height: fit-content;
     background: @background;
     animation: popup 0.3s;
@@ -112,13 +120,38 @@
             @subtleLink();
             margin: 0.45em auto 0.75em;
         }
+        .template-selection {
+            min-height: 10em;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: row wrap;
+
+            .template-single {
+                margin: 0.3em;
+            }
+        }
+        #temp-selection-header {
+            width: fit-content;
+            margin: 0 auto;
+        }
     }
 }
 
-#basicInfoContainer {
-    min-width: 220px;
-    width: fit-content;
-    padding: 0.8em;
+#basic-info-container {
+    margin-top: 1em;
+    width: calc(@maxPageEditorWidth - 0.9em);
+    min-width: 300px;
+    padding: 0.5em 0.75em;
+    background: rgba(170,120,130,0.11);
+    border-radius: 1.3em;
+    margin-bottom: 0.7em;
+    box-shadow: 1px 1px 9px rgba(0,0,0,0.15);
+
+    #book-settings-btn {
+        display: flex;
+    }
     
     > p {
         margin-top: 0.3em;
@@ -126,7 +159,10 @@
         font-style: italic;
     }
     .attribute {
-        padding: 0.2em 1em;
+        // &:nth-child(even) {
+        //     background: rgba(0,0,0,0.07);
+        // }
+        padding: 0.2em 0.5em;
         @flexSpaceBetween();
         button {
             margin-left: @spaceBetween;
@@ -134,18 +170,32 @@
         p, h2 {
             margin-right: @spaceBetween;
         }
+
+        #book-settings-btn {
+            p {
+                width: 5em;
+            }
+            // font-size: 0.95em;
+        }
     }
 }
 
 // popup form for changing a field on the book
 .edit-book-attribute-content {
     @mediumPopup();
+    max-width: 400px;
 
     .edit-book-popup-form {
         margin: 1.3em auto 0;
+        padding: 0 0.5em;
         text-align: center;
-
-        h3 {
+        #edit-form {
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        h2, h3 {
             margin: 0 auto 0.5em;
         }
         >*, form>* {
@@ -168,18 +218,160 @@
             @subtleLink();
             margin: 0 auto 0.5em;
         }
+        label {
+            width: 100%;
+            @flexSpaceBetween();
+            margin: 0.3em 0;
+        }
+        #form-genre {
+            margin-bottom: 0.7em;
+        }
     }
 }
 
-#publish-delete-container {
+#publish-container {
     min-width: 310px;
     max-width: 80%;
-    padding: 1em;
-    @flexSpaceBetween();
+    padding: 0.5em 0 1.5em;
+    @flexCenter();
     
     button {
+        margin: 0 auto;
         font-size: 1.01em;
-        padding: 0.3em 0.5em 0.2em;
-        border-radius: 1em;
+        padding: 0.7em 1.12em 0.62em;
+        border-radius: 2em;
+        box-shadow: 1px 1px 10px rgba(170,120,130,0.2);
     }
+}
+
+.form-btn-container {
+    width: 100%;
+    max-width: 350px;
+    @flexSpaceBetween();
+    margin: 1em auto;
+}
+
+#delete-button, .delete-button {
+    background: darkred;
+    color: white;
+}
+
+.book-form-coverart {
+    margin: 0.3em auto;
+    overflow: hidden;
+    max-height: 20em;
+    max-width: 80%;
+}
+
+#publish-popup {
+    max-width: 390px;
+
+    >*{
+        text-align: center;
+        margin: 1em auto;
+    }
+
+    .cover-art-container-publish {
+        img {
+            margin: 0.3em auto;
+            overflow: hidden;
+            max-width: 80%;
+            max-height: 20em;
+        }
+    }
+    button {
+        margin: 0 auto;
+    }
+    #cancel-publish {
+        @subtleLink();
+        font-size: 1em;
+    }
+}
+
+#loading-error-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: @background;
+    #error-page-header {
+        width: fit-content;
+        margin: 2em auto;
+    }
+}
+
+#page-editor-options {
+    background: white;
+    @flexSpaceBetween();
+    min-width: 300px;
+    max-width: 300px;
+    border: 3px black solid;
+}
+
+.page-settings-btn {
+    width: fit-content;
+    padding: 0.6em 0.7em;
+    * {
+        margin-left: 0.4em;
+    }
+    p {
+        margin-left: 0;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-edit-form {
+    width: 100%;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    margin-bottom: 0.92em;
+
+    button  {
+        margin: 0 auto;
+        width: fit-content;
+    }
+    .delete-button {
+        margin: 1em auto 0;
+        font-size: 0.9em;
+    }
+}
+
+#change-template-container {
+    .template-selection-page {
+        font-size: 0.90em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        div {
+            margin: 0.3em 0.55em 0.1em;
+        }
+    }
+    .change-temp-img {
+        max-width: 50px;
+    }
+}
+
+#page-min-tooltip {
+    margin: 0.5em auto 0;
+    font-size: 0.89em;
+}
+
+.upload-widget-page-template {
+    display: flex;
+    flex-direction: column;
+
+    button {
+        position: relative;
+        top: -1.2em;
+        margin: 0 auto;
+        padding: 0 0.3em;
+        font-size: 0.9em;
+        width: fit-content;
+    }
+}
+
+.upload-widget-cover {
+    
 }

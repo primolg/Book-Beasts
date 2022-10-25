@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
 import HTMLFlipBook from 'react-pageflip'
+import BookView1 from './BookView1';
+import BookView2 from './BookView2';
 import BookView3 from './BookView3';
+import BookView4 from './BookView4';
 import disableScroll from 'disable-scroll';
 
 const BookView = () => {
@@ -56,18 +59,49 @@ const BookView = () => {
         const blankPage = {
             page: {
                 content: '',
-                image: '',
             }
         }
         pages.push(blankPage);
     }
-
+    
 return ( pages ? (
   <div className="content-container">
         <HTMLFlipBook width={300} height={500}>
-        {pages.map((page) => <div className="demoPage">
-            <BookView3 key={page.page.id} page={page}/>
+        {pages.map((page) => {
+        switch(page.page.templateId){
+            case 1:
+                return (
+            <div className="demoPage">
+                <BookView1 key={page.page.id} page={page}/>
+            </div>)
+            case 2:
+                return (
+            <div className="demoPage">
+                <BookView2 key={page.page.id} page={page}/>
+            </div>)
+            case 3:
+                return (
+            <div className="demoPage">
+                <BookView3 key={page.page.id} page={page}/>
             </div>
+                )
+            case 4:
+                return (
+            <div className="demoPage">
+                <BookView4 key={page.page.id} page={page}/>
+            </div>
+                )
+            default:
+                return (
+            <div className="demoPage">
+                <BookView3 key={page.page.id} page={page}/>
+            </div>)
+        }
+        
+        <div className="demoPage">
+            <BookView3 key={page.page.id} page={page}/>
+        </div>
+            }
         )}
         </HTMLFlipBook>
     </div>

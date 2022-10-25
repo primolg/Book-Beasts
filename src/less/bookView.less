@@ -1,3 +1,5 @@
+@import "./common.less";
+
 .title-box {
     display: flex;
     align-items: center;
@@ -5,6 +7,8 @@
 }
 
 .outer-div-book-view{
+    background: @background;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,21 +117,49 @@
     background-image: url("https://res.cloudinary.com/ddqp7dojc/image/upload/v1666191176/capstone/123_zupemy.jpg");
 }
 
+@media only screen and (min-width: 1025px) {
+    .content-container {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    }  
+}
+
 .view-page-outer-div {
     background-color: rgb(236, 236, 236);
     display: flex;
     flex-direction: column;
     justify-content: center space-evenly;
     bottom: 0;
-    background-image: url("https://res.cloudinary.com/ddqp7dojc/image/upload/v1666133015/capstone/111_vyc4kx.jpg");
+    background-image: url("https://www.photos-public-domain.com/wp-content/uploads/2012/05/ivory-off-white-paper-texture.jpg");
     height: 500px;
 }
 
+.view-single-image {
+    height: 500px;
+    width: 100%;
+}
+
+.view-content-div {
+    margin: 8px;
+}
+
 .view-small-text-page {
-    margin: 5px;
+    margin: 8px;
+}
+
+.view-small-image-page-4 {
+    bottom: 0;
+    position: absolute;
+    height: 300px;
 }
 
 .view-page-image {
     height: 300px;
     width: 100%
+}
+
+.filler-image {
+    height: 300px;
+    width: 100%;
+    opacity: 1;
 }

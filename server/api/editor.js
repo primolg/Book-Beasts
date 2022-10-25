@@ -9,9 +9,13 @@ const { Student, Book, Page } = require('../db');
 router.get('/:id', async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.id);
-        const pages = await book.getOrderedPages();
-        book.dataValues.pages = pages;
-        res.send(book);
+        if (!book?.id) {
+            res.send(null);
+        } else {
+            const pages = await book.getOrderedPages();
+            book.dataValues.pages = pages;
+            res.send(book);
+        }
     } catch (error) {
         next(error);
     }
@@ -64,7 +68,7 @@ router.delete('/:id', async(req, res, next) => {
 router.post('/:bookId/pages', async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.bookId);
-        const newPage = await book.createNewPage();
+        const newPage = await book.createNewPage(req.body.templateId);
         await book.reload();
         const pages = await book.getOrderedPages();
         book.dataValues.pages = pages;

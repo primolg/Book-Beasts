@@ -31,7 +31,7 @@ const DeleteInstructor = ( { instructor }) => {
                         <label className="is-hidden"></label>
                         </div>
                     <div className="action">
-                    <div className="delete-button">
+                    <div className="sarahs-delete-button">
                         
                <button className="plus" onClick={handleDelete}></button> 
                </div>

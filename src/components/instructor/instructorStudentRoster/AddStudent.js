@@ -49,7 +49,7 @@ const AddStudent = ({ activeTab, setActiveTab }) => {
 
     return(
         <>
-        <Popup trigger={<button className="btn draw-border">Add Student</button>}  position="bottom left" keepTooltipInside=".tooltipBoundary">
+        <Popup trigger={<button className="btn draw-border">Add Student</button>}  position="top right" keepTooltipInside=".tooltipBoundary">
         {close => (
             <div className="form-card">
                 <h2 className="card-heading">
