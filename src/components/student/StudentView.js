@@ -24,7 +24,7 @@ const StudentView = () => {
         <div className="outer-div-student">
             <div className="my-books">
                 <div className="shelf-and-text">  
-                    {studentData?.books ?
+                    {studentData?.books?.length ?
                         <>
                         <p>My Books ({studentData.books.length})</p>
                         <Bookshelf books={studentData.books} />
