@@ -29,35 +29,32 @@ const ImageWidget = (props) => {
     )
 
     useEffect(() => {
-        return () => {
-            console.log("Unmounting");
-        }
-    }, [])
-
-    useEffect(() => {
         if (isFirstLoad && image) {
             setFirstLoad(false);
         }
 
         if (props.isCover) {
             if (!image && props.hasCover) {
+                console.log("here cover 1")
                 setImage(book.coverArt);
             } else if (!isFirstLoad) {
-                console.log("here 2")
+                console.log("here cover 2")
                 dispatch(updateCoverArt(book.id, image));
             }
         } else {
             if (image && (!isFirstLoad || !props.hasImage)) {
-                console.log("here 1");
+                console.log("here page 1");
                 dispatch(setUploadImg(image));
+                setImage(image);
             } else if (props.hasImage) {
+                console.log("here page 2");
                 setImage(props.image);
             }
         }
     }, [image]);
 
     useEffect(() => {
-        if (!props.isCover) {
+        if (!props.isCover && props.hasImage) {
             setImage(props.image || "");
             setFirstLoad(true);
         }
