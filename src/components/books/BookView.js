@@ -59,7 +59,8 @@ const BookView = () => {
         const blankPage = {
             page: {
                 content: '',
-            }
+            },
+            pageNumber: null,
         }
         pages.push(blankPage);
     }
@@ -96,14 +97,11 @@ return ( pages ? (
             <div className="demoPage">
                 <BookView3 key={page.page.id} page={page}/>
             </div>)
-        }
-        
-        <div className="demoPage">
-            <BookView3 key={page.page.id} page={page}/>
-        </div>
             }
-        )}
+        }
+    )}
         </HTMLFlipBook>
+        <div className="book-view-instructions">Swipe or click to turn the page!</div>
     </div>
   ) : (
     <div>no data</div>

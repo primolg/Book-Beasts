@@ -6,6 +6,7 @@ const BookView1 = React.forwardRef(({page}, ref) => {
                 <div className="view-content-div">
                     {page.page.content}
                 </div>
+                <div className="view-page-number">Page {page.pageNumber}</div>
         </div>
         ) : (<div className="demoPage filler-page"></div>)
     );

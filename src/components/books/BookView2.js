@@ -6,6 +6,7 @@ const BookView2 = React.forwardRef(({page}, ref) => {
                 <div>
                     <img src={page.page.image} className="view-single-image"/>
                 </div>
+                <div className="view-page-number">Page {page.pageNumber}</div>
         </div>
         ) : (<div className="demoPage filler-page"></div>)
     );
