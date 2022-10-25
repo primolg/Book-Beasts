@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "start": "node server",
+    "start": "webpack -w & nodemon server -w",
     "dev": "webpack -w & nodemon server -w",
     "dev:noseed": "webpack -w & nodemon server -w",
     "dev:seedonce": "webpack -w & node server/db && nodemon server -w",
