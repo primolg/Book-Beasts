@@ -28,7 +28,6 @@ async function requireStudentToken(req, res, next) {
             throw new Error("No access: Invalid token");
         }
 
-        // to verify WHICH student, will have to include req.params here
         req.user = user;
         next();
     } catch (error) {

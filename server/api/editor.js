@@ -1,16 +1,19 @@
 const router = require('express').Router();
 const { Student, Book, Page } = require('../db');
+const { requireStudentToken } = require("../gatekeeper");
 // should consider token verification for most of these actions
 // make a separate function to get and attach pages to a book before res.send
 
 // === Create/edit/delete books === //
 
 // gets UNPUBLISHED book w/ pages for editing
-router.get('/:id', async (req, res, next) => {
+router.get('/:bookId', requireStudentToken, async (req, res, next) => {
     try {
-        const book = await Book.findByPk(req.params.id);
+        const book = await Book.findByPk(req.params.bookId);
         if (!book?.id) {
             res.send(null);
+        } else if (book.studentId !== req.user.id) {
+        
         } else {
             const pages = await book.getOrderedPages();
             book.dataValues.pages = pages;
@@ -38,13 +41,13 @@ router.post('/', async (req, res, next) => {
 });
 
 // update book (attributes such as genre, title)
-router.put('/:id', async (req, res, next) => {
+router.put('/:bookId', async (req, res, next) => {
     try {
         await Book.update(
             { ...req.body },
-            { where: { id: req.params.id }}
+            { where: { id: req.params.bookId }}
         );
-        const updatedBook = await Book.findByPk(req.params.id);
+        const updatedBook = await Book.findByPk(req.params.bookId);
         res.send(updatedBook);
     } catch (error) {
         next(error);
@@ -52,9 +55,9 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // delete book
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:bookId', async(req, res, next) => {
     try {
-        const deletedBook = await Book.findByPk(req.params.id);
+        const deletedBook = await Book.findByPk(req.params.bookId);
         await deletedBook.destroy();
         res.send(deletedBook);
     } catch(error) {

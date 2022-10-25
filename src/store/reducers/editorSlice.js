@@ -80,11 +80,16 @@ export const {
 
 // gets book structured for editing
 export const fetchBook = (bookId) => async (dispatch) => {
-    const { data: book } = await axios.get(`/api/editor/${bookId}`);
+    const token = localStorage.getItem("token");
+    const { data: book } = await axios.get(`/api/editor/${bookId}`, {
+        headers: { authorization: token },
+      });
     if (book) {
         dispatch(setBook(book));
+    } else if (book===null) {
+        alert("Unable to find that book");
     } else {
-        // alert("Unable to find that book");
+        alert("No access");
     }
 }
 
@@ -160,7 +165,7 @@ export const deletePage = (page) => async (dispatch) => {
 }
 
 export const updateCoverArt = (bookId, url) => async (dispatch) => {
-    console.log("here REDUCER")
+    // console.log("here REDUCER")
     const { data: book } = await axios.put(`/api/editor/${bookId}`, {
         coverArt: url,
     });
