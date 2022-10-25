@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateOtherPage, setCurrentText } from "../../store/reducers/editorSlice";
+import { updateOtherPage } from "../../store/reducers/editorSlice";
 import { TemplateContainer, PageEditorOptions } from "./";
 
 const PageEditor = () => {
@@ -17,10 +17,10 @@ const PageEditor = () => {
     const savePreviousAndSwitchPages = async () => {
         if (page.id) {
             if (pageToUpdate.id) {
-                console.log("Saving page...");
+                // console.log("Saving page...");
                 await dispatch(updateOtherPage(pageToUpdate));
             }
-            console.log("Switching pages");
+            // console.log("Switching pages");
             setPageToUpdate({
                 id: page.id,
                 bookId: page.bookId,
@@ -37,19 +37,13 @@ const PageEditor = () => {
 
     useEffect(() => {
         if (page.id) {
-            console.log("Updating text in container");
+            // console.log("Updating text in container");
             setPageToUpdate({
                 ...pageToUpdate,
                 content: text
             });
         }
     }, [text]);
-
-    // useEffect(() => {
-    //     if (text !== page.content) {
-    //         dispatch(setCurrentText(page.content));
-    //     }
-    // }, [pageToUpdate.id])
 
     return(
         <>  

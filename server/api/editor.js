@@ -11,9 +11,15 @@ router.get('/:bookId', requireStudentToken, async (req, res, next) => {
     try {
         const book = await Book.findByPk(req.params.bookId);
         if (!book?.id) {
-            res.send(null);
+            res.send({
+                error: true,
+                errorType: "undefined"
+            });
         } else if (book.studentId !== req.user.id) {
-        
+            res.send({
+                error: true,
+                errorType: "noAccess"
+            })
         } else {
             const pages = await book.getOrderedPages();
             book.dataValues.pages = pages;
