@@ -2813,7 +2813,7 @@
       "nextPage": 34,
       "studentId": 80,
       "bookId": 3,
-      "templateId": 3
+      "templateId": 1
     },
     {
       "isFirstPage": false,
@@ -2826,7 +2826,7 @@
       "nextPage": 35,
       "studentId": 80,
       "bookId": 3,
-      "templateId": 3
+      "templateId": 2
     },
     {
       "isFirstPage": false,
@@ -2852,7 +2852,7 @@
       "nextPage": 37,
       "studentId": 80,
       "bookId": 3,
-      "templateId": 3
+      "templateId": 4
     },
     {
       "isFirstPage": false,
@@ -2865,7 +2865,7 @@
       "nextPage": 40,
       "studentId": 80,
       "bookId": 3,
-      "templateId": 3
+      "templateId": 1
     },
     {
       "isFirstPage": false,
