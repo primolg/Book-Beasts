@@ -92,7 +92,7 @@ export const createNewBook = (book) => async (dispatch) => {
     // "book" should be === { studentId: 5, genre: "racecar" };
     const { data: newBook } = await axios.post("/api/editor", book);
     if (!newBook || newBook === {}) {
-        alert("Unable to create book");
+        // alert("Unable to create book");
         return false;
     } else {
         dispatch(setBook(newBook));
@@ -103,7 +103,7 @@ export const createNewBook = (book) => async (dispatch) => {
 export const updateBook = (book) => async (dispatch) => {
     const { data: updatedBook } = await axios.put(`/api/editor/${book.id}`, book);
     if (!updatedBook || updatedBook === {}) {
-        alert("Unable to edit book");
+        // alert("Unable to edit book");
     } else {
         dispatch(_updateBook(updatedBook));
         return true;

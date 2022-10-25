@@ -14,7 +14,7 @@ const Pageshelf = () => {
     const addPage = async (templateId) => {
         const updatedBook = await dispatch(addNewPage(currentPage.bookId, templateId));
         if (!updatedBook) {
-            alert("Could not add new page!");
+            // alert("Could not add new page!");
         } else {
             shelf.current.scrollLeft = 10000;
             dispatch(setCurrentPage(updatedBook.pages[updatedBook.pages.length-1]));

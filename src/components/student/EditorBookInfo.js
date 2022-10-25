@@ -28,7 +28,7 @@ const EditorBookInfo = () => {
             if (confirm("Are you sure you want to delete this book? Once you do, there's no going back!")) {
                 const res = await dispatch(deleteBook(book.id));
                 if (res) {
-                    alert("Book successfully deleted!");
+                    // alert("Book successfully deleted!");
                     navigate(`/student`);
                 }
             }

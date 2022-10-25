@@ -32,13 +32,12 @@ const Bookshelf = ({books, themes}) => {
             studentId: student?.id,
         }));
         if (res) navigate(`/editor/${res.id}`);
-        else alert("Could not create book");
     };
     
     const handleSubmit = (e) => {
         e.preventDefault();
         if (titleRef.current.value.length < 3) {
-            alert("Book title must be more than 2 letters!")
+            alert("Book title must be more than 2 letters!");
         } else {
             createBookAndRedirect();
         }
