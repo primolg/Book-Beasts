@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { setUploadImg } from "../../../store/reducers/editorSlice";
+import { setUploadImg, updateCoverArt } from "../../../store/reducers/editorSlice";
 
 const ImageWidget = (props) => {
     const dispatch = useDispatch();
@@ -17,34 +17,53 @@ const ImageWidget = (props) => {
             croppingAspectRatio: props.croppingRatio,
             maxImageHeight: props.maxHeight ? props.maxHeight : 1000,
             maxImageWidth: props.maxWidth ? props.maxWidth : 1000,
+            clientAllowedFormats: ["jpeg", "jpg", "png"],
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
+                // console.log("Setting image");
                 setImage(result.info.secure_url)
             } else {
-                // console.log(result)
+                // console.log("Upload error")
             }
         }
     )
 
     useEffect(() => {
-        if ((image && !isFirstLoad) || (image && !props.hasImage && !props.hasCover)) {
-            dispatch(setUploadImg(image));
-        } else if (!props.isCover && props.hasImage) {
+        if (isFirstLoad && image) {
             setFirstLoad(false);
-            setImage(props.image)
-        } else if (props.isCover && props.hasCover) {
-            setImage(book.coverArt);
+        }
+
+        if (props.isCover) {
+            if (!image && props.hasCover) {
+                console.log("here cover 1")
+                setImage(book.coverArt);
+            } else if (!isFirstLoad) {
+                console.log("here cover 2")
+                dispatch(updateCoverArt(book.id, image));
+            }
+        } else {
+            if (image && (!isFirstLoad || !props.hasImage)) {
+                console.log("here page 1");
+                dispatch(setUploadImg(image));
+                setImage(image);
+            } else if (props.hasImage) {
+                console.log("here page 2");
+                setImage(props.image);
+            }
         }
     }, [image]);
 
     useEffect(() => {
-        setFirstLoad(true);
-    }, [page])
+        if (!props.isCover && props.hasImage) {
+            setImage(props.image || "");
+            setFirstLoad(true);
+        }
+    }, [props.image])
     
     return (
         <div className={!props.isCover ? "upload-widget-page-template" : "upload-widget-cover" }>
-            {image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>}
+            {props.top ? (image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>): <></>}
             <button
                 onClick={()=>myWidget.open()}
                 className="cloudinary-button">
@@ -52,6 +71,7 @@ const ImageWidget = (props) => {
                         props.isCover ? "Upload cover art" :
                         props.hasImage ? "Replace image" : "Upload image"}
             </button>
+            {props.top ? <></> : (image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>)}
         </div>
     )
 }

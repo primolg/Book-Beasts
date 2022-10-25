@@ -38,6 +38,7 @@ const Template4 = ({ defaultPageArt }) => {
                         templateId={4}
                         hasImage={hasImage}
                         image={image}
+                        top={false}
                     />
                 </div>
             </div>

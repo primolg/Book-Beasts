@@ -23,6 +23,7 @@ const BookTable = () => {
         <div>
         <InstructorHeader/>
         <div className='table-container'>
+        <button className='small-btn' onClick={() => navigate(-1)}>Back</button>
       <div className='booksTable' id="book-table">
 
             {books.length !==0 ? (

@@ -4,7 +4,7 @@ import ImageWidget from './uploadWidget';
 
 const Template2 = ({ defaultPageArt }) => {
     const page = useSelector(state => state.editor.currentPage);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const hasImage = page.image && page.image !== defaultPageArt;
     const image = page.image;
@@ -19,6 +19,7 @@ const Template2 = ({ defaultPageArt }) => {
                     templateId={2}
                     hasImage={hasImage}
                     image={image}
+                    top={true}
                 />
             </div>
         </div>

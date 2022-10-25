@@ -9,6 +9,7 @@ const BookEditor = () => {
     const bookId = useParams().id;
     const currentBook = useSelector(state => state.editor.currentBook);
     const currentPage = useSelector(state => state.editor.currentPage);
+    // const currentText = useSelector(state => state.editor.currentText);
     const dispatch = useDispatch();
 
     const [pages, setPages] = useState([]);
