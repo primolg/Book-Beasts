@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addStudent } from '../../../store/reducers/instructorSlice';
 import Popup from 'reactjs-popup';
 
-const AddStudent = () => {
+const AddStudent = ({ activeTab, setActiveTab }) => {
     const params = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ const AddStudent = () => {
         age: form.age,
         color: form.color,
         }, params.id));
-        navigate(`/instructorPortal/${params.id}`)
+        setActiveTab("portal-home")
     };
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
 //the state change from showing immediately in the student table. Working on fixing this issue.
@@ -49,7 +49,7 @@ const AddStudent = () => {
 
     return(
         <>
-        <Popup trigger={<button className="btn draw-border">Add Student</button>}  position="bottom right" keepTooltipInside=".tooltipBoundary">
+        <Popup trigger={<button className="pop-btn-outline">Add Student</button>}  position="right center" >
         {close => (
             <div className="form-card">
                 <h2 className="card-heading">
@@ -58,33 +58,33 @@ const AddStudent = () => {
             <form className="card-form" onSubmit={handleSubmit}>
 
             <div className="input">
-               <input name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
-               <label className="input-field" htmlFor="firstName">First Name:</label>
+               <input className="input-field" name='firstName' value={form.firstName} onChange={handleChange('firstName')}/>
+               <label className="input-label" htmlFor="firstName">First Name:</label>
             </div>   
 
             <div className='input'>
-               <input name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
-               <label className="input-field" htmlFor="lastName">Last Name:</label>
+               <input className="input-field" name='lastName' value={form.lastName} onChange={handleChange('lastName')}/>
+               <label className="input-label" htmlFor="lastName">Last Name:</label>
                </div>
 
             <div className="input">  
-               <input name="email" value={form.email} onChange={handleChange('email')}/>
-               <label className="input-field" htmlFor="email">Email:</label>
+               <input className="input-field" name="email" value={form.email} onChange={handleChange('email')}/>
+               <label className="input-label" htmlFor="email">Email:</label>
             </div>
 
             <div className="input">   
-               <input name='username' value={form.username} onChange={handleChange('username')}/>
-               <label className="input-field" htmlFor="username">Username:</label>
+               <input className="input-field" name='username' value={form.username} onChange={handleChange('username')}/>
+               <label className="input-label" htmlFor="username">Username:</label>
             </div>   
 
             <div className="input">  
-               <input name="password" value={form.password} onChange={handleChange('password')}/>
-               <label className="input-field" htmlFor="password">Password:</label>
+               <input className="input-field" name="password" value={form.password} onChange={handleChange('password')}/>
+               <label className="input-label" htmlFor="password">Password:</label>
             </div>
 
             <div className="input">  
-               <input name="age" value={form.age} onChange={handleChange('age')}/>
-               <label className="input-field" htmlFor="age">Student Age:</label>
+               <input className="input-field" name="age" value={form.age} onChange={handleChange('age')}/>
+               <label className="input-label" htmlFor="age">Student Age:</label>
             </div>   
 
             <div className="input"> 
@@ -98,7 +98,7 @@ const AddStudent = () => {
                 <option>Yellow</option>
                 <option>Pink</option>
                 </select>
-               <label htmlFor="color">Color:</label>
+               <label className="input-label" htmlFor="color">Color:</label>
             </div>
                
             <div className="input no-border">
@@ -112,9 +112,6 @@ const AddStudent = () => {
                 </button>
             </div>
               </form> 
-              <button className="close" onClick={close}>
-                CANCEL
-              </button>
           </div>
         )}
     </Popup>

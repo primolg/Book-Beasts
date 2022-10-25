@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BookView1 = React.forwardRef(({page}, ref) => {
+const ViewSingleBook1 = React.forwardRef(({page}, ref) => {
     return ( page ? (
         <div ref={ref} className="view-page-outer-div bookview3-outer-div">
                 <div className="view-content-div">
@@ -12,4 +12,4 @@ const BookView1 = React.forwardRef(({page}, ref) => {
     );
 });
 
-export default BookView1;
+export default ViewSingleBook1;

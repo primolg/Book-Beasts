@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../store/reducers/bookSlice';
-import HTMLFlipBook from 'react-pageflip'
+import HTMLFlipBook from 'react-pageflip';
 import BookView1 from './BookView1';
 import BookView2 from './BookView2';
 import BookView3 from './BookView3';
@@ -59,7 +59,8 @@ const BookView = () => {
         const blankPage = {
             page: {
                 content: '',
-            }
+            },
+            pageNumber: null,
         }
         pages.push(blankPage);
     }
@@ -96,14 +97,11 @@ return ( pages ? (
             <div className="demoPage">
                 <BookView3 key={page.page.id} page={page}/>
             </div>)
-        }
-        
-        <div className="demoPage">
-            <BookView3 key={page.page.id} page={page}/>
-        </div>
             }
-        )}
+        }
+    )}
         </HTMLFlipBook>
+        <div className="book-view-instructions">Swipe or click to turn the page!</div>
     </div>
   ) : (
     <div>no data</div>

@@ -9,7 +9,7 @@ const LogoutButton = ({ text }) => {
     
     const handleLogout = () => {
         dispatch(logout());
-        alert("Successfully logged out");
+        // alert("Successfully logged out");
         navigate("/");
     }
 
@@ -19,7 +19,7 @@ const LogoutButton = ({ text }) => {
         );
     } else {
         return(
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout} id="logout-button">Logout</button>
         );
     }
 }

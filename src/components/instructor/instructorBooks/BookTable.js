@@ -3,12 +3,13 @@ import BookRow from './BookRow';
 import { fetchStudentData } from '../../../store/reducers/instructorSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { InstructorHeader } from '../instructorTabs';
 
 
 const BookTable = () => {
     const dispatch = useDispatch();
     const params = useParams();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const student = useSelector((state) => state.instructorList.currentStudent)
     const books= student.books;
     // //
@@ -16,16 +17,18 @@ const BookTable = () => {
         dispatch(fetchStudentData(params.id, params.studentId))
     }, []);
 
-   console.log('BOOKLIST', student)
-   console.log("BOOKLIST", books)
+   
     return(
+        <div>
+        <InstructorHeader/>
         <div className='table-container'>
+        <button className='back-btn' onClick={() => navigate(-1)}>Back</button>
       <div className='booksTable' id="book-table">
 
-            {books ? (
+            {books.length !==0 ? (
                 <div className='bookList'>
                     <div className='table-title'>
-                    <h1> Book List</h1>
+                    <h3>{`${student.firstName}'s`} Book List</h3>
                     </div>
                     <table className='table-fill' id="booksTable">
                         <thead>
@@ -42,22 +45,20 @@ const BookTable = () => {
                         </thead>
                         <tbody className='table-hover'>
                           {books.map((book) => (
-                            <BookRow key={book.id} singleBook={book} />
+                            <BookRow key={book.id} singleBook={book} student={student}/>
                           ))}
                         </tbody>
                     </table>
                     </div>
             ): (
-                <div>
-                <h3>This student hasn't created any books yet!</h3>
-                <button className='small-btn' onClick={() => navigate(-1)}>Back To Roster</button>
+                <div className='nunsuch-container'>
+                <h1>This student hasn't created any books yet!</h1>
+                <button className='nunsuch-button' onClick={() => navigate(-1)}>Back</button>
                 </div>
             )}
         </div>
-       
-        
+       </div>
         </div>
-       
     )
 }
 

@@ -92,8 +92,12 @@ router.post('/:id/students', async(req, res, next) => {
 
 router.put('/:id/students/:studentId',  async(req, res, next) => {
     try{
+        
     const editStudent = await Student.findByPk(req.params.studentId);
-    res.send(await editStudent.update(req.body));
+    console.log("API EDIT", req.params)
+    console.log("API EDIT BODY", req.body)
+    await editStudent.update(req.body)
+    res.send(editStudent);
     }catch(error){
         next(error);
     }
