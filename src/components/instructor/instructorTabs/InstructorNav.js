@@ -42,12 +42,3 @@ const InstructorNav = () => {
 }
 
 export default InstructorNav;
-
-{/* <div className='nav-container'>
-<div className='navbar'>
-    <NavLink to={`/instructorPortal/${params.id}/students`} className='instructor-nav-item'>Your Students</NavLink>
-    <NavLink to={`/instructorPortal/${params.id}/edit`} className='instructor-nav-item'>Edit Your Account</NavLink>
-    <NavLink to={`/instructorPortal/${params.id}`} className='instructor-nav-item'>Back to Portal</NavLink>
-    <LogoutButton />
-</div>
-</div> */}

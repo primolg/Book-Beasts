@@ -7,7 +7,7 @@ import InstructorNav from '../instructorTabs/InstructorNav';
 import AddStudent from './AddStudent';
 
 
-const InstructorStudents = () => {
+const InstructorStudents = ({ activeTab, setActiveTab }) => {
     const dispatch = useDispatch();
     const params = useParams();
     const studentList = useSelector((state) => state.instructorList.studentList);
@@ -18,8 +18,8 @@ const InstructorStudents = () => {
 
     return(
         <div id="students-tab">
-            <AddStudent  />
-            <StudentTable studentList={studentList} />
+            <AddStudent activeTab={activeTab} setActiveTab={setActiveTab} />
+            <StudentTable studentList={studentList} activeTab={activeTab} setActiveTab={setActiveTab}/>
             
         </div>
     )

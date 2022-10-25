@@ -149,6 +149,7 @@ export const fetchBookData = (userId, studentId, bookId) => async(dispatch) => {
 
 export const updateStudentData = (updatedStudentInfo, userId, studentId) => async(dispatch) => {
   try{
+    console.log("UPDATE THUNK", updatedStudentInfo, userId, studentId)
   const { data: updatedStudent } = await axios.put(`/api/instructors/${userId}/students/${studentId}`, updatedStudentInfo, userId, studentId);
   dispatch(getStudent(updatedStudent));
   }catch(error){

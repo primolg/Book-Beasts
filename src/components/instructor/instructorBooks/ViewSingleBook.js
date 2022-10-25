@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookData } from '../../../store/reducers/instructorSlice';
+import { InstructorHeader } from '../instructorTabs';
 
 const ViewSingleBook = () => {
     const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const ViewSingleBook = () => {
     }, []);
 
   return pages ? (
+    <div>
+        <InstructorHeader/>
         <div className="outer-div-book-view" id="instructor-book-view">
             <div className="page-selector-shelf">
                 {pages.map(page =>
@@ -39,6 +42,7 @@ const ViewSingleBook = () => {
                 <p id="page-content">{pages[currentPage].page.content}</p>
                 <p id="page-number-on-page">page {pages[currentPage].pageNumber}</p>
             </div>
+        </div>
         </div>
     ) : (
         <div>
