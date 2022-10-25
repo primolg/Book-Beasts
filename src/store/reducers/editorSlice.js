@@ -89,9 +89,9 @@ export const fetchBook = (bookId) => async (dispatch) => {
     if (book && !book?.error) {
         dispatch(setBook(book));
     } else if (book.errorType==="undefined") {
-        alert("That book does not exist!");
+        // alert("That book does not exist!");
     } else {
-        alert("You do not have access to edit that book");
+        // alert("You do not have access to edit that book");
     }
 }
 

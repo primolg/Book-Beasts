@@ -36,26 +36,17 @@ const ImageWidget = (props) => {
             setFirstLoad(false);
         }
 
-        console.log("\nprops.isCover:", props.isCover);
-        console.log("props.hasCover:", props.hasCover);
-        console.log("image:", image);
-        console.log("isFirstLoad:", isFirstLoad);
-
         if (props.isCover) {
             if (!image && props.hasCover) {
-                console.log("here cover 1")
                 setImage(book.coverArt);
             } else if (!isFirstLoad) {
-                console.log("here cover 2")
                 dispatch(updateCoverArt(book.id, image));
             }
         } else {
             if (image && (!isFirstLoad || !props.hasImage)) {
-                // console.log("here page 1");
                 dispatch(setUploadImg(image));
                 setImage(image);
             } else if (props.hasImage) {
-                // console.log("here page 2");
                 setImage(props.image);
             }
         }
