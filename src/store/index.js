@@ -18,5 +18,5 @@ export default configureStore ({
         editor: editorReducer,
     },
     middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware().concat(loggerMiddleware),
+        getDefaultMiddleware()/*.concat(loggerMiddleware),*/
 });

@@ -1,5 +1,9 @@
 @import "./common.less";
 
+@pageEditorShadow: {
+    box-shadow: 1px 1px 8px rgba(0,0,0,0.09);
+}
+
 .page-selector-shelf-editor{
     background: white;
 
@@ -14,6 +18,8 @@
     max-height: 10vh;
     min-width: 300px;
     max-width: 300px;
+
+    @pageEditorShadow();
 
     .page-selector-editor{
         display: flex;
@@ -49,6 +55,7 @@
     max-height: 500px;
     overflow: hidden;
     border: 3px black solid;
+    @pageEditorShadow();
     
     textarea {
         padding: 8px;
@@ -87,6 +94,7 @@
     font-style: italic;
     text-decoration: underline;
     font-size: 0.9em;
+    cursor: pointer;
 }
 
 // popup form for creating a new book
@@ -134,7 +142,7 @@
         }
         #temp-selection-header {
             width: fit-content;
-            margin: 0 auto;
+            margin: 0 auto 0.5em;
         }
     }
 }
@@ -252,8 +260,16 @@
 }
 
 #delete-button, .delete-button {
+    cursor: pointer;
     background: darkred;
     color: white;
+
+    &:hover {
+        background: rgb(155, 10, 10);
+    }
+    &:active {
+        background: rgb(120, 0, 0);
+    }
 }
 
 .book-form-coverart {
@@ -299,26 +315,59 @@
     }
 }
 
-#page-editor-options {
-    background: white;
-    @flexSpaceBetween();
+#page-editor-options-container {
     min-width: 300px;
     max-width: 300px;
-    border: 3px black solid;
-}
+    margin: 0.3em auto 0.1em;
+    padding: 0;
 
-.page-settings-btn {
-    width: fit-content;
-    padding: 0.6em 0.7em;
-    * {
-        margin-left: 0.4em;
+    background: white;
+    border: 3px black solid;
+    @pageEditorShadow();
+
+    #page-editor-options-header {
+        width: 100%;
+        text-align: center;
+        font-size: 1.18em;
+        margin: 0 auto;
+        padding: 0.35em 0 0.3em;
+        background:rgb(250,250,250);
+        border-bottom: 2px rgb(200,200,200) solid;
     }
-    p {
-        margin-left: 0;
+    
+    #page-editor-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .page-settings-btn {
+            width: 33%;
+            height: 73px;
+            margin: 0 auto 0;
+            padding: 0.5em 0 0.4em;
+            * {
+                height: 70%;
+                margin: 0.1em auto 0.2em;
+            }
+            p {
+                height: 30%;
+                text-align: center;
+                font-size: 0.83em;
+                font-style: italic;
+                margin: 0.5em auto 0;
+            }
+        
+            // for centering the fn icons
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        
+            &:hover {
+                cursor: pointer;
+                background: rgb(245,245,245);
+            }
+        }
     }
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 #page-edit-form {
@@ -333,7 +382,7 @@
         width: fit-content;
     }
     .delete-button {
-        margin: 1em auto 0;
+        margin: 1em auto 0.85em;
         font-size: 0.9em;
     }
 }
@@ -354,8 +403,8 @@
 }
 
 #page-min-tooltip {
-    margin: 0.5em auto 0;
-    font-size: 0.89em;
+    margin: 0.5em auto 0.8em;
+    // font-size: 0.89em;
 }
 
 .upload-widget-page-template {

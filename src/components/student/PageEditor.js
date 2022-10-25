@@ -19,10 +19,10 @@ const PageEditor = () => {
     useEffect(() => {
         if (page.id) {
             if (pageToUpdate.id) {
-                console.log("Saving page...");
+                // console.log("Saving page...");
                 dispatch(updateOtherPage(pageToUpdate));
             }
-            console.log("Switching pages");
+            // console.log("Switching pages");
             setPageToUpdate({
                 id: page.id,
                 bookId: page.bookId,
@@ -33,7 +33,7 @@ const PageEditor = () => {
 
     useEffect(() => {
         if (page.id) {
-            console.log("Updating text in container");
+            // console.log("Updating text in container");
             setPageToUpdate({
                 ...pageToUpdate,
                 content: text
