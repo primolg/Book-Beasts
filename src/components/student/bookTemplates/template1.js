@@ -34,10 +34,10 @@ const Template1 = () => {
     return (
         <div className="page-outer-div temp1-outer-div">
             <div className='text-div'>
-                <textarea className="full-text-page" value={text} onChange={(event) => setText(event.target.value) }
-                    rows="13" cols="30"
+                <textarea className="full-text-page" defaultValue={text} onChange={(event) => setText(event.target.value) }
+                    rows="16" cols="30"
                     spellCheck="true"
-                    onKeyPress={rowLimiter(event, 17)}
+                    onKeyPress={rowLimiter(event, 16)}
                 ></textarea>
             </div>
         </div>
