@@ -51,17 +51,22 @@ const Bookshelf = ({books, themes}) => {
     return !themes ? (
                 <div className="shelf-div-student">
                     {bookArray.map(book => 
+                    <a href={(book.isPublished ? "/books/" : "/editor/") + book.id}>
                         <div key={book.id} className="book-in-shelf-student">
-                            <Link to={(book.isPublished ? "/books/" : "/editor/") + book.id}>{book.title}</Link>
+                            <div className="image-div">
+                                <img src={book.coverArt}></img>
+                            </div>
+                            <Link className="book-link" to={(book.isPublished ? "/books/" : "/editor/") + book.id}>{book.title}</Link>
                             {book.isPublished ? "" : <p>in progress</p>}
                         </div>
+                    </a>
                     )}
                 </div>
         ) : (
             <div className="shelf-div-student">
                 {themes.map((theme, i) => 
                 <Popup key={i} modal className="new-book" trigger={
-                    <div className="book-in-shelf-student">
+                    <div className="book-in-shelf-student themes">
                         <p onClick={() => handleClick(theme)}>
                             {theme}
                         </p>
