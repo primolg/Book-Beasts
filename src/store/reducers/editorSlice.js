@@ -138,11 +138,34 @@ export const updatePage = (page) => async (dispatch) => {
     }
 }
 
+export const updateOtherPage = (page) => async (dispatch) => {
+    const { data: pages } = await axios.put(`/api/editor/${page.bookId}/pages/${page.id}`, page);
+    if (pages) {
+        dispatch(_updatePages(pages));
+        return true;
+    } else {
+        return false;
+    }
+}
+
 export const deletePage = (page) => async (dispatch) => {
     const { data: book } = await axios.delete(`/api/editor/${page.bookId}/pages/${page.id}`);
     if (book) {
         dispatch(_updateBook(book));
         dispatch(setCurrentPage(book.pages[0]));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export const updateCoverArt = (bookId, url) => async (dispatch) => {
+    console.log("here REDUCER")
+    const { data: book } = await axios.put(`/api/editor/${bookId}`, {
+        coverArt: url,
+    });
+    if (book) {
+        dispatch(_updateBook(book));
         return true;
     } else {
         return false;

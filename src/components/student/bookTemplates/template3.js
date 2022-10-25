@@ -35,7 +35,7 @@ const Template3 = ({ defaultPageArt }) => {
                         image={image}
                     />
                 </div>
-                <textarea className="full-text-page" defaultValue={text} onChange={(event) => setText(event.target.value) }
+                <textarea className="full-text-page" value={text} onChange={(event) => setText(event.target.value) }
                     rows="10" cols="30"
                     spellCheck="true"
                     onKeyPress={rowLimiter(event, 10)}

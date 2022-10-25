@@ -14,12 +14,11 @@ const TemplateContainer = (props) => {
     // clear book in store when leaving the editor
     useEffect(() => {
         return () => {
-            console.log("here");
             dispatch(clearCurrentBook());
         }
     }, []);
 
-    // currently does not work as intended - updates the book in db with the cover art it already has (when loading)
+    // detects image changes and updates page
     useEffect(() => {
         if (uploadedImg !== "") {
             dispatch(updatePage({
@@ -28,16 +27,16 @@ const TemplateContainer = (props) => {
             }));
         }
     }, [uploadedImg]);
-
+    
     return(
-        <>
+        <div className="page-editor">
             {
                 templateId===1 ? <Template1 {...props} /> :
                 templateId===2 ? <Template2 {...props} defaultPageArt={defaultPageArt}/> :
                 templateId===3 ? <Template3 {...props} defaultPageArt={defaultPageArt}/> :
                 templateId===4 ? <Template4 {...props} defaultPageArt={defaultPageArt}/> : "Checking template..."
             }
-        </>
+        </div>
     )
 };
 

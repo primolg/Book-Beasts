@@ -3,7 +3,6 @@ import Bookshelf from "./Bookshelf";
 import EditorBookInfo from "./EditorBookInfo";
 import StudentView from "./StudentView";
 import PublishButton from "./PublishButton";
-import Autosave from "./Autosave";
 import Pageshelf from "./Pageshelf";
 import TemplateContainer from "./bookTemplates/TemplateContainer";
 import PageEditor from "./PageEditor";
@@ -16,7 +15,6 @@ export {
   EditorBookInfo,
   StudentView,
   PublishButton,
-  Autosave,
   Pageshelf,
   TemplateContainer,
   PageEditor,
