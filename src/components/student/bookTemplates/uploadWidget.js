@@ -45,7 +45,6 @@ const ImageWidget = (props) => {
     
     return (
         <div className={!props.isCover ? "upload-widget-page-template" : "upload-widget-cover" }>
-            {image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>}
             <button
                 onClick={()=>myWidget.open()}
                 className="cloudinary-button">
@@ -53,6 +52,7 @@ const ImageWidget = (props) => {
                         props.isCover ? "Upload cover art" :
                         props.hasImage ? "Replace image" : "Upload image"}
             </button>
+            {image && <img src={image} className={props.isCover? "book-form-coverart" : "img-upload"}/>}
         </div>
     )
 }
