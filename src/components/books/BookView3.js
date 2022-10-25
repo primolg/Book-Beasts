@@ -9,6 +9,7 @@ const BookView3 = React.forwardRef(({page}, ref) => {
                 <div className="view-small-text-page" id="view-pageText">
                     <p>{page.page.content}</p>
                 </div>
+                <div className="view-page-number">Page {page.pageNumber}</div>
         </div>
         ) : (<div className="demoPage filler-page"></div>)
     );
