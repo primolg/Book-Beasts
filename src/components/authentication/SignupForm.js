@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signup } from "../../store/reducers/authSlice";
 
@@ -47,6 +47,7 @@ const SignupForm = ({ type, setAccountType }) => {
                 <p onClick={() => setAccountType(null)} className="return">
                     {"Wait - I'm not an instructor!"}
                 </p>
+                <hr />
                 <form>
                     {/* Still need local form validation */}
                     <p>Username:</p>
@@ -64,7 +65,7 @@ const SignupForm = ({ type, setAccountType }) => {
                     <p>Password:</p>
                     <input type="password" onChange={handleFormChange} placeholder="Password"/>
 
-                    <button type="submit" onClick={handleFormSubmit}>Login</button>
+                    <button type="submit" onClick={handleFormSubmit}>Signup</button>
                 </form>
             </>
             : <>
@@ -75,6 +76,9 @@ const SignupForm = ({ type, setAccountType }) => {
                 </p>
             </>
             }
+            <Link to="/login">
+                <p className="return">Already have an account? Log in here!</p>
+            </Link>
         </div>
     )
 }

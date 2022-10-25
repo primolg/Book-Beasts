@@ -1,4 +1,4 @@
-// === UTILITIES === //
+@import "./common.less";
 
 // colors
 @light: rgba(215,215,215,1);
@@ -24,13 +24,31 @@
 .mainContent() {
     width: @formWidth;
     margin: 1em auto;
-    padding: 0.7em 1em;
+    padding: 0.9em 1.3em 1em;
+    background: rgba(150,120,130,0.17);
+    border-radius: 2em;
+    
+    button {
+        border-radius: 1em;
+        border: 1px solid black;
+        .subtleShadow(1, 0.8);
+
+        &:hover {
+            background: rgb(231,231,231);
+            cursor: pointer;
+        }
+    }
 }
 .textLink(@size, @bool) {
     font-size: @size*1em;
     font-style: if(@bool, italic, normal);
     text-align: center;
     text-decoration: underline;
+
+    &:hover {
+        cursor: pointer;
+        color: rgb(70,70,70);
+    }
 }
 
 // === STYLING === //
@@ -38,9 +56,9 @@
 #authContainer {
     .removeLinkStyling();
     .content {
-        background-color: @light;
         .mainContent();
         .subtleShadow(1, 0.8);
+
         &.loggedIn {
             text-align: center;
             button {
@@ -58,32 +76,15 @@
             width: fit-content;
             margin: 0 auto;
             button {
-                padding: 0.4em 0.7em 0.3em;
+                border-radius: 1.3em;
+                padding: 0.5em 0.8em 0.42em;
             }
         }
     }
 }
 
-.userStatus {
-    background-color: @light;
-    .subtleShadow(1.5, 0.4);
-    .removeLinkStyling();
-
-    display: flex;
-    justify-content: space-between;
-    p {
-        padding: 0.5em;
-    }
-    div {
-        display: flex;
-    }
-    .link {
-        .textLink(1, false);
-    }
-}
-
 .formContainer {
-    background-color: @light;
+    background-color: @background;
     .mainContent();
     .subtleShadow(1, 0.8);
 
@@ -99,6 +100,9 @@
         margin: 0.7em 0 0.5em;
         .textLink(0.9, true);
     }
+    hr {
+        margin: 0.8em 0 0.4em;
+    }
     form {
         display: flex;
         flex-direction: column;
@@ -107,7 +111,25 @@
         }
         button {
             margin: 1em auto 0;
-            padding: 0.2em 0.7em;
+            padding: 0.4em 0.8em;
         }
     }
+
+    .switch-login-signup {
+        text-align: center;
+        margin: 0.9em auto 0;
+        font-size: 0.85em;
+        font-style: italic;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+#logout-button {
+    padding: 0.4em 0.8em;
+}
+
+.link:hover {
+    cursor: pointer;
 }

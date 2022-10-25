@@ -16,7 +16,7 @@ const PublishButton = () => {
             isPublished: true,
         }));
         if (res) {
-            alert("Successfully published book!");
+            // alert("Successfully published book!");
             navigate(`/books/${book.id}`);
         }
 

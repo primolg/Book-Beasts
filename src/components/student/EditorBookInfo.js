@@ -20,15 +20,20 @@ const EditorBookInfo = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const [hideOldCover, setHideOldCover] = useState(false);
     const [hasCover, setHasCover] = useState(book?.coverArt!==defaultCoverArt);
+
+    useEffect(() => {
+        if (book?.coverArt!==defaultCoverArt) {
+            setHasCover(true);
+        }
+    }, [book])
 
     const handleDelete = async (e) => {
         if (e.target.name==="delete") {
             if (confirm("Are you sure you want to delete this book? Once you do, there's no going back!")) {
                 const res = await dispatch(deleteBook(book.id));
                 if (res) {
-                    alert("Book successfully deleted!");
+                    // alert("Book successfully deleted!");
                     navigate(`/student`);
                 }
             }
@@ -37,12 +42,6 @@ const EditorBookInfo = () => {
             return;
         }
     }
-
-    useEffect(() => {
-        if (hasCover && uploadedImg) {
-            setHideOldCover(true);
-        }
-    }, [uploadedImg]);
 
     const handleSubmit = async (e, close) => {
         const updated = { id: book.id };
