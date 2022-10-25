@@ -19,7 +19,7 @@ const LogoutButton = ({ text }) => {
         );
     } else {
         return(
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout} id="logout-button">Logout</button>
         );
     }
 }

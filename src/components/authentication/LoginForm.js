@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/reducers/authSlice";
 
@@ -43,6 +43,7 @@ const LoginForm = ({ type, setAccountType }) => {
             <p onClick={() => setAccountType(type==="user"?"student":"user")} className="return">
                 {`Wait - I'm ${type === "user" ? "a student!" : "an instructor!"}`}
             </p>
+            <hr />
             <form>
                 <p>Enter username or email:</p>
                 <input type="text" onChange={handleFormChange} placeholder="Username or email" />
@@ -52,6 +53,10 @@ const LoginForm = ({ type, setAccountType }) => {
 
                 <button type="submit" onClick={handleFormSubmit}>Login</button>
             </form>
+            
+            <Link to="/signup">
+                    <p className="switch-login-signup">Don't have an account? Signup here</p>
+            </Link>
         </div>
     )
 }
