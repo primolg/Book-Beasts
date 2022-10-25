@@ -4,12 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { updateStudentData, fetchStudentData } from "../../../store/reducers/instructorSlice";
 import Popup from 'reactjs-popup';
 
-//This shows hashed password when opening Edit popup - need to fix that.
 
-const EditStudent = ( {student, activeTab, setActiveTab } ) => {
+const EditStudent = ( { student, activeTab, setActiveTab } ) => {
     const dispatch = useDispatch();
     const params = useParams();
     const navigate  = useNavigate();
+
+    console.log("EDIT PARAMS", params.id);
 
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
@@ -39,12 +40,12 @@ const EditStudent = ( {student, activeTab, setActiveTab } ) => {
             username: form.username,
             password: form.password,
         }, params.id, student.id, student));
-        setActiveTab("portal-home");
+        setActiveTab("portal-home")
     };
 
 //^^^^ navigating to the instructor's portal to reflect state change, Popup seems to prevent 
 //the state change from showing immediately in the student table. Working on fixing this issue.
-
+    console.log("EDIT STUDENT", params.id, student.id, student)
     useEffect(() => {
         dispatch(fetchStudentData(params.id, student.id))
     }, []);
@@ -61,7 +62,7 @@ const EditStudent = ( {student, activeTab, setActiveTab } ) => {
 
     return (
         <>
-        <Popup trigger={<button className="small-btn draw-border">Edit</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
+        <Popup trigger={<button className="small-btn-outline ">Edit</button>} position="bottom right" keepTooltipInside=".tooltipBoundary">
             {close => (
                 
                   <div className="form-card">

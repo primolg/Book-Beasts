@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 require('dotenv').config();
 
 const hashPassword = async function(user) {
-    // console.log("HASH NEW", user.password)
     user.password = await bcrypt.hash(user.password, 10);
 }
 
@@ -53,6 +52,7 @@ function generateToken() {
 
 const findByToken = (model) => async(token) => {
     try {
+        console.log("TOKEN MODEL", model)
         const { id } = jwt.verify(token, process.env.JWT);
         const user = await model.findByPk(id);
         if (user) {
