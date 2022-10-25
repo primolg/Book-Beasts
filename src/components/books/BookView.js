@@ -15,23 +15,6 @@ const BookView = () => {
     const pages = books ? filterPages(books.pages) : undefined
     const dispatch = useDispatch();
 
-
-    // show the photo with this index
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    // move to the next photo
-    // if we are at the end, go to the first photo
-    const next = () => {
-        setCurrentIndex((currentIndex + 1) % pages.length);
-    };
-
-    // move to the previous photo
-    // if we are at the beginning, go to the last photo
-    const prev = () => {
-        setCurrentIndex((currentIndex - 1 + pages.length) % pages.length);
-    };
-
-
     //function to sort through pages linked list + add page number to each obj
     function filterPages(pages){
         let orderedPages = [];
