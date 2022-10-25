@@ -32,14 +32,21 @@ const ImageWidget = (props) => {
     useEffect(() => {
         if (isFirstLoad && image) {
             setFirstLoad(false);
+        } else if (isFirstLoad && props.isCover && !props.hasCover) {
+            setFirstLoad(false);
         }
+
+        console.log("\nprops.isCover:", props.isCover);
+        console.log("props.hasCover:", props.hasCover);
+        console.log("image:", image);
+        console.log("isFirstLoad:", isFirstLoad);
 
         if (props.isCover) {
             if (!image && props.hasCover) {
-                // console.log("here cover 1")
+                console.log("here cover 1")
                 setImage(book.coverArt);
             } else if (!isFirstLoad) {
-                // console.log("here cover 2")
+                console.log("here cover 2")
                 dispatch(updateCoverArt(book.id, image));
             }
         } else {
