@@ -7,9 +7,6 @@ Book Beasts is an application where children and young adults can explore their 
 * Students can create, edit, and publish books
 * Teachers can create/manage student accounts
 
-## Technologies used
-_(Incomplete list)_
-
 _**Front-end**_
 * [React](https://www.npmjs.com/package/react) - Foundation for user-experience
 * [React-Redux](https://react-redux.js.org/) - State management, implemented with Redux Toolkit
